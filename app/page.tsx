@@ -1,103 +1,344 @@
 import Image from "next/image";
+import { ModeToggle } from "@/components/ui/toggle-theme";
+import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
+
+
+
+
+const content = [
+  {
+    title: "Collaborative Editing",
+    description:
+      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+        Collaborative Editing
+      </div>
+    ),
+  },
+  {
+    title: "Real time changes",
+    description:
+      "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center text-white">
+        <img
+          src="/linear.webp"
+          width={300}
+          height={300}
+          className="h-full w-full object-cover"
+          alt="linear board demo"
+        />
+      </div>
+    ),
+  },
+  {
+    title: "Version control",
+    description:
+      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
+        Version control
+      </div>
+    ),
+  },
+  {
+    title: "Running out of content",
+    description:
+      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+        Running out of content
+      </div>
+    ),
+  },
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-8">
+     <div className="grid grid-cols-2 gap-4 md:grid-cols-2">
+      <div className="col-span-1/2">
+       
+      <div className="flex flex-col items-center justify-center">
+      <div className="mx-auto max-w-screen-lg px-4 2xl:px-0">
+        <nav className="mb-4 flex" aria-label="Breadcrumb">
+          <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+            <li className="inline-flex items-center">
+              <a
+                href="#"
+                className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white"
+              >
+                <svg
+                  className="me-2 h-4 w-4"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"
+                  />
+                </svg>
+                Home
+              </a>
+            </li>
+            <li>
+              <div className="flex items-center">
+                <svg
+                  className="mx-1 h-4 w-4 text-gray-400 rtl:rotate-180"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m9 5 7 7-7 7"
+                  />
+                </svg>
+                <a
+                  href="#"
+                  className="ms-1 text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white md:ms-2"
+                >
+                  My account
+                </a>
+              </div>
+            </li>
+            <li aria-current="page">
+              <div className="flex items-center">
+                <svg
+                  className="mx-1 h-4 w-4 text-gray-400 rtl:rotate-180"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m9 5 7 7-7 7"
+                  />
+                </svg>
+                <span className="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400 md:ms-2">
+                  Account
+                </span>
+              </div>
+            </li>
+          </ol>
+        </nav>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div className="py-4 md:py-8">
+          <div className="mb-4 grid gap-4 sm:grid-cols-2 sm:gap-8 lg:gap-16">
+            <div className="space-y-4">
+              <div className="flex space-x-4">
+                <img
+                  className="h-16 w-16 rounded-lg"
+                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
+                  alt="Helene avatar"
+                />
+                <div>
+                  <span className="mb-2 inline-block rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
+                    {" "}
+                    PRO Account{" "}
+                  </span>
+                  <h2 className="flex items-center text-xl font-bold leading-none text-gray-900 dark:text-white sm:text-2xl">
+                    Helene Engels
+                  </h2>
+                </div>
+              </div>
+              <dl className="">
+                <dt className="font-semibold text-gray-900 dark:text-white">
+                  Email Address
+                </dt>
+                <dd className="text-gray-500 dark:text-gray-400">
+                  helene@example.com
+                </dd>
+              </dl>
+              <dl>
+                <dt className="font-semibold text-gray-900 dark:text-white">
+                  Home Address
+                </dt>
+                <dd className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
+                  <svg
+                    className="hidden h-5 w-5 shrink-0 text-gray-400 dark:text-gray-500 lg:inline"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"
+                    />
+                  </svg>
+                  2 Miles Drive, NJ 071, New York, United States of America
+                </dd>
+              </dl>
+              <dl>
+                <dt className="font-semibold text-gray-900 dark:text-white">
+                  Delivery Address
+                </dt>
+                <dd className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
+                  <svg
+                    className="hidden h-5 w-5 shrink-0 text-gray-400 dark:text-gray-500 lg:inline"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"
+                    />
+                  </svg>
+                  9th St. PATH Station, New York, United States of America
+                </dd>
+              </dl>
+            </div>
+            <div className="space-y-4">
+              <dl>
+                <dt className="font-semibold text-gray-900 dark:text-white">
+                  Phone Number
+                </dt>
+                <dd className="text-gray-500 dark:text-gray-400">
+                  +1234 567 890 / +12 345 678
+                </dd>
+              </dl>
+              <dl>
+                <dt className="font-semibold text-gray-900 dark:text-white">
+                  Favorite pick-up point
+                </dt>
+                <dd className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
+                  <svg
+                    className="hidden h-5 w-5 shrink-0 text-gray-400 dark:text-gray-500 lg:inline"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 12c.263 0 .524-.06.767-.175a2 2 0 0 0 .65-.491c.186-.21.333-.46.433-.734.1-.274.15-.568.15-.864a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 12 9.736a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 16 9.736c0 .295.052.588.152.861s.248.521.434.73a2 2 0 0 0 .649.488 1.809 1.809 0 0 0 1.53 0 2.03 2.03 0 0 0 .65-.488c.185-.209.332-.457.433-.73.1-.273.152-.566.152-.861 0-.974-1.108-3.85-1.618-5.121A.983.983 0 0 0 17.466 4H6.456a.986.986 0 0 0-.93.645C5.045 5.962 4 8.905 4 9.736c.023.59.241 1.148.611 1.567.37.418.865.667 1.389.697Zm0 0c.328 0 .651-.091.94-.266A2.1 2.1 0 0 0 7.66 11h.681a2.1 2.1 0 0 0 .718.734c.29.175.613.266.942.266.328 0 .651-.091.94-.266.29-.174.537-.427.719-.734h.681a2.1 2.1 0 0 0 .719.734c.289.175.612.266.94.266.329 0 .652-.091.942-.266.29-.174.536-.427.718-.734h.681c.183.307.43.56.719.734.29.174.613.266.941.266a1.819 1.819 0 0 0 1.06-.351M6 12a1.766 1.766 0 0 1-1.163-.476M5 12v7a1 1 0 0 0 1 1h2v-5h3v5h7a1 1 0 0 0 1-1v-7m-5 3v2h2v-2h-2Z"
+                    />
+                  </svg>
+                  Herald Square, 2, New York, United States of America
+                </dd>
+              </dl>
+              <dl>
+                <dt className="font-semibold text-gray-900 dark:text-white">
+                  My Companies
+                </dt>
+                <dd className="text-gray-500 dark:text-gray-400">
+                  FLOWBITE LLC, Fiscal code: 18673557
+                </dd>
+              </dl>
+              <dl>
+                <dt className="mb-1 font-semibold text-gray-900 dark:text-white">
+                  Payment Methods
+                </dt>
+                <dd className="flex items-center space-x-4 text-gray-500 dark:text-gray-400">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-700">
+                    <img
+                      className="h-4 w-auto dark:hidden"
+                      src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/visa.svg"
+                      alt=""
+                    />
+                    <img
+                      className="hidden h-4 w-auto dark:flex"
+                      src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/visa-dark.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <div className="text-sm">
+                      <p className="mb-0.5 font-medium text-gray-900 dark:text-white">
+                        Visa ending in 7658
+                      </p>
+                      <p className="font-normal text-gray-500 dark:text-gray-400">
+                        Expiry 10/2024
+                      </p>
+                    </div>
+                  </div>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <button
+            type="button"
+            data-modal-target="accountInformationModal2"
+            data-modal-toggle="accountInformationModal2"
+            className="inline-flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 sm:w-auto"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <svg
+              className="-ms-0.5 me-1.5 h-4 w-4"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+              ></path>
+            </svg>
+            Edit your data
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 md:p-8">
+        </div>
+      </div>
+
+
+      </div>
+        
+      </div>
+
+      <div className="col-span-1">
+      <StickyScroll content={content} />
+
+
+      </div>
+      
+
+
+     </div>
+    </section>
   );
 }

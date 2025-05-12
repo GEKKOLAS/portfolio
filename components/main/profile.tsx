@@ -1,8 +1,9 @@
 import React from 'react'
 import { TextGenerateEffect } from '../ui/text-generate-effect'
 import { div } from 'motion/react-client';
+import { ModeToggle } from '../ui/toggle-theme';
 
-const words = "Hello, I'm Nicolas Murillo Arango, a .NET Full Stack Developer with a passion for creating innovative solutions. I specialize in building robust web applications using the latest technologies and frameworks. Let's connect and explore how I can help you achieve your goals.";
+const words = "I specialize in building robust web applications using the latest technologies and frameworks. Let's connect.";
 export const Profile = () => {
   return (
     <div className="flex flex-col items-center justify-center">
@@ -13,7 +14,7 @@ export const Profile = () => {
             <div className="flex justify-center">
               <img
               className="h-30 w-30 rounded-full transform-3d transition duration-500 ease-in-out hover:scale-140"
-              src="/GRR.jpeg"
+              src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNThiOGF4bXhyeDZnMWJhMzM1enV5anpybHBsN21zbzk2MXZ2OGRrZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NaxKt9aSzAspO/giphy.gif"
               alt="profile avatar"
               />
             </div>
@@ -26,7 +27,7 @@ export const Profile = () => {
                 </span>
                 <TextGenerateEffect words={words} className='text-sm'/>
             </div>
-            
+
             <div className="flex flex-wrap justify-center gap-4 mt-6">
               <img
                 src="/icons/javascript.svg"

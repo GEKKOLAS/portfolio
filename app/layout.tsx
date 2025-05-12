@@ -37,9 +37,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <BackgroundBeams />
-          <div className="flex flex-col items-center justify-center items-middle h-24">
-            <Navbar />
-          </div>
+          <Navbar />
           {children}
         </ThemeProvider>
       </body>

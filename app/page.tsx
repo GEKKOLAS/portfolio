@@ -11,15 +11,14 @@ import { About } from "@/components/main/about";
 
 export default function Home() {
   return (
-    <section className="bg-white py-8 antialiased dark:bg-transparent md:py-8">
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-2 sm:grid-cols-1 h-full">
-        <div className="w-full items-center justify-center">
+    <section className="bg-white antialiased dark:bg-transparent md:py-8">
+      <div className="flex flex-col-1 md:grid-cols-1 sm:grid-cols-1 h-full">
+        <div className="flex items-center justify-center">
           <Profile/>
         </div>
-        <div className="">
+        <div className="w-3/3 flex flex-col items-center justify-center">
           <Projects />
         </div>
-
       </div>
     </section>
   );

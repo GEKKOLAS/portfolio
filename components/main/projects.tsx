@@ -21,13 +21,13 @@ const content = [
     ),
   },
   {
-    title: "Real time changes",
+    title: "Learning Management System (LMS)",
     description:
-      "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
+      "A Learning Management System (LMS) is a software application for the administration, documentation, tracking, reporting, and delivery of educational courses or training programs. It provides a centralized platform for educators and learners to interact, manage course content, and track progress.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <img
-          src="/linear.webp"
+          src="/learning.jpg"
           width={300}
           height={300}
           className="h-full w-full object-cover"
@@ -37,24 +37,112 @@ const content = [
     ),
   },
   {
-    title: "Version control",
+    title: "Real-time Chat Application",
     description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      "A real-time chat application is a software program that enables users to communicate with each other in real-time through text, voice, or video. It typically includes features such as instant messaging, group chats, file sharing, and notifications.",
     content: (
-      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
-        Version control
-      </div>
+      <div className="flex h-full w-full items-center justify-center text-white">
+      <img
+        src="/chat.jpg"
+        width={300}
+        height={300}
+        className="h-full w-full object-cover"
+        alt="linear board demo"
+      />
+    </div>
     ),
   },
+  {
+    title: "Real-time Chat Application",
+    description:
+      "A real-time chat application is a software program that enables users to communicate with each other in real-time through text, voice, or video. It typically includes features such as instant messaging, group chats, file sharing, and notifications.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center text-white">
+      <img
+        src="/chat.jpg"
+        width={300}
+        height={300}
+        className="h-full w-full object-cover"
+        alt="linear board demo"
+      />
+    </div>
+    ),
+  },
+  {
+    title: "Real-time Chat Application",
+    description:
+      "A real-time chat application is a software program that enables users to communicate with each other in real-time through text, voice, or video. It typically includes features such as instant messaging, group chats, file sharing, and notifications.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center text-white">
+      <img
+        src="/chat.jpg"
+        width={300}
+        height={300}
+        className="h-full w-full object-cover"
+        alt="linear board demo"
+      />
+    </div>
+    ),
+  },
+  {
+    title: "Real-time Chat Application",
+    description:
+      "A real-time chat application is a software program that enables users to communicate with each other in real-time through text, voice, or video. It typically includes features such as instant messaging, group chats, file sharing, and notifications.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center text-white">
+      <img
+        src="/chat.jpg"
+        width={300}
+        height={300}
+        className="h-full w-full object-cover"
+        alt="linear board demo"
+      />
+    </div>
+    ),
+  },
+  {
+    title: "Real-time Chat Application",
+    description:
+      "A real-time chat application is a software program that enables users to communicate with each other in real-time through text, voice, or video. It typically includes features such as instant messaging, group chats, file sharing, and notifications.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center text-white">
+      <img
+        src="/chat.jpg"
+        width={300}
+        height={300}
+        className="h-full w-full object-cover"
+        alt="linear board demo"
+      />
+    </div>
+    ),
+  },
+  {
+    title: "Real-time Chat Application",
+    description:
+      "A real-time chat application is a software program that enables users to communicate with each other in real-time through text, voice, or video. It typically includes features such as instant messaging, group chats, file sharing, and notifications.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center text-white">
+      <img
+        src="/chat.jpg"
+        width={300}
+        height={300}
+        className="h-full w-full object-cover"
+        alt="linear board demo"
+      />
+    </div>
+    ),
+  },
+
+
 ];
 
 
 
 export const Projects = () => {
   return (
-    <div className="col-span-1 flex flex-col items-center justify-center h-full">
-  <StickyScroll content={content} />
-</div>
+    <div className="col-span-1 flex flex-col items-center justify-center h-full w-full scrollbar-hide">
+    <StickyScroll content={content} contentClassName="scrollbar-hide" />
+  </div>
   )
 }
 

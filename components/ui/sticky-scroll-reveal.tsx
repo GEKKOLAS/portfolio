@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { JSX, ReactElement, useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -12,8 +12,7 @@ export const StickyScroll = ({
   content: {
     title: string;
     description: string;
-    content?: React.ReactNode | any;
-    component?: ReactElement | any;
+    content?: React.ReactNode | JSX.Element| any;
   }[];
   contentClassName?: string;
 }) => {
@@ -21,7 +20,7 @@ export const StickyScroll = ({
   const ref = useRef<any>(null);
   const { scrollYProgress } = useScroll({
     // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
-    // target: ref
+    target: ref,
     container: ref,
     offset: ["start start", "end start"],
   });
@@ -66,7 +65,7 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className="relative flex h-[40rem] justify-center space-x-10 overflow-y-auto rounded-md p-10"
+      className="relative flex h-[30rem] justify-center space-x-10 overflow-y-auto rounded-md p-10"
       ref={ref}
     >
       
@@ -92,7 +91,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className="text-kg mt-10 max-w-sm text-slate-300"
+                className="text-kg mt-10 w-full text-slate-300"
               >
                 {item.description}
               </motion.p>
@@ -110,6 +109,7 @@ export const StickyScroll = ({
       >
         {content[activeCard].content ?? null}
       </div>
+
     </motion.div>
   );
 };

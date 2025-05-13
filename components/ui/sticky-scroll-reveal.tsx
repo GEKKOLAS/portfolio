@@ -4,6 +4,7 @@ import { useMotionValueEvent, useScroll } from "motion/react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { About } from "../main/about";
+import { div } from "motion/react-client";
 
 export const StickyScroll = ({
   content,
@@ -20,7 +21,7 @@ export const StickyScroll = ({
   const ref = useRef<any>(null);
   const { scrollYProgress } = useScroll({
     // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
-    target: ref,
+    //target: ref,
     container: ref,
     offset: ["start start", "end start"],
   });
@@ -80,7 +81,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className="text-2xl font-bold text-slate-100"
+                className="text-2xl font-bold text-green-500"
               >
                 {item.title}
               </motion.h2>
@@ -98,18 +99,22 @@ export const StickyScroll = ({
             </div>
           ))}
           <div className="h-40" />
+          
         </div>
+
       </div>
+
       <div
         style={{ background: backgroundGradient }}
         className={cn(
-          "sticky top-10 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block",
+          "sticky top-10 md:hidden h-60  overflow-hidden rounded-md bg-white lg:block",
           contentClassName,
         )}
       >
         {content[activeCard].content ?? null}
       </div>
-
     </motion.div>
+    
+    
   );
 };

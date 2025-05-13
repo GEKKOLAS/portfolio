@@ -2,9 +2,11 @@ import React from 'react'
 import { TextGenerateEffect } from '../ui/text-generate-effect'
 import { div } from 'motion/react-client';
 import { ModeToggle } from '../ui/toggle-theme';
+import { Banner } from './banner';
 
-const words = "I specialize in building robust web applications using the latest technologies and frameworks. Let's connect.";
+
 export const Profile = () => {
+  const words = "I specialize in building robust web applications using the latest technologies and frameworks. Let's connect.";
   return (
     <div className="flex flex-col items-center justify-center">
     <div className="mx-auto max-w-screen-lg px-4 2xl:px-0">
@@ -14,7 +16,7 @@ export const Profile = () => {
             <div className="flex justify-center">
               <img
               className="h-30 w-30 rounded-full transform-3d transition duration-500 ease-in-out hover:scale-140"
-              src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNThiOGF4bXhyeDZnMWJhMzM1enV5anpybHBsN21zbzk2MXZ2OGRrZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NaxKt9aSzAspO/giphy.gif"
+              src="https://media.giphy.com/media/eU9sk1Z80ZugM67Pse/giphy.gif?cid=ecf05e47hybpp1h7hkr0x5ba1vqfdy7rxg4e9k5w1ex665pf&ep=v1_gifs_search&rid=giphy.gif&ct=g"
               alt="profile avatar"
               />
             </div>
@@ -27,39 +29,7 @@ export const Profile = () => {
                 </span>
                 <TextGenerateEffect words={words} className='text-sm'/>
             </div>
-
-            <div className="flex flex-wrap justify-center gap-4 mt-6">
-              <img
-                src="/icons/javascript.svg"
-                alt="JavaScript"
-                className="h-12 w-12"
-                title="JavaScript"
-              />
-              <img
-                src="/icons/typescript.svg"
-                alt="TypeScript"
-                className="h-12 w-12"
-                title="TypeScript"
-              />
-              <img
-                src="/icons/react.svg"
-                alt="React"
-                className="h-12 w-12"
-                title="React"
-              />
-              <img
-                src="/icons/dotnet.svg"
-                alt=".NET"
-                className="h-12 w-12"
-                title=".NET"
-              />
-              <img
-                src="/icons/sql-server.svg"
-                alt="SQL Server"
-                className="h-12 w-12"
-                title="SQL Server"
-              />
-            </div>
+            <Banner />
             </div>
         </div>
       </div>

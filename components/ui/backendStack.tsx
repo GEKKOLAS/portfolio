@@ -5,8 +5,8 @@ export const Backend = () => {
     <div>
       <div className="relative overflow-hidden mt-1 bg-transparent rounded-full py-2 px-4">
         <div
-          className="flex animate-scroll-logos gap-x-8 items-center"
-          style={{ width: "max-content" }}
+          className="flex animate-scroll-logos-back  gap-x-8 items-center"
+          style={{ width: "max-content"  }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -84,8 +84,8 @@ export const Backend = () => {
                 y2="34.658"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#387EB8" />
-                <stop offset="1" stop-color="#366994" />
+                <stop stopColor="#387EB8" />
+                <stop offset="1" stopColor="#366994" />
               </linearGradient>
               <linearGradient
                 id="b"
@@ -95,8 +95,8 @@ export const Backend = () => {
                 y2="45.163"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#FFE052" />
-                <stop offset="1" stop-color="#FFC331" />
+                <stop stopColor="#FFE052" />
+                <stop offset="1" stopColor="#FFC331" />
               </linearGradient>
             </defs>
           </svg>
@@ -108,7 +108,7 @@ export const Backend = () => {
           >
             <path
               fill="#fff"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M28.057 6.53 17.952.532a3.8 3.8 0 0 0-3.88 0L3.965 6.53A4.03 4.03 0 0 0 2 10.002v11.996a4.03 4.03 0 0 0 1.948 3.472l10.105 5.998a3.8 3.8 0 0 0 3.88 0L28.04 25.47a4.03 4.03 0 0 0 1.948-3.472V10.002a4.03 4.03 0 0 0-1.93-3.472zM20.23 25.262v.86a.318.318 0 0 1-.148.265l-.512.293c-.08.042-.148 0-.148-.113v-.847a1.66 1.66 0 0 1-1.164.113c-.062-.042-.086-.122-.056-.2l.183-.78a.322.322 0 0 1 .102-.17.18.18 0 0 1 .05-.035.11.11 0 0 1 .08 0 1.41 1.41 0 0 0 1.059-.134 1.41 1.41 0 0 0 .79-1.21c0-.438-.24-.62-.82-.625-.734 0-1.4-.14-1.43-1.224a3.137 3.137 0 0 1 1.186-2.4v-.872a.34.34 0 0 1 .148-.268l.494-.314c.08-.042.148 0 .148.116v.872a1.61 1.61 0 0 1 .967-.116c.07.04.098.128.064.2l-.173.773a.325.325 0 0 1-.138.195c-.02.012-.05.008-.074 0a1.28 1.28 0 0 0-.931.152 1.17 1.17 0 0 0-.706 1.037c0 .395.208.515.907.53.935 0 1.337.423 1.348 1.362a3.346 3.346 0 0 1-1.228 2.53zm5.293-1.45a.201.201 0 0 1-.078.194L22.9 25.558c-.024.02-.06.023-.087.007s-.04-.05-.033-.08v-.66a.184.184 0 0 1 .116-.162l2.516-1.507c.024-.02.06-.023.087-.007s.04.05.033.08v.582zM27.288 9.06l-9.562 5.906c-1.193.706-2.07 1.478-2.07 2.914v11.778c0 .86.353 1.4.882 1.58a3.14 3.14 0 0 1-.53.053 3.13 3.13 0 0 1-1.595-.441L4.308 24.853A3.3 3.3 0 0 1 2.706 22V10.002a3.304 3.304 0 0 1 1.602-2.858l10.105-5.998c.98-.58 2.196-.58 3.176 0l10.105 5.998c.833.504 1.4 1.35 1.552 2.3-.328-.713-1.083-.9-1.962-.395h.003z"
             />
           </svg>
@@ -144,7 +144,7 @@ export const Backend = () => {
             <path
               d="m21.47 20.829 -2.881 -2.881a0.572 0.572 0 0 0 -0.7 -0.084 6.854 6.854 0 0 1 -7.081 0 0.576 0.576 0 0 0 -0.7 0.084l-2.881 2.881a0.576 0.576 0 0 0 -0.103 0.69 0.57 0.57 0 0 0 0.166 0.186 12 12 0 0 0 14.113 0 0.58 0.58 0 0 0 0.239 -0.423 0.576 0.576 0 0 0 -0.172 -0.453Zm0.002 -17.668 -2.88 2.88a0.569 0.569 0 0 1 -0.701 0.084A6.857 6.857 0 0 0 8.724 8.08a6.862 6.862 0 0 0 -1.222 3.692 6.86 6.86 0 0 0 0.978 3.764 0.573 0.573 0 0 1 -0.083 0.699l-2.881 2.88a0.567 0.567 0 0 1 -0.864 -0.063A11.993 11.993 0 0 1 6.771 2.7a11.99 11.99 0 0 1 14.637 -0.405 0.566 0.566 0 0 1 0.232 0.418 0.57 0.57 0 0 1 -0.168 0.448Zm-7.118 12.261a3.427 3.427 0 1 0 0 -6.854 3.427 3.427 0 0 0 0 6.854Z"
               fill="#fff"
-              stroke-width="1"
+              strokeWidth="1"
             ></path>
           </svg>
           <svg
@@ -196,8 +196,8 @@ export const Backend = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
               transform="scale(64)"
               fill="#ffff"
@@ -217,8 +217,8 @@ export const Backend = () => {
                 y1="115.276%"
                 y2="41.364%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux1"
@@ -227,8 +227,8 @@ export const Backend = () => {
                 y1="2.404%"
                 y2="90.542%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".8" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".8" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux2"
@@ -237,8 +237,8 @@ export const Backend = () => {
                 y1="88.248%"
                 y2="9.748%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux3"
@@ -247,8 +247,8 @@ export const Backend = () => {
                 y1="85.49%"
                 y2="13.811%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux4"
@@ -257,8 +257,8 @@ export const Backend = () => {
                 y1="3.102%"
                 y2="93.895%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux5"
@@ -267,8 +267,8 @@ export const Backend = () => {
                 y1="5.475%"
                 y2="93.524%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux6"
@@ -277,8 +277,8 @@ export const Backend = () => {
                 y1="89.845%"
                 y2="40.632%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux7"
@@ -287,8 +287,8 @@ export const Backend = () => {
                 y1="99.975%"
                 y2="23.545%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux8"
@@ -297,8 +297,8 @@ export const Backend = () => {
                 y1="13.229%"
                 y2="94.673%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".8" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".8" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux9"
@@ -307,8 +307,8 @@ export const Backend = () => {
                 y1="37.327%"
                 y2="92.782%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxa"
@@ -317,8 +317,8 @@ export const Backend = () => {
                 y1="2.299%"
                 y2="81.204%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxb"
@@ -327,8 +327,8 @@ export const Backend = () => {
                 y1="2.272%"
                 y2="71.799%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxc"
@@ -337,8 +337,8 @@ export const Backend = () => {
                 y1="48.921%"
                 y2="98.1%"
               >
-                <stop offset="0%" stop-color="#FFA63F" />
-                <stop offset="100%" stop-color="#FF0" />
+                <stop offset="0%" stopColor="#FFA63F" />
+                <stop offset="100%" stopColor="#FF0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxd"
@@ -347,8 +347,8 @@ export const Backend = () => {
                 y1="143.009%"
                 y2="-64.622%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxe"
@@ -357,8 +357,8 @@ export const Backend = () => {
                 y1="34.024%"
                 y2="89.175%"
               >
-                <stop offset="0%" stop-color="#FFA63F" />
-                <stop offset="100%" stop-color="#FF0" />
+                <stop offset="0%" stopColor="#FFA63F" />
+                <stop offset="100%" stopColor="#FF0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxf"
@@ -367,8 +367,8 @@ export const Backend = () => {
                 y1="-17.216%"
                 y2="66.118%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxg"
@@ -377,8 +377,8 @@ export const Backend = () => {
                 y1="1.565%"
                 y2="104.313%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxh"
@@ -387,8 +387,8 @@ export const Backend = () => {
                 y1="4.533%"
                 y2="92.827%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxi"
@@ -397,8 +397,8 @@ export const Backend = () => {
                 y1="17.609%"
                 y2="99.385%"
               >
-                <stop offset="0%" stop-color="#FFA63F" />
-                <stop offset="100%" stop-color="#FF0" />
+                <stop offset="0%" stopColor="#FFA63F" />
+                <stop offset="100%" stopColor="#FF0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxj"
@@ -407,8 +407,8 @@ export const Backend = () => {
                 y1="2.89%"
                 y2="94.17%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <filter
                 id="logosLinuxTuxk"
@@ -429,7 +429,7 @@ export const Backend = () => {
             <g fill="none">
               <path
                 fill="#000"
-                fill-opacity=".2"
+                fillOpacity=".2"
                 d="M235.125 249.359c0 17.355-52.617 31.497-117.54 31.497S.044 266.806.044 249.359c0-17.356 52.618-31.498 117.54-31.498c64.924 0 117.45 14.142 117.541 31.498"
                 filter="url(#logosLinuxTuxk)"
                 transform="translate(10)"
@@ -446,7 +446,7 @@ export const Backend = () => {
               <path
                 fill="#000"
                 stroke="#000"
-                stroke-width=".977"
+                strokeWidth=".977"
                 d="M176.805 117.86c13.59 11.02 38.292 49.587 2.204 74.748c-11.846 7.806 10.468 32.508 23.049 19.927c43.618-43.894-1.102-94.308-16.53-111.664c-13.774-15.151-25.987 3.49-8.723 16.989z"
               />
               <path
@@ -491,7 +491,7 @@ export const Backend = () => {
               <path
                 fill="#000"
                 stroke="#000"
-                stroke-width="1.25"
+                strokeWidth="1.25"
                 d="M79.925 122.727c-8.907 14.509-30.211 48.669-1.652 66.484c38.384 23.6 27.548 47.108-7.53 25.895c-49.404-29.568-5.97-89.257 13.774-112.03c22.59-25.529 4.316 4.683-4.592 19.65z"
               />
               <path
@@ -517,7 +517,7 @@ export const Backend = () => {
               <path
                 fill="url(#logosLinuxTuxc)"
                 stroke="#E68C3F"
-                stroke-width="6.25"
+                strokeWidth="6.25"
                 d="M51.835 258.542c-20.57-10.928-50.414 2.112-39.578-27.457c2.204-6.704-3.214-16.805.275-23.325c4.133-7.989 13.04-6.244 18.366-11.57c5.234-5.51 8.54-15.06 18.366-13.59c9.734 1.468 16.254 13.406 23.049 28.099c5.05 10.468 22.865 25.253 21.672 37.007c-1.47 17.998-21.948 21.396-42.15 10.836z"
                 transform="translate(10)"
               />
@@ -529,7 +529,7 @@ export const Backend = () => {
               <path
                 fill="url(#logosLinuxTuxe)"
                 stroke="#E68C3F"
-                stroke-width="6.251"
+                strokeWidth="6.251"
                 d="M194.445 253.49c15.06-18.273 48.578-14.508 25.988-39.577c-4.775-5.418-3.306-16.989-9.183-21.947c-6.887-6.061-14.509-1.102-21.488-4.224c-6.979-3.398-14.325-9.918-22.865-5.327c-8.54 4.684-9.459 16.805-10.285 32.783c-.735 11.479-11.203 30.671-5.602 41.231c8.081 16.346 29.11 14.142 43.435-2.938z"
                 transform="translate(10)"
               />
@@ -555,13 +555,13 @@ export const Backend = () => {
               <path
                 fill="url(#logosLinuxTuxi)"
                 stroke="#E68C3F"
-                stroke-width="3.75"
+                strokeWidth="3.75"
                 d="M97.107 66.344c3.673-3.398 12.58-13.774 29.477-2.939c3.122 2.02 5.693 2.204 11.662 4.775c12.03 4.96 6.336 16.897-6.52 20.937c-5.51 1.745-10.468 8.449-20.386 7.806c-8.54-.46-10.744-6.06-15.978-9.091c-9.275-5.234-10.652-12.305-5.602-16.07c5.051-3.765 6.98-5.143 7.347-5.418z"
                 transform="translate(10)"
               />
               <path
                 stroke="#E68C3F"
-                stroke-width="2.5"
+                strokeWidth="2.5"
                 d="M148.43 75.986c-5.05.275-15.979 11.203-27.457 11.203c-11.479 0-18.366-10.652-20.11-10.652"
               />
               <path
@@ -587,8 +587,8 @@ export const Backend = () => {
                 gradientTransform="matrix(1 0 0 -1 1075 158)"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0" stop-color="#114a8b" />
-                <stop offset="1" stop-color="#0669bc" />
+                <stop offset="0" stopColor="#114a8b" />
+                <stop offset="1" stopColor="#0669bc" />
               </linearGradient>
               <linearGradient
                 id="b"
@@ -599,11 +599,11 @@ export const Backend = () => {
                 gradientTransform="matrix(1 0 0 -1 1075 158)"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0" stop-opacity=".3" />
-                <stop offset=".07" stop-opacity=".2" />
-                <stop offset=".32" stop-opacity=".1" />
-                <stop offset=".62" stop-opacity=".05" />
-                <stop offset="1" stop-opacity="0" />
+                <stop offset="0" stopOpacity=".3" />
+                <stop offset=".07" stopOpacity=".2" />
+                <stop offset=".32" stopOpacity=".1" />
+                <stop offset=".62" stopOpacity=".05" />
+                <stop offset="1" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="c"
@@ -614,8 +614,8 @@ export const Backend = () => {
                 gradientTransform="matrix(1 0 0 -1 1075 158)"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0" stop-color="#3ccbf4" />
-                <stop offset="1" stop-color="#2892df" />
+                <stop offset="0" stopColor="#3ccbf4" />
+                <stop offset="1" stopColor="#2892df" />
               </linearGradient>
             </defs>
             <path
@@ -655,7 +655,7 @@ export const Backend = () => {
           >
             <path
               fill="#004880"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M376.624 460.825c-47.024 0-85.149-38.13-85.149-85.157 0-47.008 38.126-85.159 85.149-85.159 47.025 0 85.149 38.151 85.149 85.158 0 47.028-38.125 85.158-85.149 85.158ZM206.772 265.643c-29.397 0-53.218-23.844-53.218-53.224 0-29.401 23.821-53.223 53.218-53.223 29.398 0 53.219 23.823 53.219 53.223 0 29.38-23.821 53.224-53.219 53.224ZM380.392 99.5H238.277c-72.419 0-131.172 58.759-131.172 131.206v142.108c0 72.469 58.753 131.186 131.172 131.186h142.115c72.462 0 131.172-58.717 131.172-131.186V230.707c0-72.448-58.71-131.207-131.172-131.207ZM85.15 49.579c0 23.524-19.074 42.578-42.575 42.578C19.052 92.157 0 73.103 0 49.58 0 26.074 19.051 7 42.575 7c23.5 0 42.574 19.074 42.574 42.579Z"
             />
           </svg>
@@ -916,7 +916,7 @@ export const Backend = () => {
             <path
               d="M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z"
               fill="url(#paint1_linear)"
-              fill-opacity="0.2"
+              fillOpacity="0.2"
             />
             <path
               d="M45.317 2.07103C48.1765 -1.53037 53.9745 0.442937 54.0434 5.041L54.4849 72.2922H9.83113C1.64038 72.2922 -2.92775 62.8321 2.1655 56.4175L45.317 2.07103Z"
@@ -931,8 +931,8 @@ export const Backend = () => {
                 y2="71.8295"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#249361" />
-                <stop offset="1" stop-color="#3ECF8E" />
+                <stop stopColor="#249361" />
+                <stop offset="1" stopColor="#3ECF8E" />
               </linearGradient>
               <linearGradient
                 id="paint1_linear"
@@ -943,14 +943,15 @@ export const Backend = () => {
                 gradientUnits="userSpaceOnUse"
               >
                 <stop />
-                <stop offset="1" stop-opacity="0" />
+                <stop offset="1" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>
 
           {/* Duplicar para efecto de loop infinito */}
 
-          <svg
+
+                    <svg
             xmlns="http://www.w3.org/2000/svg"
             width="64"
             height="64"
@@ -1026,8 +1027,8 @@ export const Backend = () => {
                 y2="34.658"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#387EB8" />
-                <stop offset="1" stop-color="#366994" />
+                <stop stopColor="#387EB8" />
+                <stop offset="1" stopColor="#366994" />
               </linearGradient>
               <linearGradient
                 id="b"
@@ -1037,8 +1038,8 @@ export const Backend = () => {
                 y2="45.163"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#FFE052" />
-                <stop offset="1" stop-color="#FFC331" />
+                <stop stopColor="#FFE052" />
+                <stop offset="1" stopColor="#FFC331" />
               </linearGradient>
             </defs>
           </svg>
@@ -1050,7 +1051,7 @@ export const Backend = () => {
           >
             <path
               fill="#fff"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M28.057 6.53 17.952.532a3.8 3.8 0 0 0-3.88 0L3.965 6.53A4.03 4.03 0 0 0 2 10.002v11.996a4.03 4.03 0 0 0 1.948 3.472l10.105 5.998a3.8 3.8 0 0 0 3.88 0L28.04 25.47a4.03 4.03 0 0 0 1.948-3.472V10.002a4.03 4.03 0 0 0-1.93-3.472zM20.23 25.262v.86a.318.318 0 0 1-.148.265l-.512.293c-.08.042-.148 0-.148-.113v-.847a1.66 1.66 0 0 1-1.164.113c-.062-.042-.086-.122-.056-.2l.183-.78a.322.322 0 0 1 .102-.17.18.18 0 0 1 .05-.035.11.11 0 0 1 .08 0 1.41 1.41 0 0 0 1.059-.134 1.41 1.41 0 0 0 .79-1.21c0-.438-.24-.62-.82-.625-.734 0-1.4-.14-1.43-1.224a3.137 3.137 0 0 1 1.186-2.4v-.872a.34.34 0 0 1 .148-.268l.494-.314c.08-.042.148 0 .148.116v.872a1.61 1.61 0 0 1 .967-.116c.07.04.098.128.064.2l-.173.773a.325.325 0 0 1-.138.195c-.02.012-.05.008-.074 0a1.28 1.28 0 0 0-.931.152 1.17 1.17 0 0 0-.706 1.037c0 .395.208.515.907.53.935 0 1.337.423 1.348 1.362a3.346 3.346 0 0 1-1.228 2.53zm5.293-1.45a.201.201 0 0 1-.078.194L22.9 25.558c-.024.02-.06.023-.087.007s-.04-.05-.033-.08v-.66a.184.184 0 0 1 .116-.162l2.516-1.507c.024-.02.06-.023.087-.007s.04.05.033.08v.582zM27.288 9.06l-9.562 5.906c-1.193.706-2.07 1.478-2.07 2.914v11.778c0 .86.353 1.4.882 1.58a3.14 3.14 0 0 1-.53.053 3.13 3.13 0 0 1-1.595-.441L4.308 24.853A3.3 3.3 0 0 1 2.706 22V10.002a3.304 3.304 0 0 1 1.602-2.858l10.105-5.998c.98-.58 2.196-.58 3.176 0l10.105 5.998c.833.504 1.4 1.35 1.552 2.3-.328-.713-1.083-.9-1.962-.395h.003z"
             />
           </svg>
@@ -1086,7 +1087,7 @@ export const Backend = () => {
             <path
               d="m21.47 20.829 -2.881 -2.881a0.572 0.572 0 0 0 -0.7 -0.084 6.854 6.854 0 0 1 -7.081 0 0.576 0.576 0 0 0 -0.7 0.084l-2.881 2.881a0.576 0.576 0 0 0 -0.103 0.69 0.57 0.57 0 0 0 0.166 0.186 12 12 0 0 0 14.113 0 0.58 0.58 0 0 0 0.239 -0.423 0.576 0.576 0 0 0 -0.172 -0.453Zm0.002 -17.668 -2.88 2.88a0.569 0.569 0 0 1 -0.701 0.084A6.857 6.857 0 0 0 8.724 8.08a6.862 6.862 0 0 0 -1.222 3.692 6.86 6.86 0 0 0 0.978 3.764 0.573 0.573 0 0 1 -0.083 0.699l-2.881 2.88a0.567 0.567 0 0 1 -0.864 -0.063A11.993 11.993 0 0 1 6.771 2.7a11.99 11.99 0 0 1 14.637 -0.405 0.566 0.566 0 0 1 0.232 0.418 0.57 0.57 0 0 1 -0.168 0.448Zm-7.118 12.261a3.427 3.427 0 1 0 0 -6.854 3.427 3.427 0 0 0 0 6.854Z"
               fill="#fff"
-              stroke-width="1"
+              strokeWidth="1"
             ></path>
           </svg>
           <svg
@@ -1138,8 +1139,8 @@ export const Backend = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
               transform="scale(64)"
               fill="#ffff"
@@ -1159,8 +1160,8 @@ export const Backend = () => {
                 y1="115.276%"
                 y2="41.364%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux1"
@@ -1169,8 +1170,8 @@ export const Backend = () => {
                 y1="2.404%"
                 y2="90.542%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".8" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".8" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux2"
@@ -1179,8 +1180,8 @@ export const Backend = () => {
                 y1="88.248%"
                 y2="9.748%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux3"
@@ -1189,8 +1190,8 @@ export const Backend = () => {
                 y1="85.49%"
                 y2="13.811%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux4"
@@ -1199,8 +1200,8 @@ export const Backend = () => {
                 y1="3.102%"
                 y2="93.895%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux5"
@@ -1209,8 +1210,8 @@ export const Backend = () => {
                 y1="5.475%"
                 y2="93.524%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux6"
@@ -1219,8 +1220,8 @@ export const Backend = () => {
                 y1="89.845%"
                 y2="40.632%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux7"
@@ -1229,8 +1230,8 @@ export const Backend = () => {
                 y1="99.975%"
                 y2="23.545%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux8"
@@ -1239,8 +1240,8 @@ export const Backend = () => {
                 y1="13.229%"
                 y2="94.673%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".8" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".8" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTux9"
@@ -1249,8 +1250,8 @@ export const Backend = () => {
                 y1="37.327%"
                 y2="92.782%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxa"
@@ -1259,8 +1260,8 @@ export const Backend = () => {
                 y1="2.299%"
                 y2="81.204%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxb"
@@ -1269,8 +1270,8 @@ export const Backend = () => {
                 y1="2.272%"
                 y2="71.799%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxc"
@@ -1279,8 +1280,8 @@ export const Backend = () => {
                 y1="48.921%"
                 y2="98.1%"
               >
-                <stop offset="0%" stop-color="#FFA63F" />
-                <stop offset="100%" stop-color="#FF0" />
+                <stop offset="0%" stopColor="#FFA63F" />
+                <stop offset="100%" stopColor="#FF0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxd"
@@ -1289,8 +1290,8 @@ export const Backend = () => {
                 y1="143.009%"
                 y2="-64.622%"
               >
-                <stop offset="0%" stop-color="#FFEED7" />
-                <stop offset="100%" stop-color="#BDBFC2" />
+                <stop offset="0%" stopColor="#FFEED7" />
+                <stop offset="100%" stopColor="#BDBFC2" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxe"
@@ -1299,8 +1300,8 @@ export const Backend = () => {
                 y1="34.024%"
                 y2="89.175%"
               >
-                <stop offset="0%" stop-color="#FFA63F" />
-                <stop offset="100%" stop-color="#FF0" />
+                <stop offset="0%" stopColor="#FFA63F" />
+                <stop offset="100%" stopColor="#FF0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxf"
@@ -1309,8 +1310,8 @@ export const Backend = () => {
                 y1="-17.216%"
                 y2="66.118%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxg"
@@ -1319,8 +1320,8 @@ export const Backend = () => {
                 y1="1.565%"
                 y2="104.313%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxh"
@@ -1329,8 +1330,8 @@ export const Backend = () => {
                 y1="4.533%"
                 y2="92.827%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxi"
@@ -1339,8 +1340,8 @@ export const Backend = () => {
                 y1="17.609%"
                 y2="99.385%"
               >
-                <stop offset="0%" stop-color="#FFA63F" />
-                <stop offset="100%" stop-color="#FF0" />
+                <stop offset="0%" stopColor="#FFA63F" />
+                <stop offset="100%" stopColor="#FF0" />
               </linearGradient>
               <linearGradient
                 id="logosLinuxTuxj"
@@ -1349,8 +1350,8 @@ export const Backend = () => {
                 y1="2.89%"
                 y2="94.17%"
               >
-                <stop offset="0%" stop-color="#FFF" stop-opacity=".65" />
-                <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+                <stop offset="0%" stopColor="#FFF" stopOpacity=".65" />
+                <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
               </linearGradient>
               <filter
                 id="logosLinuxTuxk"
@@ -1371,7 +1372,7 @@ export const Backend = () => {
             <g fill="none">
               <path
                 fill="#000"
-                fill-opacity=".2"
+                fillOpacity=".2"
                 d="M235.125 249.359c0 17.355-52.617 31.497-117.54 31.497S.044 266.806.044 249.359c0-17.356 52.618-31.498 117.54-31.498c64.924 0 117.45 14.142 117.541 31.498"
                 filter="url(#logosLinuxTuxk)"
                 transform="translate(10)"
@@ -1388,7 +1389,7 @@ export const Backend = () => {
               <path
                 fill="#000"
                 stroke="#000"
-                stroke-width=".977"
+                strokeWidth=".977"
                 d="M176.805 117.86c13.59 11.02 38.292 49.587 2.204 74.748c-11.846 7.806 10.468 32.508 23.049 19.927c43.618-43.894-1.102-94.308-16.53-111.664c-13.774-15.151-25.987 3.49-8.723 16.989z"
               />
               <path
@@ -1433,7 +1434,7 @@ export const Backend = () => {
               <path
                 fill="#000"
                 stroke="#000"
-                stroke-width="1.25"
+                strokeWidth="1.25"
                 d="M79.925 122.727c-8.907 14.509-30.211 48.669-1.652 66.484c38.384 23.6 27.548 47.108-7.53 25.895c-49.404-29.568-5.97-89.257 13.774-112.03c22.59-25.529 4.316 4.683-4.592 19.65z"
               />
               <path
@@ -1459,7 +1460,7 @@ export const Backend = () => {
               <path
                 fill="url(#logosLinuxTuxc)"
                 stroke="#E68C3F"
-                stroke-width="6.25"
+                strokeWidth="6.25"
                 d="M51.835 258.542c-20.57-10.928-50.414 2.112-39.578-27.457c2.204-6.704-3.214-16.805.275-23.325c4.133-7.989 13.04-6.244 18.366-11.57c5.234-5.51 8.54-15.06 18.366-13.59c9.734 1.468 16.254 13.406 23.049 28.099c5.05 10.468 22.865 25.253 21.672 37.007c-1.47 17.998-21.948 21.396-42.15 10.836z"
                 transform="translate(10)"
               />
@@ -1471,7 +1472,7 @@ export const Backend = () => {
               <path
                 fill="url(#logosLinuxTuxe)"
                 stroke="#E68C3F"
-                stroke-width="6.251"
+                strokeWidth="6.251"
                 d="M194.445 253.49c15.06-18.273 48.578-14.508 25.988-39.577c-4.775-5.418-3.306-16.989-9.183-21.947c-6.887-6.061-14.509-1.102-21.488-4.224c-6.979-3.398-14.325-9.918-22.865-5.327c-8.54 4.684-9.459 16.805-10.285 32.783c-.735 11.479-11.203 30.671-5.602 41.231c8.081 16.346 29.11 14.142 43.435-2.938z"
                 transform="translate(10)"
               />
@@ -1497,13 +1498,13 @@ export const Backend = () => {
               <path
                 fill="url(#logosLinuxTuxi)"
                 stroke="#E68C3F"
-                stroke-width="3.75"
+                strokeWidth="3.75"
                 d="M97.107 66.344c3.673-3.398 12.58-13.774 29.477-2.939c3.122 2.02 5.693 2.204 11.662 4.775c12.03 4.96 6.336 16.897-6.52 20.937c-5.51 1.745-10.468 8.449-20.386 7.806c-8.54-.46-10.744-6.06-15.978-9.091c-9.275-5.234-10.652-12.305-5.602-16.07c5.051-3.765 6.98-5.143 7.347-5.418z"
                 transform="translate(10)"
               />
               <path
                 stroke="#E68C3F"
-                stroke-width="2.5"
+                strokeWidth="2.5"
                 d="M148.43 75.986c-5.05.275-15.979 11.203-27.457 11.203c-11.479 0-18.366-10.652-20.11-10.652"
               />
               <path
@@ -1513,7 +1514,6 @@ export const Backend = () => {
               />
             </g>
           </svg>
-
           <svg
             viewBox="0 0 96 96"
             width="64"
@@ -1530,8 +1530,8 @@ export const Backend = () => {
                 gradientTransform="matrix(1 0 0 -1 1075 158)"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0" stop-color="#114a8b" />
-                <stop offset="1" stop-color="#0669bc" />
+                <stop offset="0" stopColor="#114a8b" />
+                <stop offset="1" stopColor="#0669bc" />
               </linearGradient>
               <linearGradient
                 id="b"
@@ -1542,11 +1542,11 @@ export const Backend = () => {
                 gradientTransform="matrix(1 0 0 -1 1075 158)"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0" stop-opacity=".3" />
-                <stop offset=".07" stop-opacity=".2" />
-                <stop offset=".32" stop-opacity=".1" />
-                <stop offset=".62" stop-opacity=".05" />
-                <stop offset="1" stop-opacity="0" />
+                <stop offset="0" stopOpacity=".3" />
+                <stop offset=".07" stopOpacity=".2" />
+                <stop offset=".32" stopOpacity=".1" />
+                <stop offset=".62" stopOpacity=".05" />
+                <stop offset="1" stopOpacity="0" />
               </linearGradient>
               <linearGradient
                 id="c"
@@ -1557,8 +1557,8 @@ export const Backend = () => {
                 gradientTransform="matrix(1 0 0 -1 1075 158)"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0" stop-color="#3ccbf4" />
-                <stop offset="1" stop-color="#2892df" />
+                <stop offset="0" stopColor="#3ccbf4" />
+                <stop offset="1" stopColor="#2892df" />
               </linearGradient>
             </defs>
             <path
@@ -1578,7 +1578,6 @@ export const Backend = () => {
               d="M66.6 9.36a4.14 4.14 0 0 0-3.93-2.82H33.65a4.15 4.15 0 0 1 3.93 2.82l25.18 74.62a4.15 4.15 0 0 1-3.93 5.48h29.02a4.15 4.15 0 0 0 3.93-5.48z"
             />
           </svg>
-
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="64"
@@ -1590,7 +1589,6 @@ export const Backend = () => {
               d="M2 38.5h124v43.71H64v7.29H36.44v-7.29H2Zm6.89 36.43h13.78V53.07h6.89v21.86h6.89V45.79H8.89Zm34.44-29.14v36.42h13.78v-7.28h13.78V45.79Zm13.78 7.29H64v14.56h-6.89Zm20.67-7.29v29.14h13.78V53.07h6.89v21.86h6.89V53.07h6.89v21.86h6.89V45.79Z"
             />
           </svg>
-
           <svg
             viewBox="0 0 512 512"
             xmlns="http://www.w3.org/2000/svg"
@@ -1600,7 +1598,7 @@ export const Backend = () => {
           >
             <path
               fill="#004880"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M376.624 460.825c-47.024 0-85.149-38.13-85.149-85.157 0-47.008 38.126-85.159 85.149-85.159 47.025 0 85.149 38.151 85.149 85.158 0 47.028-38.125 85.158-85.149 85.158ZM206.772 265.643c-29.397 0-53.218-23.844-53.218-53.224 0-29.401 23.821-53.223 53.218-53.223 29.398 0 53.219 23.823 53.219 53.223 0 29.38-23.821 53.224-53.219 53.224ZM380.392 99.5H238.277c-72.419 0-131.172 58.759-131.172 131.206v142.108c0 72.469 58.753 131.186 131.172 131.186h142.115c72.462 0 131.172-58.717 131.172-131.186V230.707c0-72.448-58.71-131.207-131.172-131.207ZM85.15 49.579c0 23.524-19.074 42.578-42.575 42.578C19.052 92.157 0 73.103 0 49.58 0 26.074 19.051 7 42.575 7c23.5 0 42.574 19.074 42.574 42.579Z"
             />
           </svg>
@@ -1806,6 +1804,93 @@ export const Backend = () => {
               fill="#00546B"
             />
           </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid"
+            width="64"
+            height="64"
+            viewBox="0 0 256 220"
+          >
+            <path
+              d="M246 169c-13.7 7-84.5 36.2-99.5 44-15.1 7.9-23.5 7.8-35.4 2.1C99.2 209.4 24 179 10.3 172.5 3.6 169.3 0 166.5 0 164v-26s98-21.3 113.9-27c15.8-5.6 21.3-5.8 34.8-.9 13.4 5 94 19.5 107.3 24.3V160c0 2.5-3 5.3-10 9"
+              fill="#912626"
+            />
+            <path
+              d="M246 143.2c-13.7 7.1-84.5 36.2-99.5 44-15.1 8-23.5 7.9-35.4 2.2-11.9-5.7-87.2-36.1-100.8-42.6-13.5-6.5-13.8-11-.5-16.2 13.4-5.2 88.2-34.6 104-40.3 16-5.6 21.4-5.8 34.9-1 13.4 5 83.8 33 97.1 37.9 13.3 4.9 13.8 8.9.2 16"
+              fill="#C6302B"
+            />
+            <path
+              d="M246 127c-13.7 7.2-84.5 36.3-99.5 44.2-15.1 7.8-23.5 7.7-35.4 2-11.9-5.6-87.2-36-100.8-42.6-6.7-3.2-10.3-6-10.3-8.5V96.2s98-21.3 113.9-27c15.8-5.7 21.3-5.9 34.8-1 13.4 5 94 19.5 107.3 24.4V118c0 2.5-3 5.4-10 9"
+              fill="#912626"
+            />
+            <path
+              d="M246 101.4c-13.7 7-84.5 36.2-99.5 44-15.1 7.9-23.5 7.8-35.4 2.1C99.2 141.8 24 111.4 10.3 105c-13.5-6.5-13.8-11-.5-16.1C23.2 83.5 98 54 113.8 48.5c16-5.7 21.4-6 34.9-1 13.4 5 83.8 33 97.1 37.8 13.3 5 13.8 9 .2 16"
+              fill="#C6302B"
+            />
+            <path
+              d="M246 83.7c-13.7 7-84.5 36.2-99.5 44-15.1 7.9-23.5 7.8-35.4 2.1C99.2 124.1 24 93.7 10.3 87.2 3.6 84 0 81.2 0 78.7v-26s98-21.3 113.9-27c15.8-5.6 21.3-5.8 34.8-.9 13.4 5 94 19.5 107.3 24.4v25.5c0 2.5-3 5.3-10 9"
+              fill="#912626"
+            />
+            <path
+              d="M246 58c-13.7 7-84.5 36.1-99.5 44-15.1 7.9-23.5 7.8-35.4 2C99.2 98.5 24 68 10.3 61.6c-13.5-6.5-13.8-11-.5-16.2C23.2 40.1 98 10.7 113.8 5c16-5.6 21.4-5.8 34.9-.9 13.4 5 83.8 33 97.1 37.8 13.3 4.9 13.8 9 .2 16"
+              fill="#C6302B"
+            />
+            <path
+              d="m159.3 32.8-22 2.2-5 11.9-8-13.2L99 31.4l19-6.9-5.8-10.5 17.8 7 16.7-5.5-4.5 10.9 17 6.4M131 90.3l-41-17 58.8-9.1-17.8 26M74 39.3c17.5 0 31.5 5.5 31.5 12.2 0 6.8-14 12.2-31.4 12.2s-31.5-5.4-31.5-12.2c0-6.7 14.1-12.2 31.5-12.2"
+              fill="#FFF"
+            />
+            <path d="M185.3 36 220 49.8l-34.8 13.7V36" fill="#621B1C" />
+            <path
+              d="M146.8 51.2 185.3 36v27.5l-3.8 1.5-34.7-13.8"
+              fill="#9A2928"
+            />
+          </svg>
+          <svg
+            viewBox="0 0 109 113"
+            fill="none"
+            width="64"
+            height="64"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z"
+              fill="url(#paint0_linear)"
+            />
+            <path
+              d="M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z"
+              fill="url(#paint1_linear)"
+              fillOpacity="0.2"
+            />
+            <path
+              d="M45.317 2.07103C48.1765 -1.53037 53.9745 0.442937 54.0434 5.041L54.4849 72.2922H9.83113C1.64038 72.2922 -2.92775 62.8321 2.1655 56.4175L45.317 2.07103Z"
+              fill="#3ECF8E"
+            />
+            <defs>
+              <linearGradient
+                id="paint0_linear"
+                x1="53.9738"
+                y1="54.974"
+                x2="94.1635"
+                y2="71.8295"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stopColor="#249361" />
+                <stop offset="1" stopColor="#3ECF8E" />
+              </linearGradient>
+              <linearGradient
+                id="paint1_linear"
+                x1="36.1558"
+                y1="30.578"
+                x2="54.4844"
+                y2="65.0806"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop />
+                <stop offset="1" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+
         </div>
       </div>
       <style jsx>{`
@@ -1817,7 +1902,7 @@ export const Backend = () => {
             transform: translateX(0);
           }
         }
-        .animate-scroll-logos {
+        .animate-scroll-logos-back {
           animation: scroll-logos 20s linear infinite;
         }
 

@@ -21,13 +21,17 @@ export const Profile = () => {
               />
             </div>
             <div className="text-center">
-              <h2 className="text-xl font-bold leading-none text-gray-900 dark:text-white sm:text-2xl">
-              Nicolas Murillo Arango
-              </h2>
-                <span className="mb-2 inline-block rounded bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text px-2.5 py-0.5 text-2xl font-medium text-transparent animate-pulse">
+              <h2 className=" scroll-m-20 text-4xl tracking-tight lg:text-5xl font-bold font-newyork leading-none text-gray-900 dark:text-white sm:text-2xl">
+              Hey there! I'm <span className="text-yellow-500">Nicolas</span><br />
+              <span className="text-rose-500">a passionate</span>
+              <span className="mb-2 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl inline-block font-newyork rounded bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text px-2.5 py-0.5  text-transparent animate-pulse">
                 .NET Full Stack Developer
                 </span>
-                <TextGenerateEffect words={words} className='text-sm'/>
+              </h2>
+                
+                <div className='flex items-center justify-center w-full'>
+                  <TextGenerateEffect words={words}/>
+                </div>
             </div>
             <Banner />
             </div>

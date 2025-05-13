@@ -37,10 +37,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <BackgroundBeams />
-          <BackgroundBeams />
-          
-
-
           {children}
         </ThemeProvider>
       </body>

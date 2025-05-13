@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <section className="bg-white antialiased dark:bg-transparent md:py-8">
       <div className="flex flex-col md:grid md:grid-cols-2 h-full">
-        <div className="sticky top-0 flex items-center justify-center h-full w-full pl-8 pr-8 ">
+        <div className="sticky top-0 sm: flex items-center justify-center h-full w-full pl-8 pr-8 ">
           <Profile />
         </div>
         <div className="flex-1 pr-8 h-full flex flex-col items-center justify-center">

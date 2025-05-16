@@ -9,9 +9,10 @@ export const Profile = () => {
   const words =
     "I specialize in building robust web applications using the latest technologies and frameworks. Let's connect.";
   return (
-    <div className="flex flex-col items-center justify-center">
-      <Navbar />
+    <div className="flex flex-col items-center justify-center ">
+      
       <div className="mx-auto max-w-screen-lg px-4 2xl:px-0">
+        <Navbar />
         <div className="py-4 md:py-8">
           <div className="mb-4 flex items-center justify-between">
             <div className="flex flex-col items-center justify-center w-full gap-5 ">
@@ -38,11 +39,7 @@ export const Profile = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center w-full">
-                <img
-                  src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExazVtaTl6M2x2eGtmMzhpaWlhczcxcGNranAzdnJieGtlMHR3OHgzaCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/iFaPIqooUgZ2MkVNJI/giphy.gif"
-                  alt=""
-                  className="w-full h-full"
-                />
+
               </div>
             </div>
           </div>

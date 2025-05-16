@@ -40,7 +40,7 @@ export const MaskContainer = ({
   return (
     <motion.div
       ref={containerRef}
-      className={cn("relative h-screen", className)}
+      className={cn("relative h-screen lg:h-110", className)}
       animate={{
         backgroundColor: isHovered ? "var(--slate-900)" : "var(--white)",
       }}
@@ -61,7 +61,7 @@ export const MaskContainer = ({
           maskPosition: { duration: 0.15, ease: "linear" },
         }}
       >
-        <div className="absolute inset-0 z-0 h-full w-full bg-transparent dark:bg-rose-500" />
+        <div className="absolute inset-0 z-0 h-full w-full bg-amber-300 dark:bg-rose-500" />
         <div
           onMouseEnter={() => {
             setIsHovered(true);

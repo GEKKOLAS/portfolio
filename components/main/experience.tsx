@@ -5,7 +5,7 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 export const Experience = () => {
   return (
     <ScrollArea style={{ height: "400px", overflow: "auto" }}>
-      <div>
+      <div className=" w-full p-4 md:h-full sm:h-full">
         <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-yellow-400 mb-6">
           Professional Experience
         </h2>

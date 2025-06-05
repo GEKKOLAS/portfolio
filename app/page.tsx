@@ -1,16 +1,15 @@
-import Image from "next/image";
+
 import { ModeToggle } from "@/components/ui/toggle-theme";
-import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
-import { MaskContainer } from "@/components/ui/svg-mask-effect";
+
 import { Projects } from "@/components/main/projects";
 import { Profile } from "@/components/main/profile";
-import { Navbar } from "@/components/main/navbar";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+
+
 import { About } from "@/components/main/about";
-import { Contact } from "@/components/main/contact";
+
 
 import { Experience } from "@/components/main/experience";
-import { BackgroundBeams } from "@/components/ui/background-beams";
+
 import { Banner } from "@/components/main/banner";
 
 export default function Home() {

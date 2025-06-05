@@ -17,25 +17,30 @@ export const MaskContainer = ({
   className?: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [mousePosition, setMousePosition] = useState<any>({ x: null, y: null });
-  const containerRef = useRef<any>(null);
-  const updateMousePosition = (e: any) => {
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  const [mousePosition, setMousePosition] = useState<{ x: number | null; y: number | null }>({
+    x: null,
+    y: null,
+  });
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const updateMousePosition = (e: MouseEvent) => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    }
   };
 
   useEffect(() => {
-    containerRef.current.addEventListener("mousemove", updateMousePosition);
+    const refCurrent = containerRef.current;
+    if (refCurrent) {
+      refCurrent.addEventListener("mousemove", updateMousePosition as EventListener);
+    }
     return () => {
-      if (containerRef.current) {
-        containerRef.current.removeEventListener(
-          "mousemove",
-          updateMousePosition,
-        );
+      if (refCurrent) {
+        refCurrent.removeEventListener("mousemove", updateMousePosition as EventListener);
       }
     };
   }, []);
-  let maskSize = isHovered ? revealSize : size;
+  const maskSize = isHovered ? revealSize : size;
 
   return (
     <motion.div
@@ -51,9 +56,10 @@ export const MaskContainer = ({
       <motion.div
         className="absolute flex h-full w-full items-center justify-center bg-transparent text-6xl [mask-image:url(/mask.svg)] [mask-repeat:no-repeat] [mask-size:40px] dark:bg-white"
         animate={{
-          maskPosition: `${mousePosition.x - maskSize / 2}px ${
-            mousePosition.y - maskSize / 2
-          }px`,
+          maskPosition:
+            mousePosition.x !== null && mousePosition.y !== null
+              ? `${mousePosition.x - maskSize / 2}px ${mousePosition.y - maskSize / 2}px`
+              : "0px 0px",
           maskSize: `${maskSize}px`,
         }}
         transition={{
@@ -75,9 +81,7 @@ export const MaskContainer = ({
         </div>
       </motion.div>
 
-      <div className="flex h-full w-full items-center justify-center">
-        {revealText}
-      </div>
+      <div className="flex h-full w-full items-center justify-center">{revealText}</div>
     </motion.div>
   );
 };

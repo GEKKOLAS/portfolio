@@ -1,5 +1,5 @@
 import React from 'react'
-import { ModeToggle } from '../ui/toggle-theme'
+
 
 export const Navbar = () => {
   return (

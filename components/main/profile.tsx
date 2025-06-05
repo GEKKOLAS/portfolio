@@ -1,28 +1,32 @@
+'use client'
 import React from "react";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
-import { div } from "motion/react-client";
-import { ModeToggle } from "../ui/toggle-theme";
-import { Banner } from "./banner";
+import Image from "next/image";
 import { Navbar } from "./navbar";
 
 export const Profile = () => {
   const words =
     "I specialize in building robust web applications using the latest technologies and frameworks. Let's connect.";
   return (
-    <div className="flex flex-col items-center justify-center ">
-      
+    <div className="flex flex-col items-center justify-center pb-5">
       <div className="mx-auto max-w-screen-lg px-4 2xl:px-0">
         <Navbar />
-        <div className="py-4 md:py-8">
+        <div >
           <div className="mb-4 flex items-center justify-between">
             <div className="flex flex-col items-center justify-center w-full gap-5 ">
-              <div className="flex justify-center">
-                <img
-                  className="h-30 w-30 rounded-full transform-3d transition duration-500 ease-in-out hover:scale-110 hover:rotate-12"
-                  src="https://media.giphy.com/media/eU9sk1Z80ZugM67Pse/giphy.gif?cid=ecf05e47hybpp1h7hkr0x5ba1vqfdy7rxg4e9k5w1ex665pf&ep=v1_gifs_search&rid=giphy.gif&ct=g"
-                  alt="profile avatar"
-                />
-              </div>
+                <div className="flex justify-center">
+                <div className="relative w-50 h-50 rounded-full overflow-hidden shadow-lg p-1 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 animate-gradient-border">
+                  <div className="rounded-full overflow-hidden bg-cyan-300 dark:bg-rose-500 w-full h-full">
+                    <Image
+                      className="rounded-full w-full h-full object-cover border-4 border-white shadow-lg"
+                      src="/GRR.jpeg"
+                      alt="profile avatar"
+                      width={500}
+                      height={500}
+                    />
+                  </div>
+                </div>
+                </div>
               <div className="text-center">
                 <h2 className=" scroll-m-20 text-4xl tracking-tight lg:text-5xl font-bold font-newyork leading-none text-gray-900 dark:text-white sm:text-2xl">
                   Hey there! I'm{" "}

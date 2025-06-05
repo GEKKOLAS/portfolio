@@ -1,9 +1,7 @@
 import { StickyScroll } from "../ui/sticky-scroll-reveal";
-import React, { Children } from "react";
+import React from "react";
 import { About } from "./about";
-import { Component } from "lucide-react";
-import { Separator } from "@radix-ui/react-dropdown-menu";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import Image from "next/image";
 
 const content = [
   {
@@ -12,7 +10,7 @@ const content = [
       "Ecommerce app built with ASP.NET as the backend and Angular with Angular Material as the frontend delivers a modern, scalable shopping experience. The backend, powered by ASP.NET, handles secure user authentication, product management, order processing, and database interactions using Entity Framework.",
     content: (
       <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-        <img
+        <Image
           src="/ecomercerappt.jpg"
           width={300}
           height={300}
@@ -28,7 +26,7 @@ const content = [
       "A Learning Management System (LMS) is a software application for the administration, documentation, tracking, reporting, and delivery of educational courses or training programs. It provides a centralized platform for educators and learners to interact, manage course content, and track progress.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
-        <img
+        <Image
           src="/learning.jpg"
           width={300}
           height={300}
@@ -44,7 +42,7 @@ const content = [
       "A real-time chat application is a software program that enables users to communicate with each other in real-time through text, voice, or video. It typically includes features such as instant messaging, group chats, file sharing, and notifications.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
-        <img
+        <Image
           src="/chat.jpg"
           width={300}
           height={300}
@@ -60,7 +58,7 @@ const content = [
       "A book store is a retail establishment that sells books, magazines, and other printed materials. It may also offer related products such as stationery, gifts, and educational materials. Book stores can be independent or part of a larger chain and often provide a cozy atmosphere for browsing and reading.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
-        <img
+        <Image
           src="/chat.jpg"
           width={300}
           height={300}
@@ -76,7 +74,7 @@ const content = [
       "A car rental system is a software application that allows users to rent vehicles for a specified period. It typically includes features such as vehicle availability, booking management, payment processing, and customer support. The system can be used by both rental companies and customers to streamline the rental process.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
-        <img
+        <Image
           src="/chat.jpg"
           width={300}
           height={300}

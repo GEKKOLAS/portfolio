@@ -29,7 +29,7 @@ export const Profile = () => {
                 </div>
               <div className="text-center">
                 <h2 className=" scroll-m-20 text-4xl tracking-tight lg:text-5xl font-bold font-newyork leading-none text-gray-900 dark:text-white sm:text-2xl">
-                  Hey there! I'm{" "}
+                  Hey there! I&apos;m{" "}
                   <span className="text-yellow-500">Nicolas</span>
                   <br />
                   <span className="text-rose-500">a passionate</span>

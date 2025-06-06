@@ -1,4 +1,3 @@
-
 import { ModeToggle } from "@/components/ui/toggle-theme";
 
 import { Projects } from "@/components/main/projects";
@@ -11,20 +10,22 @@ import { About } from "@/components/main/about";
 import { Experience } from "@/components/main/experience";
 
 import { Banner } from "@/components/main/banner";
+import { Social } from "@/components/main/socialnet";
 
 export default function Home() {
   return (
-    <section className="bg-white antialiased dark:bg-transparent md:py-8">
+    <section id="home" className="bg-white antialiased dark:bg-transparent">
       <div className="grid h-full lg:grid-cols-2 md:grid gap-4 ">
-        <div className="flex items-center justify-center h-full w-full pl-8 pr-8 pb-8 pt-8 overscroll-contain md:static  sm:static  lg:sticky lg:top-0">
+        <div className="flex items-center justify-center h-full w-full pl-8 pr-8 pb-8 overscroll-contain md:static  sm:static  lg:sticky lg:top-0">
           <Profile /> 
           <ModeToggle />
+
         </div>
-        <div className="flex-1 pr-8 h-full flex flex-col items-center justify-center overscroll-contain">
+        <div id="about" className="flex-1 pr-8 h-full flex flex-col items-center justify-center overscroll-contain">
           <About />
         </div>
         <div></div>
-        <div className="w-full h-full py-15 flex flex-col items-center justify-center overscroll-contain overflow-hidden">
+        <div id="timeline" className="w-full h-full py-15 flex flex-col items-center justify-center overscroll-contain overflow-hidden">
           <Experience />
         </div>
         <div></div>
@@ -32,8 +33,8 @@ export default function Home() {
           <Banner />
         </div>
         <div />
-        <div className="w-full py-15 flex flex-col items-center justify-center">
-          <Projects />
+        <div id="projects" className="w-full py-15 flex flex-col items-center justify-center">
+          <Projects  />
         </div>
       </div>
     </section>

@@ -12,6 +12,7 @@ import { Experience } from "@/components/main/experience";
 import { Banner } from "@/components/main/banner";
 import { Social } from "@/components/main/socialnet";
 
+
 export default function Home() {
   return (
     <section id="home" className="bg-white antialiased dark:bg-transparent">
@@ -19,7 +20,6 @@ export default function Home() {
         <div className="flex items-center justify-center h-full w-full pl-8 pr-8 pb-8 overscroll-contain md:static  sm:static  lg:sticky lg:top-0">
           <Profile /> 
           <ModeToggle />
-
         </div>
         <div id="about" className="flex-1 pr-8 h-full flex flex-col items-center justify-center overscroll-contain">
           <About />

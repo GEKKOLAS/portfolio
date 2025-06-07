@@ -9,6 +9,7 @@ import { Social } from "./socialnet";
 
 
 
+
 export const Profile = () => {
   const words =
     "I specialize in building robust web applications using the latest technologies and frameworks. Let's connect.";
@@ -44,7 +45,7 @@ export const Profile = () => {
                 </h2>
                 <div className="flex items-center lg:pt-5 justify-center w-full">
                   <TextGenerateEffect words={words} />
-                </div>
+                </div>    
                 <Social />
               </div>
             </div>

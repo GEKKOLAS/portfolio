@@ -10,14 +10,13 @@ import { About } from "@/components/main/about";
 import { Experience } from "@/components/main/experience";
 
 import { Banner } from "@/components/main/banner";
-import { Social } from "@/components/main/socialnet";
 
 
 export default function Home() {
   return (
     <section id="home" className="bg-white antialiased dark:bg-transparent">
       <div className="grid h-full lg:grid-cols-2 md:grid gap-4 ">
-        <div className="flex items-center justify-center h-full w-full pl-8 pr-8 pb-8 overscroll-contain md:static  sm:static  lg:sticky lg:top-0">
+        <div className="flex items-center justify-center h-full w-full pl-8 pr-8 pb-8 overscroll-contain md:sticky  sm:static  lg:sticky 2xl:top-25 md:top-0">
           <Profile /> 
           <ModeToggle />
         </div>

@@ -6,7 +6,9 @@ import { Frontend } from "../ui/frontendStack";
 
 export const Banner = () => {
   return (
-    <div>
+    
+    <section className="relative">
+      <div>
       <div>
         <div className="mx-auto h-30  max-w-2xl px-6 lg:px-8">
           <h2
@@ -28,5 +30,7 @@ export const Banner = () => {
         </div>
       </div>
     </div>
+
+    </section>
   );
 };

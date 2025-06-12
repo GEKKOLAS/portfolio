@@ -4,7 +4,8 @@ import Image from "next/image";
 
 export const About = () => {
   return (
-    <div>
+    <section className="relative h-screen ">
+      <div>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <div className="flex flex-col items-center justify-center h-50 w-full p-4 md:h-full sm:h-full">
         <div className="rounded-lg border border-transparent bg-transparent p-4 dark:border-transparent dark:bg-transparent md:p-3">
@@ -27,7 +28,7 @@ export const About = () => {
           <MaskContainer
             revealText={
               <div className="flex flex-col items-center justify-center w-full py-8 overflow-contain">
-                <p className="text-center pt-30 font-extralight md:text-2xl sm:text text-indigo-800 dark:text-yellow-400 font-serif">
+                <p className="text-center pt-20 font-extralight md:text-2xl sm:text text-indigo-800 dark:text-white font-serif">
                   I&apos;m business-minded developer with a unique blend of technical
                   expertise and creativity. Bachelor degree in International
                   Business & a professional background in Business analisys and
@@ -72,5 +73,6 @@ export const About = () => {
         </div>
       </div>
     </div>
+    </section>
   );
 };

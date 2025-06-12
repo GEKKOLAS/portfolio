@@ -11,7 +11,8 @@ import { Banner } from "@/components/main/banner";
 
 export default function Home() {
   return (
-    <section id="home" className="bg-white antialiased dark:bg-transparent">
+    <main className="relative h-[200vh]">
+      <section id="home" className="bg-white antialiased dark:bg-transparent">
       <div className="grid h-full lg:grid-cols-2 md:grid gap-4 ">
         <div className="flex items-center justify-center h-full w-full pl-8 pr-8 pb-8 overscroll-contain md:static  sm:static  lg:sticky 2xl:top-25 md:top-0">
           <Profile />
@@ -23,7 +24,7 @@ export default function Home() {
         >
           <Experience />
         </div>
-        <div></div>
+        <div/>
         <div
           id="about"
           className="w-full h-full py-15 flex flex-col items-center justify-center overscroll-contain overflow-hidden"
@@ -41,7 +42,9 @@ export default function Home() {
         >
           <Projects />
         </div>
+        <div />
       </div>
     </section>
+    </main>
   );
 }

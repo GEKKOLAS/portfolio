@@ -44,7 +44,7 @@ export const Profile = () => {
                       <span
                         key={role}
                         style={{ display: "none" }}
-                        className={`scroll-m-20 font-extrabold tracking-tight lg:text-5xl 2xl:text-9xl inline-block font-newyork rounded px-2.5 py-0.5 bg-clip-text text-transparent animate-pulse
+                        className={`scroll-m-20 font-extrabold tracking-tight 2xl:text-9xl lg:text-5xl md:text-4xl inline-block font-newyork rounded px-2.5 py-0.5 bg-clip-text text-transparent animate-pulse
                           ${idx === 0 ? "bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent" : ""}
                           ${idx === 1 ? "bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 bg-clip-text text-transparent" : ""}
                           ${idx === 2 ? "bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent" : ""}

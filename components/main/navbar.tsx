@@ -17,15 +17,6 @@ export const Navbar = () => {
                             <li>
                                 <button
                                     type="button"
-                                    onClick={() => scrollToSection('home')}
-                                    className="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 hover:bg-gray-100 dark:text-white"
-                                >
-                                    Home
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    type="button"
                                     onClick={() => scrollToSection('projects')}
                                     className="block py-2 pr-4 pl-3 text-green-400 border-b border-gray-100 hover:bg-gray-100 lg:hover:bg-gray-100 lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-green-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                                 >
@@ -53,7 +44,11 @@ export const Navbar = () => {
                             <li>
                                 <button
                                     type="button"
-                                    onClick={() => scrollToSection('contact')}
+                                    onClick={() => {
+                                        scrollToSection('contact');
+                                        const event = new CustomEvent('triggerSocialAnimation');
+                                        window.dispatchEvent(event);
+                                    }}
                                     className="block py-2 pr-4 pl-3 text-cyan-400 border-b border-gray-100 hover:bg-gray-100 lg:hover:bg-gray-100 lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-cyan-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                                 >
                                     Contact

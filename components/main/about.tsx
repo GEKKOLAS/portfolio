@@ -24,14 +24,11 @@ export const About = () => {
               height={200}
             />
           </div>
-          <h2 className="text-2xl  font-bold text-center mx-auto my-1 text-slate-900 dark:text-rose-400">
-            About Me
-          </h2>
           <MaskContainer
             revealText={
               <div className="flex flex-col items-center justify-center w-full py-8 overflow-contain">
-                <p className="text-center font-semibold md:text-2xl sm:text text-indigo-800 dark:text-yellow-400 font-serif">
-                  Business-minded developer with a unique blend of technical
+                <p className="text-center pt-30 font-extralight md:text-2xl sm:text text-indigo-800 dark:text-yellow-400 font-serif">
+                  I&apos;m business-minded developer with a unique blend of technical
                   expertise and creativity. Bachelor degree in International
                   Business & a professional background in Business analisys and
                   Digital Marketing, bringing a holistic approach to software

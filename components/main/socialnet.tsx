@@ -52,7 +52,7 @@ export const Social = () => {
             </a>
           {/* Instagram */}
           <a
-            href="/timeline"
+            href="/NickLatestCV.pdf"
             download="NickLatestCV.pdf"
             className="flex justify-center items-center transition-transform duration-300 hover:scale-110 hover:text-pink-500"
           >

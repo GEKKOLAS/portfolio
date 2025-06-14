@@ -84,27 +84,6 @@ const content = [
       </div>
     ),
   },
-  {
-    title: "machine learning Application",
-    description:
-      "A machine learning application is a software program that uses algorithms and statistical models to analyze data, learn from it, and make predictions or decisions without explicit programming. These applications can be used in various fields such as finance, healthcare, marketing, and more.",
-    content: (
-      <div className="flex h-full w-full items-center justify-center text-white">
-        <Image
-          src="/chat.jpg"
-          width={300}
-          height={300}
-          className="h-full w-full object-cover"
-          alt="linear board demo"
-        />
-      </div>
-    ),
-  },
-  {
-    title: "About Section",
-    description:
-      "This section provides an overview of the portfolio and its purpose.",
-  },
 ];
 
 export const Projects = () => {

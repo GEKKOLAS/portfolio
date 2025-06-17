@@ -4,8 +4,9 @@ import Image from "next/image";
 
 export const About = () => {
   return (
-    <section className="relative h-screen ">
-      <div>
+    <section className="sticky top-0 z-50 bg-white dark:bg-transparent">
+    <div style={{ height: "800px", overflow: "auto" }}>
+        <div className="sticky top-0 z-50 flex items-center justify-between w-full px-4 py-2 bg-white dark:bg-transparent">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <div className="flex flex-col items-center justify-center h-50 w-full p-4 md:h-full sm:h-full">
         <div className="rounded-lg border border-transparent bg-transparent p-4 dark:border-transparent dark:bg-transparent md:p-3">
@@ -72,6 +73,8 @@ export const About = () => {
           </MaskContainer>
         </div>
       </div>
+    </div>
+
     </div>
     </section>
   );

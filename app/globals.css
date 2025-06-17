@@ -2,31 +2,31 @@
 @import "tw-animate-css";
 
 @keyframes scroll-logos {
-          0% {
-            transform: translateX(-50%);
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
-        .animate-scroll-logos-front {
-          animation: scroll-logos 20s linear infinite;
-        }
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.animate-scroll-logos-back {
+  animation: scroll-logos 20s linear infinite;
+}
 
-        @keyframes gradient-move {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-        .animate-gradient-move {
-          animation: gradient-move 4s ease-in-out infinite;
-        }
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animate-gradient-move {
+  animation: gradient-move 4s ease-in-out infinite;
+}
 
 @custom-variant dark (&:is(.dark *));
 /* Hide scrollbar */

@@ -1,7 +1,7 @@
 import { StickyScroll } from "../ui/sticky-scroll-reveal";
 import React from "react";
-import { About } from "./about";
 import Image from "next/image";
+
 
 const content = [
   {
@@ -87,5 +87,7 @@ const content = [
 ];
 
 export const Projects = () => {
-  return <StickyScroll content={content} />;
+  return (
+    <StickyScroll content={content} />
+  );
 };

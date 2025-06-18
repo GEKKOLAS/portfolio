@@ -1,15 +1,10 @@
 import { ModeToggle } from "@/components/ui/toggle-theme";
-
 import { Projects } from "@/components/main/projects";
 import { Profile } from "@/components/main/profile";
-
 import { About } from "@/components/main/about";
-
 import { Experience } from "@/components/main/experience";
-
 import { Banner } from "@/components/main/banner";
 import { AnimatedTestimonialsDemo } from "@/components/main/services";
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 export default function Home() {
   return (

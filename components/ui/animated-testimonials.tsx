@@ -67,10 +67,10 @@ export const AnimatedTestimonials = ({
     return null;
   };
   return (
-    <div className="sticky top-0 mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
+    <div className="sticky top-0 mx-auto max-w-sm py-20 font-sans antialiased md:max-w-6xl">
       <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
         <div>
-          <div className="relative h-full w-full">
+          <div className="relative h-full w-full ">
             <AutoAdvance
               current={active}
               setCurrent={setActive}

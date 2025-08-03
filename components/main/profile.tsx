@@ -15,7 +15,7 @@ export const Profile = () => {
   const words =
     "I specialize in building robust web applications using the latest technologies on AI & frameworks. Let's connect.";
   return (
-    <div className="flex flex-col items-center justify-center pb-5 2xl:h-full lg:h-full lg:pb-30">
+    <div className="flex flex-col items-center justify-center pb-5 2xl:h-full lg:h-full lg:pb-30 md:pb-20 md:pt-20 sm:pb-10">
       <div className="mx-auto max-w-screen-lg px-4 2xl:px-0">
         <Navbar />
         <div >

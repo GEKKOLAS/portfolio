@@ -81,40 +81,40 @@ export const AnimatedTestimonials = ({
                 <motion.div
                   key={testimonial.src}
                   initial={{
-                    opacity: 0,
-                    scale: 0.9,
-                    z: -100,
-                    rotate: randomRotateY(),
+                  opacity: 0,
+                  scale: 0.9,
+                  z: -100,
+                  rotate: randomRotateY(),
                   }}
                   animate={{
-                    opacity: isActive(index) ? 1 : 0.7,
-                    scale: isActive(index) ? 1 : 0.95,
-                    z: isActive(index) ? 0 : -100,
-                    rotate: isActive(index) ? 0 : randomRotateY(),
-                    zIndex: isActive(index)
-                      ? 40
-                      : testimonials.length + 2 - index,
-                    y: isActive(index) ? [0, -80, 0] : 0,
+                  opacity: isActive(index) ? 1 : 0.7,
+                  scale: isActive(index) ? 1 : 0.95,
+                  z: isActive(index) ? 0 : -100,
+                  rotate: isActive(index) ? 0 : randomRotateY(),
+                  zIndex: isActive(index)
+                    ? 40
+                    : testimonials.length + 2 - index,
+                  y: isActive(index) ? [0, -80, 0] : 0,
                   }}
                   exit={{
-                    opacity: 0,
-                    scale: 0.9,
-                    z: 100,
-                    rotate: randomRotateY(),
+                  opacity: 0,
+                  scale: 0.9,
+                  z: 100,
+                  rotate: randomRotateY(),
                   }}
                   transition={{
-                    duration: 0.4,
-                    ease: "easeInOut",
+                  duration: 0.4,
+                  ease: "easeInOut",
                   }}
                   className="absolute inset-0 origin-bottom"
                 >
                   <Image
-                    src={testimonial.src}
-                    alt={testimonial.title}
-                    width={500}
-                    height={500}
-                    draggable={true}
-                    className="h-full w-full rounded-3xl object-cover object-center"
+                  src={testimonial.src}
+                  alt={testimonial.title}
+                  width={1600}
+                  height={800}
+                  draggable={true}
+                  className="w-full h-full md:w-full md:h-full lg:w-[1600px] lg:h-[350px] 2xl:w-[1600px] 2xl:h-[600px] rounded-3xl object-cover object-center"
                   />
                 </motion.div>
               ))}

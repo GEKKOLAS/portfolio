@@ -35,7 +35,7 @@ export function AnimatedTestimonialsDemo() {
         "Provides professional customer support and accurate translation services, ensuring clear communication, effective problem-solving, and helping clients connect with a broader, multilingual audience.",
       title: "Customer Service & Translations Services",
       subtitle: "Sales representative, Translator, Customer support",
-      src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3BxcHphbTE5czJheTl3M3lyajY3cTV6ejNkajc2ZXJwZDc2ODg4NCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3rgXBBaVvhPXk3NSnK/giphy.gif",
+      src: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGxwZDNjc2VoeTJ0NXlremh4YnRpbGVydzVkbzRucm96dzN1aXhlNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3rgXBBaVvhPXk3NSnK/giphy.gif",
     },
   ];
   return <AnimatedTestimonials testimonials={testimonials} />;

@@ -16,7 +16,7 @@ const Skills = () => {
         style={{ height: "300px", overflow: "auto", borderRadius: "10px" }}
       >
         <div className="flex flex-row justify-around flex-wrap pt-4 pb-4 pl-2 pr-2 gap-2 items-center rounded-2xl bg-transparent">
-          {Frontend_skill.map((image: any, index: number) => (
+          {Frontend_skill.map((image: { skill_name: string; Image: string; width: number; height: number; }, index: number) => (
             <SkillDataProvider
               key={index}
               src={image.Image}

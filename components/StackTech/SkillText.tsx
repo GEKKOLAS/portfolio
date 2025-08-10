@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import {motion} from 'framer-motion'
-import { slideInFromLeft, slideInFromRight, slideInFromTop  } from '@/components/utils/motion'
+import { slideInFromLeft, slideInFromRight } from '@/components/utils/motion'
 
 
 

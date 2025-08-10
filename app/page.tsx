@@ -5,6 +5,7 @@ import { About } from "@/components/main/about";
 import { Experience } from "@/components/main/experience";
 import { Banner } from "@/components/main/banner";
 import { AnimatedTestimonialsDemo } from "@/components/main/services";
+import Skills from "@/components/StackTech/SkillContent";
 
 export default function Home() {
   return (
@@ -30,7 +31,7 @@ export default function Home() {
           </div>
           <div />
           <div className="w-full h-full py-15 flex flex-col items-center justify-center overscroll-contain overflow-hidden">
-            <Banner />
+            <Skills />
           </div>
           <div />
           <div

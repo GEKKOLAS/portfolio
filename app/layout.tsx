@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../components/ui/theme-provider";
-import { BackgroundBeams } from "@/components/ui/background-beams";
 
 
 const geistSans = Geist({
@@ -37,7 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <BackgroundBeams />
+
           {children}
         </ThemeProvider>
       </body>

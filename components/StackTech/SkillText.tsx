@@ -21,7 +21,7 @@ const SkillText = () => {
         variants={slideInFromRight(0.5)}
         className='font-serif text-[40px] text-red-500 mb-10 mt-[10px] text-center italic'
         >
-            “The best way to get the right answer on the internet is not to ask a question; it's to post the wrong answer.” – Phil Karlton
+            Never miss a chance to learn and grow. 
         </motion.div>
     </div>
   )

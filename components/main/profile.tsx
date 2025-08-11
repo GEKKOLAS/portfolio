@@ -12,7 +12,9 @@ export const Profile = () => {
     "I specialize in building robust web applications using the latest technologies on AI & frameworks. Let's connect.";
   return (
     <div className="flex flex-col items-center justify-center min-h-screen pb-5 md:pb-20 md:pt-10 sm:pb-10 2xl:h-screen 2xl:mb-10 2xl:pt-10 lg:h-screen lg:mb-10 lg:pt-10">
-      <BackgroundBeams />
+      <div className="absolute inset-0 -z-10 w-full h-full">
+        <BackgroundBeams />
+      </div>
       <div className="mx-auto max-w-screen-lg px-4 2xl:px-0 flex-1 flex flex-col justify-center">
         <Navbar />
         <div>

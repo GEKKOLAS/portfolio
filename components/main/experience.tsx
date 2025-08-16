@@ -1,5 +1,4 @@
 import React from "react";
-
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 export const Experience = () => {

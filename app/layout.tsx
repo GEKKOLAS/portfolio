@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono,  } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../components/ui/theme-provider";
+import { Tangerine } from "next/font/google";
 
-
+const tangerine = Tangerine({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-tangerine",
+});
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${tangerine.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

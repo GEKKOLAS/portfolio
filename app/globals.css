@@ -1,3 +1,7 @@
+/* Fuente Tangerine personalizada */
+.font-tangerine {
+  font-family: var(--font-tangerine), cursive;
+}
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -156,3 +160,4 @@
     @apply bg-background text-foreground;
   }
 }
+

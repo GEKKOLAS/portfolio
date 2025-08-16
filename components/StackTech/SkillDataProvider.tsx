@@ -15,7 +15,7 @@ interface Props {
 const SkillDataProvider = ({ src, width, height, index }: Props) => {
   const ref = React.useRef(null);
   const inView = useInView(ref, {
-    once: true,
+    once: true, // false allow multiple triggers
   });
 
   const imageVariants = {
@@ -23,7 +23,7 @@ const SkillDataProvider = ({ src, width, height, index }: Props) => {
     visible: { opacity: 1 },
   };
 
-  const animationDelay = 0.2;
+  const animationDelay = 0.1;
   return (
     <motion.div
       ref={ref}
@@ -32,6 +32,7 @@ const SkillDataProvider = ({ src, width, height, index }: Props) => {
       animate={inView ? "visible" : "hidden"}
       custom={index}
       transition={{ delay: index * animationDelay }}
+      viewport={{ once: false, amount: 0.5 }}
     >
       <Image src={src} width={width} height={height} alt="skill image" />
     </motion.div>

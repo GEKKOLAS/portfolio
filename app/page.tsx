@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/ui/toggle-theme";
+
 import { Projects } from "@/components/main/projects";
 import { Profile } from "@/components/main/profile";
 import { About } from "@/components/main/about";
@@ -6,6 +6,8 @@ import { Experience } from "@/components/main/experience";
 import { AnimatedTestimonialsDemo } from "@/components/main/services";
 import Skills from "@/components/StackTech/SkillContent";
 import SplashCursor from "@/components/ui/splashCursor";
+
+import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
 
 
 export default function Home() {
@@ -16,7 +18,7 @@ export default function Home() {
         <div className="grid h-full lg:grid-cols-2 md:grid gap-4 ">
           <div className="flex items-center justify-center h-full w-full pl-8 pr-8 pb-8 overscroll-contain md:static  sm:static  lg:sticky 2xl:top-25 md:top-0">
             <Profile />
-            <ModeToggle />
+            <AnimatedThemeToggler />
           </div>
           <div
             id="timeline"

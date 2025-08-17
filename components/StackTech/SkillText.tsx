@@ -1,29 +1,22 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { slideInFromLeft, slideInFromRight } from "@/components/utils/motion";
+import { slideInFromRight } from "@/components/utils/motion";
+import ColourfulText from "../ui/colourful-text";
 
 const SkillText = () => {
   return (
-    <div className="w-full h-auto flex flex-col items-center justify-center">
-      <motion.div
-        variants={slideInFromLeft(0.5)}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.5 }}
-        className="text-[30px] font-medium mt-[10px] text-center mb-[15px] text-black dark:text-white"
-      >
-        Crafting seamless digital experiences with modern web technologies and
-        thoughtful design.
-      </motion.div>
+    <div className="w-fit h-auto flex flex-col items-center justify-center">
+      
       <motion.div
         variants={slideInFromRight(0.5)}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.5 }}
-        className="text-[50px] font-tangerine text-rose-500 mb-10 mt-[10px] text-center"
-      >
-        “Never miss a chance to learn and grow.”
+        className="text-6xl text-center text-transparent"
+      > 
+        <ColourfulText text="I like crafting seamless digital experiences with modern technologies and thoughtful design." />
+
       </motion.div>
     </div>
   );

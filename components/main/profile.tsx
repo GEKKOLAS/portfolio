@@ -36,46 +36,18 @@ export const Profile = () => {
               <div className="text-center gap-3">
                 <h2 className="scroll-m-20 tracking-tight lg:text-2xl 2xl:text-6xl font-bold font-newyork leading-none text-gray-900 dark:text-white">
                   Hey there! I&apos;m{" "}
-                  <span className="text-yellow-500">Nicolas</span> a
-                  <br />
+                  <span className="text-yellow-500">Nicolas</span>
+                  <br />a{" "}
                   <span className="text-rose-500">
                     Passionate {""} <br />
                   </span>
-                  {[
-                    ".NET Full Stack Developer",
-                    "React Enthusiast",
-                    "Cloud Solutions Architect",
-                  ].map((role, idx) => (
-                    <span
-                      key={role}
-                      style={{ display: "none" }}
-                      className={`scroll-m-20 font-extrabold tracking-tight 2xl:text-9xl lg:text-5xl md:text-4xl inline-block font-newyork rounded px-2.5 py-0.5 bg-clip-text text-transparent animate-pulse
-              ${
-                idx === 0
-                  ? "bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-                  : ""
-              }
-              ${
-                idx === 1
-                  ? "bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
-                  : ""
-              }
-              ${
-                idx === 2
-                  ? "bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent"
-                  : ""
-              }
-              `}
-                      id={`typed-role-${idx}`}
-                    >
-                      {role}
-                    </span>
-                  ))}
-                  <ReactTyped
+                  
+                  <div>
+                    <ReactTyped
                     strings={[
-                      '<span class="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">.NET Developer</span>',
+                      '<span class="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500  bg-clip-text text-transparent">.NET Developer</span>',
                       '<span class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">Full Stack Developer</span>',
-                      '<span class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent">Automation Engineer</span>',
+                      '<span class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500  bg-clip-text text-transparent">Automation Engineer</span>',
                     ]}
                     typeSpeed={60}
                     backSpeed={40}
@@ -84,6 +56,7 @@ export const Profile = () => {
                     showCursor
                     contentType="html"
                   />
+                  </div>
                 </h2>
                 <br />
                 <div className="flex items-center justify-center w-full">

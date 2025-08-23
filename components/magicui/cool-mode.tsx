@@ -1,7 +1,9 @@
 "use client";
 
+// Importa React y hooks necesarios
 import React, { ReactNode, useEffect, useRef } from "react";
 
+// Interfaces para describir las partículas y sus opciones
 export interface BaseParticle {
   element: HTMLElement | SVGSVGElement;
   left: number;
@@ -28,6 +30,7 @@ export interface CoolParticleOptions extends BaseParticleOptions {
   speedUp?: number;
 }
 
+// Obtiene o crea el contenedor global para las partículas
 const getContainer = () => {
   const id = "_coolMode_effect";
   const existingContainer = document.getElementById(id);
@@ -50,12 +53,14 @@ const getContainer = () => {
 
 let instanceCounter = 0;
 
+// Aplica el efecto de partículas al elemento dado
 const applyParticleEffect = (
   element: HTMLElement,
   options?: CoolParticleOptions,
 ): (() => void) => {
   instanceCounter++;
 
+  // Configuración por defecto y variables de estado
   const defaultParticle = "circle";
   const particleType = options?.particle || defaultParticle;
   const sizes = [15, 20, 25, 35, 45];
@@ -68,6 +73,7 @@ const applyParticleEffect = (
 
   const container = getContainer();
 
+  // Genera una nueva partícula y la agrega al contenedor
   function generateParticle() {
     const size =
       options?.size || sizes[Math.floor(Math.random() * sizes.length)];
@@ -81,6 +87,7 @@ const applyParticleEffect = (
 
     const particle = document.createElement("div");
 
+    // Crea la partícula según el tipo: círculo SVG, imagen o emoji/texto
     if (particleType === "circle") {
       const svgNS = "http://www.w3.org/2000/svg";
       const circleSVG = document.createElementNS(svgNS, "svg");
@@ -103,11 +110,11 @@ const applyParticleEffect = (
       particleType.startsWith("http") ||
       particleType.startsWith("/")
     ) {
-      // Handle URL-based images
+      // Imagen por URL
       particle.innerHTML = `<img src="${particleType}" width="${size}" height="${size}" style="border-radius: 50%">`;
     } else {
-      // Handle emoji or text characters
-      const fontSizeMultiplier = 3; // Make emojis 3x bigger
+      // Emoji o texto
+      const fontSizeMultiplier = 3; // Hace el emoji más grande
       const emojiSize = size * fontSizeMultiplier;
       particle.innerHTML = `<div style="font-size: ${emojiSize}px; line-height: 1; text-align: center; width: ${size}px; height: ${size}px; display: flex; align-items: center; justify-content: center; transform: scale(${fontSizeMultiplier}); transform-origin: center;">${particleType}</div>`;
     }
@@ -117,6 +124,7 @@ const applyParticleEffect = (
 
     container.appendChild(particle);
 
+    // Agrega la partícula al array de partículas activas
     particles.push({
       direction,
       element: particle,
@@ -130,6 +138,7 @@ const applyParticleEffect = (
     });
   }
 
+  // Actualiza la posición y estado de cada partícula
   function refreshParticles() {
     particles.forEach((p) => {
       p.left = p.left - p.speedHorz * p.direction;
@@ -137,6 +146,7 @@ const applyParticleEffect = (
       p.speedUp = Math.min(p.size, p.speedUp - 1);
       p.spinVal = p.spinVal + p.spinSpeed;
 
+      // Elimina partículas que salen de la pantalla
       if (
         p.top >=
         Math.max(window.innerHeight, document.body.clientHeight) + p.size
@@ -145,6 +155,7 @@ const applyParticleEffect = (
         p.element.remove();
       }
 
+      // Actualiza el estilo de la partícula
       p.element.setAttribute(
         "style",
         [
@@ -163,6 +174,7 @@ const applyParticleEffect = (
   let lastParticleTimestamp = 0;
   const particleGenerationDelay = 30;
 
+  // Bucle principal de animación
   function loop() {
     const currentTime = performance.now();
     if (
@@ -180,12 +192,14 @@ const applyParticleEffect = (
 
   loop();
 
+  // Detecta si es interacción táctil
   const isTouchInteraction = "ontouchstart" in window;
 
   const tap = isTouchInteraction ? "touchstart" : "mousedown";
   const tapEnd = isTouchInteraction ? "touchend" : "mouseup";
   const move = isTouchInteraction ? "touchmove" : "mousemove";
 
+  // Actualiza la posición del mouse/touch
   const updateMousePosition = (e: MouseEvent | TouchEvent) => {
     if ("touches" in e) {
       mouseX = e.touches?.[0].clientX;
@@ -196,6 +210,7 @@ const applyParticleEffect = (
     }
   };
 
+  // Inicia la generación automática de partículas
   const startAutoAddParticle = (e: MouseEvent | TouchEvent) => {
     updateMousePosition(e);
     autoAddParticle = true;
@@ -203,14 +218,16 @@ const applyParticleEffect = (
 
   const tapHandler = startAutoAddParticle;
 
-  // Start animation on hover (mouseenter/touchstart)
+  // Inicia animación al hacer hover o touch
   element.addEventListener("mouseenter", startAutoAddParticle, { passive: true });
   element.addEventListener("touchstart", startAutoAddParticle, { passive: true });
 
+  // Detiene la generación automática de partículas
   const disableAutoAddParticle = () => {
     autoAddParticle = false;
   };
 
+  // Listeners para movimiento, inicio y fin de interacción
   element.addEventListener(move, updateMousePosition, { passive: true });
   element.addEventListener(tap, tapHandler, { passive: true });
   element.addEventListener(tapEnd, disableAutoAddParticle, { passive: true });
@@ -218,6 +235,7 @@ const applyParticleEffect = (
     passive: false,
   });
 
+  // Función de limpieza: elimina listeners y contenedor si no hay instancias
   return () => {
     element.removeEventListener(move, updateMousePosition);
     element.removeEventListener(tap, tapHandler);
@@ -237,12 +255,13 @@ const applyParticleEffect = (
   };
 };
 
+// Props del componente CoolMode
 interface CoolModeProps {
   children: ReactNode;
   options?: CoolParticleOptions;
 }
 
-
+// Componente principal que aplica el efecto a su hijo
 export const CoolMode: React.FC<CoolModeProps> = ({ children, options }) => {
   const ref = useRef<HTMLElement>(null);
 
@@ -256,7 +275,7 @@ export const CoolMode: React.FC<CoolModeProps> = ({ children, options }) => {
     return null;
   }
 
-    // Clona el hijo y le pasa el ref solo si el tipo lo permite, forzamos el tipo para evitar error TS
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return React.cloneElement(children as any, { ref });
+  // Clona el hijo y le pasa el ref solo si el tipo lo permite
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return React.cloneElement(children as any, { ref });
 };

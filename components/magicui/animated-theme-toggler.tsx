@@ -40,7 +40,7 @@ export const AnimatedThemeToggler = ({ className }: props) => {
         ],
       },
       {
-        duration: 700,
+        duration: 5000,
         easing: "ease-in-out",
         pseudoElement: "::view-transition-new(root)",
       },
@@ -55,7 +55,10 @@ export const AnimatedThemeToggler = ({ className }: props) => {
       className
       )}
     >
-      <CoolMode>{isDarkMode ? <SunDim color="yellow" /> : <Moon />}</CoolMode>
+      <CoolMode options={{
+          particle:
+            "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bHU3eTcxYWVnZjg3N212bTE1enlsczcxMWltOHhyMDh2bmZsandyayZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/jm0cDW7FhLXGkr8ZsE/giphy.gif",
+        }}>{isDarkMode ? <SunDim color="yellow" /> : <Moon />}</CoolMode>
     </button>
   );
 };

@@ -47,7 +47,7 @@ export default function Home() {
             <Projects />
           </div>
           <div />
-          <div className="w-full h-full py-5 flex flex-col items-center justify-center" id="services">
+          <div className="w-full h-full flex flex-col items-center justify-center" id="services">
             <AnimatedTestimonialsDemo />
           </div>
         </div>

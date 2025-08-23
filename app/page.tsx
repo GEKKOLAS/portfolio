@@ -32,9 +32,13 @@ export default function Home() {
 
   return (
     <main className="relative h-[200vh]">
-      {/* Loader */}
       {loading ? (
-        <LoaderFour />
+        <div onAnimationEnd={() => {
+          // Only proceed when the loader animation is complete
+          setTimeout(() => setLoading(false), 500); // Add small buffer after animation
+        }}>
+          <LoaderFour />
+        </div>
       ) : (
         <>
           <SplashCursor />

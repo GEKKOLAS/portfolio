@@ -16,16 +16,11 @@ export default function Home() {
   
 
   React.useEffect(() => {
-    // Set initial opacity
     setLoading(true);
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 5s ease-in-out';
 
-    // Single timer for both loading and opacity
     const timer = setTimeout(() => {
-      document.body.style.opacity = '1';
       setLoading(false);
-    }, 7000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);

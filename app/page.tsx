@@ -15,17 +15,15 @@ export default function Home() {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 8000); //  seconds delay
-
     // Set initial opacity
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 5s ease-in-out';
 
-    setTimeout(() => {
+    // Single timer for both loading and opacity
+    const timer = setTimeout(() => {
       document.body.style.opacity = '1';
-    }, 7000); // Start transition exactly when loader disappears
+      setLoading(false);
+    }, 7000);
 
     return () => clearTimeout(timer);
   }, []);

@@ -6,7 +6,7 @@ import React from "react";
 export const LoaderFour = ({ text = "Loading..." }: { text?: string }) => {
   return (
     <div className="flex h-screen w-full items-center justify-center fixed inset-0">
-      <div className="relative font-bold text-black text-4xl [perspective:1000px] dark:text-white">
+      <div className="relative font-tangerine text-black text-9xl [perspective:1000px] dark:text-white">
       <motion.span
       animate={{
       skewX: [0, -40, 0],

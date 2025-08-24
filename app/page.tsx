@@ -13,9 +13,11 @@ import React from "react";
 
 export default function Home() {
   const [loading, setLoading] = React.useState(true);
+  
 
   React.useEffect(() => {
     // Set initial opacity
+    setLoading(true);
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 5s ease-in-out';
 

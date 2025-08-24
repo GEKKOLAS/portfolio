@@ -18,7 +18,7 @@ export const Navbar = () => {
                                 <button
                                     type="button"
                                     onClick={() => scrollToSection('projects')}
-                                    className="block py-2 pr-4 pl-3 text-green-400 border-b border-gray-100 hover:bg-gray-100 lg:hover:bg-gray-100 lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-green-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="block py-2 pr-4 pl-3 text-green-400 hover:text-purple-300 hover:scale-200 transition-all duration-300 lg:p-0"
                                 >
                                     Projects
                                 </button>
@@ -27,7 +27,7 @@ export const Navbar = () => {
                                 <button
                                     type="button"
                                     onClick={() => scrollToSection('timeline')}
-                                    className="block py-2 pr-4 pl-3 text-yellow-400 border-b border-gray-100 hover:bg-gray-100 lg:hover:bg-gray-100 lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-yellow-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="block py-2 pr-4 pl-3 text-yellow-400 hover:text-blue-300 hover:scale-200 transition-all duration-300 lg:p-0"
                                 >
                                     Timeline
                                 </button>
@@ -36,9 +36,9 @@ export const Navbar = () => {
                                 <button
                                     type="button"
                                     onClick={() => scrollToSection('about')}
-                                    className="block py-2 pr-4 pl-3 text-rose-400 border-b border-gray-100 hover:bg-gray-100 lg:hover:bg-gray-100 lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-rose-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="block py-2 pr-4 pl-3 text-rose-400 hover:text-rose-300 hover:scale-200 transition-all duration-300 lg:p-0"
                                 >
-                                    About me
+                                    About
                                 </button>
                             </li>
                             <li>
@@ -49,9 +49,22 @@ export const Navbar = () => {
                                         const event = new CustomEvent('triggerSocialAnimation');
                                         window.dispatchEvent(event);
                                     }}
-                                    className="block py-2 pr-4 pl-3 text-cyan-400 border-b border-gray-100 hover:bg-gray-100 lg:hover:bg-gray-100 lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-cyan-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="block py-2 pr-4 pl-3 text-cyan-400 hover:text-yellow-300 hover:scale-200 transition-all duration-300 lg:p-0"
                                 >
                                     Services
+                                </button>
+                            </li>
+                             <li>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        scrollToSection('skills');
+                                        const event = new CustomEvent('triggerSocialAnimation');
+                                        window.dispatchEvent(event);
+                                    }}
+                                    className="block py-2 pr-4 pl-3 text-purple-400 hover:text-rose-600 hover:scale-200 transition-all duration-300 lg:p-0"
+                                >
+                                    Stack
                                 </button>
                             </li>
                         </ul>

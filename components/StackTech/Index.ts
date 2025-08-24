@@ -134,42 +134,7 @@ export const Backend_skill = [
     height: 80,
   },
 
-  // Databases
-  {
-    skill_name: "MySQL",
-    Image:
-      "https://oumha429zaujvejc.public.blob.vercel-storage.com/Icons/mysql.svg",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "PostgreSQL",
-    Image:
-      "https://oumha429zaujvejc.public.blob.vercel-storage.com/Icons/postgresql.svg",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "SQL Server",
-    Image:
-      "https://oumha429zaujvejc.public.blob.vercel-storage.com/Icons/sql-server.svg",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "SQLite",
-    Image:
-      "https://oumha429zaujvejc.public.blob.vercel-storage.com/Icons/sqlite.svg",
-    width: 80,
-    height: 80,
-  },
-  {
-    skill_name: "Supabase",
-    Image:
-      "https://oumha429zaujvejc.public.blob.vercel-storage.com/Icons/supabase.svg",
-    width: 80,
-    height: 80,
-  },
+  
   // DevOps / Cloud / Hosting
   {
     skill_name: "Docker",
@@ -299,6 +264,45 @@ export const Backend_skill = [
     skill_name: "Ubuntu",
     Image:
       "https://oumha429zaujvejc.public.blob.vercel-storage.com/Icons/ubuntu.svg",
+    width: 80,
+    height: 80,
+  },
+];
+
+export const DB_skill = [
+  // Databases
+  {
+    skill_name: "MySQL",
+    Image:
+      "https://oumha429zaujvejc.public.blob.vercel-storage.com/Icons/mysql.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "PostgreSQL",
+    Image:
+      "https://oumha429zaujvejc.public.blob.vercel-storage.com/Icons/postgresql.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "SQL Server",
+    Image:
+      "https://oumha429zaujvejc.public.blob.vercel-storage.com/Icons/sql-server.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "SQLite",
+    Image:
+      "https://oumha429zaujvejc.public.blob.vercel-storage.com/Icons/sqlite.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Supabase",
+    Image:
+      "https://oumha429zaujvejc.public.blob.vercel-storage.com/Icons/supabase.svg",
     width: 80,
     height: 80,
   },

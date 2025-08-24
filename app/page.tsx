@@ -33,10 +33,7 @@ export default function Home() {
   return (
     <main className="relative h-[200vh]">
       {loading ? (
-        <div onAnimationEnd={() => {
-          // Only proceed when the loader animation is complete
-          setTimeout(() => setLoading(false), 500); // Add small buffer after animation
-        }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-dark">
           <LoaderFour />
         </div>
       ) : (

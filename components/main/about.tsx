@@ -52,7 +52,7 @@ export const About = () => {
               <MaskContainer
                 revealText={
                   <div className="flex flex-col items-center justify-center w-full h-full py-8 overflow-contain">
-                    <p className="text-center pt-20 font-tangerine text-sm md:text-3xl lg:text-3xl xl:text-4xl text-indigo-800 dark:text-rose-300 font-serif px-4">
+                    <p className="text-center pt-20 font-tangerine text-sm md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-indigo-800 dark:text-rose-300 font-serif px-4">
                       I&apos;m business-minded developer with a unique blend of
                       technical expertise and creativity. Bachelor degree in
                       International Business & a professional background in

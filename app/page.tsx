@@ -29,7 +29,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative h-[200vh]">
+    <main className="relative h-[200vh]" >
       <AnimatePresence>
         {loading ? (
           <motion.div
@@ -50,7 +50,7 @@ export default function Home() {
             >
               <SplashCursor />
               <section id="home" className="bg-white antialiased dark:bg-transparent">
-                <div className="grid h-full lg:grid-cols-2 md:grid gap-4 ">
+                <div className="grid h-full lg:grid-cols-2 md:grid gap-4" id="turbulent-displace">
                   <div className="flex items-center justify-center h-full w-full pl-8 pr-8 pb-8 overscroll-contain md:static  sm:static  lg:sticky 2xl:top-25 md:top-0">
                     <Profile />
                     <div className="absolute top-4 right-4">

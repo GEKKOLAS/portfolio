@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "../components/ui/theme-provider";
 import { Tangerine } from "next/font/google";
 
+
 const tangerine = Tangerine({
   weight: ["400", "700"],
   subsets: ["latin"],

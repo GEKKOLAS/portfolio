@@ -93,7 +93,7 @@ export const Social = () => {
           </a>
           {/* WhatsApp */}
           <a
-            href="https://wa.me/573102957334"
+            href="https://wa.me/573125720170"
             className="flex justify-center items-center transition-transform duration-300 hover:scale-110 hover:text-[#25D366]"
             target="_blank"
             rel="noopener noreferrer"

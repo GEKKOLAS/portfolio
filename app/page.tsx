@@ -6,6 +6,7 @@ import { Experience } from "@/components/main/experience";
 import { AnimatedTestimonialsDemo } from "@/components/main/services";
 import Skills from "@/components/StackTech/SkillContent";
 import SplashCursor from "@/components/ui/splashCursor";
+import { FireRevealOverlay } from "@/components/effects/fire-reveal-overlay";
 import { LoaderFour } from "@/components/ui/loader";
 import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
 import React from "react";
@@ -14,17 +15,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
   const [loading, setLoading] = React.useState(true);
-  const [showContent, setShowContent] = React.useState(false);
+  const [fireDone, setFireDone] = React.useState(false); // revert to original sequence
 
   React.useEffect(() => {
-    setLoading(true);
-
     const timer = setTimeout(() => {
-      setLoading(false);
-      // Start fade-in after loader disappears
-      setTimeout(() => setShowContent(true), 100); // shorter delay for smoothness
+      setLoading(false); // loader finished, fire effect starts automatically
     }, 2000);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -40,14 +36,28 @@ export default function Home() {
           >
             <LoaderFour />
           </motion.div>
+        ) : !fireDone ? (
+          <motion.div
+            key="fire"
+            className="fixed inset-0 z-40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 0.4 } }}
+            exit={{ opacity: 0, transition: { duration: 0.5 } }}
+          >
+            <FireRevealOverlay
+              text=""
+              durationMs={6000}
+              onComplete={() => setFireDone(true)}
+            />
+          </motion.div>
         ) : (
-          showContent && (
             <motion.div
               key="content"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0, transition: { duration: 0.7 } }}
               exit={{ opacity: 0 }}
             >
+              {/* Content after fire effect */}
               <SplashCursor />
               <section id="home" className="bg-white antialiased dark:bg-transparent">
                 <div className="grid h-full lg:grid-cols-2 md:grid gap-4" id="turbulent-displace">
@@ -88,8 +98,7 @@ export default function Home() {
                 </div>
               </section>
             </motion.div>
-          )
-        )}
+          )}
       </AnimatePresence>
     </main>
   );

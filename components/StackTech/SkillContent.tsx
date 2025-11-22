@@ -11,10 +11,14 @@ const Skills = () => {
       style={{ transform: "scale(0.9)" }}
     >
       {/* Title or description for the skills section */}
-      <SkillText />
+      <div className="w-full">
+        <SkillText />
+      </div>
 
       {/* Animated orbiting circles demo for visual effect */}
-      <OrbitingCirclesDemo />
+      <div className="w-full">
+        <OrbitingCirclesDemo />
+      </div>
 
       {/* Scrollable area for skill icons 
       <ScrollArea

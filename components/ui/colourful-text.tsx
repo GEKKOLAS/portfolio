@@ -1,51 +1,62 @@
 "use client";
+
 import React from "react";
 import { motion } from "motion/react";
+import { useTheme } from "next-themes";
 
 export default function ColourfulText({ text }: { text: string }) {
+  // Neon color palettes
+  const lightColors = ["#ff1744", "#ff003c", "#ff2052"];
+  const darkColors = ["#0099cc"];
 
-  const colors = React.useMemo(() => [
-    "rgb(42, 169, 210)",
-    "rgb(4, 112, 202)",
-    "rgb(107, 10, 255)",
-    "rgb(183, 0, 218)",
-    "rgb(218, 0, 171)",
-    "rgb(230, 64, 92)",
-  ], []);
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
 
-  const [currentColors, setCurrentColors] = React.useState(colors);
-  const [count, setCount] = React.useState(0);
+  // Handle hydration
+  React.useEffect(() => setMounted(true), []);
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      const shuffled = [...colors].sort(() => Math.random() - 0.5);
-      setCurrentColors(shuffled);
-      setCount((prev) => prev + 1);
-    }, 90000); 
+  if (!mounted) {
+    return <span className="inline-block font-tangerine font-semibold tracking-tight">{text}</span>;
+  }
 
-    return () => clearInterval(interval);
-  }, [colors]);
+  const isDark = theme === "dark" || resolvedTheme === "dark";
+  const palette = isDark ? darkColors : lightColors;
 
-  return text.split("").map((char, index) => (
-    <motion.span
-      key={`${char}-${count}-${index}`}
-      initial={{
-        y: 0,
-      }}
-      animate={{
-        color: currentColors[index % currentColors.length],
-        y: [0, -3, 0],
-        scale: [1, 1.01, 1],
-        filter: ["blur(0px)", `blur(5px)`, "blur(0px)"],
-        opacity: [1, 0.8, 1],
-      }}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.05,
-      }}
-      className="inline-block whitespace-pre font-tangerine font-bold tracking-tight"
-    >
-      {char}
-    </motion.span>
-  ));
+  const neonShadow = (color: string) =>
+    `0 0 5px ${color}, 0 0 10px ${color}, 0 0 20px ${color}, 0 0 40px ${color}`;
+
+  // build arrays for continuous color/textShadow animation
+  const colorCycle = palette;
+  const shadowCycle = palette.map((c) => neonShadow(c));
+
+  return (
+    <>
+      {text.split("").map((char, index) => (
+        <motion.span
+          key={`${char}-${index}`}
+          initial={{ y: 10, opacity: 0, filter: "blur(8px)" }}
+          animate={{
+            // continuous cycling for color and shadow
+            color: colorCycle,
+            textShadow: shadowCycle,
+            // single-run entrance for position/opacity/blur (will use default transition)
+            y: [10, -3, 0],
+            filter: ["blur(8px)", "blur(4px)", "blur(0px)"],
+            opacity: [0, 0.8, 1],
+          }}
+          transition={{
+            // color & shadow: loop continuously, staggered per letter
+            color: { duration: colorCycle.length * 1.2, repeat: Infinity, ease: "linear", delay: index * 0.08 },
+            textShadow: { duration: colorCycle.length * 1.2, repeat: Infinity, ease: "linear", delay: index * 0.08 },
+            // entrance (y/opacity/filter): single short animation, staggered
+            default: { duration: 0.55, ease: "easeOut", delay: index * 0.05 },
+          }}
+          className="inline-block whitespace-pre font-tangerine font-semibold tracking-tight"
+          style={{ background: "transparent" }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </>
+  );
 }

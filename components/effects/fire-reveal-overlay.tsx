@@ -121,7 +121,7 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
         canvas.style.opacity = '1';
         if (!whiteShownRef.current){
           whiteShownRef.current = true;
-          onWhiteShown && onWhiteShown();
+          if (onWhiteShown) onWhiteShown();
         }
       }
     } else {

@@ -6,6 +6,8 @@ interface FireRevealOverlayProps {
   durationMs?: number; // total animation time
   onComplete?: () => void;
   className?: string;
+  reveal?: boolean; // if true, treat burn as alpha mask revealing underlying content
+  onWhiteShown?: () => void; // callback cuando el fondo blanco aparece
 }
 
 // Lightweight single-run fire/burn effect canvas.
@@ -14,6 +16,8 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
   durationMs = 6000,
   onComplete,
   className = "fixed inset-0 z-40 pointer-events-none w-full h-screen",
+  reveal = true,
+  onWhiteShown,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const glRef = useRef<WebGLRenderingContext | null>(null);
@@ -22,6 +26,7 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
   const startRef = useRef<number>(0);
   const rafRef = useRef<number>(0);
   const finishedRef = useRef(false);
+  const whiteShownRef = useRef(false);
 
   const vert = `precision mediump float;\nattribute vec2 a_position;\nvarying vec2 vUv;\nvoid main(){vUv=a_position;gl_Position=vec4(a_position,0.0,1.0);}';`;
   // Using the provided fragment shader (simplified variable names to avoid warnings)
@@ -39,9 +44,9 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
     // Enable alpha blending so transparent areas stay invisible (prevents white flash)
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-    // Start hidden; we'll fade in after first meaningful frame to avoid white square flash
-    canvas.style.opacity = "0";
-    canvas.style.transition = "opacity .45s ease";
+  // Inicio oculto, mostramos tras el primer frame para fondo blanco temprano sin flash brusco
+  canvas.style.opacity = "0";
+  canvas.style.transition = "opacity .6s ease"; // transición más larga para entrada más suave
 
     const createShader = (type: number, src: string) => {
       const shader = gl.createShader(type); if (!shader) return null;
@@ -49,8 +54,8 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) { console.error(gl.getShaderInfoLog(shader)); gl.deleteShader(shader); return null; }
       return shader;
     };
-    const vs = createShader(gl.VERTEX_SHADER, vert.replace("';",""));
-    const fs = createShader(gl.FRAGMENT_SHADER, frag.replace("';",""));
+  const vs = createShader(gl.VERTEX_SHADER, vert.replace("';",""));
+  const fs = createShader(gl.FRAGMENT_SHADER, frag.replace("';",""));
     if (!vs || !fs) return;
     const program = gl.createProgram(); if (!program) return;
     gl.attachShader(program, vs); gl.attachShader(program, fs); gl.linkProgram(program);
@@ -69,15 +74,20 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
     for (let i=0;i<count;i++){ const info = gl.getActiveUniform(program,i); if (info) uniforms[info.name]=gl.getUniformLocation(program, info.name); }
     uniformsRef.current = uniforms;
 
-    // text texture
+    // text / mask texture
     const tCanvas = document.createElement("canvas"); tCanvas.width=1024; tCanvas.height=512;
     const ctx2d = tCanvas.getContext("2d");
-    // Create a fully transparent texture background (removes initial white flash)
     if (ctx2d){
-      ctx2d.clearRect(0,0,tCanvas.width,tCanvas.height);
+      // For reveal mode we want fully opaque base (white) that can be eroded to transparency by fragment alpha logic.
+      // If not reveal, background stays solid.
+      ctx2d.fillStyle = reveal ? "white" : "beige";
+      ctx2d.fillRect(0,0,tCanvas.width,tCanvas.height);
       if (text){
-        ctx2d.fillStyle="black"; // draw text only; leave rest transparent
-        ctx2d.font="bold 160px Arial"; ctx2d.textAlign="center"; ctx2d.textBaseline="middle"; ctx2d.fillText(text, tCanvas.width/2, tCanvas.height/2);
+        ctx2d.fillStyle = "black";
+        ctx2d.font = "bold 160px Arial";
+        ctx2d.textAlign = "center";
+        ctx2d.textBaseline = "middle";
+        ctx2d.fillText(text, tCanvas.width/2, tCanvas.height/2);
       }
     }
     const tex = gl.createTexture(); if (!tex) return; texRef.current = tex;
@@ -106,16 +116,21 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
     let progress: number;
     if (elapsed <= 1){
       progress = easeInOut(elapsed);
-      // Reveal canvas after a tiny progress to avoid showing raw initial texture
-      if (progress > 0.01 && canvas.style.opacity !== '1') {
+      // Aparición del fondo blanco controlada por progreso (>0.08)
+      if (progress > 0.08 && canvas.style.opacity !== '1') {
         canvas.style.opacity = '1';
+        if (!whiteShownRef.current){
+          whiteShownRef.current = true;
+          onWhiteShown && onWhiteShown();
+        }
       }
     } else {
       if (!finishedRef.current){
         finishedRef.current = true;
-        canvas.style.transition='opacity .5s';
+        canvas.style.transition='opacity .3s';
         canvas.style.opacity='0';
-        setTimeout(()=> onComplete && onComplete(), 550);
+        // FireDone sooner with reduced fade-out
+        setTimeout(()=> onComplete && onComplete(), 300);
       }
       return;
     }

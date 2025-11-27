@@ -6,6 +6,8 @@ interface UniformLocations {
   u_progress: WebGLUniformLocation | null;
   u_text: WebGLUniformLocation | null;
   u_resolution: WebGLUniformLocation | null;
+  u_fireBase: WebGLUniformLocation | null;
+  u_fireBright: WebGLUniformLocation | null;
 }
 
 interface ScrollFireOverlayProps {
@@ -18,7 +20,7 @@ interface ScrollFireOverlayProps {
 export const ScrollFireOverlay: React.FC<ScrollFireOverlayProps> = ({
   triggerOffset = 300,
   text = "LOGO",
-  durationMs = 8000,
+  durationMs = 6000,
   className = "fixed top-0 left-0 w-full h-screen pointer-events-none z-50",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -42,6 +44,8 @@ export const ScrollFireOverlay: React.FC<ScrollFireOverlayProps> = ({
     uniform float u_progress;
     uniform sampler2D u_text;
     uniform vec2 u_resolution;
+    uniform vec3 u_fireBase;   // base color for the fire palette
+    uniform vec3 u_fireBright; // bright/highlight color for the fire palette
 
     float noise(vec2 p){
       return fract(sin(dot(p, vec2(12.9898,78.233)))*43758.5453);
@@ -57,6 +61,10 @@ export const ScrollFireOverlay: React.FC<ScrollFireOverlayProps> = ({
       return v;
     }
 
+    vec3 getColor(float flame) {
+      return mix(u_fireBase, u_fireBright, flame);
+    }
+
     void main() {
       vec2 uv = gl_FragCoord.xy / u_resolution.xy;
       float t = u_time * 0.0004;
@@ -64,8 +72,11 @@ export const ScrollFireOverlay: React.FC<ScrollFireOverlayProps> = ({
       float mask = texture2D(u_text, uv).r;
       float flame = fbm(uv * 6.0 + t * 4.0);
       float reveal = smoothstep(u_progress - 0.2, u_progress + 0.05, uv.y + displace * 0.15);
-      vec3 fireCol = mix(vec3(0.05,0.0,0.1), vec3(1.0,0.5,0.0), flame);
-      fireCol = mix(fireCol, vec3(1.0,1.0,0.4), flame * flame);
+      float f = clamp(flame * 1.3, 0.0, 1.0);
+      vec3 fireCol = getColor(f);
+      // glow aligned to chosen palette (avoid green bias)
+      fireCol += 0.20 * f * u_fireBright;
+      fireCol = clamp(fireCol, 0.0, 1.0);
       vec3 base = mix(vec3(0.0), fireCol, reveal * mask);
       gl_FragColor = vec4(base, 1.0);
     }
@@ -97,8 +108,8 @@ export const ScrollFireOverlay: React.FC<ScrollFireOverlayProps> = ({
       return shader;
     };
 
-  const vs = createShader(gl.VERTEX_SHADER, vertShader);
-  const fs = createShader(gl.FRAGMENT_SHADER, fragShader);
+    const vs = createShader(gl.VERTEX_SHADER, vertShader);
+    const fs = createShader(gl.FRAGMENT_SHADER, fragShader);
     if (!vs || !fs) return;
 
     const program = gl.createProgram();
@@ -113,10 +124,10 @@ export const ScrollFireOverlay: React.FC<ScrollFireOverlayProps> = ({
     gl.useProgram(program);
 
     const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
-  const buffer = gl.createBuffer();
-  if (!buffer) return;
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+    const buffer = gl.createBuffer();
+    if (!buffer) return;
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
     const posLoc = gl.getAttribLocation(program, "a_position");
     gl.enableVertexAttribArray(posLoc);
     gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
@@ -126,9 +137,23 @@ export const ScrollFireOverlay: React.FC<ScrollFireOverlayProps> = ({
       u_progress: gl.getUniformLocation(program, "u_progress"),
       u_text: gl.getUniformLocation(program, "u_text"),
       u_resolution: gl.getUniformLocation(program, "u_resolution"),
+      // new color uniforms
+      u_fireBase: gl.getUniformLocation(program, "u_fireBase"),
+      u_fireBright: gl.getUniformLocation(program, "u_fireBright"),
     };
 
-  const textCanvas = document.createElement("canvas");
+    // Pick a random palette in TSX and pass concrete RGBs
+    const palettes: Array<{ base: [number, number, number]; bright: [number, number, number] }> = [
+      { base: [0.01, 0.15, 0.01], bright: [0.20, 2.20, 0.20] }, // acid green (more luminous)
+      { base: [0.10, 0.04, 0.00], bright: [1.20, 0.55, 0.05] }, // orange
+      { base: [0.00, 0.02, 0.10], bright: [0.10, 0.70, 1.60] }, // blue
+      { base: [0.06, 0.00, 0.08], bright: [1.40, 0.30, 1.80] }, // purple
+    ];
+    const pick = palettes[Math.floor(Math.random() * palettes.length)];
+    if (uniformsRef.current.u_fireBase) gl.uniform3f(uniformsRef.current.u_fireBase, pick.base[0], pick.base[1], pick.base[2]);
+    if (uniformsRef.current.u_fireBright) gl.uniform3f(uniformsRef.current.u_fireBright, pick.bright[0], pick.bright[1], pick.bright[2]);
+
+    const textCanvas = document.createElement("canvas");
     textCanvas.width = 2048;
     textCanvas.height = 1024;
     const text2d = textCanvas.getContext("2d");
@@ -142,10 +167,10 @@ export const ScrollFireOverlay: React.FC<ScrollFireOverlayProps> = ({
       text2d.fillText(text, textCanvas.width / 2, textCanvas.height / 2);
     }
 
-  const tex = gl.createTexture();
-  if (!tex) return;
-  textTextureRef.current = tex;
-  gl.bindTexture(gl.TEXTURE_2D, tex);
+    const tex = gl.createTexture();
+    if (!tex) return;
+    textTextureRef.current = tex;
+    gl.bindTexture(gl.TEXTURE_2D, tex);
     gl.texImage2D(
       gl.TEXTURE_2D,
       0,
@@ -210,6 +235,7 @@ export const ScrollFireOverlay: React.FC<ScrollFireOverlayProps> = ({
       if (startedRef.current) return;
       if (window.scrollY >= triggerOffset) {
         startedRef.current = true;
+
         init();
       }
     };

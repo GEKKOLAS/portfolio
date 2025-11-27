@@ -45,7 +45,7 @@ export const StickyScroll = ({
     "transparent",
     "transparent",
     "transparent",
-  ];
+  ]; // Reverted to original non-animatable values
   const linearGradients = useMemo(() => [
     "linear-gradient(to bottom right, #06b6d4, #10b981)", // cyan-500 to emerald-500
     "linear-gradient(to bottom right, #ec4899, #6366f1)", // pink-500 to indigo-500

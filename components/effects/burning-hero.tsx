@@ -35,7 +35,7 @@ export const BurningHero: React.FC<BurningHeroProps> = ({
   // Provided shaders adapted to inline strings.
   const vertSource = `precision mediump float;\n\n    varying vec2 vUv;\n    attribute vec2 a_position;\n    void main() {\n        vUv = a_position;\n        gl_Position = vec4(a_position, 0.0, 1.0);\n    }`;
 
-  const fragSource = `precision mediump float;\n\n    varying vec2 vUv;\n    uniform vec2 u_resolution;\n    uniform float u_progress;\n    uniform float u_time;\n    uniform sampler2D u_text;\n\n    float rand(vec2 n) {\n        return fract(cos(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);\n    }\n    float noise(vec2 n) {\n        const vec2 d = vec2(0., 1.);\n        vec2 b = floor(n), f = smoothstep(vec2(0.0), vec2(1.0), fract(n));\n        return mix(mix(rand(b), rand(b + d.yx), f.x), mix(rand(b + d.xy), rand(b + d.yy), f.x), f.y);\n    }\n    float fbm(vec2 n) {\n        float total = 0.0, amplitude = .4;\n        for (int i = 0; i < 4; i++) {\n            total += noise(n) * amplitude;\n            n += n;\n            amplitude *= 0.6;\n        }\n        return total;\n    }\n    void main() {\n        vec2 uv = vUv;\n        uv.x *= min(1., u_resolution.x / u_resolution.y);\n        uv.y *= min(1., u_resolution.y / u_resolution.x);\n        vec2 screenUv = vUv * 0.5 + 0.5;\n        screenUv.y = 1.0 - screenUv.y;\n        float t = u_progress;\n        vec4 textColor = texture2D(u_text, screenUv);\n        vec3 color = textColor.rgb;\n        float main_noise = 1. - fbm(.75 * uv + 10. - vec2(.3, .9 * t));\n        float paper_darkness = smoothstep(main_noise - .1, main_noise, t);\n        color -= vec3(.99, .95, .99) * paper_darkness;\n        vec3 fire_color = fbm(6. * uv - vec2(0., .005 * u_time)) * vec3(6., 1.4, .0);\n        float show_fire = smoothstep(.4, .9, fbm(10. * uv + 2. - vec2(0., .005 * u_time)));\n        show_fire += smoothstep(.7, .8, fbm(.5 * uv + 5. - vec2(0., .001 * u_time)));\n        float fire_border = .02 * show_fire;\n        float fire_edge = smoothstep(main_noise - fire_border, main_noise - .5 * fire_border, t);\n        fire_edge *= (1. - smoothstep(main_noise - .5 * fire_border, main_noise, t));\n        color += fire_color * fire_edge;\n        float opacity = 1. - smoothstep(main_noise - .0005, main_noise, t);\n        gl_FragColor = vec4(color, opacity);\n    }`;
+  const fragSource = `precision mediump float;\n\n    varying vec2 vUv;\n    uniform vec2 u_resolution;\n    uniform float u_progress;\n    uniform float u_time;\n    uniform sampler2D u_text;\n    uniform vec3 u_fireBase;\n    uniform vec3 u_fireBright;\n\n    float rand(vec2 n) {\n        return fract(cos(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);\n    }\n    float noise(vec2 n) {\n        const vec2 d = vec2(0., 1.);\n        vec2 b = floor(n), f = smoothstep(vec2(0.0), vec2(1.0), fract(n));\n        return mix(mix(rand(b), rand(b + d.yx), f.x), mix(rand(b + d.xy), rand(b + d.yy), f.x), f.y);\n    }\n    float fbm(vec2 n) {\n        float total = 0.0, amplitude = .4;\n        for (int i = 0; i < 4; i++) {\n            total += noise(n) * amplitude;\n            n += n;\n            amplitude *= 0.6;\n        }\n        return total;\n    }\n    void main() {\n        vec2 uv = vUv;\n        uv.x *= min(1., u_resolution.x / u_resolution.y);\n        uv.y *= min(1., u_resolution.y / u_resolution.x);\n        vec2 screenUv = vUv * 0.5 + 0.5;\n        screenUv.y = 1.0 - screenUv.y;\n        float t = u_progress;\n        vec4 textColor = texture2D(u_text, screenUv);\n        vec3 color = textColor.rgb;\n        float main_noise = 1. - fbm(.75 * uv + 10. - vec2(.3, .9 * t));\n        float paper_darkness = smoothstep(main_noise - .1, main_noise, t);\n        color -= vec3(.99, .95, .99) * paper_darkness;\n        float fFire = clamp(fbm(6. * uv - vec2(0., .005 * u_time)), 0.0, 1.0);\n        vec3 fire_color = mix(u_fireBase, u_fireBright, fFire);\n        float show_fire = smoothstep(.4, .9, fbm(10. * uv + 2. - vec2(0., .005 * u_time)));\n        show_fire += smoothstep(.7, .8, fbm(.5 * uv + 5. - vec2(0., .001 * u_time)));\n        float fire_border = .02 * show_fire;\n        float fire_edge = smoothstep(main_noise - fire_border, main_noise - .5 * fire_border, t);\n        fire_edge *= (1. - smoothstep(main_noise - .5 * fire_border, main_noise, t));\n        color += fire_color * fire_edge;\n        float opacity = 1. - smoothstep(main_noise - .0005, main_noise, t);\n        gl_FragColor = vec4(color, opacity);\n    }`;
 
   const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
 
@@ -97,6 +97,17 @@ export const BurningHero: React.FC<BurningHeroProps> = ({
       if (info) uniforms[info.name] = gl.getUniformLocation(program, info.name);
     }
     uniformsRef.current = uniforms;
+    // Initialize random palette and set uniforms
+    const palettes: Array<{ base: [number, number, number]; bright: [number, number, number] }> = [
+      { base: [0.02, 0.10, 0.01], bright: [0.10, 1.60, 0.12] }, // acid green
+      { base: [0.10, 0.04, 0.00], bright: [1.20, 0.55, 0.05] }, // orange
+      { base: [0.00, 0.02, 0.10], bright: [0.10, 0.70, 1.60] }, // blue
+      { base: [0.06, 0.00, 0.08], bright: [1.40, 0.30, 1.80] }, // purple
+    ];
+    const pick = palettes[Math.floor(Math.random() * palettes.length)];
+    const uFireBase = uniforms["u_fireBase"]; const uFireBright = uniforms["u_fireBright"];
+    if (uFireBase) gl.uniform3f(uFireBase, pick.base[0], pick.base[1], pick.base[2]);
+    if (uFireBright) gl.uniform3f(uFireBright, pick.bright[0], pick.bright[1], pick.bright[2]);
 
     // Text canvas texture
     const textCanvas = document.createElement("canvas");
@@ -189,7 +200,10 @@ export const BurningHero: React.FC<BurningHeroProps> = ({
     <div className={`relative w-full h-screen overflow-hidden ${className}`}>
       <div className="hero-section absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#0a0a0a] via-[#1a1a2e] to-[#16213e]">
         <div className="hero-content text-center px-5 text-white">
-          <h1 className="hero-title text-5xl md:text-6xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#ff6b35] via-[#f7931e] to-[#ffd700] mb-6 leading-tight">
+          <h1
+            className="hero-title text-5xl md:text-6xl font-black tracking-tight bg-clip-text text-transparent mb-6 leading-tight"
+            style={{ backgroundImage: 'linear-gradient(90deg, #8cff00, #39ff14, #c6ff61)' }}
+          >
             {textTitle}
           </h1>
           <p className="hero-subtitle text-xl md:text-2xl font-light max-w-3xl mx-auto opacity-90 leading-relaxed">

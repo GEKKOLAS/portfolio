@@ -47,7 +47,7 @@ export const MaskContainer = ({
       ref={containerRef}
       className={cn("relative h-screen lg:h-125", className)}
       animate={{
-        backgroundColor: isHovered ? "var(--slate-900)" : "var(--white)",
+        backgroundColor: isHovered ? "var(--slate-900)" : "var(--white)", // Reverted to CSS variables
       }}
       transition={{
         backgroundColor: { duration: 0.3 },

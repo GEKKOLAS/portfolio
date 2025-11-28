@@ -23,13 +23,14 @@ export const Profile = () => {
           <div className="flex justify-center">
           <div className="relative w-50 h-50 rounded-full overflow-hidden shadow-lg p-1 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 animate-gradient-border">
             <div className="rounded-full overflow-hidden bg-cyan-300 dark:bg-rose-500 w-full h-full">
-            <Image
-              className="rounded-full w-full h-full object-cover border-4 border-white shadow-lg"
-              src="/GRR.jpeg"
-              alt="profile avatar"
-              width={500}
-              height={500}
-            />
+              <Image
+                className="rounded-full w-full h-full object-cover border-4 border-white shadow-lg"
+                src="/profile.png"
+                alt="profile avatar"
+                width={500}
+                height={300}
+                style={{ objectPosition: "center 3%" }}
+              />
             </div>
           </div>
           </div>

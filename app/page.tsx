@@ -42,20 +42,28 @@ export default function Home() {
         {!loading && !fireDone && (
           <motion.div
             key="fire"
-            className="fixed inset-0 z-40 pointer-events-none"
+            className="fixed inset-0 z-40 pointer-events-none w-full h-full flex items-center justify-center bg-transparent"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.4 } }}
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
           >
             <FireRevealOverlay
-              text=""
+              text="" // omit text drawing
+              imageSrc="/bestversion.png" // imagen como máscara
+              useLogoMask // activar uso de imagen como máscara
+              imageScale={500} // reducir tamaño del ancho
+              imageScaleY={500} // aumentar altura relativa sin deformar
+              imageFit="contain" // ajustar letterbox a contain
+              showWhiteBackground={true} // mantiene fase blanca inicial
+              fireColor={[1.6,0.4,2.2]} // fuego púrpura
+              startDelayMs={700} // retraso para que no aparezca tan rápido
               durationMs={9800}
               onComplete={() => setFireDone(true)}
               reveal
               onWhiteShown={() => {
                 if (!whiteShown) {
                   setWhiteShown(true);
-                  setTimeout(() => setShowContent(true), 500); // 0.5s después del fondo blanco
+                  setTimeout(() => setShowContent(true), 500);
                 }
               }}
             />

@@ -121,11 +121,15 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
         const c = document.createElement("canvas"); c.width = cSize; c.height = cSize;
         const cx = c.getContext("2d");
         if (cx) {
-          // Improve 2D resampling quality
-          // @ts-ignore
-          cx.imageSmoothingEnabled = true;
-          // @ts-ignore
-          cx.imageSmoothingQuality = 'high';
+          // Improve 2D resampling quality (feature detect with extended type)
+          const smoothCtx = cx as CanvasRenderingContext2D;
+          // Feature detection using 'in' keeps it safe if future environments differ
+          if ('imageSmoothingEnabled' in smoothCtx) {
+            smoothCtx.imageSmoothingEnabled = true;
+          }
+          if ('imageSmoothingQuality' in smoothCtx) {
+            smoothCtx.imageSmoothingQuality = 'high';
+          }
           // Fondo blanco (para que se vea sobre background blanco)
           cx.fillStyle = "white";
           cx.fillRect(0,0,cSize,cSize);

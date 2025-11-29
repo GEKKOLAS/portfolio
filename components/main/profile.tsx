@@ -25,7 +25,7 @@ export const Profile = () => {
             <div className="rounded-full overflow-hidden bg-cyan-300 dark:bg-rose-500 w-full h-full">
               <Image
                 className="rounded-full w-full h-full object-cover border-4 border-white shadow-lg"
-                src="/profile.png"
+                src="/IAProfile.png"
                 alt="profile avatar"
                 width={500}
                 height={300}

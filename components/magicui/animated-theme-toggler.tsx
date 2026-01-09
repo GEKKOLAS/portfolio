@@ -57,7 +57,7 @@ export const AnimatedThemeToggler = ({ className }: props) => {
     >
       <CoolMode options={{
           particle:
-            "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bHU3eTcxYWVnZjg3N212bTE1enlsczcxMWltOHhyMDh2bmZsandyayZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/jm0cDW7FhLXGkr8ZsE/giphy.gif",
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzVka3FwaWx2d2l6eGM4Ym83anlsMGkxd2oxZ3NmMzh3Zmt1aHJkbiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/lQmOVHG429XNG2qNld/giphy.gif",
         }}>{isDarkMode ? <SunDim color="yellow" /> : <Moon />}</CoolMode>
     </button>
   );

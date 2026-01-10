@@ -109,7 +109,7 @@ export default function Home() {
               <div />
               <div
                 id="projects"
-                className="w-full py-15 flex flex-col items-center justify-center"
+                className="w-full py-15 pb-70 flex flex-col items-center justify-center"
               >
                 <Projects />
               </div>

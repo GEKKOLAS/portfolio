@@ -4,8 +4,11 @@ import React, { useEffect, useRef } from "react";
 interface FireRevealOverlayProps {
   text?: string; // optional text mask
   imageSrc?: string; // optional image mask path under public
+  videoSrc?: string; // optional video mask (mp4) for animated reveal
   imageScale?: number; // escala (0.1 - 1) para reducir tamaño de la imagen máscara
   imageScaleY?: number; // escala vertical independiente (si no se define usa imageScale)
+  maskScale?: number; // escala en viewport (0.1 - 1) para hacer el logo más pequeño en pantalla
+  useNativeSize?: boolean; // usar tamaño intrínseco del contenido relativo al viewport
   startDelayMs?: number; // retraso antes de iniciar la animación (fuego y progreso)
   durationMs?: number; // total animation time
   onComplete?: () => void;
@@ -22,8 +25,11 @@ interface FireRevealOverlayProps {
 export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
   text = "LOGO",
   imageSrc,
+  videoSrc,
   imageScale = 0.5,
   imageScaleY,
+  maskScale = 1.0,
+  useNativeSize = false,
   startDelayMs = 0,
   durationMs = 6000,
   onComplete,
@@ -43,6 +49,12 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
   const rafRef = useRef<number>(0);
   const finishedRef = useRef(false);
   const whiteShownRef = useRef(false);
+  const maskCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const maskCtxRef = useRef<CanvasRenderingContext2D | null>(null);
+  const maskImgRef = useRef<HTMLImageElement | null>(null);
+  const maskVideoRef = useRef<HTMLVideoElement | null>(null);
+  const maskDimsRef = useRef<{ cSize: number; targetW: number; targetH: number; offX: number; offY: number } | null>(null);
+  const blobUrlRef = useRef<string | null>(null);
 
   const vert = `precision mediump float;\nattribute vec2 a_position;\nvarying vec2 vUv;\nvoid main(){vUv=a_position;gl_Position=vec4(a_position,0.0,1.0);}';`;
   // Fragment shader with configurable fire color
@@ -112,103 +124,139 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
     if (useLogoMask) {
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.onload = () => {
-        // Canvas cuadrado para centrar y escalar la imagen
-        const dprCanvas = Math.min(window.devicePixelRatio || 1, 2);
-        const cSize = Math.floor(1024 * dprCanvas);
-        const c = document.createElement("canvas"); c.width = cSize; c.height = cSize;
-        const cx = c.getContext("2d");
-        if (cx) {
-          // Improve 2D resampling quality (feature detect with extended type)
-          const smoothCtx = cx as CanvasRenderingContext2D;
-          // Feature detection using 'in' keeps it safe if future environments differ
-          if ('imageSmoothingEnabled' in smoothCtx) {
-            smoothCtx.imageSmoothingEnabled = true;
-          }
-          if ('imageSmoothingQuality' in smoothCtx) {
-            smoothCtx.imageSmoothingQuality = 'high';
-          }
-          // Fondo blanco (para que se vea sobre background blanco)
-          cx.fillStyle = "white";
-          cx.fillRect(0,0,cSize,cSize);
-          const scaleX = Math.min(1, Math.max(0.05, imageScale));
-          const scaleY = Math.min(1, Math.max(0.05, imageScaleY ?? imageScale));
-          const targetW = img.width * scaleX;
-          const targetH = img.height * scaleY;
-          const offX = (cSize - targetW) / 2;
-          const offY = (cSize - targetH) / 2;
-          cx.drawImage(img, offX, offY, targetW, targetH);
-          const imageData = cx.getImageData(0, 0, cSize, cSize);
-          const data = imageData.data;
-          for (let i = 0; i < data.length; i += 4) {
-            const r = data[i], g = data[i+1], b = data[i+2];
-            // Mantener fondo blanco (no transparentar) para que se vea sobre blanco
-            // Solo garantizar opacidad de la parte del logo
-            if (!(r > 240 && g > 240 && b > 240)) {
-              if (data[i+3] < 200) data[i+3] = 255;
-            }
-          }
-          cx.putImageData(imageData, 0, 0);
-          gl.bindTexture(gl.TEXTURE_2D, tex);
-          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c);
-          // Ajustar letterbox según imageFit usando dimensiones reales de la imagen escalada dentro del canvas
-          if (uvScaleLoc && uvOffsetLoc){
+      // Offscreen canvas for both image and video mask drawing
+      const dprCanvas = Math.min(window.devicePixelRatio || 1, 2);
+      const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE) || 2048;
+      const desired = Math.max(window.innerWidth, window.innerHeight) * dprCanvas;
+      const cSize = Math.min(maxTex, Math.ceil(desired));
+      const c = document.createElement("canvas"); c.width = cSize; c.height = cSize;
+      const cx = c.getContext("2d");
+      if (!cx) return;
+      const smoothCtx = cx as CanvasRenderingContext2D;
+      if ('imageSmoothingEnabled' in smoothCtx) smoothCtx.imageSmoothingEnabled = true;
+      if ('imageSmoothingQuality' in smoothCtx) smoothCtx.imageSmoothingQuality = 'high';
+      cx.fillStyle = "white";
+      cx.fillRect(0,0,cSize,cSize);
+      maskCanvasRef.current = c;
+      maskCtxRef.current = cx;
+
+      const setupLetterbox = (contentW: number, contentH: number) => {
+        const uvScaleLoc = uniformsRef.current["u_uvScale"]; const uvOffsetLoc = uniformsRef.current["u_uvOffset"];
+        if (uvScaleLoc && uvOffsetLoc){
+          let sX = 1.0, sY = 1.0, oX = 0.0, oY = 0.0;
+          if (useNativeSize) {
+            // Escala basada en píxeles del contenido respecto al viewport
+            const vpW = Math.max(1, window.innerWidth);
+            const vpH = Math.max(1, window.innerHeight);
+            sX = Math.min(1, contentW / vpW);
+            sY = Math.min(1, contentH / vpH);
+          } else {
             const screenAspect = window.innerWidth / window.innerHeight;
-            const imageAspect = targetW / targetH;
-            let scaleX = 1.0, scaleY = 1.0, offsetX = 0.0, offsetY = 0.0;
+            const imageAspect = contentW / contentH;
             if (imageFit === 'contain') {
-              if (screenAspect > imageAspect){
-                // pantalla más ancha -> limitar por altura
-                scaleX = imageAspect / screenAspect;
-                offsetX = (1.0 - scaleX)/2.0;
-              } else {
-                scaleY = screenAspect / imageAspect;
-                offsetY = (1.0 - scaleY)/2.0;
-              }
-            } else { // cover
-              if (screenAspect > imageAspect){
-                // pantalla más ancha -> escalar para cubrir ancho
-                scaleY = screenAspect / imageAspect;
-                offsetY = (1.0 - scaleY)/2.0;
-              } else {
-                scaleX = imageAspect / screenAspect;
-                offsetX = (1.0 - scaleX)/2.0;
-              }
+              if (screenAspect > imageAspect){ sX = imageAspect / screenAspect; }
+              else { sY = screenAspect / imageAspect; }
+            } else {
+              if (screenAspect > imageAspect){ sY = screenAspect / imageAspect; }
+              else { sX = imageAspect / screenAspect; }
             }
-            gl.uniform2f(uvScaleLoc, scaleX, scaleY);
-            gl.uniform2f(uvOffsetLoc, offsetX, offsetY);
           }
-          resize();
-        } else {
-          gl.bindTexture(gl.TEXTURE_2D, tex);
-          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-          // Calcular letterbox para mantener proporción según imageFit
-          if (uvScaleLoc && uvOffsetLoc){
-            const screenAspect = window.innerWidth / window.innerHeight;
-            const imageAspect = img.width / img.height;
-            let scaleX = 1.0, scaleY = 1.0, offsetX = 0.0, offsetY = 0.0;
-            if (imageFit === 'contain') {
-              if (screenAspect > imageAspect){
-                scaleX = imageAspect / screenAspect; offsetX = (1.0 - scaleX)/2.0;
-              } else {
-                scaleY = screenAspect / imageAspect; offsetY = (1.0 - scaleY)/2.0;
-              }
-            } else { // cover
-              if (screenAspect > imageAspect){
-                scaleY = screenAspect / imageAspect; offsetY = (1.0 - scaleY)/2.0;
-              } else {
-                scaleX = imageAspect / screenAspect; offsetX = (1.0 - scaleX)/2.0;
-              }
-            }
-            gl.uniform2f(uvScaleLoc, scaleX, scaleY);
-            gl.uniform2f(uvOffsetLoc, offsetX, offsetY);
-          }
-          resize();
+          // Apply viewport scaling to shrink/expand mask on screen
+          const userScale = Math.min(1, Math.max(0.1, maskScale));
+          sX *= userScale; sY *= userScale;
+          oX = (1.0 - sX)/2.0; oY = (1.0 - sY)/2.0;
+          const gl = glRef.current; if (gl) { gl.uniform2f(uvScaleLoc, sX, sY); gl.uniform2f(uvOffsetLoc, oX, oY); }
         }
       };
-      img.src = imageSrc ?? "/geeksDesings.png";
+
+      const drawAndUpload = (offX: number, offY: number, targetW: number, targetH: number) => {
+        const gl = glRef.current; const tex = texRef.current; const mCtx = maskCtxRef.current; const mCanvas = maskCanvasRef.current;
+        if (!gl || !tex || !mCtx || !mCanvas) return;
+        mCtx.clearRect(0,0,cSize,cSize);
+        mCtx.fillStyle = "white"; mCtx.fillRect(0,0,cSize,cSize);
+        if (maskImgRef.current){ mCtx.drawImage(maskImgRef.current, offX, offY, targetW, targetH); }
+        else if (maskVideoRef.current){ mCtx.drawImage(maskVideoRef.current, offX, offY, targetW, targetH); }
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, mCanvas);
+      };
+
+      if (videoSrc) {
+        // Video-based animated mask
+        const vid = document.createElement('video');
+        vid.crossOrigin = 'anonymous';
+        vid.loop = true;
+        vid.muted = true;
+        vid.playsInline = true;
+        vid.autoplay = true;
+        const sourceUrl = videoSrc;
+        if (sourceUrl.startsWith('http')) {
+          fetch(sourceUrl, { mode: 'cors' })
+            .then(r => r.blob())
+            .then(blob => { const url = URL.createObjectURL(blob); blobUrlRef.current = url; vid.src = url; })
+            .catch(()=> { vid.src = sourceUrl; });
+        } else { vid.src = sourceUrl; }
+        vid.addEventListener('loadedmetadata', () => {
+          const contentW = Math.max(1, vid.videoWidth);
+          const contentH = Math.max(1, vid.videoHeight);
+          const fitScale = (imageFit === 'contain') 
+            ? Math.min(cSize / contentW, cSize / contentH)
+            : Math.max(cSize / contentW, cSize / contentH);
+          const userScaleX = Math.min(1, Math.max(0.05, imageScale));
+          const userScaleY = Math.min(1, Math.max(0.05, imageScaleY ?? imageScale));
+          const targetW = contentW * fitScale * userScaleX;
+          const targetH = contentH * fitScale * userScaleY;
+          const offX = (cSize - targetW) / 2; const offY = (cSize - targetH) / 2;
+          maskVideoRef.current = vid;
+          maskDimsRef.current = { cSize, targetW, targetH, offX, offY };
+          setupLetterbox(targetW, targetH);
+          drawAndUpload(offX, offY, targetW, targetH);
+          resize();
+          // Start playback once enough data
+          vid.play().catch(()=>{});
+        });
+      } else {
+        // Image-based mask (static or animated GIF first frame)
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = () => {
+          // Canvas cuadrado: escalar manteniendo proporción con contain/cover
+          const contentW = Math.max(1, (img.naturalWidth || img.width || cSize));
+          const contentH = Math.max(1, (img.naturalHeight || img.height || cSize));
+          const fitScale = (imageFit === 'contain') 
+            ? Math.min(cSize / contentW, cSize / contentH)
+            : Math.max(cSize / contentW, cSize / contentH);
+          const userScaleX = Math.min(1, Math.max(0.05, imageScale));
+          const userScaleY = Math.min(1, Math.max(0.05, imageScaleY ?? imageScale));
+          const targetW = contentW * fitScale * userScaleX;
+          const targetH = contentH * fitScale * userScaleY;
+          const offX = (cSize - targetW) / 2;
+          const offY = (cSize - targetH) / 2;
+          maskImgRef.current = img;
+          maskDimsRef.current = { cSize, targetW, targetH, offX, offY };
+          try {
+            const imageData = cx.getImageData(0, 0, cSize, cSize);
+            const data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+              const r = data[i], g = data[i+1], b = data[i+2];
+              if (!(r > 240 && g > 240 && b > 240)) {
+                if (data[i+3] < 200) data[i+3] = 255;
+              }
+            }
+            cx.putImageData(imageData, 0, 0);
+          } catch {}
+          drawAndUpload(offX, offY, targetW, targetH);
+          // Ajustar letterbox según imageFit usando dimensiones reales de la imagen escalada dentro del canvas
+          setupLetterbox(targetW, targetH);
+          resize();
+        };
+        const srcImg = imageSrc ?? "/geeksDesings.png";
+        if (srcImg.startsWith("http")) {
+          fetch(srcImg, { mode: 'cors' })
+            .then(r => r.blob())
+            .then(blob => { const url = URL.createObjectURL(blob); blobUrlRef.current = url; img.src = url; })
+            .catch(() => { img.src = srcImg; });
+        } else { img.src = srcImg; }
+      }
     } else {
       const tCanvas = document.createElement("canvas"); tCanvas.width=1024; tCanvas.height=512;
       const ctx2d = tCanvas.getContext("2d");
@@ -277,6 +325,30 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
     }
     const tLoc = uniforms["u_time"]; if (tLoc) gl.uniform1f(tLoc, now);
     const pLoc = uniforms["u_progress"]; if (pLoc) gl.uniform1f(pLoc, progress);
+    // If using a logo/image mask, update texture per frame to support animated GIFs
+    if (useLogoMask) {
+      const mCanvas = maskCanvasRef.current;
+      const mCtx = maskCtxRef.current;
+      const mImg = maskImgRef.current;
+      const mVid = maskVideoRef.current;
+      const dims = maskDimsRef.current;
+      if (mCanvas && mCtx && mImg && dims) {
+        mCtx.clearRect(0, 0, dims.cSize, dims.cSize);
+        mCtx.fillStyle = "white";
+        mCtx.fillRect(0, 0, dims.cSize, dims.cSize);
+        mCtx.drawImage(mImg, dims.offX, dims.offY, dims.targetW, dims.targetH);
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, mCanvas);
+      } else if (mCanvas && mCtx && mVid && dims) {
+        // Draw current video frame
+        mCtx.clearRect(0, 0, dims.cSize, dims.cSize);
+        mCtx.fillStyle = "white";
+        mCtx.fillRect(0, 0, dims.cSize, dims.cSize);
+        mCtx.drawImage(mVid, dims.offX, dims.offY, dims.targetW, dims.targetH);
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, mCanvas);
+      }
+    }
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex);
     const txtLoc = uniforms["u_text"]; if (txtLoc) gl.uniform1i(txtLoc, 0);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -286,7 +358,13 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
   useEffect(()=>{
     init();
     window.addEventListener('resize', resize);
-    return ()=>{ window.removeEventListener('resize', resize); if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+    return ()=>{ 
+      window.removeEventListener('resize', resize); 
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      const url = blobUrlRef.current; 
+      if (url) { URL.revokeObjectURL(url); blobUrlRef.current = null; }
+      const vid = maskVideoRef.current; if (vid) { try { vid.pause(); vid.src = ''; } catch {} maskVideoRef.current = null; }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

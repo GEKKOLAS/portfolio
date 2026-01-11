@@ -49,11 +49,13 @@ export default function Home() {
           >
             <FireRevealOverlay
               text="" // omit text drawing
-              imageSrc="/bestversion.png" // imagen como máscara
+              imageSrc="/2.svg"
+              videoSrc="" // video fallback for animated mask
               useLogoMask // activar uso de imagen como máscara
-              imageScale={500} // reducir tamaño del ancho
-              imageScaleY={500} // aumentar altura relativa sin deformar
-              imageFit="contain" // ajustar letterbox a contain
+              imageScale={1.0} // escala del contenido interno
+              imageScaleY={1.0} // escala vertical relativa
+              maskScale={150} // reducir ligeramente el tamaño en el viewport
+              imageFit="cover" // cubrir el viewport (más grande)
               showWhiteBackground={true} // mantiene fase blanca inicial
               fireColor={[1.6,0.4,2.2]} // fuego púrpura
               startDelayMs={700} // retraso para que no aparezca tan rápido

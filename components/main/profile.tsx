@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { TextGenerateEffect } from "../ui/text-generate-effect";
 import Image from "next/image";
 import { Navbar } from "./navbar";
 import { Social } from "./socialnet";

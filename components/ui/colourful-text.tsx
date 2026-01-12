@@ -6,8 +6,8 @@ import { useTheme } from "next-themes";
 
 export default function ColourfulText({ text }: { text: string }) {
   // Neon color palettes
-  const lightColors = ["#ff1744", "#ff003c", "#ff2052"];
-  const darkColors = ["#0099cc"];
+  const lightColors = ["#66ccff", "#ff2052"];
+  const darkColors = ["#0099cc", "#ff003c", "#ff66a3", "#ff66cc", "#ff99e6"];
 
   const { theme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
@@ -16,7 +16,7 @@ export default function ColourfulText({ text }: { text: string }) {
   React.useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    return <span className="inline-block font-tangerine font-semibold tracking-tight">{text}</span>;
+    return <span className="inline-block sekuya-regular tracking-tight">{text}</span>;
   }
 
   const isDark = theme === "dark" || resolvedTheme === "dark";
@@ -51,7 +51,7 @@ export default function ColourfulText({ text }: { text: string }) {
             // entrance (y/opacity/filter): single short animation, staggered
             default: { duration: 0.55, ease: "easeOut", delay: index * 0.05 },
           }}
-          className="inline-block whitespace-pre font-tangerine font-semibold tracking-tight"
+          className="inline-block whitespace-pre manufacturing-consent-regular tracking-tight"
           style={{ background: "transparent" }}
         >
           {char}

@@ -6,6 +6,7 @@ import { Navbar } from "./navbar";
 import { Social } from "./socialnet";
 import { ReactTyped } from "react-typed";
 import { BackgroundBeams } from "../ui/background-beams";
+import { AuroraText } from "../ui/aurora-text";
 
 export const Profile = () => {
   const words =
@@ -61,7 +62,8 @@ export const Profile = () => {
           </h2>
           <br />
           <div className="flex items-center justify-center w-full">
-            <TextGenerateEffect words={words} />
+            {/* <TextGenerateEffect words={words} /> */}
+            <AuroraText className="text-2xl sekuya-regular">{words}</AuroraText>
           </div>
           <Social />
           </div>

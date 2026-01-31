@@ -13,6 +13,13 @@ import { Lensflare, LensflareElement } from "three/examples/jsm/objects/Lensflar
 
 type ThemeName = "nebula" | "sunset" | "forest" | "aurora" | "purple";
 
+type AuraUniforms = {
+  time: { value: number };
+  uMouse: { value: THREE.Vector2 };
+  uExplode: { value: number };
+};
+type AuraMaterial = THREE.ShaderMaterial & { uniforms: AuraUniforms };
+
 export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = ({ className, theme = "nebula" }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -31,7 +38,7 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
       controls: OrbitControls,
       mainGroup: THREE.Group,
       clock: THREE.Clock,
-      coreSphere: THREE.Points,
+      coreSphere: THREE.Points<THREE.BufferGeometry, AuraMaterial>,
         orbitRings: THREE.Group,
       centralLight: THREE.PointLight,
       lensflare: Lensflare | null = null,
@@ -199,7 +206,7 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
       return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
     }
 
-    function createPointShaderMaterial() {
+    function createPointShaderMaterial(): AuraMaterial {
       return new THREE.ShaderMaterial({
         uniforms: { time: { value: 0 }, uMouse: { value: mouse }, uExplode: { value: 0.0 } },
         vertexShader: pointMaterialShader.vertexShader,
@@ -208,10 +215,10 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
         transparent: true,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
-      });
+      }) as AuraMaterial;
     }
 
-    function createSpiralSphere(radius: number, particleCount: number) {
+    function createSpiralSphere(radius: number, particleCount: number): THREE.Points<THREE.BufferGeometry, AuraMaterial> {
       const geometry = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
       const colors = new Float32Array(particleCount * 3);
@@ -231,7 +238,7 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
       geometry.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
       geometry.setAttribute("randomDir", new THREE.BufferAttribute(randomDirs, 3));
       const material = createPointShaderMaterial();
-      (material.uniforms.uExplode.value as number) = 0;
+      material.uniforms.uExplode.value = 0;
       return new THREE.Points(geometry, material);
     }
 
@@ -380,9 +387,11 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
           hoverProgress = Math.min(1, hoverProgress + delta * 2);
           const hoverExplode = easeInOutCubic(hoverProgress) * hoverExplodeMax;
           const totalExplode = Math.max(easedProgress, hoverExplode);
-          orbitRings.children.forEach((ring: any) => {
-            ring.material.uniforms.uExplode.value = totalExplode;
-          });
+          for (const ringObj of orbitRings.children) {
+            const ringPts = ringObj as THREE.Points<THREE.BufferGeometry, AuraMaterial>;
+            const ringMat = ringPts.material as AuraMaterial;
+            ringMat.uniforms.uExplode.value = totalExplode;
+          }
           if (progress >= 1.0) {
             isExplosionActive = false;
           }
@@ -395,22 +404,27 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
             hoverProgress = Math.max(0, hoverProgress - delta * 2);
           }
           const hoverExplode = easeInOutCubic(hoverProgress) * hoverExplodeMax;
-          orbitRings.children.forEach((ring: any) => {
-            ring.material.uniforms.uExplode.value = hoverExplode;
-          });
+          for (const ringObj of orbitRings.children) {
+            const ringPts = ringObj as THREE.Points<THREE.BufferGeometry, AuraMaterial>;
+            const ringMat = ringPts.material as AuraMaterial;
+            ringMat.uniforms.uExplode.value = hoverExplode;
+          }
         }
 
-        (coreSphere.material as any).uniforms.time.value = time;
-        (coreSphere.material as any).uniforms.uMouse.value.copy(mouse);
-        orbitRings.children.forEach((ring: any) => {
-          ring.material.uniforms.time.value = time;
-          ring.material.uniforms.uMouse.value.copy(mouse);
-        });
+        const coreMat = coreSphere.material as AuraMaterial;
+        coreMat.uniforms.time.value = time;
+        coreMat.uniforms.uMouse.value.copy(mouse);
+        for (const ringObj of orbitRings.children) {
+          const ringPts = ringObj as THREE.Points<THREE.BufferGeometry, AuraMaterial>;
+          const ringMat = ringPts.material as AuraMaterial;
+          ringMat.uniforms.time.value = time;
+          ringMat.uniforms.uMouse.value.copy(mouse);
+        }
 
         const breathe = 1 + Math.sin(time * 1.5) * 0.05;
         const hoverScale = 1 + easeInOutCubic(hoverProgress) * 0.15;
         coreSphere.scale.set(breathe * hoverScale, breathe * hoverScale, breathe * hoverScale);
-        orbitRings.children.forEach((ring: any, index: number) => {
+        orbitRings.children.forEach((ring: THREE.Object3D, index: number) => {
           const speed = 0.0005 * (index + 1);
           ring.rotation.z += speed;
           ring.rotation.x += speed * 0.3;
@@ -425,7 +439,7 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
       function changeTheme(themeName: ThemeName) {
         const t = themes[themeName];
         if (!t) return;
-        const sphereColorsAttr = (coreSphere.geometry as any).attributes.color as THREE.BufferAttribute;
+        const sphereColorsAttr = (coreSphere.geometry as THREE.BufferGeometry).attributes.color as THREE.BufferAttribute;
         for (let i = 0; i < sphereColorsAttr.count; i++) {
           const colorPos = (i / sphereColorsAttr.count) * (t.sphere.length - 1);
           const c1 = t.sphere[Math.floor(colorPos)];
@@ -434,8 +448,9 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
           sphereColorsAttr.setXYZ(i, newColor.r, newColor.g, newColor.b);
         }
         sphereColorsAttr.needsUpdate = true;
-        orbitRings.children.forEach((ring: any, i: number) => {
-          const ringColorsAttr = ring.geometry.attributes.color as THREE.BufferAttribute;
+        orbitRings.children.forEach((ringObj: THREE.Object3D, i: number) => {
+          const ring = ringObj as THREE.Points;
+          const ringColorsAttr = (ring.geometry as THREE.BufferGeometry).attributes.color as THREE.BufferAttribute;
           for (let j = 0; j < ringColorsAttr.count; j++) {
             const newColor = t.rings(i, orbitRings.children.length, j, ringColorsAttr.count);
             ringColorsAttr.setXYZ(j, newColor.r, newColor.g, newColor.b);
@@ -460,11 +475,19 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
         ro.disconnect();
         window.removeEventListener("mousemove", onMouseMove);
         window.removeEventListener("click", onClick);
-        composer?.dispose();
-        renderer?.dispose();
+        composer.dispose();
+        renderer.dispose();
         currentHdrTexture?.dispose();
-        (coreSphere.material as any)?.dispose?.();
-        orbitRings.children.forEach((ring: any) => ring.material?.dispose?.());
+        coreSphere.material.dispose();
+        orbitRings.children.forEach((ringObj: THREE.Object3D) => {
+          const ring = ringObj as THREE.Points;
+          const mat = ring.material;
+          if (Array.isArray(mat)) {
+            mat.forEach((m) => m.dispose());
+          } else {
+            mat.dispose();
+          }
+        });
       };
     }
 

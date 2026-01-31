@@ -83,7 +83,7 @@ export default function Home() {
           className="contents"
         >
           <SplashCursor />
-          <section id="home" className="bg-white antialiased dark:bg-transparent">
+          <section id="home" className="bg-transparent antialiased">
             <div className="grid h-full lg:grid-cols-2 md:grid gap-4" id="turbulent-displace">
               <div className="flex items-center justify-center h-full w-full pl-8 pr-8 pb-8 overscroll-contain md:static  sm:static  lg:sticky 2xl:top-25 md:top-0">
                 <Profile />

@@ -8,7 +8,6 @@ import Skills from "@/components/StackTech/SkillContent";
 import SplashCursor from "@/components/ui/splashCursor";
 import { FireRevealOverlay } from "@/components/effects/fire-reveal-overlay";
 import { LoaderFour } from "@/components/ui/loader";
-import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
 import { UnicornStudioDivider } from "@/components/effects/unicornstudio-divider";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -96,9 +95,6 @@ export default function Home() {
             {/* Left panel (fixed on desktop) */}
             <div className="relative z-10 flex items-center justify-center w-full px-8 pb-8 lg:h-[100dvh] lg:sticky lg:top-0 overflow-hidden">
               <Profile />
-              <div className="absolute top-4 right-4">
-                <AnimatedThemeToggler />
-              </div>
             </div>
 
             {/* Right panel (ONLY scroll container on desktop) */}

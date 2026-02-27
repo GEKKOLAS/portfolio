@@ -10,7 +10,7 @@ const scrollToSection = (id: string) => {
 export const Navbar = () => {
     return (
         <header>
-            <nav className="bg-white border-gray-200 px-4 py-7 lg:px-6  dark:bg-transparent">
+            <nav className="bg-transparent border-gray-200 px-4 py-7 lg:px-6 dark:bg-transparent">
                 <div className="flex flex-wrap items-center justify-center mx-auto max-w-screen-xl">
                     <div className="hidden justify-center items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
                         <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 lg:justify-center">

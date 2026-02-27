@@ -12,7 +12,7 @@ const SkillText = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, amount: 0.5 }}
-      className="text-4xl text-center text-transparent w-11/12"
+      className="text-4xl text-center text-transparent w-full"
       >
       <ColourfulText text="I like crafting digital experiences with modern technologies and thoughtful design." />
       </motion.div>

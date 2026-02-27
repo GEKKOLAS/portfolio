@@ -164,7 +164,7 @@ export default function Home() {
 
               <section
                 id="skills"
-                className="snap-section bg-transparent"
+                className="snap-section bg-transparent w-full"
                 data-snap-anim="zoom"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center overflow-hidden">

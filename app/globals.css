@@ -278,11 +278,50 @@
       min-height: 100dvh;
       height: auto;
 
-      /* Progressive enhancement: blur/contrast based on section timeline */
+      /* Shared vars used by all variants */
       --contrast: 4;
       --blur: 0.5rem;
-      animation: snap-blink ease-in-out both;
-      animation-timeline: --section;
+
+      /* Default animation (may be overridden per section) */
+      --snap-anim-name: snap-blink;
+
+      /* Default (fallback) is no animation; JS will add `.is-active` */
+      animation: none;
+    }
+
+    /* Per-section animation selection */
+    .right-scroll .snap-section[data-snap-anim="blink"] .snap-content {
+      --snap-anim-name: snap-blink;
+    }
+    .right-scroll .snap-section[data-snap-anim="horizontal"] .snap-content {
+      --snap-anim-name: snap-horizontal;
+    }
+    .right-scroll .snap-section[data-snap-anim="backwards"] .snap-content {
+      --snap-anim-name: snap-backwards;
+    }
+    .right-scroll .snap-section[data-snap-anim="zoom"] .snap-content {
+      --snap-anim-name: snap-zoom;
+    }
+
+    /* Scroll-driven animations (supported browsers) */
+    @supports (animation-timeline: --section) {
+      .right-scroll .snap-content {
+        /* Duration is required for consistent behavior across engines */
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: both;
+        animation-name: var(--snap-anim-name);
+        animation-timeline: --section;
+        animation-range: entry 0% exit 100%;
+      }
+    }
+
+    /* Fallback: play the section animation when it becomes active */
+    .right-scroll .snap-section.is-active .snap-content {
+      animation-duration: 700ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: both;
+      animation-name: var(--snap-anim-name);
     }
   }
 }
@@ -296,6 +335,66 @@
 
   50% {
     filter: blur(0) contrast(1);
+    opacity: 1;
+  }
+}
+
+@keyframes snap-horizontal {
+  0% {
+    transform: translate3d(12%, 0%, 0);
+    filter: blur(var(--blur)) contrast(var(--contrast));
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0);
+    filter: blur(0) contrast(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(-12%, 0%, 0);
+    filter: blur(var(--blur)) contrast(var(--contrast));
+    opacity: 1;
+  }
+}
+
+@keyframes snap-backwards {
+  0% {
+    transform: translate3d(0%, -12%, 0);
+    filter: blur(var(--blur)) contrast(var(--contrast));
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0);
+    filter: blur(0) contrast(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(0%, 12%, 0);
+    filter: blur(var(--blur)) contrast(var(--contrast));
+    opacity: 1;
+  }
+}
+
+@keyframes snap-zoom {
+  0% {
+    transform: scale(0.92);
+    filter: blur(calc(var(--blur) * 1.5)) contrast(var(--contrast));
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1);
+    filter: blur(0) contrast(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.04);
+    filter: blur(var(--blur)) contrast(var(--contrast));
     opacity: 1;
   }
 }

@@ -20,6 +20,49 @@ export default function Home() {
   const [showContent, setShowContent] = React.useState(false); // content appears 0.5s after white background
 
   React.useEffect(() => {
+    if (!showContent) return;
+
+    const scrollRoot = document.querySelector<HTMLElement>(".right-scroll");
+    if (!scrollRoot) return;
+
+    const sections = Array.from(
+      scrollRoot.querySelectorAll<HTMLElement>(".snap-section")
+    );
+    if (sections.length === 0) return;
+
+    const setActive = (active: HTMLElement) => {
+      for (const section of sections) section.classList.remove("is-active");
+
+      // Force restart of the keyframe animation when re-activating.
+      active.classList.remove("is-active");
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      active.offsetHeight;
+      active.classList.add("is-active");
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0));
+        const top = visible[0]?.target as HTMLElement | undefined;
+        if (top) setActive(top);
+      },
+      {
+        root: scrollRoot,
+        threshold: [0.35, 0.5, 0.65, 0.8],
+      }
+    );
+
+    for (const section of sections) observer.observe(section);
+
+    // Initial active section
+    setActive(sections[0]);
+
+    return () => observer.disconnect();
+  }, [showContent]);
+
+  React.useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false); // loader finished, fire effect starts automatically
     }, 2000);
@@ -99,31 +142,51 @@ export default function Home() {
 
             {/* Right panel (ONLY scroll container on desktop) */}
             <div className="relative z-10 right-scroll pr-8">
-              <section id="timeline" className="snap-section bg-transparent">
-                <div className="snap-content h-full w-full flex items-center justify-center">
-                  <Experience />
-                </div>
-              </section>
-
-              <section id="about" className="snap-section bg-transparent">
+              <section
+                id="about"
+                className="snap-section bg-transparent"
+                data-snap-anim="zoom"
+              >
                 <div className="snap-content h-full w-full flex items-center justify-center overflow-hidden">
                   <About />
                 </div>
               </section>
 
-              <section id="skills" className="snap-section bg-transparent">
+              <section
+                id="timeline"
+                className="snap-section bg-transparent"
+                data-snap-anim="backwards"
+              >
+                <div className="snap-content h-full w-full flex items-center justify-center">
+                  <Experience />
+                </div>
+              </section>
+
+              <section
+                id="skills"
+                className="snap-section bg-transparent"
+                data-snap-anim="horizontal"
+              >
                 <div className="snap-content h-full w-full flex items-center justify-center overflow-hidden">
                   <Skills />
                 </div>
               </section>
 
-              <section id="projects" className="snap-section bg-transparent">
+              <section
+                id="projects"
+                className="snap-section bg-transparent"
+                data-snap-anim="blink"
+              >
                 <div className="snap-content h-full w-full flex items-center justify-center">
                   <Projects />
                 </div>
               </section>
 
-              <section id="services" className="snap-section bg-transparent">
+              <section
+                id="services"
+                className="snap-section bg-transparent"
+                data-snap-anim="zoom"
+              >
                 <div className="snap-content h-full w-full flex items-center justify-center">
                   <AnimatedTestimonialsDemo />
                 </div>

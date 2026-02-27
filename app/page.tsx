@@ -9,6 +9,7 @@ import SplashCursor from "@/components/ui/splashCursor";
 import { FireRevealOverlay } from "@/components/effects/fire-reveal-overlay";
 import { LoaderFour } from "@/components/ui/loader";
 import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
+import { UnicornStudioDivider } from "@/components/effects/unicornstudio-divider";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -27,7 +28,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative h-[200vh]" >
+    <main className="relative min-h-[100dvh]">
       <AnimatePresence>
         {loading && (
           <motion.div
@@ -83,44 +84,56 @@ export default function Home() {
           className="contents"
         >
           <SplashCursor />
-          <section id="home" className="bg-transparent antialiased">
-            <div className="grid h-full lg:grid-cols-2 md:grid gap-4" id="turbulent-displace">
-              <div className="flex items-center justify-center h-full w-full pl-8 pr-8 pb-8 overscroll-contain md:static  sm:static  lg:sticky 2xl:top-25 md:top-0">
-                <Profile />
-                <div className="absolute top-4 right-4">
-                  <AnimatedThemeToggler />
-                </div>
-              </div>
-              <div
-                id="timeline"
-                className="flex-1 pr-8 h-full flex flex-col items-center justify-center overscroll-contain"
-              >
-                <Experience />
-              </div>
-              <div />
-              <div
-                id="about"
-                className="w-full h-full py-15 flex flex-col items-center justify-center overscroll-contain overflow-hidden"
-              >
-                <About />
-              </div>
-              <div />
-              <div className="w-full h-full py-15 flex flex-col items-center justify-center overscroll-contain overflow-hidden">
-                <Skills />
-              </div>
-              <div />
-              <div
-                id="projects"
-                className="w-full py-15 pb-70 flex flex-col items-center justify-center"
-              >
-                <Projects />
-              </div>
-              <div />
-              <div className="w-full h-full flex flex-col items-center justify-center" id="services">
-                <AnimatedTestimonialsDemo />
+
+          <div className="relative grid min-h-[100dvh] lg:grid-cols-2 gap-4 bg-transparent antialiased" id="turbulent-displace">
+            {/* Background divider (between left/right panels on desktop) */}
+            <UnicornStudioDivider
+              projectId="87f73EZDBHyi74vnR17e"
+              className="pointer-events-none hidden lg:block absolute inset-0 z-0"
+              style={{ width: "100%", height: "100%" }}
+            />
+
+            {/* Left panel (fixed on desktop) */}
+            <div className="relative z-10 flex items-center justify-center w-full px-8 pb-8 lg:h-[100dvh] lg:sticky lg:top-0 overflow-hidden">
+              <Profile />
+              <div className="absolute top-4 right-4">
+                <AnimatedThemeToggler />
               </div>
             </div>
-          </section>
+
+            {/* Right panel (ONLY scroll container on desktop) */}
+            <div className="relative z-10 right-scroll pr-8">
+              <section id="timeline" className="snap-section bg-transparent">
+                <div className="snap-content h-full w-full flex items-center justify-center">
+                  <Experience />
+                </div>
+              </section>
+
+              <section id="about" className="snap-section bg-transparent">
+                <div className="snap-content h-full w-full flex items-center justify-center overflow-hidden">
+                  <About />
+                </div>
+              </section>
+
+              <section id="skills" className="snap-section bg-transparent">
+                <div className="snap-content h-full w-full flex items-center justify-center overflow-hidden">
+                  <Skills />
+                </div>
+              </section>
+
+              <section id="projects" className="snap-section bg-transparent">
+                <div className="snap-content h-full w-full flex items-center justify-center">
+                  <Projects />
+                </div>
+              </section>
+
+              <section id="services" className="snap-section bg-transparent">
+                <div className="snap-content h-full w-full flex items-center justify-center">
+                  <AnimatedTestimonialsDemo />
+                </div>
+              </section>
+            </div>
+          </div>
         </motion.div>
       )}
       </AnimatePresence>

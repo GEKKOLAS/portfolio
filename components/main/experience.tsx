@@ -1,12 +1,10 @@
 import React from "react";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { BoxReveal } from "../magicui/box-reveal";
 
 export const Experience = () => {
   return (
-    <section className="sticky top-0">
-      <ScrollArea style={{ height: "400px", overflow: "auto" }}>
-        <div className=" w-full p-4 md:h-full sm:h-full">
+    <section className="w-full">
+        <div className="w-full p-4">
             <BoxReveal
               boxColor={"#FFD600"}
               duration={0.9}
@@ -148,7 +146,6 @@ export const Experience = () => {
           </li>
         </ol>
         </div>
-      </ScrollArea>
     </section>
   );
 };

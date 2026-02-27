@@ -235,11 +235,68 @@
 }
 
 @layer base {
+  html,
+  body {
+    height: 100%;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Desktop (lg+) layout: ONLY the right panel scrolls */
+  @media (min-width: 1024px) {
+    html,
+    body {
+      overflow: hidden;
+    }
+
+    .right-scroll {
+      height: 100dvh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+
+      scroll-snap-type: y mandatory;
+
+      /* Optional: enables scroll-driven animations when supported */
+      timeline-scope: --main;
+      view-timeline: --main;
+    }
+
+    .right-scroll .snap-section {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      min-height: 100dvh;
+      height: auto;
+      view-timeline: --section;
+    }
+
+    .right-scroll .snap-content {
+      min-height: 100dvh;
+      height: auto;
+
+      /* Progressive enhancement: blur/contrast based on section timeline */
+      --contrast: 4;
+      --blur: 0.5rem;
+      animation: snap-blink ease-in-out both;
+      animation-timeline: --section;
+    }
+  }
+}
+
+@keyframes snap-blink {
+  0%,
+  100% {
+    filter: blur(var(--blur)) contrast(var(--contrast));
+    opacity: 1;
+  }
+
+  50% {
+    filter: blur(0) contrast(1);
+    opacity: 1;
   }
 }
 

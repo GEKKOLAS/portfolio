@@ -6,7 +6,6 @@ const Skills = () => {
   return (
     // Main section for the Skills component
     <section
-      id="skills"
       className="flex flex-col pt-3 pb-3 items-center justify-center gap-5 h-full relative overflow-hidden"
       style={{ transform: "scale(0.9)" }}
     >

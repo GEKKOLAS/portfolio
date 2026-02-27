@@ -283,7 +283,7 @@
       --blur: 0.5rem;
 
       /* Default animation (may be overridden per section) */
-      --snap-anim-name: snap-blink;
+      --snap-anim-name: snap-zoom;
 
       /* Default (fallback) is no animation; JS will add `.is-active` */
       animation: none;

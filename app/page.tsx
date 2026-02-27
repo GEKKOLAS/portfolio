@@ -155,7 +155,7 @@ export default function Home() {
               <section
                 id="timeline"
                 className="snap-section bg-transparent"
-                data-snap-anim="backwards"
+                data-snap-anim="zoom"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center">
                   <Experience />
@@ -165,7 +165,7 @@ export default function Home() {
               <section
                 id="skills"
                 className="snap-section bg-transparent"
-                data-snap-anim="horizontal"
+                data-snap-anim="zoom"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center overflow-hidden">
                   <Skills />
@@ -175,7 +175,7 @@ export default function Home() {
               <section
                 id="projects"
                 className="snap-section bg-transparent"
-                data-snap-anim="blink"
+                data-snap-anim="zoom"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center">
                   <Projects />

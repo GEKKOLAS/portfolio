@@ -45,20 +45,7 @@ export const StickyScroll = ({
     "transparent",
     "transparent",
     "transparent",
-  ]; // Reverted to original non-animatable values
-  const linearGradients = useMemo(() => [
-    "linear-gradient(to bottom right, #06b6d4, #10b981)", // cyan-500 to emerald-500
-    "linear-gradient(to bottom right, #ec4899, #6366f1)", // pink-500 to indigo-500
-    "linear-gradient(to bottom right, #f97316, #eab308)", // orange-500 to yellow-500
-  ], []);
-
-  const [backgroundGradient, setBackgroundGradient] = useState(
-    linearGradients[0],
-  );
-
-  useEffect(() => {
-    setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
-  }, [activeCard, linearGradients]);
+  ]; // Keep the sticky card background light and transparent
 
   return (
     <motion.div
@@ -104,9 +91,8 @@ export const StickyScroll = ({
       </div>
 
       <div
-        style={{ background: backgroundGradient }}
         className={cn(
-          "sticky top-10  h-60  overflow-hidden rounded-md bg-white lg:block",
+          "sticky top-10 h-60 min-w-[20rem] overflow-hidden rounded-3xl bg-transparent shadow-2xl/10 lg:block",
           contentClassName,
         )}
       >

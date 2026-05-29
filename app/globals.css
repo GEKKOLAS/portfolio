@@ -83,6 +83,19 @@
   animation: gradient-move 4s ease-in-out infinite;
 }
 
+@keyframes background-divider {
+  0%,
+  100% {
+    transform: translate(-12%, -12%) scale(1);
+  }
+  50% {
+    transform: translate(12%, 12%) scale(1.05);
+  }
+}
+.animate-background-divider {
+  animation: background-divider 14s ease-in-out infinite;
+}
+
 @custom-variant dark (&:is(.dark *));
 /* Hide scrollbar */
 ::-webkit-scrollbar {

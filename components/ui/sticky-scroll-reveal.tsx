@@ -1,5 +1,5 @@
 "use client";
-import React, { JSX, useEffect, useRef, useState, useMemo } from "react";
+import React, { JSX, useRef } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";

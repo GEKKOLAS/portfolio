@@ -1,5 +1,4 @@
 import { StickyScroll } from "../ui/sticky-scroll-reveal";
-import React from "react";
 import Image from "next/image";
 
 const ProjectImageCard = ({

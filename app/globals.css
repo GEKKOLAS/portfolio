@@ -258,8 +258,7 @@
       height: 100dvh;
       overflow-y: auto;
       overscroll-behavior: contain;
-
-      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
 
       /* Optional: enables scroll-driven animations when supported */
       timeline-scope: --main;
@@ -267,8 +266,6 @@
     }
 
     .right-scroll .snap-section {
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
       min-height: 100dvh;
       height: auto;
       view-timeline: --section;

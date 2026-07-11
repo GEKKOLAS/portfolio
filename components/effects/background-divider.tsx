@@ -50,58 +50,59 @@ export function BackgroundDivider({ className, style }: BackgroundDividerProps) 
 
       float fbm(vec2 p) {
         float value = 0.0;
-        float amplitude = 0.55;
-        mat2 rot = mat2(0.8, -0.6, 0.6, 0.8);
-        for (int i = 0; i < 6; i++) {
-          value += amplitude * noise(p);
-          p = rot * p * 1.9 + vec2(1.0, 0.7);
-          amplitude *= 0.5;
+        float amp = 0.6;
+        mat2 rot = mat2(0.82, -0.57, 0.57, 0.82);
+        for (int i = 0; i < 5; i++) {
+          value += amp * noise(p);
+          p = rot * p * 1.7 + vec2(0.8, 0.5);
+          amp *= 0.5;
         }
         return value;
       }
 
       vec3 palette(float t) {
-        vec3 dark = vec3(0.08, 0.04, 0.18);
-        vec3 fuchsia = vec3(1.00, 0.10, 0.86);
-        vec3 cyan = vec3(0.22, 0.98, 1.00);
-        vec3 neon = vec3(1.00, 0.84, 0.96);
-        vec3 base = mix(dark, fuchsia, smoothstep(0.0, 0.45, t));
-        vec3 highlight = mix(cyan, neon, smoothstep(0.55, 1.0, t));
-        return mix(base, highlight, smoothstep(0.25, 0.85, t));
+        vec3 deep = vec3(0.02, 0.01, 0.08);
+        vec3 plasma = vec3(0.18, 0.03, 0.34);
+        vec3 mist = vec3(0.08, 0.12, 0.22);
+        vec3 glow = vec3(0.70, 0.22, 0.95);
+        vec3 a = mix(deep, plasma, smoothstep(0.0, 0.45, t));
+        vec3 b = mix(mist, glow, smoothstep(0.5, 1.0, t));
+        return mix(a, b, smoothstep(0.1, 0.9, t));
       }
 
       void main() {
         vec2 uv = gl_FragCoord.xy / iResolution.xy;
-        vec2 aspect = vec2(iResolution.x / iResolution.y, 1.0);
         vec2 p = (uv - 0.5) * 2.0;
+        vec2 aspect = vec2(iResolution.x / iResolution.y, 1.0);
         p.x *= aspect.x;
 
-        float time = iTime * 0.18;
-        vec2 warp = p + vec2(sin(time * 0.7) * 0.22, cos(time * 0.95) * 0.18);
+        float t = iTime * 0.11;
+        float lower = smoothstep(0.0, 0.45, uv.y);
+        float upper = 1.0 - lower;
 
-        float n1 = fbm(warp * 1.3 + vec2(time * 0.6, -time * 0.45));
-        float n2 = fbm(warp * 2.1 - vec2(time * 0.25, time * 0.55));
-        float n3 = fbm(warp * 3.4 + vec2(-time * 0.3, time * 0.2));
+        vec2 flow = p + vec2(sin(t * 0.35) * 0.08, cos(t * 0.45) * 0.06);
+        float n1 = fbm(flow * 0.9 + vec2(t * 0.25, -t * 0.16));
+        float n2 = fbm(flow * 1.8 - vec2(t * 0.14, t * 0.2));
+        float grain = n1 * 0.7 + n2 * 0.3;
 
-        float line = smoothstep(0.014, 0.008, abs(p.x + sin(time * 0.4) * 0.12 + n1 * 0.085));
-        float band = smoothstep(0.16, 0.08, abs(p.x + 0.09 * sin(time * 0.42)));
-        float halo = smoothstep(0.65, 0.1, length(p + vec2(0.1, 0.0)));
-        float light = smoothstep(0.4, 0.0, length(vec2(p.x * 1.1, p.y * 0.8)));
+        float diagonal = smoothstep(0.0, 0.09, abs((uv.y - 0.5) - (uv.x - 0.5) * 0.20));
+        float vertical = smoothstep(0.0, 0.03, abs(uv.x - 0.5));
+        float beam = pow(max(0.0, 1.0 - abs(p.x) * 0.95), 2.6) * (0.8 + 0.4 * diagonal);
+        float tail = smoothstep(0.0, 0.65, 1.0 - uv.y) * (0.55 + 0.35 * sin(t + grain * 3.0));
+        float haze = pow(max(0.0, 1.0 - (uv.y * 1.04)), 1.8) * 0.24;
+        float nebula = smoothstep(0.0, 0.9, grain) * lower * 0.45;
+        float glow = beam * 1.05 + tail * 0.8 + nebula * 0.22;
 
-        float noiseMix = n1 * 0.5 + n2 * 0.3 + n3 * 0.2;
-        float glow = pow(max(0.0, noiseMix), 1.6) * 0.75;
+        vec3 base = palette(0.1 + 0.8 * grain);
+        vec3 color = base * (0.24 + 0.76 * glow);
+        color += vec3(1.00, 0.30, 0.95) * beam * 0.72;
+        color += vec3(0.92, 0.12, 0.98) * tail * 0.3;
+        color += vec3(0.06, 0.06, 0.10) * (1.0 - smoothstep(0.0, 0.05, abs(uv.x - 0.5))) * upper * 0.8;
+        color += vec3(0.08, 0.10, 0.14) * haze * lower;
+        color += vec3(0.14, 0.06, 0.24) * nebula * 0.24;
+        color = pow(color, vec3(0.9));
 
-        vec3 base = palette(smoothstep(-0.3, 0.95, noiseMix));
-        vec3 accent = palette(clamp(line * 1.4 + band * 0.9 + light * 0.4, 0.0, 1.0));
-
-        vec3 color = base * (0.55 + 0.55 * glow);
-        color += accent * (0.65 * line + 0.45 * band * light);
-        color += vec3(0.24, 0.12, 0.38) * (1.0 - smoothstep(0.12, 0.8, length(p)));
-        color += vec3(0.64, 0.28, 0.95) * pow(max(0.0, 0.18 - abs(p.x + 0.04)), 2.0) * line * 0.95;
-        color *= mix(1.0, 1.2, halo);
-        color = pow(color, vec3(0.88));
-
-        gl_FragColor = vec4(color, 1.0);
+        gl_FragColor = vec4(color, 0.98);
       }
     `;
 

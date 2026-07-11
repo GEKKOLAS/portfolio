@@ -12,6 +12,7 @@ type Testimonial = {
   subtitle: string;
   src: string;
 };
+
 export const AnimatedTestimonials = ({
   testimonials,
   autoplay = false,
@@ -21,7 +22,6 @@ export const AnimatedTestimonials = ({
 }) => {
   const [active, setActive] = useState(0);
 
-
   const handleNext = useCallback(() => {
     setActive((prev) => (prev + 1) % testimonials.length);
   }, [testimonials.length]);
@@ -30,9 +30,7 @@ export const AnimatedTestimonials = ({
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  const isActive = (index: number) => {
-    return index === active;
-  };
+  const isActive = (index: number) => index === active;
 
   useEffect(() => {
     if (autoplay) {
@@ -41,15 +39,13 @@ export const AnimatedTestimonials = ({
     }
   }, [autoplay, handleNext]);
 
-  const randomRotateY = () => {
-    return Math.floor(Math.random() * 21) - 10;
-  };
+  const randomRotateY = () => Math.floor(Math.random() * 21) - 10;
 
   interface AutoAdvanceProps {
     current: number;
     setCurrent: (index: number) => void;
     slidesLength: number;
-    interval?: number; // in ms, optional
+    interval?: number;
   }
 
   const AutoAdvance = ({
@@ -67,134 +63,100 @@ export const AnimatedTestimonials = ({
 
     return null;
   };
+
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-8 py-12">
-      <div className="flex justify-center items-start min-h-screen">
-      <div className="sticky top-20 mx-auto max-w-sm pb-20 font-sans antialiased md:max-w-full">
-        <div className="relative grid grid-cols-1 gap-12 md:grid-cols-2">
-        <div>
-          <div className="relative h-full w-full">
-          <AutoAdvance
-            current={active}
-            setCurrent={setActive}
-            slidesLength={testimonials.length}
-          />
-          <AnimatePresence>
-            {testimonials.map((testimonial, index) => (
+    <section className="w-full py-8 sm:py-10 lg:py-12">
+      <div className="rounded-[2rem] border border-white/15 bg-white/70 p-6 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-900/70 sm:p-8">
+        <div className="mb-6">
+          <p className="text-xs uppercase tracking-[0.35em] text-fuchsia-500">Services</p>
+          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+            Capabilities shaped for digital products and execution.
+          </h2>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div className="relative min-h-[280px] sm:min-h-[340px]">
+            <AutoAdvance
+              current={active}
+              setCurrent={setActive}
+              slidesLength={testimonials.length}
+            />
+            <AnimatePresence>
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={testimonial.src}
+                  initial={{ opacity: 0, scale: 0.95, rotate: randomRotateY(), y: 20 }}
+                  animate={{
+                    opacity: isActive(index) ? 1 : 0.25,
+                    scale: isActive(index) ? 1 : 0.92,
+                    rotate: isActive(index) ? 0 : randomRotateY(),
+                    y: isActive(index) ? 0 : 16,
+                    zIndex: isActive(index) ? 40 : testimonials.length + 2 - index,
+                  }}
+                  exit={{ opacity: 0, scale: 0.92, y: -20 }}
+                  transition={{ duration: 0.35, ease: "easeInOut" }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={testimonial.src}
+                    alt={testimonial.title}
+                    width={1200}
+                    height={700}
+                    draggable={true}
+                    className="h-full w-full rounded-[1.5rem] border border-white/15 object-cover object-center shadow-[0_20px_60px_-24px_rgba(0,0,0,0.45)]"
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+
+          <div className="flex flex-col justify-between gap-5 rounded-[1.5rem] border border-white/10 bg-zinc-950/5 p-5 dark:bg-white/5">
             <motion.div
-              key={testimonial.src}
-              initial={{
-              opacity: 0,
-              scale: 0.9,
-              z: -100,
-              rotate: randomRotateY(),
-              }}
-              animate={{
-              opacity: isActive(index) ? 1 : 0.7,
-              scale: isActive(index) ? 1 : 0.95,
-              z: isActive(index) ? 0 : -100,
-              rotate: isActive(index) ? 0 : randomRotateY(),
-              zIndex: isActive(index)
-                ? 40
-                : testimonials.length + 2 - index,
-              y: isActive(index) ? [0, -80, 0] : 0,
-              }}
-              exit={{
-              opacity: 0,
-              scale: 0.9,
-              z: 100,
-              rotate: randomRotateY(),
-              }}
-              transition={{
-              duration: 0.4,
-              ease: "easeInOut",
-              }}
-              className="absolute inset-0 origin-bottom"
+              key={active}
+              initial={{ y: 16, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -16, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
             >
-              <Image
-              src={testimonial.src}
-              alt={testimonial.title}
-              width={1200}
-              height={600}
-              draggable={true}
-              className="w-full h-full md:w-full md:h-full lg:w-[1200px] lg:h-[330px] 2xl:w-[900px] 2xl:h-[500px] 3xl:w-[1200px] 3xl:h-[600px]  rounded-3xl object-cover object-center "
-              />
+              <h3 className="text-2xl font-semibold text-zinc-950 dark:text-white">
+                {testimonials[active].title}
+              </h3>
+              <p className="mt-2 text-sm font-medium uppercase tracking-[0.3em] text-fuchsia-500/85">
+                {testimonials[active].subtitle}
+              </p>
+              <motion.p className="mt-5 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
+                {testimonials[active].description
+                  .split(" ")
+                  .map((word, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ filter: "blur(10px)", opacity: 0, y: 5 }}
+                      animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
+                      transition={{ duration: 0.18, ease: "easeInOut", delay: 0.02 * index }}
+                      className="inline-block"
+                    >
+                      {word}&nbsp;
+                    </motion.span>
+                  ))}
+              </motion.p>
             </motion.div>
-            ))}
-          </AnimatePresence>
-          </div>
-        </div>
-        <div className="flex flex-col justify-between py-4">
-          <motion.div
-          key={active}
-          initial={{
-            y: 20,
-            opacity: 0,
-          }}
-          animate={{
-            y: 0,
-            opacity: 1,
-          }}
-          exit={{
-            y: -20,
-            opacity: 0,
-          }}
-          transition={{
-            duration: 0.2,
-            ease: "easeInOut",
-          }}
-          >
-          <h3 className="text-2xl font-bold text-black dark:text-white">
-            {testimonials[active].title}
-          </h3>
-          <p className="text-sm text-gray-500 dark:text-neutral-500">
-            {testimonials[active].subtitle}
-          </p>
-          <motion.p className="mt-8 text-lg md:line-clamp-9 text-gray-500 dark:text-neutral-300">
-            {testimonials[active].description
-            .split(" ")
-            .map((word, index) => (
-              <motion.span
-              key={index}
-              initial={{
-                filter: "blur(10px)",
-                opacity: 0,
-                y: 5,
-              }}
-              animate={{
-                filter: "blur(0px)",
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.2,
-                ease: "easeInOut",
-                delay: 0.02 * index,
-              }}
-              className="inline-block"
+
+            <div className="flex gap-3">
+              <button
+                onClick={handlePrev}
+                className="group/button flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white/70 transition-colors hover:border-fuchsia-300 hover:bg-fuchsia-50 dark:border-zinc-700 dark:bg-zinc-800/70 dark:hover:bg-zinc-700"
               >
-              {word}&nbsp;
-              </motion.span>
-            ))}
-          </motion.p>
-          </motion.div>
-          <div className="flex gap-4 pt-12 md:pt-0">
-          <button
-            onClick={handlePrev}
-            className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
-          >
-            <IconArrowLeft className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
-          </button>
-          <button
-            onClick={handleNext}
-            className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
-          >
-            <IconArrowRight className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
-          </button>
+                <IconArrowLeft className="h-5 w-5 text-zinc-700 transition-transform duration-300 group-hover/button:rotate-12 dark:text-zinc-300" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="group/button flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white/70 transition-colors hover:border-fuchsia-300 hover:bg-fuchsia-50 dark:border-zinc-700 dark:bg-zinc-800/70 dark:hover:bg-zinc-700"
+              >
+                <IconArrowRight className="h-5 w-5 text-zinc-700 transition-transform duration-300 group-hover/button:-rotate-12 dark:text-zinc-300" />
+              </button>
+            </div>
           </div>
         </div>
-        </div>
-      </div>
       </div>
     </section>
   );

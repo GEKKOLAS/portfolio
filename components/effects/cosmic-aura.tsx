@@ -15,7 +15,6 @@ type ThemeName = "nebula" | "sunset" | "forest" | "aurora" | "purple";
 
 type AuraUniforms = {
   time: { value: number };
-  uMouse: { value: THREE.Vector2 };
   uExplode: { value: number };
 };
 type AuraMaterial = THREE.ShaderMaterial & { uniforms: AuraUniforms };
@@ -45,14 +44,9 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
       currentHdrTexture: THREE.Texture | null = null,
       destroyed = false;
 
-    const mouse = new THREE.Vector2(-10, -10);
     let isExplosionActive = false;
-    let explosionStartTime = 0;
+    const explosionStartTime = 0;
     const explosionDuration = 2000;
-    let hoverActive = false;
-    let hoverProgress = 0; // 0..1 eased
-    const hoverExplodeMax = 0.6; // how much rings expand on hover
-    let lastElapsed = 0;
 
     const themes: Record<ThemeName, {
       sphere: THREE.Color[];
@@ -106,9 +100,7 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
         attribute vec3 randomDir;
         varying vec3 vColor;
         varying float vDistance;
-        varying float vMouseEffect;
         uniform float time;
-        uniform vec2 uMouse;
         uniform float uExplode;
         vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
         vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -159,26 +151,20 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
           float turbulence = snoise(position * 0.4 + randomDir * 2.0 + time * 0.8) * 10.0 * uExplode;
           vec3 explodedPos = position + randomDir * (explodeAmount + turbulence);
           vec3 mixedPos = mix(position, explodedPos, uExplode);
-          vec4 projectedVertex = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-          vec2 screenPos = projectedVertex.xy / projectedVertex.w;
-          float mouseDist = distance(screenPos, uMouse);
-          float mouseEffect = 1.0 - smoothstep(0.0, 0.25, mouseDist);
-          vMouseEffect = mouseEffect;
           float noiseFrequency = 0.4;
-          float noiseAmplitude = (0.8 + mouseEffect * 3.5) * (1.0 - uExplode);
+          float noiseAmplitude = 0.8 * (1.0 - uExplode);
           vec3 noiseInput = mixedPos * noiseFrequency + time * 0.5;
           vec3 displacement = vec3(snoise(noiseInput), snoise(noiseInput + vec3(10.0)), snoise(noiseInput + vec3(20.0)));
           vec3 finalPos = mixedPos + displacement * noiseAmplitude;
           float pulse = sin(time + length(position)) * 0.1 + 1.0;
           vec4 mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
           vDistance = -mvPosition.z;
-          gl_PointSize = size * (400.0 / -mvPosition.z) * pulse * (1.0 + vMouseEffect * 0.5);
+          gl_PointSize = size * (400.0 / -mvPosition.z) * pulse;
           gl_Position = projectionMatrix * mvPosition;
         }
       `,
       fragmentShader: `
         varying vec3 vColor;
-        varying float vMouseEffect;
         uniform float time;
         uniform float uExplode;
         float rand(vec2 co){ return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453); }
@@ -187,7 +173,7 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
           float r = dot(cxy, cxy);
           if (r > 1.0) discard;
           // Softer glow and twinkle to reduce perceived brightness
-          float glow = exp(-r * 3.5) * 0.55 + vMouseEffect * 0.15;
+          float glow = exp(-r * 3.5) * 0.55;
           float twinkle = rand(gl_PointCoord + time) * 0.15 + 0.5;
           // Darker violet explosion tint
           vec3 explosionColor = vec3(0.45, 0.25, 0.75);
@@ -195,7 +181,7 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
           // Reduce explosion brightness boost significantly
           mixedColor *= (1.0 + uExplode * 0.8);
           // Global darkening factor for particles
-          vec3 finalColor = mixedColor * 0.5 * (1.0 + sin(time * 0.8) * 0.15 + vMouseEffect * 0.35) * glow * twinkle;
+          vec3 finalColor = mixedColor * 0.5 * (1.0 + sin(time * 0.8) * 0.15) * glow * twinkle;
           gl_FragColor = vec4(finalColor, smoothstep(0.0, 1.0, glow));
         }
       `,
@@ -208,7 +194,7 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
 
     function createPointShaderMaterial(): AuraMaterial {
       return new THREE.ShaderMaterial({
-        uniforms: { time: { value: 0 }, uMouse: { value: mouse }, uExplode: { value: 0.0 } },
+        uniforms: { time: { value: 0 }, uExplode: { value: 0.0 } },
         vertexShader: pointMaterialShader.vertexShader,
         fragmentShader: pointMaterialShader.fragmentShader,
         vertexColors: true,
@@ -336,46 +322,10 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
 
       changeTheme(theme);
 
-      const resize = () => {
-        if (destroyed) return;
-        const r = containerEl.getBoundingClientRect();
-        const w = Math.max(1, Math.floor(r.width));
-        const h = Math.max(1, Math.floor(r.height));
-        renderer.setSize(w, h);
-        composer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      };
-
-      const onMouseMove = (event: MouseEvent) => {
-        const r = containerEl.getBoundingClientRect();
-        const xPix = event.clientX;
-        const yPix = event.clientY;
-        const inside = xPix >= r.left && xPix <= r.right && yPix >= r.top && yPix <= r.bottom;
-        hoverActive = inside;
-        const x = (xPix - r.left) / r.width;
-        const y = (yPix - r.top) / r.height;
-        mouse.x = x * 2 - 1;
-        mouse.y = -(y * 2 - 1);
-      };
-
-      const onClick = () => {
-        if (isExplosionActive) return;
-        isExplosionActive = true;
-        explosionStartTime = clock.getElapsedTime();
-      };
-
-      const ro = new ResizeObserver(resize);
-      ro.observe(containerEl);
-      window.addEventListener("mousemove", onMouseMove);
-      window.addEventListener("click", onClick);
-
       function animate() {
         if (destroyed) return;
         requestAnimationFrame(animate);
         const elapsedTime = clock.getElapsedTime();
-        const delta = elapsedTime - lastElapsed;
-        lastElapsed = elapsedTime;
         const time = elapsedTime;
 
         if (isExplosionActive) {
@@ -383,47 +333,34 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
           const progress = Math.min(explosionTime / explosionDuration, 1.0);
           const pulseProgress = Math.sin(progress * Math.PI);
           const easedProgress = easeInOutCubic(pulseProgress);
-          // Update hover progress
-          hoverProgress = Math.min(1, hoverProgress + delta * 2);
-          const hoverExplode = easeInOutCubic(hoverProgress) * hoverExplodeMax;
-          const totalExplode = Math.max(easedProgress, hoverExplode);
           for (const ringObj of orbitRings.children) {
             const ringPts = ringObj as THREE.Points<THREE.BufferGeometry, AuraMaterial>;
             const ringMat = ringPts.material as AuraMaterial;
-            ringMat.uniforms.uExplode.value = totalExplode;
+            ringMat.uniforms.uExplode.value = easedProgress;
           }
           if (progress >= 1.0) {
             isExplosionActive = false;
           }
         }
-        // Handle hover-only state when not exploding
+
         if (!isExplosionActive) {
-          if (hoverActive) {
-            hoverProgress = Math.min(1, hoverProgress + delta * 2);
-          } else {
-            hoverProgress = Math.max(0, hoverProgress - delta * 2);
-          }
-          const hoverExplode = easeInOutCubic(hoverProgress) * hoverExplodeMax;
           for (const ringObj of orbitRings.children) {
             const ringPts = ringObj as THREE.Points<THREE.BufferGeometry, AuraMaterial>;
             const ringMat = ringPts.material as AuraMaterial;
-            ringMat.uniforms.uExplode.value = hoverExplode;
+            ringMat.uniforms.uExplode.value = 0;
           }
         }
 
         const coreMat = coreSphere.material as AuraMaterial;
         coreMat.uniforms.time.value = time;
-        coreMat.uniforms.uMouse.value.copy(mouse);
         for (const ringObj of orbitRings.children) {
           const ringPts = ringObj as THREE.Points<THREE.BufferGeometry, AuraMaterial>;
           const ringMat = ringPts.material as AuraMaterial;
           ringMat.uniforms.time.value = time;
-          ringMat.uniforms.uMouse.value.copy(mouse);
         }
 
         const breathe = 1 + Math.sin(time * 1.5) * 0.05;
-        const hoverScale = 1 + easeInOutCubic(hoverProgress) * 0.15;
-        coreSphere.scale.set(breathe * hoverScale, breathe * hoverScale, breathe * hoverScale);
+        coreSphere.scale.set(breathe, breathe, breathe);
         orbitRings.children.forEach((ring: THREE.Object3D, index: number) => {
           const speed = 0.0005 * (index + 1);
           ring.rotation.z += speed;
@@ -472,9 +409,7 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
 
       return () => {
         destroyed = true;
-        ro.disconnect();
-        window.removeEventListener("mousemove", onMouseMove);
-        window.removeEventListener("click", onClick);
+        
         composer.dispose();
         renderer.dispose();
         currentHdrTexture?.dispose();

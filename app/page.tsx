@@ -8,7 +8,6 @@ import Skills from "@/components/StackTech/SkillContent";
 import SplashCursor from "@/components/ui/splashCursor";
 import { FireRevealOverlay } from "@/components/effects/fire-reveal-overlay";
 import { LoaderFour } from "@/components/ui/loader";
-import { UnicornStudioDivider } from "@/components/effects/unicornstudio-divider";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -127,21 +126,14 @@ export default function Home() {
         >
           <SplashCursor />
 
-          <div className="relative grid min-h-[100dvh] lg:grid-cols-2 gap-4 bg-transparent antialiased" id="turbulent-displace">
-            {/* Background divider (between left/right panels on desktop) */}
-            <UnicornStudioDivider
-              projectId="87f73EZDBHyi74vnR17e"
-              className="pointer-events-none hidden lg:block absolute inset-0 z-0"
-              style={{ width: "100%", height: "100%" }}
-            />
-
+          <div className="relative grid min-h-[100dvh] gap-4 bg-transparent antialiased lg:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.2fr)]" id="turbulent-displace">
             {/* Left panel (fixed on desktop) */}
-            <div className="relative z-10 flex items-center justify-center w-full px-8 pb-8 lg:h-[100dvh] lg:sticky lg:top-0 overflow-hidden">
+            <div className="relative z-10 flex items-center justify-center w-full px-4 pb-8 lg:h-[100dvh] lg:sticky lg:top-0 overflow-hidden lg:px-3 xl:px-4">
               <Profile />
             </div>
 
             {/* Right panel (ONLY scroll container on desktop) */}
-            <div className="relative z-10 right-scroll pr-8">
+            <div className="relative z-10 right-scroll pr-4 lg:pr-5 xl:pr-8">
               <section
                 id="about"
                 className="snap-section bg-transparent"

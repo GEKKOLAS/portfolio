@@ -1,151 +1,82 @@
 import React from "react";
 import { BoxReveal } from "../magicui/box-reveal";
 
+const roles = [
+  {
+    period: "Feb 2025 – Present",
+    title: "Freelance full-stack developer at La Veleta S&S",
+    description:
+      "Building modern software products with .NET, React, Blazor and Azure DevOps while shaping clean architecture, scalable delivery and product-focused UI experiences.",
+    tags: [".NET", "React", "Azure", "Agile"],
+  },
+  {
+    period: "Jan 2024 – Jul 2024",
+    title: "Customer Solution Specialist at Teleperformance",
+    description:
+      "Worked across customer support, product education and troubleshooting, strengthening communication and problem-solving in fast-paced environments.",
+    tags: ["CRM", "Support", "Training"],
+  },
+  {
+    period: "Jan 2023 – Jan 2024",
+    title: "Customer Service Representative at Teleperformance",
+    description:
+      "Delivered service and reservations support while building a sharp eye for user needs, process clarity and multilingual communication.",
+    tags: ["Reservations", "Customer care", "Communication"],
+  },
+  {
+    period: "Jan 2019 – Jan 2023",
+    title: "Full Stack .NET Developer at Fenix Alliance Group",
+    description:
+      "Delivered enterprise solutions with ASP.NET Core, React, Razor Pages and Azure DevOps, combining backend stability and elegant front-end delivery.",
+    tags: ["ASP.NET", "Entity Framework", "CI/CD"],
+  },
+];
+
 export const Experience = () => {
   return (
-    <section className="w-full">
-        <div className="w-full p-4">
-            <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-yellow-400 mb-6">
-                Professional Experience
-              </h2>
-            </BoxReveal>
-          <ol className="relative border-s border-gray-200 dark:border-gray-700">
-            <li className="mb-10 ms-4">
-              <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-rose-400 dark:bg-rose-500"></div>
-              <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-               <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-rose-500">
-                February 2025 - Present
-              </time>
-            </BoxReveal>
-             <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Freelance full-stack developer in La Veleta S&S
-              </h3>
-            </BoxReveal>
-              <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                Enterprise Software Development using .Net technologies.
-                Crafting dynamic front-end experiences with React, Blazor, Razor
-                Pages, MVC, and HTML5.
-                Creating robust back-end systems leveraging ASP.NET Core, Entity
-                Framework, and microservices architecture. Streamlining
-                development and operations with Azure DevOps/AzurePipelines for
-                continuous integration and delivery. Adopting Agile practices.
-              </p>
+    <section className="w-full py-8 sm:py-10 lg:py-12">
+      <div className="rounded-[2rem] border border-white/15 bg-white/70 p-6 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-900/70 sm:p-8">
+        <BoxReveal boxColor="#FFD600" duration={0.9}>
+          <div className="mb-7">
+            <p className="text-xs uppercase tracking-[0.35em] text-fuchsia-500">Experience</p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+              A path shaped by software craft, operations and growth.
+            </h2>
+          </div>
+        </BoxReveal>
 
-            </BoxReveal>
-              
+        <ol className="relative space-y-4">
+          {roles.map((role, index) => (
+            <li key={role.title} className="relative">
+              <div className="absolute left-0 top-4 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-white bg-fuchsia-500 shadow-[0_0_0_6px_rgba(244,114,182,0.16)] dark:border-zinc-900" />
+              <div className="ml-5 rounded-[1.25rem] border border-white/10 bg-zinc-950/5 p-5 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 dark:bg-white/5">
+                <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-zinc-500 dark:text-zinc-400">
+                  <time>{role.period}</time>
+                  <span className="rounded-full border border-fuchsia-400/20 bg-fuchsia-500/10 px-2 py-1 text-[10px] font-semibold text-fuchsia-700 dark:text-fuchsia-300">
+                    #{index + 1}
+                  </span>
+                </div>
+                <h3 className="mt-3 text-lg font-semibold text-zinc-950 dark:text-white">
+                  {role.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
+                  {role.description}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {role.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-zinc-200 bg-white/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.25em] text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/70 dark:text-zinc-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </li>
-            <li className="mb-10 ms-4">
-              <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-yellow-400 dark:bg-yellow-400"></div>
-              <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-yellow-500">
-                Jan 2024 - July 20204
-              </time>
-            </BoxReveal>
-              <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Customer Solution Specialist at Teleperformance
-              </h3>
-            </BoxReveal>
-            <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <p className="text-base font-normal text-gray-500 dark:text-gray-400">
-                Customer Service Client Relationship Management, Sales of
-                devices such as cameras, sensors, door locks and Customer
-                Education about company policies (Vivint) Troubleshooting
-              </p>
-            </BoxReveal>
-              
-              
-            </li>
-            <li className="mb-10 ms-4">
-              <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-rose-400 dark:bg-rose-500"></div>
-              <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-rose-500">
-                Jan 2023 - Jan 2024
-              </time>
-            </BoxReveal>
-              <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Customer Service Representative at Teleperformance
-              </h3>
-            </BoxReveal>
-            <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <p className="text-base font-normal text-gray-500 dark:text-gray-400">
-                Customer Service Client Relationship Management Sales and
-                Booking of Hotel Reservations Customer Education about company
-                policies (ESA)
-              </p>
-            </BoxReveal>
-            </li>
-            <li className=" mb-10 ms-4">
-              <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-yellow-400 dark:bg-yellow-400"></div>
-              <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-yellow-500">
-                Jan 2019 - Jan 2023
-              </time>
-            </BoxReveal>
-            <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Full Stack .NET Developer at Fenix Alliance Group
-              </h3>
-            </BoxReveal>
-            <BoxReveal
-              boxColor={"#FFD600"}
-              duration={0.9}
-            >
-              <p className="text-base font-normal text-gray-500 dark:text-gray-400">
-                Enterprise Software Development using .Net technologies.
-                Crafting dynamic front-end experiences with React, Blazor, Razor
-                Pages, MVC, and HTML5.
-                <br />
-                <br />
-                Creating robust back-end systems leveraging ASP.NET Core, Entity
-                Framework, and microservices architecture. Streamlining
-                development and operations with Azure DevOps/AzurePipelines for
-                continuous integration and delivery. Adopting Agile practices.
-              </p>
-            </BoxReveal>
-          </li>
+          ))}
         </ol>
-        </div>
+      </div>
     </section>
   );
 };

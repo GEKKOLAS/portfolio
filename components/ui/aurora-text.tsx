@@ -14,10 +14,11 @@ export const AuroraText = memo(
     children,
     className = "",
     colors = [
-      "#FF0080",
-      "#FF4D8D",
-      "#FF8A00",
-      
+      "#22D3EE",
+      "#8B5CF6",
+      "#EC4899",
+      "#F97316",
+      "#FACC15",
     ],
     speed = 0.3,
   }: AuroraTextProps) => {
@@ -29,10 +30,17 @@ export const AuroraText = memo(
     }
 
     return (
-      <span className={`relative inline-block ${className}`}>
+      <span className={`relative isolate inline-block ${className}`}>
         <span className="sr-only">{children}</span>
         <span
-          className="animate-aurora bg-[length:200%_auto] bg-clip-text text-transparent" 
+          className="animate-aurora-text absolute inset-0 -z-10 bg-[length:300%_auto] bg-clip-text text-transparent opacity-55 blur-[7px]"
+          style={gradientStyle}
+          aria-hidden="true"
+        >
+          {children}
+        </span>
+        <span
+          className="animate-aurora-text bg-[length:300%_auto] bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(236,72,153,0.2)]"
           style={gradientStyle}
           aria-hidden="true"
         >

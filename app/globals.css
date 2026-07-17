@@ -83,6 +83,24 @@
   animation: gradient-move 4s ease-in-out infinite;
 }
 
+@keyframes aurora-text-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-aurora-text {
+  animation-name: aurora-text-flow;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
 @keyframes background-divider {
   0%,
   100% {
@@ -94,6 +112,112 @@
 }
 .animate-background-divider {
   animation: background-divider 14s ease-in-out infinite;
+}
+
+/* Layered, cursor-reactive project cards */
+.project-card-scene {
+  perspective: 1400px;
+}
+
+.project-card {
+  --card-rotate-x: 0deg;
+  --card-rotate-y: 0deg;
+  --card-glow-x: 50%;
+  --card-glow-y: 50%;
+  transform: rotateX(var(--card-rotate-x)) rotateY(var(--card-rotate-y));
+  transform-style: preserve-3d;
+  box-shadow: 0 22px 55px -24px rgb(24 24 27 / 0.42),
+    0 1px 0 rgb(255 255 255 / 0.55) inset;
+  transition: transform 180ms ease-out, box-shadow 300ms ease;
+  will-change: transform;
+}
+
+.project-card:hover {
+  box-shadow: 0 42px 90px -30px rgb(168 85 247 / 0.42),
+    0 18px 45px -28px rgb(0 0 0 / 0.7),
+    0 1px 0 rgb(255 255 255 / 0.65) inset;
+}
+
+.project-card-content {
+  transform: translateZ(24px);
+  transform-style: preserve-3d;
+}
+
+.project-card-image {
+  transform: translateZ(38px);
+  transition: transform 350ms ease;
+}
+
+.project-card:hover .project-card-image {
+  transform: translateZ(52px) translateY(-3px);
+}
+
+.project-card-chip {
+  transform: translateZ(12px);
+  transition: transform 200ms ease, background-color 200ms ease;
+}
+
+.project-card-chip:hover {
+  transform: translateZ(24px) translateY(-2px);
+}
+
+.project-card-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--card-glow-x) var(--card-glow-y), rgb(255 255 255 / 0.34), transparent 32%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+
+.project-card:hover .project-card-glow {
+  opacity: 1;
+}
+
+.project-card-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(2px);
+  opacity: 0.32;
+  pointer-events: none;
+  animation: project-card-float 6s ease-in-out infinite;
+}
+
+.project-card-orb-one {
+  right: 12%;
+  top: -1.25rem;
+  width: 5rem;
+  height: 5rem;
+  background: rgb(217 70 239 / 0.28);
+}
+
+.project-card-orb-two {
+  bottom: -1.5rem;
+  left: 34%;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: rgb(59 130 246 / 0.22);
+  animation-delay: -3s;
+}
+
+@keyframes project-card-float {
+  0%, 100% { transform: translate3d(0, 0, 16px); }
+  50% { transform: translate3d(0, -12px, 32px); }
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .project-card,
+  .project-card-image,
+  .project-card-chip {
+    transform: none;
+    transition: none;
+  }
+
+  .project-card-orb {
+    animation: none;
+  }
 }
 
 @custom-variant dark (&:is(.dark *));

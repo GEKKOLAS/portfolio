@@ -68,7 +68,6 @@ export const Profile = () => {
           </h2>
           <br />
           <div className="flex items-center justify-center w-full">
-            {/* <TextGenerateEffect words={words} /> */}
             <AuroraText className="text-2xl sekuya-regular">{words}</AuroraText>
           </div>
           <Social />

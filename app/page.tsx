@@ -126,14 +126,14 @@ export default function Home() {
         >
           <SplashCursor />
 
-          <div className="relative grid min-h-[100dvh] gap-4 bg-transparent antialiased lg:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.2fr)]" id="turbulent-displace">
+          <div className="relative grid min-h-[100dvh] gap-3 bg-transparent antialiased lg:grid-cols-[minmax(260px,0.62fr)_minmax(0,1.38fr)] xl:grid-cols-[minmax(280px,0.58fr)_minmax(0,1.42fr)]" id="turbulent-displace">
             {/* Left panel (fixed on desktop) */}
-            <div className="relative z-10 flex items-center justify-center w-full px-4 pb-8 lg:h-[100dvh] lg:sticky lg:top-0 overflow-hidden lg:px-3 xl:px-4">
+            <div className="relative z-10 flex items-center justify-center w-full px-4 pb-8 lg:h-[100dvh] lg:sticky lg:top-0 overflow-hidden lg:px-2 xl:px-3">
               <Profile />
             </div>
 
             {/* Right panel (ONLY scroll container on desktop) */}
-            <div className="relative z-10 right-scroll pr-4 lg:pr-5 xl:pr-8">
+            <div className="relative z-10 right-scroll px-3 lg:pl-2 lg:pr-5 xl:pl-3 xl:pr-8">
               <section
                 id="about"
                 className="snap-section bg-transparent"

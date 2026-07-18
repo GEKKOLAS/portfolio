@@ -4,7 +4,7 @@ export const Social = () => {
   return (
     <section className="bg-transparent dark:bg-transparent">
       <div>
-        <div className="grid grid-cols-5 pt-4 text-gray-500 sm:h-6 lg:grid-cols-5 dark:text-gray-400 items-center justify-center">
+        <div className="grid grid-cols-5 items-center justify-center pt-4 text-gray-500 dark:text-gray-400 [&_svg]:h-9 [&_svg]:w-9 sm:[&_svg]:h-11 sm:[&_svg]:w-11 lg:pt-3 lg:[&_svg]:h-8 lg:[&_svg]:w-8 xl:[&_svg]:h-10 xl:[&_svg]:w-10 2xl:[&_svg]:h-12 2xl:[&_svg]:w-12">
           {/* linkedIn */}
           <a
             href="https://www.linkedin.com/in/gekko"
@@ -32,7 +32,7 @@ export const Social = () => {
             target="_blank"
             rel="noopener noreferrer"
             >
-            <span className="bg-gray-800 dark:bg-transparent rounded-full p-2 flex items-center justify-center">
+            <span className="flex items-center justify-center rounded-full bg-gray-800 p-1.5 dark:bg-transparent sm:p-2 lg:p-1.5 xl:p-2">
               <svg
               width="48"
               height="48"

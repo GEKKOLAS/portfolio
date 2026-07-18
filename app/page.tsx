@@ -29,13 +29,13 @@ export default function Home() {
     );
     if (sections.length === 0) return;
 
-    const setActive = (active: HTMLElement) => {
-      for (const section of sections) section.classList.remove("is-active");
+    const animatedSections = new WeakSet<HTMLElement>();
 
-      // Force restart of the keyframe animation when re-activating.
-      active.classList.remove("is-active");
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      active.offsetHeight;
+    const setActive = (active: HTMLElement) => {
+      // Each section should enter only once instead of restarting whenever
+      // IntersectionObserver reports a slightly different visibility ratio.
+      if (animatedSections.has(active)) return;
+      animatedSections.add(active);
       active.classList.add("is-active");
     };
 
@@ -48,8 +48,12 @@ export default function Home() {
         if (top) setActive(top);
       },
       {
-        root: scrollRoot,
-        threshold: [0.35, 0.5, 0.65, 0.8],
+        // Desktop scrolls inside this panel; mobile scrolls in the viewport.
+        root:
+          scrollRoot.scrollHeight > scrollRoot.clientHeight + 1
+            ? scrollRoot
+            : null,
+        threshold: [0.15, 0.3, 0.5],
       }
     );
 
@@ -147,7 +151,7 @@ export default function Home() {
               <section
                 id="timeline"
                 className="snap-section bg-transparent"
-                data-snap-anim="zoom"
+                data-snap-anim="horizontal"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center">
                   <Experience />
@@ -157,7 +161,7 @@ export default function Home() {
               <section
                 id="skills"
                 className="snap-section bg-transparent w-full"
-                data-snap-anim="zoom"
+                data-snap-anim="rotate"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center overflow-hidden">
                   <Skills />
@@ -167,7 +171,7 @@ export default function Home() {
               <section
                 id="projects"
                 className="snap-section bg-transparent"
-                data-snap-anim="zoom"
+                data-snap-anim="backwards"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center">
                   <Projects />
@@ -177,7 +181,7 @@ export default function Home() {
               <section
                 id="services"
                 className="snap-section bg-transparent"
-                data-snap-anim="zoom"
+                data-snap-anim="blink"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center">
                   <AnimatedTestimonialsDemo />

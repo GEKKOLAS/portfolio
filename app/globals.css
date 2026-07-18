@@ -95,6 +95,34 @@
   }
 }
 
+@keyframes nav-item-bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  38% {
+    transform: translateY(-0.3rem) scale(1.18);
+  }
+  68% {
+    transform: translateY(0.08rem) scale(1.08);
+  }
+  84% {
+    transform: translateY(-0.06rem) scale(1.12);
+  }
+}
+
+@media (hover: hover) {
+  .nav-item:hover {
+    z-index: 1;
+    animation: nav-item-bounce 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-item:hover {
+    animation: none;
+  }
+}
+
 .animate-aurora-text {
   animation-name: aurora-text-flow;
   animation-timing-function: ease-in-out;
@@ -436,6 +464,9 @@
     .right-scroll .snap-section[data-snap-anim="zoom"] .snap-content {
       --snap-anim-name: snap-zoom;
     }
+    .right-scroll .snap-section[data-snap-anim="rotate"] .snap-content {
+      --snap-anim-name: snap-rotate;
+    }
 
     /* Scroll-driven animations (supported browsers) */
     @supports (animation-timeline: --section) {
@@ -461,75 +492,113 @@
 }
 
 @keyframes snap-blink {
-  0%,
-  100% {
-    filter: none;
-    opacity: 1;
+  0% {
+    transform: scale(0.97);
+    filter: blur(12px) saturate(1.5);
+    opacity: 0;
   }
 
-  50% {
-    filter: none;
+  100% {
+    transform: scale(1);
+    filter: blur(0) saturate(1);
     opacity: 1;
   }
 }
 
 @keyframes snap-horizontal {
   0% {
-    transform: translate3d(12%, 0%, 0);
-    filter: none;
-    opacity: 1;
-  }
-
-  50% {
-    transform: translate3d(0, 0, 0);
-    filter: none;
-    opacity: 1;
+    transform: translate3d(10%, 0, 0);
+    opacity: 0;
   }
 
   100% {
-    transform: translate3d(-12%, 0%, 0);
-    filter: none;
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 @keyframes snap-backwards {
   0% {
-    transform: translate3d(0%, -12%, 0);
-    filter: none;
-    opacity: 1;
-  }
-
-  50% {
-    transform: translate3d(0, 0, 0);
-    filter: none;
-    opacity: 1;
+    transform: translate3d(0, 8%, 0) scale(0.98);
+    opacity: 0;
   }
 
   100% {
-    transform: translate3d(0%, 12%, 0);
-    filter: none;
+    transform: translate3d(0, 0, 0) scale(1);
     opacity: 1;
   }
 }
 
 @keyframes snap-zoom {
   0% {
-    transform: scale(0.92);
-    filter: none;
-    opacity: 1;
-  }
-
-  50% {
-    transform: scale(1);
-    filter: none;
-    opacity: 1;
+    transform: scale(0.88);
+    opacity: 0;
   }
 
   100% {
-    transform: scale(1.04);
-    filter: none;
+    transform: scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes snap-rotate {
+  0% {
+    transform: perspective(1200px) rotateY(-8deg) translate3d(-4%, 0, 0);
+    transform-origin: left center;
+    opacity: 0;
+  }
+
+  100% {
+    transform: perspective(1200px) rotateY(0) translate3d(0, 0, 0);
+    transform-origin: left center;
+    opacity: 1;
+  }
+}
+
+/* Reliable section entrances on desktop and mobile. The active class is
+   controlled by IntersectionObserver in app/page.tsx. */
+.right-scroll .snap-content {
+  --snap-anim-name: snap-zoom;
+  animation: none;
+  will-change: transform, opacity, filter;
+}
+
+.right-scroll .snap-section[data-snap-anim="blink"] .snap-content {
+  --snap-anim-name: snap-blink;
+}
+
+.right-scroll .snap-section[data-snap-anim="horizontal"] .snap-content {
+  --snap-anim-name: snap-horizontal;
+}
+
+.right-scroll .snap-section[data-snap-anim="backwards"] .snap-content {
+  --snap-anim-name: snap-backwards;
+}
+
+.right-scroll .snap-section[data-snap-anim="zoom"] .snap-content {
+  --snap-anim-name: snap-zoom;
+}
+
+.right-scroll .snap-section[data-snap-anim="rotate"] .snap-content {
+  --snap-anim-name: snap-rotate;
+}
+
+.right-scroll .snap-section.is-active .snap-content {
+  animation-name: var(--snap-anim-name);
+  animation-duration: 1400ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+  animation-timeline: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .right-scroll .snap-content,
+  .right-scroll .snap-section.is-active .snap-content {
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
   }
 }
 

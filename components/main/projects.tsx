@@ -61,8 +61,8 @@ const projects = [
     subtitle: "Learning management system",
     description:
       "A responsive learning portal focused on course discovery, structured educational content, user workflows, and a clear student experience.",
-    image: "/learning.jpg",
-    href: "https://github.com/GEKKOLAS/learning-managment",
+    image: "/project-lms.png",
+    href: "https://github.com/GEKKOLAS/LMS/tree/main/lms-clone",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     highlights: ["Course discovery", "Structured content", "Responsive experience"],
   },

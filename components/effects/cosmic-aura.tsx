@@ -5,7 +5,6 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
-import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { Lensflare, LensflareElement } from "three/examples/jsm/objects/Lensflare";
 
 // Adaptation of the provided "Interactive Cosmic Anomaly" to render inside a parent container.
@@ -41,8 +40,9 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
         orbitRings: THREE.Group,
       centralLight: THREE.PointLight,
       lensflare: Lensflare | null = null,
-      currentHdrTexture: THREE.Texture | null = null,
-      destroyed = false;
+      destroyed = false,
+      animationFrameId: number | null = null,
+      isInViewport = true;
 
     let isExplosionActive = false;
     const explosionStartTime = 0;
@@ -51,27 +51,22 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
     const themes: Record<ThemeName, {
       sphere: THREE.Color[];
       rings: (i: number, count: number, j: number, pCount: number) => THREE.Color;
-      hdr: string;
     }> = {
       nebula: {
         sphere: [new THREE.Color(0x00ffff), new THREE.Color(0xff1493), new THREE.Color(0x4169e1), new THREE.Color(0xff69b4), new THREE.Color(0x00bfff)],
         rings: (i, count, j, pCount) => new THREE.Color().setHSL((i / count) * 0.6 + (j / pCount) * 0.2 + 0.5, 0.8, 0.6),
-        hdr: "https://www.spacespheremaps.com/wp-content/uploads/HDR_blue_nebulae-1.hdr",
       },
       sunset: {
         sphere: [new THREE.Color(0xff4500), new THREE.Color(0xff8c00), new THREE.Color(0xffd700), new THREE.Color(0xff0080), new THREE.Color(0xda70d6)],
         rings: (i, count, j, pCount) => new THREE.Color().setHSL((i / count) * 0.1 + (j / pCount) * 0.1 + 0.0, 0.9, 0.7),
-        hdr: "https://www.spacespheremaps.com/wp-content/uploads/HDR_silver_and_gold_nebulae.hdr",
       },
       forest: {
         sphere: [new THREE.Color(0x228b22), new THREE.Color(0x00ff7f), new THREE.Color(0x3cb371), new THREE.Color(0x1e90ff), new THREE.Color(0x87cefa)],
         rings: (i, count, j, pCount) => new THREE.Color().setHSL((i / count) * 0.2 + (j / pCount) * 0.1 + 0.25, 0.8, 0.55),
-        hdr: "https://www.spacespheremaps.com/wp-content/uploads/HDR_subdued_multi_nebulae.hdr",
       },
       aurora: {
         sphere: [new THREE.Color(0x00ff7f), new THREE.Color(0x40e0d0), new THREE.Color(0x483d8b), new THREE.Color(0x9932cc), new THREE.Color(0x00fa9a)],
         rings: (i, count, j, pCount) => new THREE.Color().setHSL((i / count) * 0.3 + (j / pCount) * 0.1 + 0.45, 0.9, 0.65),
-        hdr: "https://www.spacespheremaps.com/wp-content/uploads/HDR_multi_nebulae.hdr",
       },
       purple: {
         // Deep purple-to-magenta gradient for a strong violet look
@@ -90,7 +85,6 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
           const l = 0.62;
           return new THREE.Color().setHSL(h % 1, s, l);
         },
-        hdr: "https://www.spacespheremaps.com/wp-content/uploads/HDR_multi_nebulae.hdr",
       },
     };
 
@@ -323,8 +317,8 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
       changeTheme(theme);
 
       function animate() {
-        if (destroyed) return;
-        requestAnimationFrame(animate);
+        if (destroyed || !isInViewport || document.hidden) return;
+        animationFrameId = requestAnimationFrame(animate);
         const elapsedTime = clock.getElapsedTime();
         const time = elapsedTime;
 
@@ -373,6 +367,35 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
         composer.render();
       }
 
+      const resumeAnimation = () => {
+        if (destroyed || !isInViewport || document.hidden || animationFrameId !== null) return;
+        animate();
+      };
+
+      const pauseAnimation = () => {
+        if (animationFrameId !== null) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+        }
+      };
+
+      const visibilityObserver = new IntersectionObserver(
+        ([entry]) => {
+          isInViewport = entry?.isIntersecting ?? false;
+          if (isInViewport && !document.hidden) resumeAnimation();
+          else pauseAnimation();
+        },
+        { threshold: 0.01 },
+      );
+
+      const handleVisibilityChange = () => {
+        if (document.hidden) pauseAnimation();
+        else resumeAnimation();
+      };
+
+      visibilityObserver.observe(containerEl);
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+
       function changeTheme(themeName: ThemeName) {
         const t = themes[themeName];
         if (!t) return;
@@ -394,25 +417,18 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
           }
           ringColorsAttr.needsUpdate = true;
         });
-        const loader = new RGBELoader();
-        loader.load(t.hdr, (texture: THREE.Texture) => {
-          texture.mapping = THREE.EquirectangularReflectionMapping;
-          if (currentHdrTexture) currentHdrTexture.dispose();
-          // Keep environment for reflections but do not draw background for transparency
-          scene.background = null;
-          scene.environment = texture;
-          currentHdrTexture = texture;
-        });
       }
 
       animate();
 
       return () => {
         destroyed = true;
-        
+        pauseAnimation();
+        visibilityObserver.disconnect();
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+
         composer.dispose();
         renderer.dispose();
-        currentHdrTexture?.dispose();
         coreSphere.material.dispose();
         orbitRings.children.forEach((ringObj: THREE.Object3D) => {
           const ring = ringObj as THREE.Points;

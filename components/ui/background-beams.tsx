@@ -82,15 +82,38 @@ export const BackgroundBeams = React.memo(
           ></path>
 
           {paths.map((path, index) => (
-            <motion.path
-              key={`path-` + index}
-              d={path}
-              stroke={`url(#linearGradient-${index})`}
-              strokeOpacity="0.4"
-              strokeWidth="0.5"
-            ></motion.path>
+            <React.Fragment key={`path-${index}`}>
+              {/* Soft luminosity restricted to the animated gradient. */}
+              <motion.path
+                d={path}
+                stroke={`url(#linearGradient-${index})`}
+                strokeOpacity="0.65"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                filter="url(#moving-beam-glow)"
+              />
+              {/* Bright core that gives each moving segment a star-like presence. */}
+              <motion.path
+                d={path}
+                stroke={`url(#linearGradient-${index})`}
+                strokeOpacity="0.95"
+                strokeWidth="0.8"
+                strokeLinecap="round"
+              />
+            </React.Fragment>
           ))}
           <defs>
+            <filter
+              id="moving-beam-glow"
+              x="-40%"
+              y="-40%"
+              width="180%"
+              height="180%"
+              colorInterpolationFilters="sRGB"
+            >
+              <feGaussianBlur stdDeviation="2.2" />
+            </filter>
+
             {paths.map((path, index) => (
               <motion.linearGradient
                 id={`linearGradient-${index}`}
@@ -114,10 +137,12 @@ export const BackgroundBeams = React.memo(
                   delay: Math.random() * 10,
                 }}
               >
-                <stop stopColor="#18CCFC" stopOpacity="0"></stop>
-                <stop stopColor="#18CCFC"></stop>
-                <stop offset="32.5%" stopColor="#6344F5"></stop>
-                <stop offset="100%" stopColor="#AE48FF" stopOpacity="0"></stop>
+                <stop offset="0%" stopColor="#22D3EE" stopOpacity="0" />
+                <stop offset="24%" stopColor="#22D3EE" stopOpacity="0" />
+                <stop offset="43%" stopColor="#67E8F9" stopOpacity="1" />
+                <stop offset="60%" stopColor="#8B5CF6" stopOpacity="1" />
+                <stop offset="76%" stopColor="#F0ABFC" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#C084FC" stopOpacity="0" />
               </motion.linearGradient>
             ))}
 

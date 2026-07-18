@@ -7,6 +7,7 @@ import { AnimatedTestimonialsDemo } from "@/components/main/services";
 import Skills from "@/components/StackTech/SkillContent";
 import SplashCursor from "@/components/ui/splashCursor";
 import { FireRevealOverlay } from "@/components/effects/fire-reveal-overlay";
+import { ScrollLineDrawing } from "@/components/effects/scroll-line-drawing";
 import { LoaderFour } from "@/components/ui/loader";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -138,9 +139,10 @@ export default function Home() {
 
             {/* Right panel (ONLY scroll container on desktop) */}
             <div className="relative z-10 right-scroll px-3 lg:pl-2 lg:pr-5 xl:pl-3 xl:pr-8">
+              <ScrollLineDrawing />
               <section
                 id="about"
-                className="snap-section bg-transparent"
+                className="snap-section relative z-10 bg-transparent"
                 data-snap-anim="zoom"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center overflow-hidden">
@@ -150,7 +152,7 @@ export default function Home() {
 
               <section
                 id="timeline"
-                className="snap-section bg-transparent"
+                className="snap-section relative z-10 bg-transparent"
                 data-snap-anim="horizontal"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center">
@@ -160,7 +162,7 @@ export default function Home() {
 
               <section
                 id="skills"
-                className="snap-section bg-transparent w-full"
+                className="snap-section relative z-10 bg-transparent w-full"
                 data-snap-anim="rotate"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center overflow-hidden">
@@ -170,7 +172,7 @@ export default function Home() {
 
               <section
                 id="projects"
-                className="snap-section bg-transparent"
+                className="snap-section relative z-10 bg-transparent"
                 data-snap-anim="backwards"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center">
@@ -180,7 +182,7 @@ export default function Home() {
 
               <section
                 id="services"
-                className="snap-section bg-transparent"
+                className="snap-section relative z-10 bg-transparent"
                 data-snap-anim="blink"
               >
                 <div className="snap-content h-full w-full flex items-center justify-center">

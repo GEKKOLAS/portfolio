@@ -9,11 +9,13 @@ import SplashCursor from "@/components/ui/splashCursor";
 import { FireRevealOverlay } from "@/components/effects/fire-reveal-overlay";
 import { ScrollLineDrawing } from "@/components/effects/scroll-line-drawing";
 import { LoaderFour } from "@/components/ui/loader";
+import { useIsMobile } from "@/lib/use-is-mobile";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 
 export default function Home() {
+  const isMobile = useIsMobile();
   const [loading, setLoading] = React.useState(true);
   const [fireDone, setFireDone] = React.useState(false); // fire controls content entrance
   const [whiteShown, setWhiteShown] = React.useState(false); // white background visibility
@@ -129,7 +131,9 @@ export default function Home() {
           exit={{ opacity: 0, transition: { duration: 0.9 } }}
           className="contents"
         >
-          <SplashCursor />
+          {/* Fluid-simulation WebGL cursor is too heavy for mobile GPUs and
+              causes the tab to run out of memory and reload; desktop only. */}
+          {!isMobile && <SplashCursor />}
 
           <div className="relative grid min-h-[100dvh] gap-3 bg-transparent antialiased lg:grid-cols-[minmax(260px,0.62fr)_minmax(0,1.38fr)] xl:grid-cols-[minmax(280px,0.58fr)_minmax(0,1.42fr)]" id="turbulent-displace">
             {/* Left panel (fixed on desktop) */}

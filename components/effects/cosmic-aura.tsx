@@ -32,7 +32,7 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
     let scene: THREE.Scene,
       camera: THREE.PerspectiveCamera,
       renderer: THREE.WebGLRenderer,
-      composer: EffectComposer,
+      composer: EffectComposer | null = null,
       controls: OrbitControls,
       mainGroup: THREE.Group,
       clock: THREE.Clock,
@@ -259,6 +259,10 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
 
 
     function init() {
+      // Bloom post-processing + 44k particles is too costly to run forever
+      // on mobile GPUs and was crashing the tab; scale it down there.
+      const isMobile = window.matchMedia("(max-width: 1023px)").matches;
+
       clock = new THREE.Clock();
       scene = new THREE.Scene();
       scene.fog = new THREE.FogExp2(0x000000, 0.008);
@@ -269,10 +273,10 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
       camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 50000);
       camera.position.set(0, 5, 14);
 
-      renderer = new THREE.WebGLRenderer({ antialias: true, canvas: canvasEl, alpha: true });
+      renderer = new THREE.WebGLRenderer({ antialias: !isMobile, canvas: canvasEl, alpha: true });
       renderer.setSize(rect.width, rect.height);
       renderer.setClearColor(0x000000, 0);
-      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+      renderer.setPixelRatio(Math.min(isMobile ? 1 : 2, window.devicePixelRatio || 1));
 
       controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
@@ -282,17 +286,19 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
       controls.maxDistance = 50;
       controls.target.set(0, 0, 0);
 
-      const renderScene = new RenderPass(scene, camera);
-      const bloomPass = new UnrealBloomPass(new THREE.Vector2(rect.width, rect.height), 0.9, 0.35, 0.85);
-      bloomPass.threshold = 0.1;
-      bloomPass.strength = 0.55;
-      bloomPass.radius = 0.35;
-      composer = new EffectComposer(renderer);
-      composer.addPass(renderScene);
-      composer.addPass(bloomPass);
+      if (!isMobile) {
+        const renderScene = new RenderPass(scene, camera);
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(rect.width, rect.height), 0.9, 0.35, 0.85);
+        bloomPass.threshold = 0.1;
+        bloomPass.strength = 0.55;
+        bloomPass.radius = 0.35;
+        composer = new EffectComposer(renderer);
+        composer.addPass(renderScene);
+        composer.addPass(bloomPass);
+      }
 
-      coreSphere = createSpiralSphere(5, 20000); // reduced particles for small container
-      orbitRings = createOrbitRings(7.5, 6, 0.6);
+      coreSphere = createSpiralSphere(5, isMobile ? 6000 : 20000); // reduced particles for small container
+      orbitRings = createOrbitRings(7.5, isMobile ? 3 : 6, 0.6);
 
       mainGroup = new THREE.Group();
       mainGroup.add(coreSphere);
@@ -364,7 +370,11 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
         });
         mainGroup.rotation.y += 0.0005;
         controls.update();
-        composer.render();
+        if (composer) {
+          composer.render();
+        } else {
+          renderer.render(scene, camera);
+        }
       }
 
       const resumeAnimation = () => {
@@ -427,7 +437,7 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
         visibilityObserver.disconnect();
         document.removeEventListener("visibilitychange", handleVisibilityChange);
 
-        composer.dispose();
+        composer?.dispose();
         renderer.dispose();
         coreSphere.material.dispose();
         orbitRings.children.forEach((ringObj: THREE.Object3D) => {

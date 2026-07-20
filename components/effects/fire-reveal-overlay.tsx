@@ -55,6 +55,8 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
   const maskVideoRef = useRef<HTMLVideoElement | null>(null);
   const maskDimsRef = useRef<{ cSize: number; targetW: number; targetH: number; offX: number; offY: number } | null>(null);
   const blobUrlRef = useRef<string | null>(null);
+  const isMobileRef = useRef(false);
+  const staticMaskUploadedRef = useRef(false);
 
   const vert = `precision mediump float;\nattribute vec2 a_position;\nvarying vec2 vUv;\nvoid main(){vUv=a_position;gl_Position=vec4(a_position,0.0,1.0);}';`;
   // Fragment shader with configurable fire color
@@ -65,6 +67,7 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
   const init = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    isMobileRef.current = window.matchMedia("(max-width: 1023px)").matches;
     const glContext = canvas.getContext("webgl", { premultipliedAlpha: false }) || canvas.getContext("experimental-webgl");
     if (!glContext) return;
     const gl = glContext as WebGLRenderingContext;
@@ -333,12 +336,18 @@ export const FireRevealOverlay: React.FC<FireRevealOverlayProps> = ({
       const mVid = maskVideoRef.current;
       const dims = maskDimsRef.current;
       if (mCanvas && mCtx && mImg && dims) {
-        mCtx.clearRect(0, 0, dims.cSize, dims.cSize);
-        mCtx.fillStyle = "white";
-        mCtx.fillRect(0, 0, dims.cSize, dims.cSize);
-        mCtx.drawImage(mImg, dims.offX, dims.offY, dims.targetW, dims.targetH);
-        gl.bindTexture(gl.TEXTURE_2D, tex);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, mCanvas);
+        // Static image mask never changes, so re-uploading it every frame is
+        // wasted GPU bandwidth; on mobile that upload alone was heavy enough
+        // to contribute to the memory pressure crashing the tab.
+        if (!isMobileRef.current || !staticMaskUploadedRef.current) {
+          mCtx.clearRect(0, 0, dims.cSize, dims.cSize);
+          mCtx.fillStyle = "white";
+          mCtx.fillRect(0, 0, dims.cSize, dims.cSize);
+          mCtx.drawImage(mImg, dims.offX, dims.offY, dims.targetW, dims.targetH);
+          gl.bindTexture(gl.TEXTURE_2D, tex);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, mCanvas);
+          staticMaskUploadedRef.current = true;
+        }
       } else if (mCanvas && mCtx && mVid && dims) {
         // Draw current video frame
         mCtx.clearRect(0, 0, dims.cSize, dims.cSize);

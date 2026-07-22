@@ -7,6 +7,7 @@ import { AnimatedTestimonialsDemo } from "@/components/main/services";
 import Skills from "@/components/StackTech/SkillContent";
 import SplashCursor from "@/components/ui/splashCursor";
 import { FireRevealOverlay } from "@/components/effects/fire-reveal-overlay";
+import { SimpleRevealOverlay } from "@/components/effects/simple-reveal-overlay";
 import { ScrollLineDrawing } from "@/components/effects/scroll-line-drawing";
 import { LoaderFour } from "@/components/ui/loader";
 import { useIsMobile } from "@/lib/use-is-mobile";
@@ -96,28 +97,44 @@ export default function Home() {
             animate={{ opacity: 1, transition: { duration: 0.4 } }}
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
           >
-            <FireRevealOverlay
-              text="" // omit text drawing
-              imageSrc="/2.svg"
-              videoSrc="" // video fallback for animated mask
-              useLogoMask // activar uso de imagen como máscara
-              imageScale={1.0} // escala del contenido interno
-              imageScaleY={1.0} // escala vertical relativa
-              maskScale={150} // reducir ligeramente el tamaño en el viewport
-              imageFit="cover" // cubrir el viewport (más grande)
-              showWhiteBackground={true} // mantiene fase blanca inicial
-              fireColor={[1.6,0.4,2.2]} // fuego púrpura
-              startDelayMs={700} // retraso para que no aparezca tan rápido
-              durationMs={9800}
-              onComplete={() => setFireDone(true)}
-              reveal
-              onWhiteShown={() => {
-                if (!whiteShown) {
-                  setWhiteShown(true);
-                  setTimeout(() => setShowContent(true), 500);
-                }
-              }}
-            />
+            {isMobile ? (
+              // The WebGL fire shader rasterizes a large filtered SVG onto a
+              // big offscreen canvas at page load, which was crashing iOS
+              // Safari before content even rendered; use a plain CSS fade
+              // there instead. Desktop keeps the full fire effect below.
+              <SimpleRevealOverlay
+                onComplete={() => setFireDone(true)}
+                onWhiteShown={() => {
+                  if (!whiteShown) {
+                    setWhiteShown(true);
+                    setTimeout(() => setShowContent(true), 500);
+                  }
+                }}
+              />
+            ) : (
+              <FireRevealOverlay
+                text="" // omit text drawing
+                imageSrc="/2.svg"
+                videoSrc="" // video fallback for animated mask
+                useLogoMask // activar uso de imagen como máscara
+                imageScale={1.0} // escala del contenido interno
+                imageScaleY={1.0} // escala vertical relativa
+                maskScale={150} // reducir ligeramente el tamaño en el viewport
+                imageFit="cover" // cubrir el viewport (más grande)
+                showWhiteBackground={true} // mantiene fase blanca inicial
+                fireColor={[1.6,0.4,2.2]} // fuego púrpura
+                startDelayMs={700} // retraso para que no aparezca tan rápido
+                durationMs={9800}
+                onComplete={() => setFireDone(true)}
+                reveal
+                onWhiteShown={() => {
+                  if (!whiteShown) {
+                    setWhiteShown(true);
+                    setTimeout(() => setShowContent(true), 500);
+                  }
+                }}
+              />
+            )}
           </motion.div>
         )}
       </AnimatePresence>

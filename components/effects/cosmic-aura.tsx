@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
@@ -21,8 +21,21 @@ type AuraMaterial = THREE.ShaderMaterial & { uniforms: AuraUniforms };
 export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = ({ className, theme = "nebula" }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
+    // Three.js + bloom + tens of thousands of animated particles reliably
+    // reloads iOS Safari from memory pressure — reducing the particle count
+    // was not enough. Skip WebGL entirely on small screens and fall back to a
+    // static CSS glow, mirroring how SplashCursor and the fire overlay are
+    // already disabled on mobile. Detected here (client-only) instead of at
+    // render time so the server/first-paint markup still matches (no
+    // hydration mismatch) and no WebGL context is ever created on phones.
+    if (window.matchMedia("(max-width: 1023px)").matches) {
+      setMobile(true);
+      return;
+    }
+
     const container = containerRef.current;
     const canvas = canvasRef.current;
     if (!container || !canvas) return;
@@ -458,7 +471,11 @@ export const CosmicAura: React.FC<{ className?: string; theme?: ThemeName }> = (
 
   return (
     <div ref={containerRef} className={className} aria-hidden>
-      <canvas ref={canvasRef} className="absolute bg-transparent inset-0 w-full h-full" />
+      {mobile ? (
+        <div className="cosmic-aura-fallback absolute inset-0" />
+      ) : (
+        <canvas ref={canvasRef} className="absolute bg-transparent inset-0 w-full h-full" />
+      )}
     </div>
   );
 };

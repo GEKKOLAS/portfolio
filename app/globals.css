@@ -142,6 +142,36 @@
   animation: background-divider 14s ease-in-out infinite;
 }
 
+/* Mobile fallback for CosmicAura: the Three.js/WebGL aura is disabled on
+   small screens (it crashed iOS Safari), so a lightweight CSS nebula glow
+   sits behind the avatar instead. */
+.cosmic-aura-fallback {
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 50% 44%, rgb(0 255 255 / 0.35), transparent 55%),
+    radial-gradient(circle at 62% 62%, rgb(255 20 147 / 0.28), transparent 60%),
+    radial-gradient(circle at 38% 60%, rgb(65 105 225 / 0.30), transparent 62%);
+  filter: blur(6px);
+  animation: cosmic-aura-pulse 6s ease-in-out infinite;
+}
+
+@keyframes cosmic-aura-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmic-aura-fallback {
+    animation: none;
+  }
+}
+
 /* Layered, cursor-reactive project cards */
 .project-card-scene {
   perspective: 1400px;

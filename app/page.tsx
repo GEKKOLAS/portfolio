@@ -7,7 +7,6 @@ import { AnimatedTestimonialsDemo } from "@/components/main/services";
 import Skills from "@/components/StackTech/SkillContent";
 import SplashCursor from "@/components/ui/splashCursor";
 import { FireRevealOverlay } from "@/components/effects/fire-reveal-overlay";
-import { SimpleRevealOverlay } from "@/components/effects/simple-reveal-overlay";
 import { ScrollLineDrawing } from "@/components/effects/scroll-line-drawing";
 import { LoaderFour } from "@/components/ui/loader";
 import { useIsMobile } from "@/lib/use-is-mobile";
@@ -76,6 +75,17 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  React.useEffect(() => {
+    if (loading || !isMobile) return;
+
+    // Mobile must never depend on an animation callback to render the page.
+    // In particular, iOS can suspend timers while the loader is fading out,
+    // leaving the previous reveal overlay mounted with no content behind it.
+    setWhiteShown(true);
+    setFireDone(true);
+    setShowContent(true);
+  }, [isMobile, loading]);
+
   return (
     <main className="relative min-h-[100dvh]">
       <AnimatePresence>
@@ -89,7 +99,7 @@ export default function Home() {
             <LoaderFour />
           </motion.div>
         )}
-        {!loading && !fireDone && (
+        {!loading && !fireDone && !isMobile && (
           <motion.div
             key="fire"
             className="fixed inset-0 z-40 pointer-events-none w-full h-full flex items-center justify-center bg-transparent"
@@ -97,22 +107,7 @@ export default function Home() {
             animate={{ opacity: 1, transition: { duration: 0.4 } }}
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
           >
-            {isMobile ? (
-              // The WebGL fire shader rasterizes a large filtered SVG onto a
-              // big offscreen canvas at page load, which was crashing iOS
-              // Safari before content even rendered; use a plain CSS fade
-              // there instead. Desktop keeps the full fire effect below.
-              <SimpleRevealOverlay
-                onComplete={() => setFireDone(true)}
-                onWhiteShown={() => {
-                  if (!whiteShown) {
-                    setWhiteShown(true);
-                    setTimeout(() => setShowContent(true), 500);
-                  }
-                }}
-              />
-            ) : (
-              <FireRevealOverlay
+            <FireRevealOverlay
                 text="" // omit text drawing
                 imageSrc="/2.svg"
                 videoSrc="" // video fallback for animated mask
@@ -134,7 +129,6 @@ export default function Home() {
                   }
                 }}
               />
-            )}
           </motion.div>
         )}
       </AnimatePresence>

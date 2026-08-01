@@ -52,7 +52,7 @@ export const Social = () => {
             </a>
           {/* cv */}
             <a
-            href="https://oumha429zaujvejc.public.blob.vercel-storage.com/NickLatestCV-D2AWjDoc85jZwNiyVQWpt77Gpk5qfi.pdf"
+            href="https://oumha429zaujvejc.public.blob.vercel-storage.com/CV%20Nicolas%20LastVersion2026.pdf"
             download
             className="flex justify-center items-center transition-transform duration-300 hover:scale-110 hover:text-pink-500"
             target="_blank"

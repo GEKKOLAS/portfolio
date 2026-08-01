@@ -3,13 +3,15 @@ import React from "react";
 import { motion } from "framer-motion";
 import { slideInFromRight } from "@/components/utils/motion";
 import ColourfulText from "../ui/colourful-text";
-import { Bot, Code2, Palette, Sparkles } from "lucide-react";
+import { Bot, Code2, Palette, Sparkles, Workflow } from "lucide-react";
 
 const aiTools = [
   { name: "Claude", use: "Reasoning & architecture", tone: "from-orange-400/20 to-amber-400/5" },
   { name: "ChatGPT", use: "Research & ideation", tone: "from-emerald-400/20 to-cyan-400/5" },
   { name: "Codex", use: "Agentic development", tone: "from-cyan-400/20 to-blue-400/5" },
   { name: "GitHub Copilot", use: "Coding assistance", tone: "from-blue-400/20 to-violet-400/5" },
+  { name: "n8n", use: "Workflow automation", tone: "from-rose-400/20 to-orange-400/5" },
+  { name: "Zapier", use: "App integrations", tone: "from-orange-400/20 to-red-400/5" },
   { name: "Midjourney", use: "Visual direction", tone: "from-violet-400/20 to-fuchsia-400/5" },
   { name: "Adobe Firefly", use: "Creative assets", tone: "from-fuchsia-400/20 to-rose-400/5" },
   { name: "Gemini", use: "Multimodal workflows", tone: "from-rose-400/20 to-yellow-400/5" },
@@ -60,6 +62,8 @@ const SkillText = () => {
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/30 bg-white/65 text-fuchsia-600 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-fuchsia-300">
                   {tool.use.includes("Visual") || tool.use.includes("Creative") ? (
                     <Palette className="h-5 w-5" aria-hidden="true" />
+                  ) : tool.use.includes("automation") || tool.use.includes("integrations") ? (
+                    <Workflow className="h-5 w-5" aria-hidden="true" />
                   ) : tool.use.includes("development") || tool.use.includes("Coding") ? (
                     <Code2 className="h-5 w-5" aria-hidden="true" />
                   ) : (
@@ -75,7 +79,7 @@ const SkillText = () => {
           </div>
 
           <div className="mt-5 flex flex-wrap gap-2">
-            {["Prompt engineering", "AI agents", "Code generation", "Image generation", "Multimodal AI"].map((item) => (
+            {["Prompt engineering", "AI agents", "Workflow automation", "Code generation", "Image generation", "Multimodal AI"].map((item) => (
               <span
                 key={item}
                 className="rounded-full border border-zinc-200 bg-white/70 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/70 dark:text-zinc-300"

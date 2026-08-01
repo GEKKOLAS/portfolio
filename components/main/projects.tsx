@@ -4,7 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { type PointerEvent, useRef, useState } from "react";
 
-const projects = [
+type DevProject = {
+  title: string;
+  subtitle: string;
+  description: string;
+  image?: string;
+  imagePlaceholder?: string;
+  href?: string;
+  linkLabel?: string;
+  liveHref?: string;
+  stack: string[];
+  highlights: string[];
+};
+
+const projects: DevProject[] = [
   {
     title: "Infinity Commerce",
     subtitle: "E-commerce platform",
@@ -67,15 +80,13 @@ const projects = [
     highlights: ["Course discovery", "Structured content", "Responsive experience"],
   },
   {
-    title: "Funds App on AWS",
-    subtitle: "Cloud-native investment platform",
+    title: "SMB Automation Suite",
+    subtitle: "n8n business automation",
     description:
-      "A full-stack funds platform deployed on AWS with atomic subscription flows, transaction history, notifications, and infrastructure automation.",
-    image: "/ecomercerappt.jpg",
-    href: "https://github.com/GEKKOLAS/aws-eshop",
-    liveHref: "https://dvsvnp7nbzde3.cloudfront.net/",
-    stack: ["ASP.NET Core", "Next.js", "DynamoDB", "CloudFront", "CloudFormation"],
-    highlights: ["AWS architecture", "Atomic transactions", "Live deployment"],
+      "Automation systems built for small and medium businesses with n8n — from lead generation funnels and CRM enrichment to marketing ad campaigns and AI-assisted video advertisements, connected to the tools each team already uses.",
+    image: "/project-automation.png",
+    stack: ["n8n", "OpenAI", "Meta Ads", "Google Ads", "REST APIs"],
+    highlights: ["Lead generation pipelines", "Ad campaign automation", "AI video ads"],
   },
 ];
 
@@ -88,7 +99,7 @@ const designProjects = [
     description:
       "A complete identity built as a system rather than a logo: wordmark construction, a type and colour scale, and the rules that keep it consistent across every application.",
     tools: ["Illustrator", "Figma", "Type design"],
-    placeholder: "Drop the identity artwork — logo grid, wordmark, applications",
+    image: "/project-design-identity.png",
   },
   {
     category: "Packaging design",
@@ -96,7 +107,7 @@ const designProjects = [
     description:
       "A modular packaging language designed so new products need no new artwork — one grid, a fixed hierarchy, and colour coding that scales across the whole range.",
     tools: ["Illustrator", "Dielines", "Pantone"],
-    placeholder: "Drop packaging shots — mockups, labels, dielines",
+    image: "/project-design-packaging.png",
   },
   {
     category: "Editorial design",
@@ -104,7 +115,7 @@ const designProjects = [
     description:
       "Long-form layout work where typography carries the argument: a baseline grid, a clear reading hierarchy, and covers designed to work as a set.",
     tools: ["InDesign", "Baseline grid", "Print"],
-    placeholder: "Drop editorial spreads — posters, layouts, print",
+    image: "/project-design-editorial.png",
   },
   {
     category: "Motion design",
@@ -112,7 +123,7 @@ const designProjects = [
     description:
       "The identity in motion: logo builds, transitions and lower-thirds, specified with timings and easing so the brand animates the same way everywhere.",
     tools: ["After Effects", "Lottie", "Easing specs"],
-    placeholder: "Drop a motion still or contact sheet",
+    image: "/project-design-motion.png",
   },
 ];
 
@@ -179,7 +190,6 @@ const dataProjects = [
   },
 ];
 
-type Project = (typeof projects)[number];
 type DesignProject = (typeof designProjects)[number];
 type DataProject = (typeof dataProjects)[number];
 type TrackKey = "all" | "dev" | "design" | "data";
@@ -197,7 +207,7 @@ const layoutOptions: { key: LayoutKey; label: string; hint: string }[] = [
   { key: "feature", label: "Feature", hint: "Full-width rows, image beside the write-up — best for detail" },
 ];
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project }: { project: DevProject }) {
   const cardRef = useRef<HTMLElement>(null);
 
   const handlePointerMove = (event: PointerEvent<HTMLElement>) => {
@@ -242,13 +252,19 @@ function ProjectCard({ project }: { project: Project }) {
             <div className="mt-5 flex flex-wrap gap-2">{project.stack.map((tech) => <span key={tech} className="project-card-chip rounded-full border border-fuchsia-400/20 bg-fuchsia-500/10 px-3 py-1 text-xs font-medium text-fuchsia-700 dark:text-fuchsia-300">{tech}</span>)}</div>
             <div className="mt-5 flex flex-wrap gap-2">{project.highlights.map((item) => <span key={item} className="text-sm text-zinc-500 dark:text-zinc-400">• {item}</span>)}</div>
             <div className="mt-6 flex flex-wrap gap-5">
-              <Link href={project.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-zinc-950 transition-colors hover:text-fuchsia-600 dark:text-white dark:hover:text-fuchsia-300">{project.linkLabel ?? "View repository"} <span aria-hidden="true">↗</span></Link>
+              {project.href ? <Link href={project.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-zinc-950 transition-colors hover:text-fuchsia-600 dark:text-white dark:hover:text-fuchsia-300">{project.linkLabel ?? "View repository"} <span aria-hidden="true">↗</span></Link> : null}
               {project.liveHref ? <Link href={project.liveHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-fuchsia-600 transition-colors hover:text-fuchsia-500 dark:text-fuchsia-300">Live demo <span aria-hidden="true">↗</span></Link> : null}
             </div>
           </div>
           <div className="project-card-image order-1 lg:order-2">
             <div className="overflow-hidden rounded-[1.5rem] border border-white/20 bg-zinc-950/10 shadow-2xl">
-              <Image src={project.image} alt={`${project.title} project preview`} width={1200} height={630} className="h-64 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] lg:h-80" />
+              {project.image ? (
+                <Image src={project.image} alt={`${project.title} project preview`} width={1200} height={630} className="h-64 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] lg:h-80" />
+              ) : (
+                <div className="flex h-64 w-full items-center justify-center bg-zinc-100/60 p-6 dark:bg-zinc-950/40 lg:h-80">
+                  <p className="max-w-[26ch] text-center text-xs leading-5 text-zinc-400 dark:text-zinc-600">{project.imagePlaceholder ?? "Artwork coming soon"}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -262,9 +278,13 @@ function DesignCard({ project, layout }: { project: DesignProject; layout: Layou
     <article className="relative overflow-hidden rounded-[2rem] border border-zinc-950/10 bg-white/70 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-violet-400/35 dark:border-white/[0.12] dark:bg-zinc-900/70">
       <div className={`grid items-center gap-5 p-4 ${layout === "feature" ? "lg:grid-cols-[0.9fr_1.1fr]" : ""}`}>
         <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-zinc-950/10 bg-zinc-100/60 dark:border-white/[0.12] dark:bg-zinc-950/40">
-          <div className="flex h-full w-full items-center justify-center p-6">
-            <p className="max-w-[24ch] text-center text-xs leading-5 text-zinc-400 dark:text-zinc-600">{project.placeholder}</p>
-          </div>
+          <Image
+            src={project.image}
+            alt={`${project.title} preview`}
+            fill
+            sizes="(min-width: 1024px) 45vw, 90vw"
+            className="object-cover"
+          />
         </div>
         <div className={layout === "feature" ? "px-2 pb-3 pt-1 lg:px-2 lg:py-0" : "px-2 pb-3 pt-1"}>
           <div className="mb-3 flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-violet-500/90 dark:text-violet-400/90">

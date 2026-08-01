@@ -7,6 +7,7 @@ import { ReactTyped } from "react-typed";
 import { BackgroundBeams } from "../ui/background-beams";
 import { AuroraText } from "../ui/aurora-text";
 import { CosmicAura } from "../effects/cosmic-aura";
+import { PixelFireReveal } from "../effects/pixel-fire-reveal";
 
 export const Profile = () => {
   const words =
@@ -28,15 +29,17 @@ export const Profile = () => {
                     <CosmicAura className="absolute -inset-3 z-0 rounded-full overflow-hidden" theme="nebula" />
 
                     <div className="relative z-10 rounded-full overflow-hidden bg-transparent w-full h-full">
-                      <Image
-                        className="rounded-full w-full h-full bg-transparent object-cover border-0"
-                        src="/HeroProfile3.png"
-                        alt="profile avatar"
-                        width={500}
-                        height={300}
-                        style={{ objectPosition: "center 3%" }}
-                        priority
-                      />
+                      <PixelFireReveal>
+                        <Image
+                          className="rounded-full w-full h-full bg-transparent object-cover border-0"
+                          src="/HeroProfile3.png"
+                          alt="profile avatar"
+                          width={500}
+                          height={300}
+                          style={{ objectPosition: "center 3%" }}
+                          priority
+                        />
+                      </PixelFireReveal>
                     </div>
                   </div>
                 </div>

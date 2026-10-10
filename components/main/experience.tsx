@@ -1,5 +1,4 @@
 import React from "react";
-import { BoxReveal } from "../magicui/box-reveal";
 
 const roles = [
   {
@@ -46,22 +45,20 @@ export const Experience = () => {
           className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-fuchsia-500/10 blur-3xl"
         />
 
-        <BoxReveal boxColor="#FFD600" duration={0.9}>
-          <div className="relative mb-7 max-w-2xl">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-fuchsia-500" />
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-fuchsia-500">
-                Career journey
-              </p>
-            </div>
-            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-white sm:text-3xl xl:text-4xl">
-              Experience built across technology and people.
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400 sm:text-base">
-              A timeline of building software, solving problems and understanding the people behind every product.
+        <div className="relative mb-7 max-w-2xl">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-fuchsia-500" />
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-fuchsia-500">
+              Career journey
             </p>
           </div>
-        </BoxReveal>
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-white sm:text-3xl xl:text-4xl">
+            Experience built across technology and people.
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400 sm:text-base">
+            A timeline of building software, solving problems and understanding the people behind every product.
+          </p>
+        </div>
 
         <ol className="relative space-y-4 before:absolute before:bottom-5 before:left-[0.42rem] before:top-5 before:w-px before:bg-gradient-to-b before:from-fuchsia-500 before:via-purple-400/60 before:to-transparent sm:space-y-5 sm:before:left-[10.75rem]">
           {roles.map((role) => (

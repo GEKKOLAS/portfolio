@@ -1,4 +1,5 @@
 import React from "react";
+import { Certifications } from "./certifications";
 
 const roles = [
   {
@@ -127,6 +128,8 @@ export const Experience = () => {
           ))}
         </ol>
       </div>
+
+      <Certifications />
     </section>
   );
 };

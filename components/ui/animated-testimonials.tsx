@@ -102,6 +102,7 @@ export const AnimatedTestimonials = ({
                     alt={testimonial.title}
                     width={1200}
                     height={700}
+                    unoptimized
                     draggable={true}
                     className="h-full w-full rounded-[1.5rem] border border-white/15 object-cover object-center shadow-[0_20px_60px_-24px_rgba(0,0,0,0.45)]"
                   />

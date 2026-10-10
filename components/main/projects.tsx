@@ -2,8 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { type PointerEvent, useRef, useState } from "react";
+import { MotionConfig, motion, type Variants } from "motion/react";
+import { type ComponentType, type KeyboardEvent, useState } from "react";
 import { Modal } from "@/components/ui/modal";
+import { useTilt } from "@/lib/use-tilt";
+import { FleetArchitecture } from "./fleet-architecture";
+import { InteractiveDataChart } from "./interactive-data-chart";
 
 type DevProject = {
   title: string;
@@ -11,6 +15,8 @@ type DevProject = {
   description: string;
   // Extra paragraphs shown only in the detail modal.
   details?: string[];
+  // Interactive system diagram shown in the detail modal.
+  architecture?: ComponentType;
   image?: string;
   imagePlaceholder?: string;
   href?: string;
@@ -61,6 +67,7 @@ const projects: DevProject[] = [
     href: "https://github.com/GEKKOLAS/FleetIQ",
     stack: [".NET 10", "PostgreSQL", "RabbitMQ", "Redis", "YARP"],
     highlights: ["12 bounded contexts", "Transactional outbox", "OAuth2 and OIDC"],
+    architecture: FleetArchitecture,
   },
   {
     title: "Scrape Studio",
@@ -202,20 +209,32 @@ type SelectedProject =
   | { track: "design"; project: DesignProject }
   | { track: "data"; project: DataProject };
 
-const trackAccent: Record<SelectedProject["track"], { eyebrow: string; dot: string; chip: string; hover: string }> = {
+const trackAccent: Record<
+  SelectedProject["track"],
+  { label: string; eyebrow: string; dot: string; chip: string; hover: string; glow: string; line: string }
+> = {
   dev: {
+    label: "Development",
+    glow: "bg-fuchsia-500/25",
+    line: "via-fuchsia-400/80",
     eyebrow: "text-fuchsia-500/80",
     dot: "bg-fuchsia-500 shadow-[0_0_14px_rgba(217,70,239,0.9)]",
     chip: "border-fuchsia-400/20 bg-fuchsia-500/10 text-fuchsia-700 dark:text-fuchsia-300",
     hover: "hover:text-fuchsia-600 dark:hover:text-fuchsia-300",
   },
   design: {
+    label: "Graphic design",
+    glow: "bg-violet-500/25",
+    line: "via-violet-400/80",
     eyebrow: "text-violet-500/90 dark:text-violet-400/90",
     dot: "bg-violet-400 shadow-[0_0_14px_rgba(167,139,250,0.9)]",
     chip: "border-violet-400/20 bg-violet-400/10 text-violet-700 dark:text-violet-300",
     hover: "hover:text-violet-600 dark:hover:text-violet-300",
   },
   data: {
+    label: "Data analysis",
+    glow: "bg-cyan-400/20",
+    line: "via-cyan-400/80",
     eyebrow: "text-cyan-600/90 dark:text-cyan-400/90",
     dot: "bg-cyan-400 shadow-[0_0_14px_rgba(34,211,238,0.9)]",
     chip: "border-cyan-400/20 bg-cyan-400/10 text-cyan-700 dark:text-cyan-300",
@@ -224,6 +243,10 @@ const trackAccent: Record<SelectedProject["track"], { eyebrow: string; dot: stri
 };
 
 const PROJECT_MODAL_TITLE_ID = "project-modal-title";
+
+const chipsOf = (item: SelectedProject) => (item.track === "design" ? item.project.tools : item.project.stack);
+
+type RelatedProject = { item: SelectedProject; shared: string[] };
 
 const trackFilters: { key: TrackKey; label: string; count: number; dot: string }[] = [
   { key: "all", label: "All", count: projects.length + designProjects.length + dataProjects.length, dot: "#A1A1AA" },
@@ -252,37 +275,12 @@ function DetailsButton({ track }: { track: SelectedProject["track"] }) {
 }
 
 function ProjectCard({ project, onOpen }: { project: DevProject; onOpen: () => void }) {
-  const cardRef = useRef<HTMLElement>(null);
-
-  const handlePointerMove = (event: PointerEvent<HTMLElement>) => {
-    if (event.pointerType === "touch") return;
-
-    const card = cardRef.current;
-    if (!card) return;
-
-    const bounds = card.getBoundingClientRect();
-    const x = (event.clientX - bounds.left) / bounds.width;
-    const y = (event.clientY - bounds.top) / bounds.height;
-
-    card.style.setProperty("--card-rotate-x", `${(0.5 - y) * 8}deg`);
-    card.style.setProperty("--card-rotate-y", `${(x - 0.5) * 10}deg`);
-    card.style.setProperty("--card-glow-x", `${x * 100}%`);
-    card.style.setProperty("--card-glow-y", `${y * 100}%`);
-  };
-
-  const resetTilt = () => {
-    const card = cardRef.current;
-    if (!card) return;
-    card.style.setProperty("--card-rotate-x", "0deg");
-    card.style.setProperty("--card-rotate-y", "0deg");
-  };
+  const tilt = useTilt<HTMLElement>();
 
   return (
     <div className="project-card-scene">
       <article
-        ref={cardRef}
-        onPointerMove={handlePointerMove}
-        onPointerLeave={resetTilt}
+        {...tilt}
         onClick={onOpen}
         className="project-card group relative cursor-pointer overflow-hidden rounded-[2rem] border border-white/20 bg-white/70 p-4 backdrop-blur-xl dark:bg-zinc-900/70"
       >
@@ -366,7 +364,7 @@ function DataMetrics({ project }: { project: DataProject }) {
   );
 }
 
-function DataChart({ project, heightClass = "h-[76px]" }: { project: DataProject; heightClass?: string }) {
+function DataChart({ project }: { project: DataProject }) {
   const max = Math.max(...project.bars);
 
   return (
@@ -375,7 +373,7 @@ function DataChart({ project, heightClass = "h-[76px]" }: { project: DataProject
         <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500">{project.chartLabel}</span>
         <span className="text-[10px] tracking-[0.06em] text-zinc-400 dark:text-zinc-600">{project.chartAxis}</span>
       </div>
-      <div className={`flex ${heightClass} items-end gap-1.5 border-b border-zinc-950/10 pb-px dark:border-white/[0.12]`}>
+      <div className="flex h-[76px] items-end gap-1.5 border-b border-zinc-950/10 pb-px dark:border-white/[0.12]">
         {project.bars.map((value, index) => (
           <div
             key={index}
@@ -420,87 +418,212 @@ function DataCard({ project, onOpen }: { project: DataProject; onOpen: () => voi
   );
 }
 
-function ProjectDetails({ selected }: { selected: SelectedProject }) {
+const modalStagger: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
+};
+
+const modalReveal: Variants = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+function ProjectDetails({
+  selected,
+  index,
+  total,
+  previous,
+  next,
+  related,
+  onNavigate,
+  onSelect,
+}: {
+  selected: SelectedProject;
+  index: number;
+  total: number;
+  previous?: SelectedProject;
+  next?: SelectedProject;
+  related: RelatedProject[];
+  onNavigate: (step: number) => void;
+  onSelect: (item: SelectedProject) => void;
+}) {
   const accent = trackAccent[selected.track];
   const { title, description } = selected.project;
   const eyebrow = selected.track === "design" ? selected.project.category : selected.project.subtitle;
   const image = selected.track === "data" ? undefined : selected.project.image;
-  const chips = selected.track === "design" ? selected.project.tools : selected.project.stack;
+  const chips = chipsOf(selected);
+  const Architecture = selected.track === "dev" ? selected.project.architecture : undefined;
   const sectionLabel = "text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500";
+  const navButton =
+    "group flex min-w-0 cursor-pointer flex-col gap-1 px-6 py-5 transition-colors hover:bg-zinc-950/[0.04] dark:hover:bg-white/[0.05] sm:px-8";
 
   return (
-    <>
-      {image ? (
-        <div className="relative aspect-[1200/630] w-full bg-zinc-100 dark:bg-zinc-950">
-          <Image
-            src={image}
-            alt={`${title} project preview`}
-            fill
-            sizes="(min-width: 960px) 896px, 100vw"
-            className={selected.track === "design" ? "object-contain" : "object-cover"}
-          />
-        </div>
-      ) : null}
+    <MotionConfig reducedMotion="user">
+      {/* Keyed so the entrance replays when stepping between projects. */}
+      <motion.div key={title} variants={modalStagger} initial="hidden" animate="show">
+        {/* Always dark: the title sits on the artwork, whatever the page theme. */}
+        <header className="dark relative overflow-hidden bg-zinc-950">
+          {image ? (
+            <div className={`relative w-full ${selected.track === "design" ? "aspect-[4/3] sm:aspect-[16/10]" : "aspect-[1200/630]"}`}>
+              <motion.div
+                className="absolute inset-0"
+                initial={{ opacity: 0, scale: 1.06 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+              >
+                <Image src={image} alt={`${title} project preview`} fill sizes="(min-width: 1080px) 1024px, 100vw" className="object-cover" />
+              </motion.div>
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+            </div>
+          ) : (
+            <>
+              <div aria-hidden="true" className={`pointer-events-none absolute -right-16 -top-24 h-72 w-72 rounded-full blur-3xl ${accent.glow}`} />
+              <div aria-hidden="true" className={`pointer-events-none absolute -bottom-28 left-1/4 h-56 w-56 rounded-full blur-3xl ${accent.glow}`} />
+            </>
+          )}
 
-      <div className="p-6 sm:p-8">
-        <div className={`mb-3 flex items-center gap-2 pr-12 text-xs uppercase tracking-[0.3em] ${accent.eyebrow}`}>
-          <span className={`h-2 w-2 shrink-0 rounded-full ${accent.dot}`} />
-          {eyebrow}
-        </div>
-        <h2 id={PROJECT_MODAL_TITLE_ID} className="text-2xl font-semibold text-zinc-950 dark:text-white sm:text-3xl">{title}</h2>
-        <p className="mt-4 text-base leading-7 text-zinc-600 dark:text-zinc-400">{description}</p>
-        {selected.track === "dev"
-          ? selected.project.details?.map((paragraph) => (
-              <p key={paragraph} className="mt-4 text-base leading-7 text-zinc-600 dark:text-zinc-400">{paragraph}</p>
-            ))
-          : null}
+          <div className={image ? "absolute inset-x-0 bottom-0 p-6 sm:p-8" : "relative p-6 pt-16 sm:p-8 sm:pt-[4.5rem]"}>
+            <motion.div variants={modalReveal} className={`mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.3em] ${accent.eyebrow}`}>
+              <span className={`h-2 w-2 shrink-0 rounded-full ${accent.dot}`} />
+              {eyebrow}
+            </motion.div>
+            <motion.h2 variants={modalReveal} id={PROJECT_MODAL_TITLE_ID} className="text-2xl font-semibold tracking-tight text-white sm:text-4xl">
+              {title}
+            </motion.h2>
+            {selected.track === "data" ? (
+              <motion.div variants={modalReveal}>
+                <InteractiveDataChart bars={selected.project.bars} label={selected.project.chartLabel} axis={selected.project.chartAxis} />
+              </motion.div>
+            ) : null}
+          </div>
 
-        {selected.track === "data" ? (
-          <>
-            <DataMetrics project={selected.project} />
-            <DataChart project={selected.project} heightClass="h-36" />
-          </>
-        ) : null}
+          <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-zinc-950/60 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-200 backdrop-blur">
+            <span className="tabular-nums">
+              {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+            </span>
+            <span aria-hidden="true" className="h-3 w-px bg-white/25" />
+            {accent.label}
+          </div>
+          <div aria-hidden="true" className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent to-transparent ${accent.line}`} />
+        </header>
 
-        {selected.track === "dev" ? (
-          <div className="mt-7">
-            <h3 className={sectionLabel}>Highlights</h3>
-            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-              {selected.project.highlights.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
-                  <span className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${accent.dot}`} />
-                  {item}
-                </li>
+        <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+          <div className="min-w-0">
+            <motion.div variants={modalReveal}>
+              <h3 className={sectionLabel}>Overview</h3>
+              <p className="mt-3 text-base leading-7 text-zinc-700 dark:text-zinc-300">{description}</p>
+              {selected.track === "dev"
+                ? selected.project.details?.map((paragraph) => (
+                    <p key={paragraph} className="mt-4 text-base leading-7 text-zinc-600 dark:text-zinc-400">{paragraph}</p>
+                  ))
+                : null}
+            </motion.div>
+
+            {selected.track === "data" ? (
+              <motion.div variants={modalReveal} className="mt-8">
+                <h3 className={sectionLabel}>Key results</h3>
+                <DataMetrics project={selected.project} />
+              </motion.div>
+            ) : null}
+
+            {selected.track === "dev" ? (
+              <motion.div variants={modalReveal} className="mt-8">
+                <h3 className={sectionLabel}>Highlights</h3>
+                <ul className="mt-3 grid gap-3 sm:grid-cols-3">
+                  {selected.project.highlights.map((item, itemIndex) => (
+                    <li key={item} className="rounded-2xl border border-zinc-950/10 bg-zinc-950/[0.02] p-4 transition-colors hover:border-fuchsia-400/40 dark:border-white/10 dark:bg-white/[0.04]">
+                      <span className={`text-xs font-semibold tabular-nums tracking-[0.2em] ${accent.eyebrow}`}>{String(itemIndex + 1).padStart(2, "0")}</span>
+                      <p className="mt-2 text-sm font-medium leading-6 text-zinc-800 dark:text-zinc-200">{item}</p>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ) : null}
+          </div>
+
+          <motion.aside variants={modalReveal} className="h-fit rounded-[1.5rem] border border-zinc-950/10 bg-zinc-950/[0.02] p-5 dark:border-white/10 dark:bg-white/[0.04]">
+            <h3 className={sectionLabel}>{selected.track === "design" ? "Tools" : "Tech stack"}</h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {chips.map((chip) => (
+                <span key={chip} className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-xs font-medium ${accent.chip}`}>{chip}</span>
               ))}
-            </ul>
-          </div>
-        ) : null}
+            </div>
 
-        <div className="mt-7">
-          <h3 className={sectionLabel}>{selected.track === "design" ? "Tools" : "Tech stack"}</h3>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {chips.map((chip) => (
-              <span key={chip} className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-xs font-medium ${accent.chip}`}>{chip}</span>
-            ))}
-          </div>
+            <dl className="mt-5 space-y-3 border-t border-zinc-950/10 pt-5 text-sm dark:border-white/10">
+              <div className="flex items-baseline justify-between gap-4">
+                <dt className="text-zinc-500">Track</dt>
+                <dd className="text-right font-medium text-zinc-900 dark:text-zinc-100">{accent.label}</dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-4">
+                <dt className="text-zinc-500">Type</dt>
+                <dd className="text-right font-medium text-zinc-900 dark:text-zinc-100">{eyebrow}</dd>
+              </div>
+            </dl>
+
+            {selected.track === "dev" && (selected.project.href || selected.project.liveHref) ? (
+              <div className="mt-5 grid gap-2.5">
+                {selected.project.href ? (
+                  <Link href={selected.project.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-zinc-950 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-fuchsia-600 dark:bg-white dark:text-zinc-950 dark:hover:bg-fuchsia-300">
+                    {selected.project.linkLabel ?? "View repository"} <span aria-hidden="true">↗</span>
+                  </Link>
+                ) : null}
+                {selected.project.liveHref ? (
+                  <Link href={selected.project.liveHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-fuchsia-400/40 px-5 py-2.5 text-sm font-medium text-fuchsia-600 transition-colors hover:bg-fuchsia-500/10 dark:text-fuchsia-300">
+                    Live demo <span aria-hidden="true">↗</span>
+                  </Link>
+                ) : null}
+              </div>
+            ) : null}
+          </motion.aside>
+
+          {Architecture ? (
+            <motion.div variants={modalReveal} className="min-w-0 lg:col-span-2">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 className={sectionLabel}>Architecture</h3>
+                <span className="text-xs text-zinc-500">Select a service to inspect it</span>
+              </div>
+              <Architecture />
+            </motion.div>
+          ) : null}
+
+          {related.length > 0 ? (
+            <motion.div variants={modalReveal} className="min-w-0 lg:col-span-2">
+              <h3 className={sectionLabel}>Related by stack</h3>
+              <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                {related.map(({ item, shared }) => (
+                  <button
+                    key={item.project.title}
+                    type="button"
+                    onClick={() => onSelect(item)}
+                    className="cursor-pointer rounded-2xl border border-zinc-950/10 bg-zinc-950/[0.02] p-4 text-left transition-colors hover:border-zinc-950/30 dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-white/30"
+                  >
+                    <span className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500">
+                      <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${trackAccent[item.track].dot}`} />
+                      {trackAccent[item.track].label}
+                    </span>
+                    <span className="mt-2 block text-sm font-semibold text-zinc-900 dark:text-zinc-100">{item.project.title}</span>
+                    <span className="mt-1 block text-xs leading-5 text-zinc-500">Also uses {shared.join(", ")}</span>
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          ) : null}
         </div>
 
-        {selected.track === "dev" && (selected.project.href || selected.project.liveHref) ? (
-          <div className="mt-8 flex flex-wrap gap-3 border-t border-zinc-950/10 pt-6 dark:border-white/10">
-            {selected.project.href ? (
-              <Link href={selected.project.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-zinc-950 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-fuchsia-600 dark:bg-white dark:text-zinc-950 dark:hover:bg-fuchsia-300">
-                {selected.project.linkLabel ?? "View repository"} <span aria-hidden="true">↗</span>
-              </Link>
-            ) : null}
-            {selected.project.liveHref ? (
-              <Link href={selected.project.liveHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/40 px-5 py-2.5 text-sm font-medium text-fuchsia-600 transition-colors hover:bg-fuchsia-500/10 dark:text-fuchsia-300">
-                Live demo <span aria-hidden="true">↗</span>
-              </Link>
-            ) : null}
-          </div>
+        {previous && next ? (
+          <nav aria-label="Other projects" className="grid grid-cols-2 divide-x divide-zinc-950/10 border-t border-zinc-950/10 dark:divide-white/10 dark:border-white/10">
+            <button type="button" onClick={() => onNavigate(-1)} className={`${navButton} items-start text-left`}>
+              <span className={sectionLabel}><span aria-hidden="true" className="inline-block transition-transform group-hover:-translate-x-1">←</span> Previous</span>
+              <span className="w-full truncate text-sm font-medium text-zinc-900 dark:text-zinc-100">{previous.project.title}</span>
+            </button>
+            <button type="button" onClick={() => onNavigate(1)} className={`${navButton} items-end text-right`}>
+              <span className={sectionLabel}>Next <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
+              <span className="w-full truncate text-sm font-medium text-zinc-900 dark:text-zinc-100">{next.project.title}</span>
+            </button>
+          </nav>
         ) : null}
-      </div>
-    </>
+      </motion.div>
+    </MotionConfig>
   );
 }
 
@@ -518,6 +641,32 @@ export const Projects = () => {
     layout === "gallery"
       ? "grid gap-6 [grid-template-columns:repeat(auto-fill,minmax(320px,1fr))]"
       : "grid grid-cols-1 gap-6";
+
+  // The modal steps through whatever the active filter is showing, in page order.
+  const visible: SelectedProject[] = [
+    ...(showDev ? projects.map((project) => ({ track: "dev" as const, project })) : []),
+    ...(showDesign ? designProjects.map((project) => ({ track: "design" as const, project })) : []),
+    ...(showData ? dataProjects.map((project) => ({ track: "data" as const, project })) : []),
+  ];
+  const selectedIndex = selected ? visible.findIndex((item) => item.project === selected.project) : -1;
+  const sibling = (step: number) =>
+    visible.length > 1 ? visible[(selectedIndex + step + visible.length) % visible.length] : undefined;
+  const navigate = (step: number) => {
+    const target = sibling(step);
+    if (target) setSelected(target);
+  };
+  const related: RelatedProject[] = selected
+    ? visible
+        .filter((item) => item.project !== selected.project)
+        .map((item) => ({ item, shared: chipsOf(item).filter((chip) => chipsOf(selected).includes(chip)) }))
+        .filter(({ shared }) => shared.length > 0)
+        .sort((a, b) => b.shared.length - a.shared.length)
+        .slice(0, 3)
+    : [];
+  const handleModalKeyDown =(event: KeyboardEvent) => {
+    if (event.key === "ArrowRight") navigate(1);
+    if (event.key === "ArrowLeft") navigate(-1);
+  };
 
   return (
     <section className="w-full py-10 lg:py-16">
@@ -598,8 +747,22 @@ export const Projects = () => {
       ) : null}
 
       {selected ? (
-        <Modal onClose={() => setSelected(null)} labelledBy={PROJECT_MODAL_TITLE_ID}>
-          <ProjectDetails selected={selected} />
+        <Modal
+          onClose={() => setSelected(null)}
+          onKeyDown={handleModalKeyDown}
+          labelledBy={PROJECT_MODAL_TITLE_ID}
+          scrollResetKey={selected.project.title}
+        >
+          <ProjectDetails
+            selected={selected}
+            index={selectedIndex}
+            total={visible.length}
+            previous={sibling(-1)}
+            next={sibling(1)}
+            related={related}
+            onNavigate={navigate}
+            onSelect={setSelected}
+          />
         </Modal>
       ) : null}
     </section>

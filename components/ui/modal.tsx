@@ -1,7 +1,7 @@
 "use client";
 
 import { IconX } from "@tabler/icons-react";
-import { type MouseEvent, type ReactNode, useEffect, useRef } from "react";
+import { type KeyboardEvent, type MouseEvent, type ReactNode, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 
@@ -10,16 +10,26 @@ import { cn } from "@/lib/utils";
 // otherwise trap a fixed overlay) and gets focus trapping and Esc for free.
 export const Modal = ({
   onClose,
+  onKeyDown,
   labelledBy,
+  scrollResetKey,
   className,
   children,
 }: {
   onClose: () => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLDialogElement>) => void;
   labelledBy?: string;
+  // Change it to send the content back to the top, e.g. when swapping what the modal shows.
+  scrollResetKey?: string;
   className?: string;
   children: ReactNode;
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0 });
+  }, [scrollResetKey]);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -45,8 +55,9 @@ export const Modal = ({
       aria-labelledby={labelledBy}
       onClose={onClose}
       onClick={handleBackdropClick}
+      onKeyDown={onKeyDown}
       className={cn(
-        "m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-4xl overflow-hidden rounded-[2rem] border border-zinc-950/10 bg-white p-0 text-zinc-950 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.7)] outline-none duration-200 animate-in fade-in-0 zoom-in-95 backdrop:bg-zinc-950/70 backdrop:backdrop-blur-sm motion-reduce:animate-none dark:border-white/[0.12] dark:bg-zinc-900 dark:text-white",
+        "m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-5xl overflow-hidden rounded-[2rem] border border-zinc-950/10 bg-white p-0 text-zinc-950 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.7)] outline-none duration-200 animate-in fade-in-0 zoom-in-95 backdrop:bg-zinc-950/70 backdrop:backdrop-blur-sm motion-reduce:animate-none dark:border-white/[0.12] dark:bg-zinc-900 dark:text-white",
         className,
       )}
     >
@@ -58,7 +69,7 @@ export const Modal = ({
       >
         <IconX className="h-4 w-4" />
       </button>
-      <div className="max-h-[calc(100dvh-2rem-2px)] overflow-y-auto overscroll-contain">{children}</div>
+      <div ref={scrollRef} className="max-h-[calc(100dvh-2rem-2px)] overflow-y-auto overscroll-contain">{children}</div>
     </dialog>,
     document.body,
   );

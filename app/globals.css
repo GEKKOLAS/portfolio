@@ -726,6 +726,39 @@
   animation-timeline: auto !important;
 }
 
+/* Mobile: the sections are thousands of px tall (projects ~10000px), so
+   promoting/animating them as GPU layers, plus dozens of backdrop/blur
+   filters, exceeds iOS Safari's memory budget and the tab gets killed
+   ("A problem repeatedly occurred"). Keep mobile rendering flat. */
+@media (max-width: 1023px) {
+  .right-scroll .snap-content,
+  .right-scroll .snap-section.is-active .snap-content {
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .right-scroll * {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .right-scroll [style*="blur(0px)"],
+  .right-scroll svg [filter] {
+    filter: none !important;
+  }
+
+  .project-card {
+    will-change: auto;
+  }
+
+  /* Hover-only decorations: useless on touch, but each one became a
+     card-sized GPU layer. */
+  .project-card-glow,
+  .project-card-orb {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .right-scroll .snap-content,
   .right-scroll .snap-section.is-active .snap-content {

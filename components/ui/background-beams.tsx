@@ -2,10 +2,12 @@
 import React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/lib/use-is-mobile";
 
 export const BackgroundBeams = React.memo(
   ({ className }: { className?: string }) => {
-    const paths = [
+    const isMobile = useIsMobile();
+    const allPaths = [
       "M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875",
       "M-373 -197C-373 -197 -305 208 159 335C623 462 691 867 691 867",
       "M-366 -205C-366 -205 -298 200 166 327C630 454 698 859 698 859",
@@ -57,6 +59,10 @@ export const BackgroundBeams = React.memo(
       "M-44 -573C-44 -573 24 -168 488 -41C952 86 1020 491 1020 491",
       "M-37 -581C-37 -581 31 -176 495 -49C959 78 1027 483 1027 483",
     ];
+    // 50 animated gradients + SVG blur filters are rasterised on the CPU by
+    // WebKit every frame, which makes iOS Safari kill the tab; mobile gets a
+    // lighter subset without the glow filter.
+    const paths = isMobile ? allPaths.filter((_, i) => i % 5 === 0) : allPaths;
 
     
     return (
@@ -84,14 +90,16 @@ export const BackgroundBeams = React.memo(
           {paths.map((path, index) => (
             <React.Fragment key={`path-${index}`}>
               {/* Soft luminosity restricted to the animated gradient. */}
-              <motion.path
-                d={path}
-                stroke={`url(#linearGradient-${index})`}
-                strokeOpacity="0.65"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-                filter="url(#moving-beam-glow)"
-              />
+              {!isMobile && (
+                <motion.path
+                  d={path}
+                  stroke={`url(#linearGradient-${index})`}
+                  strokeOpacity="0.65"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  filter="url(#moving-beam-glow)"
+                />
+              )}
               {/* Bright core that gives each moving segment a star-like presence. */}
               <motion.path
                 d={path}

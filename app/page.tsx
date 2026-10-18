@@ -154,7 +154,10 @@ export default function Home() {
 
             {/* Right panel (ONLY scroll container on desktop) */}
             <div className="relative z-10 right-scroll px-3 lg:pl-2 lg:pr-5 xl:pl-3 xl:pr-8">
-              <ScrollLineDrawing />
+              {/* The sticky, composited line forces every section that
+                  overlaps it onto its own GPU layer; on mobile that blows
+                  past iOS Safari's memory limit. Desktop only. */}
+              {!isMobile && <ScrollLineDrawing />}
               <section
                 id="about"
                 className="snap-section relative z-10 bg-transparent"

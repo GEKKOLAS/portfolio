@@ -40,6 +40,15 @@ const certifications: Certification[] = [
     preview: { src: "/certificates/google-ai-professional.jpg", width: 1600, height: 1190 },
   },
   {
+    title: "Masterclass de Python e IA Agéntica para Empresas",
+    issuer: "Código Facilito",
+    date: "Jun 2026",
+    meta: "1h 58m",
+    id: "d23cc513-7a0d-4662-a8d3-45f2109e7397",
+    file: "/certificates/python-agentic-ai-business.pdf",
+    preview: { src: "/certificates/python-agentic-ai-business.jpg", width: 1600, height: 1131 },
+  },
+  {
     title: "Registered Scrum Basics™",
     issuer: "Agile Education · Scrum Inc.",
     date: "Jun 2026",

@@ -1,35 +1,40 @@
 "use client";
 
 import Image from "next/image";
-import React, { type ReactNode, useState } from "react";
+import React, { type CSSProperties, type ReactNode, useState } from "react";
 import { BriefcaseBusiness, Code2, Headphones, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTilt } from "@/lib/use-tilt";
 
+// `accent` is an "r g b" triplet so the cards can apply their own alpha.
 const focusAreas = [
   {
     title: "AI-driven design",
     short: "Generative, original visuals",
     description: "Creative direction, generative workflows and original visual concepts shaped from imagination.",
     icon: Sparkles,
+    accent: "34 211 238",
   },
   {
     title: "Modern engineering",
     short: "Scalable full-stack products",
     description: "Current frameworks, scalable architecture and polished full-stack product experiences.",
     icon: Code2,
+    accent: "168 85 247",
   },
   {
     title: "Project management",
     short: "Planning and delivery",
     description: "A growing interest in planning, coordination and turning product goals into clear delivery paths.",
     icon: BriefcaseBusiness,
+    accent: "236 72 153",
   },
   {
     title: "IT support",
     short: "Help desk and troubleshooting",
     description: "Interested in help desk operations, practical troubleshooting and dependable user support.",
     icon: Headphones,
+    accent: "249 115 22",
   },
 ];
 
@@ -47,17 +52,68 @@ const ALIEN_STICKER =
 
 // No backdrop-blur on these blocks: six blurred layers are costly to composite.
 const block =
-  "relative overflow-hidden rounded-[1.75rem] border border-zinc-200/70 bg-white/70 p-6 dark:border-white/10 dark:bg-zinc-900/70";
+  "bento-board relative overflow-hidden rounded-[1.75rem] border border-zinc-200/70 bg-white/70 p-6 dark:border-white/10";
 const label = "text-[11px] font-semibold uppercase tracking-[0.22em]";
+
+// Paint each glow on the board itself so it stays visible without 3D transforms.
+type Light = { surface: string; glow: string; line: string };
+
+const lights = {
+  hero: {
+    surface: "#121014",
+    glow: "radial-gradient(ellipse 70% 90% at 100% 0%, rgba(168,85,247,0.30), transparent 60%), radial-gradient(ellipse 60% 70% at 0% 100%, rgba(236,72,153,0.20), transparent 60%), radial-gradient(ellipse 40% 50% at 55% 110%, rgba(34,211,238,0.16), transparent 70%)",
+    line: "linear-gradient(90deg, transparent, #E879F9, transparent)",
+  },
+  since: {
+    surface: "#0D1416",
+    glow: "radial-gradient(ellipse 90% 80% at 100% 100%, rgba(34,211,238,0.30), transparent 65%)",
+    line: "linear-gradient(90deg, transparent, #22D3EE, transparent)",
+  },
+  status: {
+    surface: "#0D150F",
+    glow: "radial-gradient(ellipse 90% 80% at 0% 0%, rgba(74,222,128,0.28), transparent 65%)",
+    line: "linear-gradient(90deg, transparent, #4ADE80, transparent)",
+  },
+  quote: {
+    surface: "#150E12",
+    glow: "radial-gradient(ellipse 80% 100% at 0% 0%, rgba(236,72,153,0.26), transparent 60%), radial-gradient(ellipse 60% 80% at 100% 100%, rgba(249,115,22,0.18), transparent 60%)",
+    line: "linear-gradient(90deg, transparent, #F472B6, transparent)",
+  },
+  origin: {
+    surface: "#121012",
+    glow: "radial-gradient(ellipse 50% 70% at 15% 100%, rgba(250,204,21,0.20), transparent 70%), radial-gradient(ellipse 50% 70% at 50% 100%, rgba(236,72,153,0.16), transparent 70%), radial-gradient(ellipse 50% 70% at 85% 100%, rgba(168,85,247,0.20), transparent 70%)",
+    line: "linear-gradient(90deg, transparent, #FACC15, #EC4899, #A855F7, transparent)",
+  },
+  shaping: {
+    surface: "#111113",
+    glow: "radial-gradient(ellipse 30% 120% at 12% 0%, rgba(34,211,238,0.14), transparent 70%), radial-gradient(ellipse 30% 120% at 38% 0%, rgba(168,85,247,0.14), transparent 70%), radial-gradient(ellipse 30% 120% at 62% 0%, rgba(236,72,153,0.14), transparent 70%), radial-gradient(ellipse 30% 120% at 88% 0%, rgba(249,115,22,0.14), transparent 70%)",
+    line: "linear-gradient(90deg, transparent, #22D3EE, #A855F7, #EC4899, #F97316, transparent)",
+  },
+} satisfies Record<string, Light>;
 
 // Same cursor-reactive tilt and glow as the project cards. `span` goes on the
 // perspective wrapper, which is the actual grid item.
-function BentoBlock({ span, className, children }: { span: string; className?: string; children: ReactNode }) {
+function BentoBlock({
+  span,
+  light,
+  className,
+  children,
+}: {
+  span: string;
+  light: Light;
+  className?: string;
+  children: ReactNode;
+}) {
   const tilt = useTilt<HTMLDivElement>();
 
   return (
     <div className={cn("project-card-scene", span)}>
-      <div {...tilt} className={cn("project-card h-full", block, className)}>
+      <div
+        {...tilt}
+        className={cn("project-card h-full", block, className)}
+        style={{ "--bento-glow": light.glow, "--bento-surface": light.surface } as CSSProperties}
+      >
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-8 top-0 h-px" style={{ background: light.line }} />
         <div className="project-card-glow" aria-hidden="true" />
         {children}
       </div>
@@ -71,15 +127,11 @@ export const About = () => {
   return (
     <section className="w-full py-10">
       <div className="grid gap-3 lg:grid-cols-6">
-        <BentoBlock span="lg:col-span-4 lg:row-span-2" className="flex flex-col justify-between gap-6 p-7">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 bg-[radial-gradient(circle,rgba(217,70,239,0.22),transparent_70%)]"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-32 left-1/2 h-[260px] w-[260px] -translate-x-1/2 bg-[radial-gradient(circle,rgba(34,211,238,0.14),transparent_70%)]"
-          />
+        <BentoBlock
+          span="lg:col-span-4 lg:row-span-2"
+          light={lights.hero}
+          className="flex flex-col justify-between gap-6 border-fuchsia-400/25 p-7 dark:border-fuchsia-400/25"
+        >
           {/* The sticker's own animation has the alien lean in from its right edge and wave,
               so pinning it flush to the block's right edge makes it peek out from the border. */}
           <Image
@@ -100,13 +152,13 @@ export const About = () => {
               <span className="bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent">imagination</span>{" "}
               to create digital experiences with their own identity.
             </h2>
-            <p className="mt-4 max-w-xl text-[15px] leading-7 text-zinc-600 dark:text-zinc-400">
+            <p className="mt-4 max-w-xl text-[15px] leading-7 text-zinc-700 dark:text-zinc-300">
               I’m a business-minded developer with a blend of technical depth and creative product thinking.
             </p>
           </div>
         </BentoBlock>
 
-        <BentoBlock span="lg:col-span-2" className="bg-gradient-to-br from-cyan-400/10 to-white/70 dark:to-zinc-900/75">
+        <BentoBlock span="lg:col-span-2" light={lights.since} className="border-cyan-400/25 dark:border-cyan-400/25">
           <p className={`${label} text-cyan-700 dark:text-cyan-300`}>Building software since</p>
           <p className="mt-3 text-[52px] font-bold leading-none tracking-tighter text-zinc-950 dark:text-white">2019</p>
           <ul className="mt-4 flex flex-wrap gap-1.5">
@@ -121,7 +173,7 @@ export const About = () => {
           </ul>
         </BentoBlock>
 
-        <BentoBlock span="lg:col-span-2" className="border-green-400/20 bg-gradient-to-br from-green-400/10 to-white/70 dark:border-green-400/20 dark:to-zinc-900/75">
+        <BentoBlock span="lg:col-span-2" light={lights.status} className="border-green-400/25 dark:border-green-400/25">
           <p className={`${label} flex items-center gap-2 text-green-700 dark:text-green-300`}>
             <span className="h-2 w-2 rounded-full bg-green-400 shadow-[0_0_12px_#4ADE80]" />
             Status
@@ -137,7 +189,7 @@ export const About = () => {
           </a>
         </BentoBlock>
 
-        <BentoBlock span="lg:col-span-3" className="border-fuchsia-400/25 bg-[radial-gradient(circle_at_0%_0%,rgba(217,70,239,0.16),transparent_55%)] dark:border-fuchsia-400/25">
+        <BentoBlock span="lg:col-span-3" light={lights.quote} className="border-pink-400/25 dark:border-pink-400/25">
           <span
             aria-hidden="true"
             className="pointer-events-none absolute -top-3 right-5 font-serif text-[140px] leading-none text-fuchsia-500/10 dark:text-fuchsia-300/10"
@@ -150,8 +202,8 @@ export const About = () => {
           </p>
         </BentoBlock>
 
-        <BentoBlock span="lg:col-span-3">
-          <p className={`${label} text-zinc-500 dark:text-zinc-400`}>Where I come from</p>
+        <BentoBlock span="lg:col-span-3" light={lights.origin} className="border-yellow-400/25 dark:border-yellow-400/25">
+          <p className={`${label} text-zinc-600 dark:text-zinc-300`}>Where I come from</p>
           <ol className="relative mt-5 grid grid-cols-3">
             <li
               aria-hidden="true"
@@ -169,18 +221,18 @@ export const About = () => {
               </li>
             ))}
           </ol>
-          <p className="mt-5 text-[12.5px] text-zinc-500">
+          <p className="mt-5 text-[12.5px] text-zinc-600 dark:text-zinc-400">
             That mix is why I connect strategy, engineering and design in a practical way.
           </p>
         </BentoBlock>
 
-        <BentoBlock span="lg:col-span-6">
+        <BentoBlock span="lg:col-span-6" light={lights.shaping}>
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className={`${label} text-zinc-500 dark:text-zinc-400`}>Currently shaping</p>
-            <p className="text-xs text-zinc-400 dark:text-zinc-600">Hover to read more</p>
+            <p className={`${label} text-zinc-600 dark:text-zinc-300`}>Currently shaping</p>
+            <p className="text-xs text-zinc-500">Hover to read more</p>
           </div>
           <ul className="mt-4 grid grid-cols-2 gap-2.5 xl:grid-cols-4">
-            {focusAreas.map(({ title, short, description, icon: Icon }, index) => {
+            {focusAreas.map(({ title, short, description, icon: Icon, accent }, index) => {
               const isActive = activeArea === index;
               return (
                 <li
@@ -190,9 +242,10 @@ export const About = () => {
                   onMouseLeave={() => setActiveArea(null)}
                   onFocus={() => setActiveArea(index)}
                   onBlur={() => setActiveArea(null)}
-                  className="rounded-[1.25rem] border border-zinc-200/70 bg-white/55 p-4 outline-none transition-all duration-300 hover:-translate-y-[3px] hover:border-fuchsia-400/35 hover:bg-fuchsia-500/[0.06] focus-visible:border-fuchsia-400/35 focus-visible:bg-fuchsia-500/[0.06] dark:border-white/10 dark:bg-white/[0.04]"
+                  style={{ "--accent": accent } as CSSProperties}
+                  className="rounded-[1.25rem] border border-[rgb(var(--accent)/0.3)] bg-white/55 p-4 outline-none transition-all duration-300 hover:-translate-y-[3px] hover:border-[rgb(var(--accent)/0.6)] hover:bg-[rgb(var(--accent)/0.07)] focus-visible:border-[rgb(var(--accent)/0.6)] focus-visible:bg-[rgb(var(--accent)/0.07)] dark:bg-white/[0.04]"
                 >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-[11px] border border-fuchsia-400/20 bg-fuchsia-500/10 text-fuchsia-600 dark:text-fuchsia-300">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-[11px] border border-[rgb(var(--accent)/0.3)] bg-[rgb(var(--accent)/0.12)] text-[rgb(var(--accent))]">
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </div>
                   <h3 className="mt-3 text-sm font-semibold text-zinc-950 dark:text-white">{title}</h3>
@@ -200,7 +253,7 @@ export const About = () => {
                   <div className="mt-1 grid text-xs leading-5">
                     <p
                       aria-hidden={isActive}
-                      className={`[grid-area:1/1] text-zinc-600 transition-opacity duration-200 dark:text-zinc-400 ${isActive ? "opacity-0" : "opacity-100"}`}
+                      className={`[grid-area:1/1] text-zinc-700 transition-opacity duration-200 dark:text-zinc-300 ${isActive ? "opacity-0" : "opacity-100"}`}
                     >
                       {short}
                     </p>

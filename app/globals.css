@@ -276,6 +276,15 @@
   }
 }
 
+/* Keep bento colors on the surface, including when mobile disables 3D layers. */
+.bento-board {
+  background-image: var(--bento-glow);
+}
+
+.dark .bento-board {
+  background-color: var(--bento-surface);
+}
+
 /* Layered, cursor-reactive project cards */
 .project-card-scene {
   perspective: 1400px;

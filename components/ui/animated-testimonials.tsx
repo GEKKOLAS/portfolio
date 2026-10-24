@@ -65,8 +65,8 @@ export const AnimatedTestimonials = ({
   };
 
   return (
-    <section className="w-full py-8 sm:py-10 lg:py-12">
-      <div className="rounded-[2rem] border border-white/15 bg-white/70 p-6 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-900/70 sm:p-8">
+    <section className="portfolio-services w-full py-8 sm:py-10 lg:py-12">
+      <div className="theme-paper rounded-[2rem] border border-white/15 bg-white/70 p-6 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-900/70 sm:p-8">
         <div className="mb-6">
           <p className="text-xs uppercase tracking-[0.35em] text-fuchsia-500">Services</p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">
@@ -104,14 +104,14 @@ export const AnimatedTestimonials = ({
                     height={700}
                     unoptimized
                     draggable={true}
-                    className="h-full w-full rounded-[1.5rem] border border-white/15 object-cover object-center shadow-[0_20px_60px_-24px_rgba(0,0,0,0.45)]"
+                    className="service-artwork h-full w-full rounded-[1.5rem] border border-white/15 object-cover object-center shadow-[0_20px_60px_-24px_rgba(0,0,0,0.45)]"
                   />
                 </motion.div>
               ))}
             </AnimatePresence>
           </div>
 
-          <div className="flex flex-col justify-between gap-5 rounded-[1.5rem] border border-white/10 bg-zinc-950/5 p-5 dark:bg-white/5">
+          <div className="service-description flex flex-col justify-between gap-5 rounded-[1.5rem] border border-white/10 bg-zinc-950/5 p-5 dark:bg-white/5">
             <motion.div
               key={active}
               initial={{ y: 16, opacity: 0 }}
@@ -144,14 +144,18 @@ export const AnimatedTestimonials = ({
 
             <div className="flex gap-3">
               <button
+                type="button"
+                aria-label="Previous service"
                 onClick={handlePrev}
-                className="group/button flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white/70 transition-colors hover:border-fuchsia-300 hover:bg-fuchsia-50 dark:border-zinc-700 dark:bg-zinc-800/70 dark:hover:bg-zinc-700"
+                className="service-arrow group/button flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white/70 transition-colors hover:border-fuchsia-300 hover:bg-fuchsia-50 dark:border-zinc-700 dark:bg-zinc-800/70 dark:hover:bg-zinc-700"
               >
                 <IconArrowLeft className="h-5 w-5 text-zinc-700 transition-transform duration-300 group-hover/button:rotate-12 dark:text-zinc-300" />
               </button>
               <button
+                type="button"
+                aria-label="Next service"
                 onClick={handleNext}
-                className="group/button flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white/70 transition-colors hover:border-fuchsia-300 hover:bg-fuchsia-50 dark:border-zinc-700 dark:bg-zinc-800/70 dark:hover:bg-zinc-700"
+                className="service-arrow group/button flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white/70 transition-colors hover:border-fuchsia-300 hover:bg-fuchsia-50 dark:border-zinc-700 dark:bg-zinc-800/70 dark:hover:bg-zinc-700"
               >
                 <IconArrowRight className="h-5 w-5 text-zinc-700 transition-transform duration-300 group-hover/button:-rotate-12 dark:text-zinc-300" />
               </button>

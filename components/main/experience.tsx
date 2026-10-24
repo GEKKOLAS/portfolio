@@ -40,7 +40,7 @@ const roles = [
 export const Experience = () => {
   return (
     <section className="w-full py-6 sm:py-8 lg:py-10">
-      <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/70 p-5 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-900/70 sm:p-7 xl:p-8">
+      <div className="theme-paper experience-paper relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/70 p-5 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-900/70 sm:p-7 xl:p-8">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-fuchsia-500/10 blur-3xl"

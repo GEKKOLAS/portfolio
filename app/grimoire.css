@@ -1,0 +1,381 @@
+@font-face {
+  font-family: "Pirata One";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/pirata-one-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IM Fell English";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/im-fell-english-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IM Fell English";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/im-fell-english-italic.woff2") format("woff2");
+}
+
+/* These decorations take no space in the original portfolio theme. */
+.grimoire-ribbon,
+.grimoire-chapter {
+  display: none;
+}
+
+html[data-theme="grimoire"] {
+  color-scheme: dark;
+  --background: #170608;
+  --foreground: #efe2c4;
+  --card: #2b0e11;
+  --card-foreground: #efe2c4;
+  --popover: #2b0e11;
+  --popover-foreground: #efe2c4;
+  --primary: #d9ae5b;
+  --primary-foreground: #2b0e11;
+  --secondary: #42141b;
+  --secondary-foreground: #efe2c4;
+  --muted: #301015;
+  --muted-foreground: #cdb89a;
+  --accent: #9c1027;
+  --accent-foreground: #f3e9d2;
+  --border: #d9ae5b45;
+  --input: #d9ae5b45;
+  --ring: #d9ae5b;
+
+  /* Existing utility colors follow the palette without recoloring images. */
+  --color-white: #efe2c4;
+  --color-zinc-100: #efe2c4;
+  --color-zinc-200: #dfcba7;
+  --color-zinc-300: #cdb89a;
+  --color-zinc-400: #cdb89a;
+  --color-zinc-500: #b8997b;
+  --color-zinc-600: #a08069;
+  --color-zinc-800: #42141b;
+  --color-zinc-900: #2b0e11;
+  --color-zinc-950: #170608;
+  --color-fuchsia-300: #ebc987;
+  --color-fuchsia-400: #d9ae5b;
+  --color-fuchsia-500: #e25a6a;
+  --color-fuchsia-600: #b3122e;
+  --color-purple-300: #e6cda0;
+  --color-purple-400: #d9ae5b;
+  --color-purple-500: #b3122e;
+  --color-violet-300: #e6cda0;
+  --color-violet-400: #d9ae5b;
+  --color-violet-500: #b3122e;
+  --color-cyan-300: #e6cda0;
+  --color-cyan-400: #d9ae5b;
+  --color-cyan-500: #e25a6a;
+  --color-pink-300: #edb5a3;
+  --color-pink-400: #e25a6a;
+  --color-pink-500: #b3122e;
+  --color-rose-400: #e25a6a;
+  --color-rose-500: #e25a6a;
+  --color-yellow-400: #ebc987;
+  --color-yellow-500: #d9ae5b;
+}
+
+html[data-theme="grimoire"] body {
+  background: radial-gradient(ellipse at 50% -10%, #5a1820 0%, #2a0c10 50%, #170608 100%);
+  background-attachment: fixed;
+  color: #efe2c4;
+  font-family: "IM Fell English", Georgia, serif;
+}
+
+html[data-theme="grimoire"] ::selection {
+  background: #9c1027;
+  color: #f3e9d2;
+}
+
+html[data-theme="grimoire"] :is(h1, h2, h3, h4) {
+  font-family: "Pirata One", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+html[data-theme="grimoire"] .portfolio-profile {
+  overflow: visible;
+}
+
+html[data-theme="grimoire"] .portfolio-profile nav {
+  margin-bottom: 1.5rem;
+}
+
+html[data-theme="grimoire"] .nav-item {
+  color: #cdb89a;
+  font-family: "Pirata One", Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.025em;
+  text-transform: none;
+}
+
+html[data-theme="grimoire"] .nav-item::before {
+  content: "✦";
+  margin-right: 0.3rem;
+  color: #e25a6a;
+  font-size: 0.65rem;
+}
+
+html[data-theme="grimoire"] .nav-item:hover {
+  color: #d9ae5b;
+}
+
+html[data-theme="grimoire"] .profile-medallion {
+  margin-bottom: 1.5rem;
+  padding: 6px;
+  background: #e9dbbe;
+  box-shadow: 0 0 0 3px #2b0e11, 8px 8px 0 #0b0304;
+}
+
+html[data-theme="grimoire"] .profile-medallion::before {
+  position: absolute;
+  inset: -12px;
+  border: 2px dashed #d9ae5b80;
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+html[data-theme="grimoire"] .profile-portrait img {
+  filter: sepia(0.35) contrast(1.05);
+}
+
+html[data-theme="grimoire"] .profile-portrait .pixel-fire-img {
+  animation: none;
+}
+
+html[data-theme="grimoire"] .profile-portrait .pixel-fire-grid {
+  display: none;
+}
+
+html[data-theme="grimoire"] .grimoire-ribbon {
+  position: absolute;
+  z-index: 20;
+  bottom: -12px;
+  left: 50%;
+  display: block;
+  width: max-content;
+  padding: 3px 12px;
+  transform: translateX(-50%) rotate(-3deg);
+  border: 2px solid #2b0e11;
+  border-radius: 2px;
+  background: #b3122e;
+  box-shadow: 3px 3px 0 #0b0304;
+  color: #f3e9d2;
+  font-family: "Pirata One", Georgia, serif;
+  font-size: 0.85rem;
+}
+
+html[data-theme="grimoire"] .grimoire-chapter {
+  display: block;
+  margin-block: 0.35rem 0.7rem;
+  color: #d9ae5b;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+html[data-theme="grimoire"] .grimoire-chapter span {
+  padding-inline: 0.35rem;
+  color: #e25a6a;
+}
+
+html[data-theme="grimoire"] .profile-heading {
+  color: #efe2c4;
+  text-shadow: 3px 3px 0 #0b0304;
+}
+
+html[data-theme="grimoire"] .profile-role .bg-clip-text {
+  background: none;
+  color: #d9ae5b;
+  -webkit-text-fill-color: currentColor;
+}
+
+html[data-theme="grimoire"] .profile-description .sekuya-regular {
+  max-width: 35ch;
+  font-family: "IM Fell English", Georgia, serif;
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+html[data-theme="grimoire"] .profile-description .animate-aurora-text {
+  animation: none;
+  background-image: none !important;
+  color: #cdb89a;
+  filter: none;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html[data-theme="grimoire"] .profile-description .animate-aurora-text.absolute {
+  display: none;
+}
+
+/* Paper panels retain the current layout and interactions in every section.
+   Local utility tokens keep existing dark:text-* classes legible on paper. */
+html[data-theme="grimoire"] .theme-paper {
+  --color-white: #2b0e11;
+  --color-zinc-50: #2b0e11;
+  --color-zinc-100: #e9dbbe;
+  --color-zinc-200: #5e4334;
+  --color-zinc-300: #5e4334;
+  --color-zinc-400: #6e4b3a;
+  --color-zinc-500: #77513d;
+  --color-zinc-600: #5e4334;
+  --color-zinc-700: #5e4334;
+  --color-zinc-800: #d9c49e;
+  --color-zinc-900: #e4d1aa;
+  --color-zinc-950: #2b0e11;
+  --color-fuchsia-200: #9c1027;
+  --color-fuchsia-300: #9c1027;
+  --color-fuchsia-400: #9c1027;
+  --color-fuchsia-500: #9c1027;
+  --color-fuchsia-600: #9c1027;
+  --color-fuchsia-700: #9c1027;
+  --color-purple-300: #9c1027;
+  --color-purple-400: #9c1027;
+  --color-purple-500: #9c1027;
+  --color-violet-300: #9c1027;
+  --color-violet-400: #9c1027;
+  --color-violet-500: #9c1027;
+  --color-violet-700: #9c1027;
+  --color-cyan-200: #624a2c;
+  --color-cyan-300: #9c1027;
+  --color-cyan-400: #9c1027;
+  --color-cyan-600: #9c1027;
+  --color-cyan-700: #9c1027;
+  --color-cyan-800: #9c1027;
+  --color-pink-300: #9c1027;
+  --color-pink-400: #9c1027;
+  --color-pink-500: #9c1027;
+  --color-green-200: #42552e;
+  --color-green-300: #42552e;
+  --color-green-400: #536e39;
+  --color-green-700: #42552e;
+  --color-yellow-300: #805622;
+  --color-yellow-400: #996d23;
+  --color-yellow-500: #996d23;
+  --color-yellow-600: #805622;
+  --color-yellow-700: #805622;
+  --color-orange-500: #9c1027;
+  --accent: 156 16 39;
+  background-color: #e9dbbe;
+  background-image: radial-gradient(ellipse at center, #f5e9d200 25%, #78461e35 100%);
+  border: 1px solid #2b0e1145;
+  border-radius: 3px;
+  box-shadow: inset 0 0 36px #78461e30, 5px 6px 0 #0b030440;
+  color: #2b0e11;
+  transform-style: flat;
+  clip-path: polygon(0 3px, 5% 0, 10% 4px, 15% 1px, 20% 5px, 25% 0, 30% 3px, 35% 1px, 40% 5px, 45% 0, 50% 3px, 55% 1px, 60% 4px, 65% 0, 70% 5px, 75% 1px, 80% 3px, 85% 0, 90% 4px, 95% 1px, 100% 3px, 100% calc(100% - 2px), 95% 100%, 90% calc(100% - 4px), 85% 100%, 80% calc(100% - 3px), 75% calc(100% - 1px), 70% calc(100% - 5px), 65% 100%, 60% calc(100% - 2px), 55% 100%, 50% calc(100% - 4px), 45% calc(100% - 1px), 40% 100%, 35% calc(100% - 5px), 30% calc(100% - 2px), 25% 100%, 20% calc(100% - 3px), 15% 100%, 10% calc(100% - 5px), 5% 100%, 0 calc(100% - 2px));
+}
+
+html[data-theme="grimoire"] .theme-paper:hover {
+  box-shadow: inset 0 0 36px #78461e30, 6px 8px 0 #0b030460;
+}
+
+/* A clipped sheet is a flat surface. Raised 3D children can otherwise lose
+   pointer hit testing on mobile, including the links inside project cards. */
+html[data-theme="grimoire"] .theme-paper :is(.project-card-content, .project-card-image, .project-card-chip) {
+  transform: none;
+  transform-style: flat;
+}
+
+html[data-theme="grimoire"] .theme-paper .bg-clip-text {
+  background-image: none;
+  color: #9c1027;
+  -webkit-text-fill-color: currentColor;
+}
+
+html[data-theme="grimoire"] .theme-paper :is(.project-card-orb, .project-card-glow, .about-sticker) {
+  display: none;
+}
+
+html[data-theme="grimoire"] .theme-paper .about-intro {
+  padding-right: 0;
+}
+
+html[data-theme="grimoire"] .bento-accent-rule {
+  background: linear-gradient(90deg, transparent, #9c1027, transparent) !important;
+}
+
+html[data-theme="grimoire"] .about-focus-area {
+  --accent: 156 16 39 !important;
+  border-radius: 3px;
+}
+
+html[data-theme="grimoire"] .about-origin-step {
+  border-color: #9c1027 !important;
+  box-shadow: none !important;
+  color: #9c1027 !important;
+}
+
+html[data-theme="grimoire"] .experience-paper article {
+  border-color: #2b0e1140;
+  border-radius: 3px;
+  background-color: #2b0e1109;
+}
+
+html[data-theme="grimoire"] .experience-paper article:hover {
+  border-color: #9c102770;
+  background-color: #2b0e1110;
+  box-shadow: 3px 4px 0 #2b0e111a;
+}
+
+html[data-theme="grimoire"] .certificate-preview-label {
+  background: #f3e9d2;
+  color: #2b0e11;
+}
+
+html[data-theme="grimoire"] .portfolio-loader {
+  background: #170608;
+}
+
+html[data-theme="grimoire"] .portfolio-loader .font-tangerine {
+  color: #efe2c4;
+  font-family: "Pirata One", Georgia, serif;
+  font-size: 4rem;
+}
+
+html[data-theme="grimoire"] .portfolio-loader .font-tangerine > span:not(:first-child) {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  html[data-theme="grimoire"] .portfolio-profile::after {
+    position: absolute;
+    inset: 8% -0.5rem 8% auto;
+    width: 1px;
+    background: linear-gradient(transparent, #d9ae5b60, transparent);
+    content: "";
+    pointer-events: none;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 800px) {
+  html[data-theme="grimoire"] .portfolio-profile nav {
+    margin-bottom: 0.7rem;
+    padding-block: 0.7rem;
+  }
+
+  html[data-theme="grimoire"] .profile-heading {
+    font-size: 1.7rem;
+  }
+
+  html[data-theme="grimoire"] .profile-description .sekuya-regular {
+    font-size: 0.95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="grimoire"] *,
+  html[data-theme="grimoire"] *::before,
+  html[data-theme="grimoire"] *::after {
+    scroll-behavior: auto !important;
+  }
+}

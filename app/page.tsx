@@ -10,12 +10,16 @@ import { FireRevealOverlay } from "@/components/effects/fire-reveal-overlay";
 import { ScrollLineDrawing } from "@/components/effects/scroll-line-drawing";
 import { LoaderFour } from "@/components/ui/loader";
 import { useIsMobile } from "@/lib/use-is-mobile";
+import { useOriginalEffects, usePortfolioTheme } from "@/components/ui/theme-provider";
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 
 export default function Home() {
   const isMobile = useIsMobile();
+  const { isOriginal } = usePortfolioTheme();
+  const originalEffects = useOriginalEffects();
+  const reduceMotion = useReducedMotion();
   const [loading, setLoading] = React.useState(true);
   const [fireDone, setFireDone] = React.useState(false); // fire controls content entrance
   const [whiteShown, setWhiteShown] = React.useState(false); // white background visibility
@@ -71,20 +75,19 @@ export default function Home() {
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false); // loader finished, fire effect starts automatically
-    }, 2000);
+    }, reduceMotion ? 0 : 2000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [reduceMotion]);
 
   React.useEffect(() => {
-    if (loading || !isMobile) return;
+    if (loading || (!isMobile && isOriginal && !reduceMotion)) return;
 
-    // Mobile must never depend on an animation callback to render the page.
-    // In particular, iOS can suspend timers while the loader is fading out,
-    // leaving the previous reveal overlay mounted with no content behind it.
+    // The lightweight theme and reduced-motion path can show content directly.
+    // Mobile also avoids waiting on WebGL callbacks that iOS may suspend.
     setWhiteShown(true);
     setFireDone(true);
     setShowContent(true);
-  }, [isMobile, loading]);
+  }, [isMobile, isOriginal, reduceMotion, loading]);
 
   return (
     <main className="relative min-h-[100dvh]">
@@ -92,14 +95,14 @@ export default function Home() {
         {loading && (
           <motion.div
             key="loader"
-            className="fixed inset-0 z-50 flex items-center justify-center bg-dark"
+            className="portfolio-loader fixed inset-0 z-50 flex items-center justify-center bg-background"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
           >
             <LoaderFour />
           </motion.div>
         )}
-        {!loading && !fireDone && !isMobile && (
+        {!loading && !fireDone && !isMobile && isOriginal && !reduceMotion && (
           <motion.div
             key="fire"
             className="fixed inset-0 z-40 pointer-events-none w-full h-full flex items-center justify-center bg-transparent"
@@ -144,20 +147,20 @@ export default function Home() {
         >
           {/* Fluid-simulation WebGL cursor is too heavy for mobile GPUs and
               causes the tab to run out of memory and reload; desktop only. */}
-          {!isMobile && <SplashCursor />}
+          {!isMobile && originalEffects && !reduceMotion && <SplashCursor />}
 
-          <div className="relative grid min-h-[100dvh] gap-3 bg-transparent antialiased lg:grid-cols-[minmax(260px,0.62fr)_minmax(0,1.38fr)] xl:grid-cols-[minmax(280px,0.58fr)_minmax(0,1.42fr)]" id="turbulent-displace">
+          <div className="portfolio-shell relative grid min-h-[100dvh] gap-3 bg-transparent antialiased lg:grid-cols-[minmax(260px,0.62fr)_minmax(0,1.38fr)] xl:grid-cols-[minmax(280px,0.58fr)_minmax(0,1.42fr)]" id="turbulent-displace">
             {/* Left panel (fixed on desktop) */}
             <div className="relative z-10 flex items-center justify-center w-full px-4 pb-8 lg:h-[100dvh] lg:sticky lg:top-0 overflow-hidden lg:px-2 xl:px-3">
               <Profile />
             </div>
 
             {/* Right panel (ONLY scroll container on desktop) */}
-            <div className="relative z-10 right-scroll px-3 lg:pl-2 lg:pr-5 xl:pl-3 xl:pr-8">
+            <div className="relative z-10 right-scroll min-w-0 px-3 lg:pl-2 lg:pr-5 xl:pl-3 xl:pr-8">
               {/* The sticky, composited line forces every section that
                   overlaps it onto its own GPU layer; on mobile that blows
                   past iOS Safari's memory limit. Desktop only. */}
-              {!isMobile && <ScrollLineDrawing />}
+              {!isMobile && originalEffects && !reduceMotion && <ScrollLineDrawing />}
               <section
                 id="about"
                 className="snap-section relative z-10 bg-transparent"

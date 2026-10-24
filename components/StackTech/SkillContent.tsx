@@ -6,7 +6,7 @@ const Skills = () => {
   return (
     // Main section for the Skills component
     <section
-      className="flex flex-col pt-3 pb-3 items-center justify-center gap-5 h-full w-full relative overflow-hidden"
+      className="portfolio-skills flex flex-col pt-3 pb-3 items-center justify-center gap-5 h-full w-full relative overflow-hidden"
     >
       {/* Title or description for the skills section */}
       <div className="w-full">

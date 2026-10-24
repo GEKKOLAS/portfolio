@@ -1,0 +1,160 @@
+.portfolio-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.sound-toggle {
+  display: inline-flex;
+  flex: 0 0 36px;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 50%;
+  background: #0f0f12;
+  color: #c084fc;
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.sound-toggle[aria-pressed="false"] { color: #a1a1aa; }
+.sound-toggle:hover { border-color: currentColor; }
+.sound-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.sound-toggle:disabled { cursor: default; }
+
+[data-theme="grimoire"] .sound-toggle {
+  border-color: #d9ae5b80;
+  background: #170608;
+  color: #d9ae5b;
+}
+
+[data-theme="rebel"] .sound-toggle {
+  border: 2px solid #fff;
+  border-radius: 0;
+  background: #000;
+  box-shadow: 3px 3px 0 #000;
+  color: #fff;
+}
+
+.theme-switcher {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: max-content;
+  max-width: 100%;
+  padding: 4px;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 999px;
+  background: rgb(15 15 18 / 0.86);
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.18);
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+.theme-switcher-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 7px 9px;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  color: #a1a1aa;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.theme-switcher-option[aria-pressed="true"] {
+  border-color: rgb(192 132 252 / 0.35);
+  color: #ead5ff;
+  background: rgb(168 85 247 / 0.15);
+}
+
+.theme-switcher-option:hover:not(:disabled):not([aria-disabled="true"]) {
+  color: #fafafa;
+  background: rgb(255 255 255 / 0.07);
+}
+
+.theme-switcher-option:focus-visible {
+  outline: 2px solid #c084fc;
+  outline-offset: 3px;
+}
+
+.theme-switcher-option:disabled {
+  cursor: default;
+}
+
+.theme-switcher[aria-busy="true"] .theme-switcher-option {
+  cursor: wait;
+}
+
+[data-theme="grimoire"] .theme-switcher {
+  border-color: rgb(217 174 91 / 0.35);
+  background: rgb(23 6 8 / 0.9);
+}
+
+[data-theme="grimoire"] .theme-switcher-option {
+  color: #cdb89a;
+}
+
+[data-theme="grimoire"] .theme-switcher-option[aria-pressed="true"] {
+  border-color: rgb(217 174 91 / 0.6);
+  color: #efe2c4;
+  background: #83152a;
+}
+
+[data-theme="grimoire"] .theme-switcher-option:focus-visible {
+  outline-color: #d9ae5b;
+}
+
+[data-theme="rebel"] .theme-switcher {
+  gap: 0;
+  border: 3px solid #fff;
+  border-radius: 0;
+  background: #000;
+  box-shadow: 5px 5px 0 #000;
+}
+
+[data-theme="rebel"] .theme-switcher-option {
+  border-radius: 0;
+  color: #fff;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+[data-theme="rebel"] .theme-switcher-option[aria-pressed="true"] {
+  border-color: #fff;
+  background: #e5001c;
+  color: #fff;
+}
+
+[data-theme="rebel"] .theme-switcher-option:focus-visible {
+  outline-color: #fff;
+  outline-offset: -3px;
+}
+
+@media (max-width: 359px) {
+  .theme-switcher-option {
+    gap: 4px;
+    padding-inline: 7px;
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switcher-option {
+    transition: none;
+  }
+}

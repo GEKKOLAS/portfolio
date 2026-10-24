@@ -52,7 +52,7 @@ const ALIEN_STICKER =
 
 // No backdrop-blur on these blocks: six blurred layers are costly to composite.
 const block =
-  "bento-board relative overflow-hidden rounded-[1.75rem] border border-zinc-200/70 bg-white/70 p-6 dark:border-white/10";
+  "theme-paper bento-board relative overflow-hidden rounded-[1.75rem] border border-zinc-200/70 bg-white/70 p-6 dark:border-white/10";
 const label = "text-[11px] font-semibold uppercase tracking-[0.22em]";
 
 // Paint each glow on the board itself so it stays visible without 3D transforms.
@@ -113,7 +113,7 @@ function BentoBlock({
         className={cn("project-card h-full", block, className)}
         style={{ "--bento-glow": light.glow, "--bento-surface": light.surface } as CSSProperties}
       >
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-8 top-0 h-px" style={{ background: light.line }} />
+        <div aria-hidden="true" className="bento-accent-rule pointer-events-none absolute inset-x-8 top-0 h-px" style={{ background: light.line }} />
         <div className="project-card-glow" aria-hidden="true" />
         {children}
       </div>
@@ -141,10 +141,10 @@ export const About = () => {
             width={200}
             height={432}
             unoptimized
-            className="pointer-events-none absolute -bottom-3 right-0 h-56 w-auto select-none motion-reduce:hidden sm:h-72 lg:h-[88%]"
+            className="about-sticker pointer-events-none absolute -bottom-3 right-0 h-56 w-auto select-none motion-reduce:hidden sm:h-72 lg:h-[88%]"
           />
           <p className="relative text-xs uppercase tracking-[0.35em] text-fuchsia-500">About</p>
-          <div className="relative pr-20 sm:pr-28">
+          <div className="about-intro relative pr-20 sm:pr-28">
             <h2 className="max-w-[22ch] text-balance text-[28px] font-semibold leading-[1.12] tracking-tight text-zinc-950 dark:text-white lg:text-4xl">
               I combine{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">engineering</span>,{" "}
@@ -212,7 +212,7 @@ export const About = () => {
             {background.map(({ step, title, color }) => (
               <li key={step} className="relative flex flex-col items-center gap-2.5 text-center">
                 <span
-                  className="flex h-[30px] w-[30px] items-center justify-center rounded-full border bg-white text-[11px] font-semibold dark:bg-zinc-900"
+                  className="about-origin-step flex h-[30px] w-[30px] items-center justify-center rounded-full border bg-white text-[11px] font-semibold dark:bg-zinc-900"
                   style={{ borderColor: color, color, boxShadow: `0 0 14px ${color}66` }}
                 >
                   {step}
@@ -243,7 +243,7 @@ export const About = () => {
                   onFocus={() => setActiveArea(index)}
                   onBlur={() => setActiveArea(null)}
                   style={{ "--accent": accent } as CSSProperties}
-                  className="rounded-[1.25rem] border border-[rgb(var(--accent)/0.3)] bg-white/55 p-4 outline-none transition-all duration-300 hover:-translate-y-[3px] hover:border-[rgb(var(--accent)/0.6)] hover:bg-[rgb(var(--accent)/0.07)] focus-visible:border-[rgb(var(--accent)/0.6)] focus-visible:bg-[rgb(var(--accent)/0.07)] dark:bg-white/[0.04]"
+                  className="about-focus-area rounded-[1.25rem] border border-[rgb(var(--accent)/0.3)] bg-white/55 p-4 outline-none transition-all duration-300 hover:-translate-y-[3px] hover:border-[rgb(var(--accent)/0.6)] hover:bg-[rgb(var(--accent)/0.07)] focus-visible:border-[rgb(var(--accent)/0.6)] focus-visible:bg-[rgb(var(--accent)/0.07)] dark:bg-white/[0.04]"
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-[11px] border border-[rgb(var(--accent)/0.3)] bg-[rgb(var(--accent)/0.12)] text-[rgb(var(--accent))]">
                     <Icon className="h-4 w-4" aria-hidden="true" />

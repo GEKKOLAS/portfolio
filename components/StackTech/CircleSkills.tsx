@@ -21,7 +21,7 @@ const SkillIcon = ({ skill }: { skill: Skill }) => (
 export function OrbitingCirclesDemo() {
   return (
     <motion.div
-      className="relative flex h-[620px] w-full flex-col items-center justify-center overflow-hidden rounded-[2rem] border border-white/15 bg-[radial-gradient(circle_at_top,_rgba(244,114,182,0.18),_transparent_55%)] p-4 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:h-[700px]"
+      className="grimoire-orbits relative flex h-[620px] w-full flex-col items-center justify-center overflow-hidden rounded-[2rem] border border-white/15 bg-[radial-gradient(circle_at_top,_rgba(244,114,182,0.18),_transparent_55%)] p-4 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:h-[700px]"
       initial={{ opacity: 0, scale: 0.96 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: false, amount: 0.3 }}

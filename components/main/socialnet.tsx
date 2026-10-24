@@ -2,7 +2,7 @@ import React from "react";
 
 export const Social = () => {
   return (
-    <section className="bg-transparent dark:bg-transparent">
+    <section className="profile-social bg-transparent dark:bg-transparent">
       <div>
         <div className="grid grid-cols-5 items-center justify-center pt-4 text-gray-500 dark:text-gray-400 [&_svg]:h-9 [&_svg]:w-9 sm:[&_svg]:h-11 sm:[&_svg]:w-11 lg:pt-3 lg:[&_svg]:h-8 lg:[&_svg]:w-8 xl:[&_svg]:h-10 xl:[&_svg]:w-10 2xl:[&_svg]:h-12 2xl:[&_svg]:w-12">
           {/* linkedIn */}

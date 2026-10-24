@@ -1,0 +1,405 @@
+@font-face {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/anton-normal-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/barlow-condensed-normal-500.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/barlow-condensed-normal-600.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/barlow-condensed-normal-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/barlow-condensed-italic-700.woff2") format("woff2");
+}
+
+html[data-theme="rebel"] {
+  color-scheme: dark;
+  --background: #e5001c;
+  --foreground: #fff;
+  --card: #fff;
+  --card-foreground: #000;
+  --popover: #000;
+  --popover-foreground: #fff;
+  --primary: #fff;
+  --primary-foreground: #000;
+  --secondary: #000;
+  --secondary-foreground: #fff;
+  --muted: #c20018;
+  --muted-foreground: #fff;
+  --accent: #000;
+  --accent-foreground: #fff;
+  --border: #000;
+  --input: #000;
+  --ring: #fff;
+  --color-zinc-50: #fff;
+  --color-zinc-100: #fff;
+  --color-zinc-200: #fff;
+  --color-zinc-300: #fff;
+  --color-zinc-400: #fff;
+  --color-zinc-500: #fff;
+  --color-zinc-600: #fff;
+  --color-zinc-700: #252525;
+  --color-zinc-800: #1a1a1a;
+  --color-zinc-900: #101010;
+  --color-zinc-950: #000;
+  --color-fuchsia-300: #fff;
+  --color-fuchsia-400: #fff;
+  --color-fuchsia-500: #fff;
+  --color-fuchsia-600: #e5001c;
+  --color-purple-300: #fff;
+  --color-purple-400: #fff;
+  --color-purple-500: #000;
+  --color-violet-300: #fff;
+  --color-violet-400: #fff;
+  --color-violet-500: #000;
+  --color-cyan-300: #fff;
+  --color-cyan-400: #fff;
+  --color-cyan-500: #000;
+  --color-pink-300: #fff;
+  --color-pink-400: #fff;
+  --color-pink-500: #000;
+  --color-rose-400: #fff;
+  --color-rose-500: #000;
+  --color-yellow-400: #fff;
+  --color-yellow-500: #fff;
+}
+
+html[data-theme="rebel"] body {
+  background:
+    radial-gradient(#0003 1.3px, transparent 1.8px) 0 0 / 11px 11px,
+    linear-gradient(112deg, #e5001c 0 58%, #c20018 58% 74%, #e5001c 74%);
+  background-attachment: fixed;
+  color: #fff;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 500;
+}
+
+html[data-theme="rebel"] ::selection {
+  background: #000;
+  color: #fff;
+}
+
+html[data-theme="rebel"] :is(h1, h2, h3, h4) {
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+html[data-theme="rebel"] .nav-item {
+  padding: 0.35rem 0.45rem;
+  background: #000;
+  color: #fff;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+html[data-theme="rebel"] .nav-item:hover {
+  background: #fff;
+  color: #000;
+}
+
+html[data-theme="rebel"] .nav-item > span {
+  display: none;
+}
+
+html[data-theme="rebel"] .profile-medallion {
+  margin-bottom: 1.3rem;
+  padding: 8px;
+  background: #fff;
+  box-shadow: 10px 10px 0 #000;
+}
+
+html[data-theme="rebel"] .profile-portrait img {
+  filter: grayscale(1) contrast(1.3);
+}
+
+html[data-theme="rebel"] .profile-portrait .pixel-fire-img {
+  animation: none;
+}
+
+html[data-theme="rebel"] .profile-portrait .pixel-fire-grid {
+  display: none;
+}
+
+html[data-theme="rebel"] .grimoire-ribbon {
+  position: absolute;
+  z-index: 20;
+  bottom: -12px;
+  left: 50%;
+  display: block;
+  width: max-content;
+  padding: 3px 10px;
+  transform: translateX(-50%) rotate(-3deg);
+  border: 3px solid #fff;
+  border-radius: 0;
+  background: #000;
+  box-shadow: 4px 4px 0 #000;
+  color: #fff;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+html[data-theme="rebel"] .grimoire-chapter {
+  display: block;
+  width: fit-content;
+  margin: 0.2rem auto 0.75rem;
+  padding: 2px 9px;
+  transform: rotate(-2deg);
+  background: #000;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+html[data-theme="rebel"] .profile-heading {
+  color: #fff;
+  text-shadow: 2px 2px 0 #000;
+}
+
+html[data-theme="rebel"] .profile-name {
+  display: inline-flex;
+  gap: 3px;
+  margin-block: 0.15em;
+  isolation: isolate;
+}
+
+html[data-theme="rebel"] .rebel-name-letter {
+  display: inline-block;
+  padding: 0.04em 0.14em;
+  background: #000;
+  box-shadow: 3px 3px 0 #000;
+  color: #fff;
+  font-family: "Anton", Impact, sans-serif;
+  text-shadow: none;
+  transform: rotate(-4deg);
+}
+
+html[data-theme="rebel"] .rebel-name-letter:nth-child(2n) {
+  background: #fff;
+  color: #000;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  transform: rotate(5deg);
+}
+
+html[data-theme="rebel"] .rebel-name-letter:nth-child(3n) {
+  background: #000;
+  color: #ff3145;
+  font-family: Georgia, serif;
+  transform: rotate(-6deg);
+}
+
+html[data-theme="rebel"] .profile-role .bg-clip-text {
+  background: none;
+  color: #fff;
+  -webkit-text-fill-color: currentColor;
+}
+
+html[data-theme="rebel"] .profile-description .sekuya-regular {
+  max-width: 35ch;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+html[data-theme="rebel"] .profile-description .animate-aurora-text {
+  animation: none;
+  background-image: none !important;
+  color: #fff;
+  filter: none;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html[data-theme="rebel"] .profile-description .animate-aurora-text.absolute {
+  display: none;
+}
+
+html[data-theme="rebel"] .profile-social a {
+  margin-inline: 3px;
+  padding: 5px;
+  border: 2px solid #000;
+  background: #fff;
+  box-shadow: 3px 3px 0 #000;
+}
+
+html[data-theme="rebel"] .profile-social a:nth-child(2) {
+  border-color: #fff;
+  background: #000;
+}
+
+html[data-theme="rebel"] .project-detail-paper h3 {
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+
+/* White poster stock with locally inverted utility colors for legible ink. */
+html[data-theme="rebel"] .theme-paper {
+  --color-white: #000;
+  --color-zinc-50: #000;
+  --color-zinc-100: #000;
+  --color-zinc-200: #2b2b2b;
+  --color-zinc-300: #2b2b2b;
+  --color-zinc-400: #3b3b3b;
+  --color-zinc-500: #454545;
+  --color-zinc-600: #2b2b2b;
+  --color-zinc-700: #000;
+  --color-zinc-800: #e5e5e5;
+  --color-zinc-900: #f1f1f1;
+  --color-zinc-950: #000;
+  --color-fuchsia-200: #c20018;
+  --color-fuchsia-300: #c20018;
+  --color-fuchsia-400: #c20018;
+  --color-fuchsia-500: #c20018;
+  --color-fuchsia-600: #c20018;
+  --color-fuchsia-700: #c20018;
+  --color-purple-300: #c20018;
+  --color-purple-400: #c20018;
+  --color-purple-500: #c20018;
+  --color-violet-300: #c20018;
+  --color-violet-400: #c20018;
+  --color-violet-500: #c20018;
+  --color-violet-700: #c20018;
+  --color-cyan-200: #000;
+  --color-cyan-300: #c20018;
+  --color-cyan-400: #c20018;
+  --color-cyan-600: #c20018;
+  --color-cyan-700: #c20018;
+  --color-cyan-800: #c20018;
+  --color-pink-300: #c20018;
+  --color-pink-400: #c20018;
+  --color-pink-500: #c20018;
+  --color-green-200: #285631;
+  --color-green-300: #285631;
+  --color-green-400: #285631;
+  --color-green-700: #285631;
+  --color-yellow-300: #000;
+  --color-yellow-400: #000;
+  --color-yellow-500: #000;
+  --color-yellow-600: #000;
+  --color-yellow-700: #000;
+  --color-orange-500: #c20018;
+  border: 4px solid #000;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: 8px 8px 0 #000;
+  color: #000;
+  transform-style: flat;
+}
+
+html[data-theme="rebel"] .theme-paper:hover {
+  box-shadow: 10px 10px 0 #000;
+}
+
+html[data-theme="rebel"] .theme-paper :is(.project-card-content, .project-card-image, .project-card-chip) {
+  transform: none;
+  transform-style: flat;
+}
+
+html[data-theme="rebel"] .theme-paper .bg-clip-text {
+  background-image: none;
+  color: #d10019;
+  -webkit-text-fill-color: currentColor;
+}
+
+html[data-theme="rebel"] .theme-paper :is(.project-card-orb, .project-card-glow, .about-sticker) {
+  display: none;
+}
+
+html[data-theme="rebel"] .about-intro {
+  padding-right: 0;
+}
+
+html[data-theme="rebel"] .bento-accent-rule {
+  background: #000 !important;
+  height: 3px;
+}
+
+html[data-theme="rebel"] .about-focus-area {
+  --accent: 209 0 25 !important;
+  border: 3px solid #000;
+  border-radius: 0;
+  background: #f1f1f1;
+}
+
+html[data-theme="rebel"] .about-origin-step {
+  border: 3px solid #000 !important;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: 3px 3px 0 #000 !important;
+  color: #000 !important;
+}
+
+html[data-theme="rebel"] .experience-paper article {
+  border: 3px solid #000;
+  border-radius: 0;
+  background: #f1f1f1;
+}
+
+html[data-theme="rebel"] .experience-paper article:hover {
+  box-shadow: 4px 4px 0 #000;
+}
+
+html[data-theme="rebel"] .certificate-preview-label {
+  border-radius: 0;
+  background: #fff;
+  color: #000;
+}
+
+html[data-theme="rebel"] .portfolio-loader {
+  background: #e5001c;
+}
+
+html[data-theme="rebel"] .portfolio-loader .font-tangerine {
+  color: #fff;
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 4rem;
+  text-transform: uppercase;
+}
+
+html[data-theme="rebel"] .portfolio-loader .font-tangerine > span:not(:first-child) {
+  display: none;
+}
+
+@media (min-width: 1024px) and (max-height: 800px) {
+  html[data-theme="rebel"] .profile-heading { font-size: 1.5rem; }
+  html[data-theme="rebel"] .profile-description .sekuya-regular { font-size: 1.05rem; }
+  html[data-theme="rebel"] .portfolio-profile nav { padding-block: 0.6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="rebel"] *,
+  html[data-theme="rebel"] *::before,
+  html[data-theme="rebel"] *::after { scroll-behavior: auto !important; }
+}

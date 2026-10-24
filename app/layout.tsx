@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono,  } from "next/font/google";
 import "./globals.css";
+import "./grimoire.css";
+import "./rebel.css";
+import { portfolioThemeNames } from "@/lib/portfolio-themes";
 import { ThemeProvider } from "../components/ui/theme-provider";
 import { Tangerine } from "next/font/google";
 
@@ -32,16 +35,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} ${tangerine.variable} antialiased`}
       >
         <ThemeProvider
-          attribute="class"
+          attribute="data-theme"
           defaultTheme="dark"
-          forcedTheme="dark"
-          disableTransitionOnChange
+          themes={portfolioThemeNames}
+          enableSystem={false}
+          enableColorScheme={false}
         >
 
           {children}

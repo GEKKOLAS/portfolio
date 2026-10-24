@@ -782,3 +782,10 @@
     animation: none;
     mix-blend-mode: normal;
 }
+
+/* Font and card geometry change with themes; keep their scroll positions
+   instead of letting the browser move a typography-dependent anchor. */
+.portfolio-shell,
+.right-scroll {
+  overflow-anchor: none;
+}

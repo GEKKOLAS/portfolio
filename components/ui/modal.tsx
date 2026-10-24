@@ -57,7 +57,7 @@ export const Modal = ({
       onClick={handleBackdropClick}
       onKeyDown={onKeyDown}
       className={cn(
-        "m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-5xl overflow-hidden rounded-[2rem] border border-zinc-950/10 bg-white p-0 text-zinc-950 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.7)] outline-none duration-200 animate-in fade-in-0 zoom-in-95 backdrop:bg-zinc-950/70 backdrop:backdrop-blur-sm motion-reduce:animate-none dark:border-white/[0.12] dark:bg-zinc-900 dark:text-white",
+        "portfolio-modal m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-5xl overflow-hidden rounded-[2rem] border border-zinc-950/10 bg-white p-0 text-zinc-950 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.7)] outline-none duration-200 animate-in fade-in-0 zoom-in-95 backdrop:bg-zinc-950/70 backdrop:backdrop-blur-sm motion-reduce:animate-none dark:border-white/[0.12] dark:bg-zinc-900 dark:text-white",
         className,
       )}
     >

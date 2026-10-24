@@ -25,7 +25,7 @@ const SkillText = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.25 }}
-        className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white/75 p-6 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-900/75 sm:p-8"
+        className="grimoire-manuscript relative overflow-hidden rounded-[2rem] border border-white/20 bg-white/75 p-6 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-900/75 sm:p-8"
       >
         <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-fuchsia-500/15 blur-3xl" aria-hidden="true" />
         <div className="pointer-events-none absolute -bottom-24 left-1/3 h-48 w-48 rounded-full bg-cyan-500/10 blur-3xl" aria-hidden="true" />
@@ -41,7 +41,7 @@ const SkillText = () => {
             </span>
           </div>
 
-          <div className="mt-4 text-2xl font-semibold leading-tight text-zinc-950 dark:text-white sm:text-3xl">
+          <div className="skill-heading mt-4 text-2xl font-semibold leading-tight text-zinc-950 dark:text-white sm:text-3xl">
             <ColourfulText text="From robust code to imaginative visual experiences." />
           </div>
 
@@ -57,7 +57,7 @@ const SkillText = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.08 * index, duration: 0.45 }}
-                className={`group flex items-center gap-3 rounded-2xl border border-zinc-200/80 bg-gradient-to-br ${tool.tone} p-3 transition-transform duration-300 hover:-translate-y-1 dark:border-white/10`}
+                className={`skill-tool group flex items-center gap-3 rounded-2xl border border-zinc-200/80 bg-gradient-to-br ${tool.tone} p-3 transition-transform duration-300 hover:-translate-y-1 dark:border-white/10`}
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/30 bg-white/65 text-fuchsia-600 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-fuchsia-300">
                   {tool.use.includes("Visual") || tool.use.includes("Creative") ? (

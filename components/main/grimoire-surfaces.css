@@ -1,0 +1,225 @@
+/* Keep the existing sections and interactions while dressing them as a grimoire. */
+html[data-theme="grimoire"] .portfolio-projects > div:first-child h2 {
+  font-family: "Pirata One", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 3.5vw, 3.15rem);
+  line-height: 1.1;
+  color: #efe2c4;
+}
+
+html[data-theme="grimoire"] .project-controls {
+  border-color: rgb(217 174 91 / 0.3);
+}
+
+html[data-theme="grimoire"] .project-controls button {
+  border-color: rgb(217 174 91 / 0.35);
+  border-radius: 3px;
+  background: #2b0e11;
+  color: #cdb89a;
+}
+
+html[data-theme="grimoire"] .project-controls button[data-active="true"] {
+  border-color: #d9ae5b;
+  background: #9c1027;
+  color: #f3e9d2;
+  box-shadow: 3px 3px 0 #0b0304;
+}
+
+html[data-theme="grimoire"] .project-controls button > span {
+  color: inherit;
+}
+
+html[data-theme="grimoire"] .project-controls button > span:first-child {
+  background: #d9ae5b !important;
+}
+
+html[data-theme="grimoire"] .project-controls button:focus-visible,
+html[data-theme="grimoire"] .service-arrow:focus-visible {
+  outline: 2px solid #d9ae5b;
+  outline-offset: 4px;
+}
+
+html[data-theme="grimoire"] .project-artwork {
+  border: 2px solid #6e4b3a;
+  border-radius: 38px 38px 4px 4px;
+  background: #2b0e11;
+  box-shadow: 4px 4px 0 rgb(43 14 17 / 0.25);
+}
+
+html[data-theme="grimoire"] .project-artwork img,
+html[data-theme="grimoire"] .service-artwork {
+  filter: sepia(0.38) saturate(0.75);
+}
+
+html[data-theme="grimoire"] .project-data-metrics {
+  border-color: rgb(43 14 17 / 0.25);
+  border-radius: 3px;
+  background: rgb(43 14 17 / 0.2);
+}
+
+html[data-theme="grimoire"] .project-data-metrics > div {
+  background: #dfcba7;
+}
+
+html[data-theme="grimoire"] .project-data-bar {
+  background: linear-gradient(to top, rgb(156 16 39 / 0.25), #9c1027) !important;
+}
+
+html[data-theme="grimoire"] .project-data-bar:last-child {
+  background: linear-gradient(to top, #9c1027, #bd7e2e) !important;
+}
+
+html[data-theme="grimoire"] .portfolio-services h2 {
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  line-height: 1.1;
+}
+
+html[data-theme="grimoire"] .service-artwork {
+  border: 3px solid #6e4b3a;
+  border-radius: 38px 38px 4px 4px;
+  box-shadow: 5px 5px 0 rgb(43 14 17 / 0.3);
+}
+
+html[data-theme="grimoire"] .service-description {
+  border: 1px solid rgb(43 14 17 / 0.3);
+  border-radius: 3px;
+  background: rgb(156 16 39 / 0.04);
+}
+
+html[data-theme="grimoire"] .service-arrow {
+  border-color: #9c1027;
+  border-radius: 3px;
+  background: #9c1027;
+  box-shadow: 3px 3px 0 #2b0e11;
+}
+
+html[data-theme="grimoire"] .service-arrow svg {
+  color: #f3e9d2;
+}
+
+html[data-theme="grimoire"] .service-arrow:hover {
+  background: #b3122e;
+}
+
+html[data-theme="grimoire"] :is(.grimoire-manuscript, .grimoire-orbits) {
+  border: 2px solid rgb(217 174 91 / 0.55);
+  border-radius: 4px;
+  background: radial-gradient(ellipse at top, #45151a, #200a0d 75%);
+  box-shadow: 7px 7px 0 #0b0304, inset 0 0 0 5px #200a0d,
+    inset 0 0 0 6px rgb(217 174 91 / 0.2);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+html[data-theme="grimoire"] .grimoire-manuscript > [aria-hidden="true"],
+html[data-theme="grimoire"] .grimoire-orbits > .pointer-events-none {
+  display: none;
+}
+
+html[data-theme="grimoire"] .skill-heading,
+html[data-theme="grimoire"] .skill-heading span {
+  font-family: "Pirata One", Georgia, serif;
+  font-weight: 400;
+  color: #efe2c4 !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="grimoire"] .skill-heading {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+}
+
+html[data-theme="grimoire"] .skill-tool {
+  border-color: rgb(217 174 91 / 0.3);
+  border-radius: 3px;
+  background: rgb(217 174 91 / 0.06);
+}
+
+html[data-theme="grimoire"] .skill-tool > div:first-child {
+  border-color: rgb(217 174 91 / 0.3);
+  border-radius: 3px;
+  color: #d9ae5b;
+}
+
+html[data-theme="grimoire"] .grimoire-orbits circle {
+  stroke: rgb(217 174 91 / 0.35);
+  stroke-width: 1px;
+  stroke-dasharray: 4 9;
+}
+
+html[data-theme="grimoire"] .portfolio-modal {
+  border: 2px solid #d9ae5b;
+  border-radius: 4px;
+  background: #2b0e11;
+  color: #efe2c4;
+  font-family: "IM Fell English", Georgia, serif;
+}
+
+html[data-theme="grimoire"] .portfolio-modal::backdrop {
+  background: rgb(11 3 4 / 0.85);
+}
+
+html[data-theme="grimoire"] .project-detail-hero {
+  background: #170608;
+}
+
+html[data-theme="grimoire"] .project-detail-hero h2 {
+  color: #efe2c4;
+  font-family: "Pirata One", Georgia, serif;
+  font-weight: 400;
+}
+
+html[data-theme="grimoire"] .project-detail-chart .rounded-t-md {
+  background: linear-gradient(to top, rgb(179 18 46 / 0.35), #d9ae5b) !important;
+}
+
+html[data-theme="grimoire"] .project-detail-paper.theme-paper,
+html[data-theme="grimoire"] .project-detail-paper.theme-paper:hover {
+  --color-zinc-100: #2b0e11;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  clip-path: none;
+}
+
+html[data-theme="grimoire"] .project-detail-paper h3 {
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+
+html[data-theme="grimoire"] .project-primary-link {
+  border-radius: 3px;
+  background: #9c1027;
+  color: #f3e9d2;
+  box-shadow: 3px 3px 0 #2b0e11;
+}
+
+html[data-theme="grimoire"] .project-primary-link:hover {
+  background: #b3122e;
+}
+
+/* The interactive architecture remains a dark inset within the paper sheet. */
+html[data-theme="grimoire"] .project-detail-diagram {
+  --color-white: #efe2c4;
+  --color-zinc-100: #efe2c4;
+  --color-zinc-200: #dfcba7;
+  --color-zinc-300: #cdb89a;
+  --color-zinc-400: #cdb89a;
+  --color-zinc-500: #b8997b;
+  --color-zinc-800: #42141b;
+  --color-zinc-900: #2b0e11;
+  --color-zinc-950: #170608;
+  --color-fuchsia-300: #d9ae5b;
+  --color-cyan-300: #d9ae5b;
+  --color-violet-300: #d9ae5b;
+  color: #efe2c4;
+}
+
+html[data-theme="grimoire"] .project-detail-paper aside {
+  border-color: rgb(43 14 17 / 0.3);
+  border-radius: 3px;
+  background: rgb(156 16 39 / 0.04);
+}
+
+html[data-theme="grimoire"] .portfolio-modal nav button:hover {
+  background: rgb(217 174 91 / 0.12);
+}

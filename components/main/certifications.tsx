@@ -66,7 +66,7 @@ export const Certifications = () => {
   const [viewing, setViewing] = useState<Certification | null>(null);
 
   return (
-    <div className="relative mt-5 overflow-hidden rounded-[2rem] border border-white/15 bg-white/70 p-5 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] dark:border-white/10 dark:bg-zinc-900/70 sm:p-7 xl:p-8">
+    <div className="theme-paper certification-paper relative mt-5 overflow-hidden rounded-[2rem] border border-white/15 bg-white/70 p-5 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] dark:border-white/10 dark:bg-zinc-900/70 sm:p-7 xl:p-8">
       <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -left-16 h-56 w-56 rounded-full bg-yellow-400/[0.08] blur-3xl" />
       <div className="relative mb-4 flex items-center gap-3">
         <span className="h-px w-8 bg-yellow-500" />
@@ -93,7 +93,7 @@ export const Certifications = () => {
                 className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.05]"
               />
               <span className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent pb-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
-                <span className="rounded-full bg-white/95 px-3.5 py-1.5 text-xs font-semibold text-zinc-950">View certificate</span>
+                <span className="certificate-preview-label rounded-full bg-white/95 px-3.5 py-1.5 text-xs font-semibold text-zinc-950">View certificate</span>
               </span>
             </button>
             <div className="flex flex-1 flex-col gap-3 border-t border-zinc-200/70 p-4 dark:border-white/10">

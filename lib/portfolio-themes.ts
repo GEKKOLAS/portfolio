@@ -1,6 +1,6 @@
 export const portfolioThemes = [
   { id: "dark", label: "Original" },
-  { id: "grimoire", label: "Cult of the Lamb" },
+  { id: "grimoire", label: "Ritual" },
   { id: "rebel", label: "Rebel" },
 ] as const;
 

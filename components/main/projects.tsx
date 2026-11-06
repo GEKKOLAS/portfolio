@@ -42,6 +42,16 @@ const projects: DevProject[] = [
     highlights: ["Secure commerce flows", "Order management", "Live deployment"],
   },
   {
+    title: "JobHunter OS",
+    subtitle: "Job search CRM",
+    description:
+      "A self-hosted job-search operations platform for capturing opportunities, assessing role fit against profile evidence, tracking recruiter conversations, and keeping follow-ups and analytics in one workspace.",
+    image: "/project-jobhunter.png",
+    href: "https://github.com/GEKKOLAS/jobhunter-os",
+    stack: [".NET 10", "Next.js 16", "PostgreSQL", "TypeScript"],
+    highlights: ["Evidence-based fit scoring", "Kanban pipeline and recruiter CRM", "Follow-ups and search analytics"],
+  },
+  {
     title: "Atelliers",
     subtitle: "Digital product studio",
     description:
@@ -50,6 +60,26 @@ const projects: DevProject[] = [
     href: "https://github.com/GEKKOLAS/atelliers",
     stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4"],
     highlights: ["Cinematic hero reel", "Scroll parallax", "Accessible motion"],
+  },
+  {
+    title: "Skylift",
+    subtitle: "Drone delivery platform",
+    description:
+      "A mission-control interface for a drone delivery platform, combining order dispatch, fleet management, live map tracking, and real-time telemetry.",
+    imagePlaceholder: "No product screenshot published in the repository",
+    href: "https://github.com/GEKKOLAS/frontend",
+    stack: ["Next.js 15", "React 19", "MapLibre", "STOMP"],
+    highlights: ["Live drone tracking map", "Real-time telemetry HUD", "Dispatch and fleet control"],
+  },
+  {
+    title: "Halcyon",
+    subtitle: "Peer-to-peer video calls",
+    description:
+      "A private, responsive video-call experience that connects peers directly with WebRTC, including in-call chat and a mobile-friendly interface.",
+    imagePlaceholder: "No product screenshot published in the repository",
+    href: "https://github.com/GEKKOLAS/halcyon",
+    stack: ["Next.js 14", "WebRTC", "shadcn/ui", "Tailwind CSS"],
+    highlights: ["Direct peer-to-peer calls", "No call data stored", "Responsive video and chat"],
   },
   {
     title: "Mail Template Hub",

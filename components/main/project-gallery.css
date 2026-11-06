@@ -1,0 +1,48 @@
+/* Keep screenshots in their original colours so the product UI stays readable. */
+.project-gallery-stage img,
+.project-gallery-thumbnail img {
+  filter: none;
+}
+
+html[data-theme="grimoire"] .project-gallery-stage,
+html[data-theme="grimoire"] .project-gallery-thumbnail {
+  border-radius: 3px;
+  background: #170608;
+}
+
+html[data-theme="grimoire"] .project-gallery-stage {
+  border-color: #6e4b3a;
+}
+
+html[data-theme="grimoire"] .project-gallery-control {
+  border-color: rgb(43 14 17 / 0.3);
+  border-radius: 3px;
+  background: #9c1027;
+  color: #f3e9d2;
+}
+
+html[data-theme="grimoire"] .project-gallery-thumbnail[aria-pressed="true"] {
+  border-color: #9c1027;
+}
+
+html[data-theme="rebel"] .project-gallery-stage,
+html[data-theme="rebel"] .project-gallery-thumbnail,
+html[data-theme="rebel"] .project-gallery-control {
+  border: 3px solid #000;
+  border-radius: 0;
+}
+
+html[data-theme="rebel"] .project-gallery-control {
+  background: #fff;
+  color: #000;
+  box-shadow: 3px 3px 0 #000;
+}
+
+html[data-theme="rebel"] .project-gallery-control:hover {
+  background: #e5001c;
+  color: #fff;
+}
+
+html[data-theme="rebel"] .project-gallery-thumbnail[aria-pressed="true"] {
+  border-color: #e5001c;
+}

@@ -7,8 +7,10 @@ import { type ComponentType, type KeyboardEvent, useState } from "react";
 import { Modal } from "@/components/ui/modal";
 import { useUISounds } from "@/components/ui/ui-sound-provider";
 import { useTilt } from "@/lib/use-tilt";
+import { projectScreenshots } from "@/lib/project-screenshots";
 import { FleetArchitecture } from "./fleet-architecture";
 import { InteractiveDataChart } from "./interactive-data-chart";
+import { ProjectGallery, type ProjectScreenshot } from "./project-gallery";
 import "./grimoire-surfaces.css";
 import "./rebel-surfaces.css";
 
@@ -21,6 +23,7 @@ type DevProject = {
   // Interactive system diagram shown in the detail modal.
   architecture?: ComponentType;
   image?: string;
+  screenshots?: ProjectScreenshot[];
   imagePlaceholder?: string;
   href?: string;
   linkLabel?: string;
@@ -45,72 +48,97 @@ const projects: DevProject[] = [
     title: "JobHunter OS",
     subtitle: "Job search CRM",
     description:
-      "A self-hosted job-search operations platform for capturing opportunities, assessing role fit against profile evidence, tracking recruiter conversations, and keeping follow-ups and analytics in one workspace.",
+      "A self-hosted job-search workspace that brings opportunities, explainable fit scoring, recruiter conversations, follow-ups, and search analytics into one place.",
     image: "/project-jobhunter.png",
     href: "https://github.com/GEKKOLAS/jobhunter-os",
-    stack: [".NET 10", "Next.js 16", "PostgreSQL", "TypeScript"],
-    highlights: ["Evidence-based fit scoring", "Kanban pipeline and recruiter CRM", "Follow-ups and search analytics"],
+    stack: [".NET 10", "Next.js 16", "React 19", "PostgreSQL", "TypeScript", "Claude"],
+    highlights: ["Explainable fit scoring", "Recruiter CRM and follow-ups", "Analytics with sample sizes"],
+    details: [
+      "Capture opportunities from pasted text, links, or public Greenhouse, Lever, and Ashby boards, then track them through a Kanban pipeline with stage history. Fit scores compare confirmed requirements against skills and the evidence behind them.",
+      "A modular .NET backend coordinates reminders through a transactional outbox. Optional Claude integration reads postings and drafts follow-ups; approved messages can be sent through Mail Template Hub. Analytics show their sample sizes and withhold rates when there is too little data.",
+    ],
   },
   {
     title: "Atelliers",
     subtitle: "Digital product studio",
     description:
-      "A cinematic, responsive website for a technology studio, presenting product engineering, AI automation, consulting services, and measurable case studies.",
+      "A responsive website for a digital product studio, presenting product engineering, AI automation, consulting services, and a case study through cinematic video and restrained motion.",
     image: "/project-atelliers.png",
     href: "https://github.com/GEKKOLAS/atelliers",
     stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4"],
-    highlights: ["Cinematic hero reel", "Scroll parallax", "Accessible motion"],
+    highlights: ["Cinematic hero reel", "Scroll parallax and reveals", "Responsive, accessible motion"],
+    details: [
+      "A locally hosted hero reel, scroll parallax, and Intersection Observer reveals give the studio a distinctive visual identity. Responsive layouts and reduced-motion support keep the experience usable across screen sizes and motion preferences.",
+    ],
   },
   {
     title: "Skylift",
     subtitle: "Drone delivery platform",
     description:
-      "A mission-control interface for a drone delivery platform, combining order dispatch, fleet management, live map tracking, and real-time telemetry.",
+      "An avionics-inspired mission-control interface for drone delivery, combining order dispatch, fleet management, live map tracking, and real-time telemetry.",
     imagePlaceholder: "No product screenshot published in the repository",
     href: "https://github.com/GEKKOLAS/frontend",
-    stack: ["Next.js 15", "React 19", "MapLibre", "STOMP"],
-    highlights: ["Live drone tracking map", "Real-time telemetry HUD", "Dispatch and fleet control"],
+    stack: ["Next.js 15", "React 19", "TypeScript", "Clerk", "MapLibre", "STOMP"],
+    highlights: ["Live tracking and telemetry", "Order dispatch workflow", "Authenticated fleet console"],
+    details: [
+      "Clerk protects the operations console and supplies the API token. MapLibre renders the delivery map, while STOMP over SockJS streams drone position and battery readings into a cockpit-style telemetry display.",
+    ],
   },
   {
     title: "Halcyon",
     subtitle: "Peer-to-peer video calls",
     description:
-      "A private, responsive video-call experience that connects peers directly with WebRTC, including in-call chat and a mobile-friendly interface.",
-    imagePlaceholder: "No product screenshot published in the repository",
+      "A private, responsive video-call app that connects two peers with WebRTC, with in-call chat, screen sharing, reactions, and room links that work across desktop and mobile.",
     href: "https://github.com/GEKKOLAS/halcyon",
-    stack: ["Next.js 14", "WebRTC", "shadcn/ui", "Tailwind CSS"],
-    highlights: ["Direct peer-to-peer calls", "No call data stored", "Responsive video and chat"],
+    stack: ["Next.js 14", "React 18", "WebRTC", "TypeScript", "shadcn/ui", "Tailwind CSS"],
+    highlights: ["Peer-to-peer video and chat", "Screen sharing and reactions", "Room links and manual invites"],
+    details: [
+      "A short-lived signaling relay exchanges connection details, then audio, video, and chat flow between peers. Manual invite and reply codes provide an alternative connection flow, with optional TURN configuration for restrictive networks.",
+      "The call interface includes draggable picture-in-picture video, speaking indicators, keyboard shortcuts, and a mobile chat sheet. Media and chat are not recorded or stored.",
+    ],
   },
   {
     title: "Mail Template Hub",
     subtitle: "Email automation platform",
     description:
-      "A full-stack platform to connect Gmail and Outlook with OAuth, design responsive MJML templates, manage assets, and schedule tracked campaigns.",
+      "An email workspace that connects Gmail and Outlook, builds responsive templates visually or with Claude, manages brand assets, and sends or schedules tracked messages through the providers' own APIs.",
     image: "/project-smtp.png",
     href: "https://github.com/GEKKOLAS/smtp",
-    stack: [".NET 10", "Next.js", "PostgreSQL", "GrapesJS", "Hangfire"],
-    highlights: ["OAuth providers", "Visual email builder", "Scheduled delivery"],
+    stack: [".NET 10", "Next.js 16", "PostgreSQL", "GrapesJS", "Hangfire", "Claude"],
+    highlights: ["Visual and AI template editor", "Gmail and Outlook inbox integration", "Brand kits and tracked sending"],
+    details: [
+      "Create templates with GrapesJS, MJML, or raw HTML, then preview exact desktop and mobile widths or revise an existing design with an AI prompt. Brand kits carry colors, fonts, logos, and tone into the editor and generated templates.",
+      "Optional inbox access enables in-thread replies. Hangfire handles scheduled sends and retries, while delivery history, bounce reporting, and opt-in click analytics track results. Scoped API keys support integrations such as approved follow-ups from JobHunter OS.",
+    ],
   },
   {
     title: "FleetIQ",
     subtitle: "Freight and logistics platform",
     description:
-      "A domain-driven logistics backend composed of 12 independent services for orders, carriers, planning, tracking, billing, documents, compliance, and analytics.",
+      "A freight and logistics platform with an Angular operations console and 12 independent .NET services covering orders, carriers, planning, live tracking, billing, and compliance.",
     image: "/project-fleetiq.png",
     href: "https://github.com/GEKKOLAS/FleetIQ",
-    stack: [".NET 10", "PostgreSQL", "RabbitMQ", "Redis", "YARP"],
-    highlights: ["12 bounded contexts", "Transactional outbox", "OAuth2 and OIDC"],
+    stack: [".NET 10", "Angular 20", "PrimeNG", "PostgreSQL", "RabbitMQ", "SignalR", "Three.js"],
+    highlights: ["Angular operations console", "3D tracking with live updates", "12 event-driven services"],
     architecture: FleetArchitecture,
+    details: [
+      "The Angular 20 and PrimeNG console brings together operational KPIs, order lifecycle actions, carrier assignments, load planning, and invoicing. A control-tower view switches between a 3D distribution network and a map, with live position updates over SignalR.",
+      "Each service owns its data and publishes domain events through a transactional outbox and RabbitMQ. A YARP gateway provides the entry point, authenticated with Duende IdentityServer and OIDC Authorization Code with PKCE for the web console.",
+    ],
   },
   {
     title: "Scrape Studio",
     subtitle: "AI-assisted product scraper",
     description:
-      "A secure full-stack scraper that extracts structured product data and images, analyzes page layouts, and generates an initial React representation.",
+      "A full-stack product scraper that extracts catalog data and images, removes image backgrounds locally, monitors asynchronous jobs, and generates an initial React layout from page structure.",
     image: "/project-scrapper.png",
     href: "https://github.com/GEKKOLAS/Scrapper",
-    stack: [".NET 10", "Next.js 16", "AngleSharp", "Azure", "OpenAI"],
-    highlights: ["Async job processing", "SSRF protection", "React code generation"],
+    stack: [".NET 10", "Next.js 16", "AngleSharp", "OpenAI", "Azure", "Docker"],
+    highlights: ["Catalog crawling and JSON export", "Local background removal", "Async jobs and React generation"],
+    details: [
+      "The crawler follows catalog links, categories, pagination, and WordPress product sitemaps. The product gallery compares original images with transparent PNGs, supports review when segmentation fails, and exports catalog data as JSON.",
+      "Deterministic extraction works without an AI key, with optional OpenAI enrichment. The backend separates domain, application, infrastructure, and API layers, with deployment templates for Azure services and optional S3/CloudFront image storage.",
+    ],
   },
   {
     title: "LMS Learning Hub",
@@ -131,7 +159,12 @@ const projects: DevProject[] = [
     stack: ["n8n", "OpenAI", "Meta Ads", "Google Ads", "REST APIs"],
     highlights: ["Lead generation pipelines", "Ad campaign automation", "AI video ads"],
   },
-];
+].map((project) => {
+  const screenshots = projectScreenshots[project.title];
+  return screenshots?.length
+    ? { ...project, image: screenshots[0].src, screenshots }
+    : project;
+});
 
 // Graphic design track. Titles and copy are scaffolding to overwrite; the
 // imagery is a drop target so real artwork can be added in place.
@@ -334,7 +367,7 @@ function ProjectCard({ project, onOpen }: { project: DevProject; onOpen: () => v
             </div>
           </div>
           <div className="project-card-image order-1 lg:order-2">
-            <div className="project-artwork overflow-hidden rounded-[1.5rem] border border-white/20 bg-zinc-950/10 shadow-2xl">
+            <div className="project-artwork relative overflow-hidden rounded-[1.5rem] border border-white/20 bg-zinc-950/10 shadow-2xl">
               {project.image ? (
                 <Image src={project.image} alt={`${project.title} project preview`} width={1200} height={630} className="h-64 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] lg:h-80" />
               ) : (
@@ -342,6 +375,11 @@ function ProjectCard({ project, onOpen }: { project: DevProject; onOpen: () => v
                   <p className="max-w-[26ch] text-center text-xs leading-5 text-zinc-400 dark:text-zinc-600">{project.imagePlaceholder ?? "Artwork coming soon"}</p>
                 </div>
               )}
+              {project.screenshots && project.screenshots.length > 1 ? (
+                <span className="pointer-events-none absolute bottom-3 right-3 rounded-full border border-white/20 bg-black/75 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm">
+                  {project.screenshots.length} screenshots
+                </span>
+              ) : null}
             </div>
           </div>
         </div>
@@ -483,7 +521,8 @@ function ProjectDetails({
   const accent = trackAccent[selected.track];
   const { title, description } = selected.project;
   const eyebrow = selected.track === "design" ? selected.project.category : selected.project.subtitle;
-  const image = selected.track === "data" ? undefined : selected.project.image;
+  const screenshots = selected.track === "dev" ? selected.project.screenshots : undefined;
+  const image = selected.track === "data" || screenshots?.length ? undefined : selected.project.image;
   const chips = chipsOf(selected);
   const Architecture = selected.track === "dev" ? selected.project.architecture : undefined;
   const sectionLabel = "text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500";
@@ -541,6 +580,11 @@ function ProjectDetails({
         </header>
 
         <div className="theme-paper project-detail-paper grid gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+          {screenshots?.length ? (
+            <motion.div variants={modalReveal} className="min-w-0 lg:col-span-2">
+              <ProjectGallery key={title} title={title} screenshots={screenshots} />
+            </motion.div>
+          ) : null}
           <div className="min-w-0">
             <motion.div variants={modalReveal}>
               <h3 className={sectionLabel}>Overview</h3>
@@ -698,6 +742,7 @@ export const Projects = () => {
         .slice(0, 3)
     : [];
   const handleModalKeyDown =(event: KeyboardEvent) => {
+    if (event.defaultPrevented) return;
     if (event.key === "ArrowRight" || event.key === "ArrowLeft") play("navigate");
     if (event.key === "ArrowRight") navigate(1);
     if (event.key === "ArrowLeft") navigate(-1);

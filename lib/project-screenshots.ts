@@ -7,6 +7,20 @@ export type RepositoryScreenshot = {
 };
 
 export const projectScreenshots: Record<string, RepositoryScreenshot[]> = {
+  // GEKKOLAS/EShopLaVeleta @ bc63bef67a24bbcfb689d0e179d1c6c35ac71215
+  // Source directory: docs/screenshots/
+  "Vapex": [
+    { src: "/projects/eshoplaveleta/home.png", alt: "Vapex: Homepage", caption: "Homepage" },
+    { src: "/projects/eshoplaveleta/shop.png", alt: "Vapex: Catalog — 901 products", caption: "Catalog — 901 products" },
+    { src: "/projects/eshoplaveleta/product-details.png", alt: "Vapex: Product details", caption: "Product details" },
+    { src: "/projects/eshoplaveleta/cart.png", alt: "Vapex: Cart", caption: "Cart" },
+    { src: "/projects/eshoplaveleta/features.png", alt: "Vapex: Features", caption: "Features" },
+    { src: "/projects/eshoplaveleta/company.png", alt: "Vapex: Company page", caption: "Company page" },
+    { src: "/projects/eshoplaveleta/team.png", alt: "Vapex: Team page", caption: "Team page" },
+    { src: "/projects/eshoplaveleta/contact.png", alt: "Vapex: Contact page", caption: "Contact page" },
+    { src: "/projects/eshoplaveleta/login.png", alt: "Vapex: Sign in", caption: "Sign in" },
+    { src: "/projects/eshoplaveleta/register.png", alt: "Vapex: Register", caption: "Register" },
+  ],
   // GEKKOLAS/jobhunter-os @ 8472b8b667577a8a57c9c718ce36a38c88d49260
   // Source directory: docs/screenshots/
   "JobHunter OS": [

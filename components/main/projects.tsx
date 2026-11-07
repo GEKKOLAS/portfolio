@@ -34,15 +34,14 @@ type DevProject = {
 
 const projects: DevProject[] = [
   {
-    title: "Infinity Commerce",
+    title: "Vapex",
     subtitle: "E-commerce platform",
     description:
-      "A modern commerce platform with secure authentication, product discovery, shopping flows, order processing, and a polished responsive storefront.",
-    image: "/ecomercerappt.jpg",
-    href: "https://infinitycomex.com/",
-    linkLabel: "Live project",
-    stack: ["ASP.NET Core", "Angular", "EF Core", "Angular Material"],
-    highlights: ["Secure commerce flows", "Order management", "Live deployment"],
+      "A dark-themed storefront for vaporizers and accessories with a 901-product catalog, Redis-backed cart, Stripe checkout, user accounts and real-time order notifications over SignalR.",
+    image: "/project-vapex.png",
+    href: "https://github.com/GEKKOLAS/EShopLaVeleta",
+    stack: ["ASP.NET Core 8", "Angular 18", "Redis", "SignalR", "Stripe"],
+    highlights: ["901-product catalog", "Redis cart + SignalR", "Stripe checkout"],
   },
   {
     title: "JobHunter OS",

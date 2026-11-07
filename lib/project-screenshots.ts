@@ -97,11 +97,19 @@ export const projectScreenshots: Record<string, RepositoryScreenshot[]> = {
     { src: "/projects/scrapper/products.png", alt: "Scrape Studio: Extracted product gallery", caption: "Extracted product gallery" },
     { src: "/projects/scrapper/jobs.png", alt: "Scrape Studio: Scraping job monitor", caption: "Scraping job monitor" },
   ],
-  // GEKKOLAS/LMS @ 6dd34f5b38caa0ea3373f9c8ea85ee1eb6b6ee9b
-  // Source directory: lms-clone/docs/screenshots/
+  // GEKKOLAS/LMS @ aa35d482d47316570601370b26238d2655c4cb43
+  // Source directory: docs/screenshots/ (repo was restructured — no longer nested under lms-clone/)
   "LMS Learning Hub": [
-    { src: "/projects/lms-clone/landing-page.png", alt: "Arcana Academy: Landing page hero", caption: "Landing page" },
-    { src: "/projects/lms-clone/course-catalog.png", alt: "Arcana Academy: Course catalog", caption: "Course catalog" },
+    { src: "/projects/lms/landing-page.png", alt: "Arcana Academy: Landing page hero", caption: "Landing page" },
+    { src: "/projects/lms/course-catalog.png", alt: "Arcana Academy: Course catalog with learning paths", caption: "Course catalog and learning paths" },
+    { src: "/projects/lms/course-detail.png", alt: "Arcana Academy: Course preview with modules and enrollment", caption: "Course preview" },
+    { src: "/projects/lms/student-dashboard.png", alt: "Arcana Academy: Student dashboard with XP, mana, streak, and courses in progress", caption: "Student dashboard" },
+    { src: "/projects/lms/my-courses.png", alt: "Arcana Academy: Enrolled courses with progress", caption: "My courses" },
+    { src: "/projects/lms/course-map.png", alt: "Arcana Academy: Course map showing completed, current, and locked classes", caption: "Arcane course map" },
+    { src: "/projects/lms/lesson-quiz.png", alt: "Arcana Academy: Quiz chapter player", caption: "Knowledge duel (quiz)" },
+    { src: "/projects/lms/rewards.png", alt: "Arcana Academy: Reward chest and mana shop", caption: "Rewards and shop" },
+    { src: "/projects/lms/leaderboard.png", alt: "Arcana Academy: Leaderboard", caption: "Leaderboard" },
+    { src: "/projects/lms/teacher-courses.png", alt: "Arcana Academy: Teacher course list", caption: "Teacher course management" },
   ],
 };
 

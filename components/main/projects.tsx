@@ -143,11 +143,11 @@ const projects: DevProject[] = [
     title: "LMS Learning Hub",
     subtitle: "Gamified learning platform",
     description:
-      "Arcana Academy turns courses into gamified expeditions: students earn XP and mana, build streaks, unlock ranks and badges, duel on quizzes, and spend rewards in an in-app shop, while teachers build and manage structured courses.",
+      "Arcana Academy turns courses into gamified expeditions: students earn XP and mana, build streaks, unlock ranks and badges, duel on quizzes, and spend rewards in an in-app shop, while teachers build and manage structured courses. A built-in demo mode runs the whole app from the browser with no backend.",
     image: "/project-lms.png",
-    href: "https://github.com/GEKKOLAS/LMS/tree/main/lms-clone",
+    href: "https://github.com/GEKKOLAS/LMS",
     stack: ["Next.js 14", "Express", "PostgreSQL", "Prisma", "Clerk", "Stripe", "Amazon S3"],
-    highlights: ["XP, mana, ranks and badges", "Stripe-powered rewards shop", "Presigned S3 video uploads"],
+    highlights: ["XP, mana, ranks and badges", "Stripe-powered rewards shop", "No-backend demo mode"],
   },
   {
     title: "SMB Automation Suite",

@@ -48,18 +48,20 @@ export const projectScreenshots: Record<string, RepositoryScreenshot[]> = {
   "Atelliers": [
     { src: "/projects/atelliers/atelliers-home.png", alt: "Atelliers: Studio homepage", caption: "Studio homepage" },
   ],
-  // GEKKOLAS/halcyon @ 395ff70af4a5c39a345356c6f2473683f359ff56
+  // GEKKOLAS/halcyon @ 4c547ec237d3bc9608af95b1b5e863edbad11016
   // Source directory: docs/screenshots/
   "Halcyon": [
-    { src: "/projects/halcyon/landing.png", alt: "Halcyon: Landing page", caption: "Landing page" },
-    { src: "/projects/halcyon/call-chat.png", alt: "Halcyon: Video call with chat", caption: "Video call with chat" },
-    { src: "/projects/halcyon/call-connected.png", alt: "Halcyon: Connected video call", caption: "Connected video call" },
-    { src: "/projects/halcyon/room-waiting.png", alt: "Halcyon: Waiting room", caption: "Waiting room" },
-    { src: "/projects/halcyon/room-manual.png", alt: "Halcyon: Manual room invitation", caption: "Manual room invitation" },
-    { src: "/projects/halcyon/call-ended.png", alt: "Halcyon: Ended call", caption: "Ended call" },
-    { src: "/projects/halcyon/landing-mobile.png", alt: "Halcyon: Mobile landing page", caption: "Mobile landing page" },
-    { src: "/projects/halcyon/room-mobile-join.png", alt: "Halcyon: Join a room on mobile", caption: "Join a room on mobile" },
-    { src: "/projects/halcyon/call-mobile.png", alt: "Halcyon: Mobile video call", caption: "Mobile video call" },
+    { src: "/projects/halcyon/landing.jpg", alt: "Halcyon: Landing page — headline, create/join widget and an interactive call preview", caption: "Landing page" },
+    { src: "/projects/halcyon/landing-features.jpg", alt: "Halcyon: Feature grid", caption: "Feature grid" },
+    { src: "/projects/halcyon/landing-how.jpg", alt: "Halcyon: How it works stepper", caption: "How it works" },
+    { src: "/projects/halcyon/call-connected.jpg", alt: "Halcyon: Connected call with network badge, timer and draggable self-view", caption: "Connected call" },
+    { src: "/projects/halcyon/call-chat.jpg", alt: "Halcyon: Connected call with side chat", caption: "Call with side chat" },
+    { src: "/projects/halcyon/room-waiting.jpg", alt: "Halcyon: Host waiting with the room link", caption: "Waiting room" },
+    { src: "/projects/halcyon/room-manual.jpg", alt: "Halcyon: Manual invite code with stepper", caption: "Manual room invitation" },
+    { src: "/projects/halcyon/call-ended.jpg", alt: "Halcyon: The other person left", caption: "Call ended" },
+    { src: "/projects/halcyon/landing-mobile.jpg", alt: "Halcyon: Mobile landing page", caption: "Mobile landing page" },
+    { src: "/projects/halcyon/room-mobile-join.jpg", alt: "Halcyon: Join a room on mobile", caption: "Join a room on mobile" },
+    { src: "/projects/halcyon/call-mobile.jpg", alt: "Halcyon: Mobile video call", caption: "Mobile video call" },
   ],
   // GEKKOLAS/smtp @ 71841b679a8413df0339acd7a0cdfadfc1a11e04
   // Source directory: docs/screenshots/
@@ -94,6 +96,12 @@ export const projectScreenshots: Record<string, RepositoryScreenshot[]> = {
     { src: "/projects/scrapper/dashboard.png", alt: "Scrape Studio: Dashboard", caption: "Dashboard" },
     { src: "/projects/scrapper/products.png", alt: "Scrape Studio: Extracted product gallery", caption: "Extracted product gallery" },
     { src: "/projects/scrapper/jobs.png", alt: "Scrape Studio: Scraping job monitor", caption: "Scraping job monitor" },
+  ],
+  // GEKKOLAS/LMS @ 6dd34f5b38caa0ea3373f9c8ea85ee1eb6b6ee9b
+  // Source directory: lms-clone/docs/screenshots/
+  "LMS Learning Hub": [
+    { src: "/projects/lms-clone/landing-page.png", alt: "Arcana Academy: Landing page hero", caption: "Landing page" },
+    { src: "/projects/lms-clone/course-catalog.png", alt: "Arcana Academy: Course catalog", caption: "Course catalog" },
   ],
 };
 

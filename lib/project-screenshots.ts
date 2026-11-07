@@ -95,5 +95,16 @@ export const projectScreenshots: Record<string, RepositoryScreenshot[]> = {
     { src: "/projects/scrapper/products.png", alt: "Scrape Studio: Extracted product gallery", caption: "Extracted product gallery" },
     { src: "/projects/scrapper/jobs.png", alt: "Scrape Studio: Scraping job monitor", caption: "Scraping job monitor" },
   ],
+  // GEKKOLAS/smb-automations- @ b3a14739d4aa9ed2b62512c9d5be81a51c564e7a
+  // Source directory: docs/screenshots/
+  "SMB Automation Suite": [
+    { src: "/projects/smb-automations/video-lead-capture.png", alt: "SMB Automation Suite: Generated video of the lead capture workflow running", caption: "Generated workflow video · lead capture" },
+    { src: "/projects/smb-automations/how-it-works.png", alt: "SMB Automation Suite: Workflow page with its explainer video", caption: "Workflow page with explainer video" },
+    { src: "/projects/smb-automations/video-zapier-paths.png", alt: "SMB Automation Suite: Generated video of a Zapier Zap choosing a path", caption: "Generated video · Zapier paths" },
+    { src: "/projects/smb-automations/library.png", alt: "SMB Automation Suite: Workflow library · light theme", caption: "Workflow library · light theme" },
+    { src: "/projects/smb-automations/n8n-workflow.png", alt: "SMB Automation Suite: n8n lead capture workflow graph", caption: "n8n workflow graph" },
+    { src: "/projects/smb-automations/zapier-workflow.png", alt: "SMB Automation Suite: Zapier quote request Zap steps", caption: "Zapier steps and paths" },
+    { src: "/projects/smb-automations/library-dark.png", alt: "SMB Automation Suite: Workflow library · dark theme", caption: "Workflow library · dark theme" },
+  ],
 };
 

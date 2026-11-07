@@ -95,5 +95,14 @@ export const projectScreenshots: Record<string, RepositoryScreenshot[]> = {
     { src: "/projects/scrapper/products.png", alt: "Scrape Studio: Extracted product gallery", caption: "Extracted product gallery" },
     { src: "/projects/scrapper/jobs.png", alt: "Scrape Studio: Scraping job monitor", caption: "Scraping job monitor" },
   ],
+  // GEKKOLAS/smb-automations- @ 74851adf6d9006828094d604707b6622ccc958ba
+  // Source directory: docs/screenshots/
+  "SMB Automation Suite": [
+    { src: "/projects/smb-automations/library.png", alt: "SMB Automation Suite: Workflow library · light theme", caption: "Workflow library · light theme" },
+    { src: "/projects/smb-automations/n8n-workflow.png", alt: "SMB Automation Suite: n8n lead capture workflow graph", caption: "n8n workflow graph" },
+    { src: "/projects/smb-automations/zapier-workflow.png", alt: "SMB Automation Suite: Zapier quote request Zap steps", caption: "Zapier steps and paths" },
+    { src: "/projects/smb-automations/library-dark.png", alt: "SMB Automation Suite: Workflow library · dark theme", caption: "Workflow library · dark theme" },
+    { src: "/projects/smb-automations/n8n-workflow-dark.png", alt: "SMB Automation Suite: n8n AI lead scoring workflow · dark theme", caption: "AI lead scoring workflow · dark theme" },
+  ],
 };
 

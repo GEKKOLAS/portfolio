@@ -151,12 +151,13 @@ const projects: DevProject[] = [
   },
   {
     title: "SMB Automation Suite",
-    subtitle: "n8n business automation",
+    subtitle: "n8n & Zapier workflow library",
     description:
-      "Automation systems built for small and medium businesses with n8n — from lead generation funnels and CRM enrichment to marketing ad campaigns and AI-assisted video advertisements, connected to the tools each team already uses.",
+      "A searchable library of n8n and Zapier automations for small and medium businesses — lead capture and CRM sync, AI lead scoring, ad reporting and invoicing. Each workflow page renders the n8n graph from its exported JSON, lists the setup steps and credentials, and offers the file ready to import.",
     image: "/project-automation.png",
-    stack: ["n8n", "OpenAI", "Meta Ads", "Google Ads", "REST APIs"],
-    highlights: ["Lead generation pipelines", "Ad campaign automation", "AI video ads"],
+    href: "https://github.com/GEKKOLAS/smb-automations-",
+    stack: ["n8n", "Zapier", "OpenAI", "Next.js", "TypeScript"],
+    highlights: ["n8n graphs from exported JSON", "Zapier step and path views", "Import-ready workflow files"],
   },
 ].map((project) => {
   const screenshots = projectScreenshots[project.title];

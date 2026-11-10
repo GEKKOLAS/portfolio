@@ -8,7 +8,6 @@ import Skills from "@/components/StackTech/SkillContent";
 import SplashCursor from "@/components/ui/splashCursor";
 import { FireRevealOverlay } from "@/components/effects/fire-reveal-overlay";
 import { ScrollLineDrawing } from "@/components/effects/scroll-line-drawing";
-import { PaperFlyOut } from "@/components/effects/paper-fly-out";
 import { LoaderFour } from "@/components/ui/loader";
 import { useIsMobile } from "@/lib/use-is-mobile";
 import { useOriginalEffects, usePortfolioTheme } from "@/components/ui/theme-provider";
@@ -162,11 +161,8 @@ export default function Home() {
                   overlaps it onto its own GPU layer; on mobile that blows
                   past iOS Safari's memory limit. Desktop only. */}
               {!isMobile && originalEffects && !reduceMotion && <ScrollLineDrawing />}
-              {/* Sections peel away like sheets of paper as they scroll past (desktop only). */}
-              {!isMobile && !reduceMotion && <PaperFlyOut />}
               <section
                 id="about"
-                data-fly="up-left"
                 className="snap-section relative z-10 bg-transparent"
                 data-snap-anim="zoom"
               >
@@ -177,7 +173,6 @@ export default function Home() {
 
               <section
                 id="timeline"
-                data-fly="up-right"
                 className="snap-section relative z-10 bg-transparent"
                 data-snap-anim="horizontal"
               >
@@ -188,7 +183,6 @@ export default function Home() {
 
               <section
                 id="skills"
-                data-fly="spin-up"
                 className="snap-section relative z-10 bg-transparent w-full"
                 data-snap-anim="rotate"
               >
@@ -199,7 +193,6 @@ export default function Home() {
 
               <section
                 id="projects"
-                data-fly="left"
                 className="snap-section relative z-10 bg-transparent"
                 data-snap-anim="backwards"
               >
@@ -210,7 +203,6 @@ export default function Home() {
 
               <section
                 id="services"
-                data-fly="right"
                 className="snap-section relative z-10 bg-transparent"
                 data-snap-anim="blink"
               >

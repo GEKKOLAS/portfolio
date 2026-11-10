@@ -5,6 +5,7 @@ import "./grimoire.css";
 import "./rebel.css";
 import { portfolioThemeNames } from "@/lib/portfolio-themes";
 import { ThemeProvider } from "../components/ui/theme-provider";
+import { VisitBeacon } from "../components/visit-beacon";
 import { Tangerine } from "next/font/google";
 
 
@@ -50,6 +51,7 @@ export default function RootLayout({
 
           {children}
         </ThemeProvider>
+        <VisitBeacon />
       </body>
     </html>
   );

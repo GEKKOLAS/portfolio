@@ -33,6 +33,18 @@ type DevProject = {
 };
 
 const projects: DevProject[] = [
+  // First on purpose: it shows the whole profile in one project (process analysis,
+  // automation, ad campaigns and measurable hours saved).
+  {
+    title: "SMB Automation Suite",
+    subtitle: "n8n & Zapier workflow library",
+    description:
+      "The automations I build for small and medium businesses, from mapping the process to the workflow that runs it: lead capture and CRM sync, AI lead scoring, weekly Meta and Google Ads reports, and invoicing. Each workflow comes with a generated explainer video, setup steps and an import-ready n8n or Zapier file.",
+    image: "/project-automation.png",
+    href: "https://github.com/GEKKOLAS/smb-automations-",
+    stack: ["n8n", "Zapier", "OpenAI", "Meta & Google Ads", "Next.js"],
+    highlights: ["From process analysis to running automation", "Ads, CRM and follow-ups connected", "Explainer video for every workflow"],
+  },
   {
     title: "Vapex",
     subtitle: "E-commerce platform",
@@ -149,16 +161,7 @@ const projects: DevProject[] = [
     stack: ["Next.js 14", "Express", "PostgreSQL", "Prisma", "Clerk", "Stripe", "Amazon S3"],
     highlights: ["XP, mana, ranks and badges", "Stripe-powered rewards shop", "No-backend demo mode"],
   },
-  {
-    title: "SMB Automation Suite",
-    subtitle: "n8n & Zapier workflow library",
-    description:
-      "A searchable library of n8n and Zapier automations for small and medium businesses — lead capture and CRM sync, AI lead scoring, ad reporting and invoicing. Every workflow gets a generated explainer video in which sample data travels through the graph step by step, alongside its setup steps, credentials and an import-ready file.",
-    image: "/project-automation.png",
-    href: "https://github.com/GEKKOLAS/smb-automations-",
-    stack: ["n8n", "Zapier", "Next.js", "Playwright", "FFmpeg"],
-    highlights: ["Generated MP4 explainer per workflow", "n8n and Zapier graphs from their definitions", "Import-ready workflow files"],
-  },
+
 ].map((project) => {
   const screenshots = projectScreenshots[project.title];
   return screenshots?.length

@@ -4,37 +4,37 @@ export function AnimatedTestimonialsDemo() {
   const testimonials = [
     {
       description:
-        "Building modern, responsive, and scalable web applications using technologies like .NET, React, and Angular. This includes designing intuitive user interfaces, implementing robust backend logic, and ensuring seamless integration between frontend and backend systems to deliver high-performance, user-friendly digital experiences.",
+        "Web apps, APIs and dashboards built with .NET, React and Angular, from the database to the interface. I design the UI myself, so what gets built matches what the business actually needs and what users find easy to use.",
       title: "Web Application Development",
-      subtitle: "Full Stack Developer",
+      subtitle: ".NET · React · Angular",
       src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOW1qa2hweDJvZm9tcXIwY3hlaXM2M2Y1YmtpeTlieXB4M3dxazdtdiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qgQUggAC3Pfv687qPC/giphy.gif",
     },
     {
       description:
-        "Streamlining and automating repetitive business tasks and workflows to improve efficiency, minimize errors, and reduce manual effort. This involves implementing software solutions that manage routine operations, seamlessly integrate with existing systems, and free up employees to focus on higher-value work—ultimately boosting productivity and operational accuracy",
-      title: "Business Process Automation:",
-      subtitle: "N8N Integration",
+        "I map how a process runs today, find the repetitive steps and automate them with n8n and Zapier: lead capture, CRM updates, reports and follow-ups that connect the tools a team already uses, so people spend their time on work that needs them.",
+      title: "Business Process Automation",
+      subtitle: "n8n · Zapier · CRM",
       src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZGFhb3lsdDk1NWp0OXZraDI4eGdmMmlneXlsNm11eXdoeThoNTE3cyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/0lGd2OXXHe4tFhb7Wh/giphy.gif",
     },
     {
       description:
-        "Connecting applications to cloud platforms like Microsoft Azure or Amazon Web Services for hosting, storage, and advanced cloud-native features. This includes deploying scalable solutions, integrating with cloud-based services, and leveraging platform tools to enhance performance, security, and reliability while enabling seamless growth and modernization.",
+        "Hosting, storage and deployment on Microsoft Azure or AWS, with CI/CD pipelines in Azure DevOps, so applications are reliable, secure and ready to grow without rebuilding them.",
       title: "Cloud Native Solutions",
       subtitle: "Azure, AWS",
       src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWd6bmQweXBvejA1ZW55bzBocmhpNWNwZmJkMzB0aGsyMTE2aGh1MiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/fC4eVInYkUAR0a5hpK/giphy.gif",
     },
     {
       description:
-        "Developing comprehensive plans to achieve business goals through online channels, including market research, audience targeting, and campaign planning. This also involves creating engaging content tailored to the target audience, selecting the most effective digital platforms, and continuously optimizing strategies to maximize reach and results.",
-      title: "Digital Marketing",
-      subtitle: "Google Ads, Facebook Ads and more",
+        "Campaigns on Google Ads and Meta planned together with the product: audience, landing page, tracking and the automations that follow up on every lead. Because I also build the software, campaign data flows straight into the CRM and reports.",
+      title: "Growth Marketing",
+      subtitle: "Google Ads · Meta Ads · Funnels",
       src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExczJrYjBoZTNiZmdreXZiajZxaWhjMGxvdm1pMWlhcm92NXhzM3doZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/XyJPNKBskIDWR3Md8K/giphy.gif",
     },
     {
       description:
-        "Provides professional customer support and accurate translation services, ensuring clear communication, effective problem-solving, and helping clients connect with a broader, multilingual audience.",
-      title: "Customer Service & Translations Services",
-      subtitle: "Sales representative, Translator, Customer support",
+        "Before writing code I sit with the client to understand the business, gather requirements and agree on what success looks like. Years of client-facing work taught me to explain technical decisions clearly, in Spanish or English.",
+      title: "Business Analysis & Client Communication",
+      subtitle: "Requirements · Discovery · ES / EN",
       src: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGxwZDNjc2VoeTJ0NXlremh4YnRpbGVydzVkbzRucm96dzN1aXhlNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3rgXBBaVvhPXk3NSnK/giphy.gif",
     },
   ];

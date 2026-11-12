@@ -15,8 +15,6 @@ import React from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 
-const INTRO_SEEN_KEY = "portfolio-intro-seen";
-
 export default function Home() {
   const isMobile = useIsMobile();
   const { isOriginal } = usePortfolioTheme();
@@ -26,28 +24,6 @@ export default function Home() {
   const [fireDone, setFireDone] = React.useState(false); // fire controls content entrance
   const [whiteShown, setWhiteShown] = React.useState(false); // white background visibility
   const [showContent, setShowContent] = React.useState(false); // content appears 0.5s after white background
-  // Returning visitors skip the loader and fire intro and see the content right away.
-  const [skipIntro, setSkipIntro] = React.useState(false);
-
-  React.useEffect(() => {
-    try {
-      if (localStorage.getItem(INTRO_SEEN_KEY)) {
-        setSkipIntro(true);
-        setLoading(false);
-      }
-    } catch {
-      // Storage blocked (private mode): play the intro as usual.
-    }
-  }, []);
-
-  React.useEffect(() => {
-    if (!showContent) return;
-    try {
-      localStorage.setItem(INTRO_SEEN_KEY, "1");
-    } catch {
-      /* ignore */
-    }
-  }, [showContent]);
 
   React.useEffect(() => {
     if (!showContent) return;
@@ -104,14 +80,14 @@ export default function Home() {
   }, [reduceMotion]);
 
   React.useEffect(() => {
-    if (loading || (!isMobile && isOriginal && !reduceMotion && !skipIntro)) return;
+    if (loading || (!isMobile && isOriginal && !reduceMotion)) return;
 
     // The lightweight theme and reduced-motion path can show content directly.
     // Mobile also avoids waiting on WebGL callbacks that iOS may suspend.
     setWhiteShown(true);
     setFireDone(true);
     setShowContent(true);
-  }, [isMobile, isOriginal, reduceMotion, loading, skipIntro]);
+  }, [isMobile, isOriginal, reduceMotion, loading]);
 
   return (
     <main className="relative min-h-[100dvh]">
@@ -126,7 +102,7 @@ export default function Home() {
             <LoaderFour />
           </motion.div>
         )}
-        {!loading && !fireDone && !skipIntro && !isMobile && isOriginal && !reduceMotion && (
+        {!loading && !fireDone && !isMobile && isOriginal && !reduceMotion && (
           <motion.div
             key="fire"
             className="fixed inset-0 z-40 pointer-events-none w-full h-full flex items-center justify-center bg-transparent"

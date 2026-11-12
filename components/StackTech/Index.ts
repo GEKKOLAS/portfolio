@@ -307,3 +307,33 @@ export const DB_skill = [
     height: 80,
   },
 ];
+// Cloud, design and business tools. Icons live in public/icons: AWS, Photoshop and
+// After Effects come from Devicon (MIT, AWS wordmark recoloured white for the dark
+// themes); Microsoft 365 is a simple local mark, since the free icon sets dropped
+// Microsoft's logos.
+export const Tools_skill = [
+  {
+    skill_name: "AWS",
+    Image: "/icons/aws.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Photoshop",
+    Image: "/icons/photoshop.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "After Effects",
+    Image: "/icons/aftereffects.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Microsoft 365",
+    Image: "/icons/microsoft365.svg",
+    width: 80,
+    height: 80,
+  },
+];

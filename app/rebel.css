@@ -227,6 +227,15 @@ html[data-theme="rebel"] .profile-role .bg-clip-text {
   -webkit-text-fill-color: currentColor;
 }
 
+/* The tagline's pink/amber/cyan words disappear on the red background. */
+html[data-theme="rebel"] .profile-tagline,
+html[data-theme="rebel"] .profile-tagline span {
+  color: #fff;
+}
+html[data-theme="rebel"] .profile-tagline span {
+  color: #ffe14d;
+}
+
 html[data-theme="rebel"] .profile-description .sekuya-regular {
   max-width: 35ch;
   font-family: "Barlow Condensed", "Arial Narrow", sans-serif;

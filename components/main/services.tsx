@@ -4,7 +4,7 @@ export function AnimatedTestimonialsDemo() {
   const testimonials = [
     {
       description:
-        "Web apps, APIs and dashboards built with .NET, React and Angular, from the database to the interface. I design the UI myself, so what gets built matches what the business actually needs and what users find easy to use.",
+        "Web apps, APIs and dashboards built with .NET, React and Angular, from the database to the interface. I design the UI and visual assets myself in Photoshop and After Effects, so what gets built matches what the business actually needs and what users find easy to use.",
       title: "Web Application Development",
       subtitle: ".NET · React · Angular",
       src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOW1qa2hweDJvZm9tcXIwY3hlaXM2M2Y1YmtpeTlieXB4M3dxazdtdiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qgQUggAC3Pfv687qPC/giphy.gif",

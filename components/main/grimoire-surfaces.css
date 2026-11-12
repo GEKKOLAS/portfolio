@@ -7,33 +7,6 @@ html[data-theme="grimoire"] .portfolio-projects > div:first-child h2 {
   color: #efe2c4;
 }
 
-html[data-theme="grimoire"] .project-controls {
-  border-color: rgb(217 174 91 / 0.3);
-}
-
-html[data-theme="grimoire"] .project-controls button {
-  border-color: rgb(217 174 91 / 0.35);
-  border-radius: 3px;
-  background: #2b0e11;
-  color: #cdb89a;
-}
-
-html[data-theme="grimoire"] .project-controls button[data-active="true"] {
-  border-color: #d9ae5b;
-  background: #9c1027;
-  color: #f3e9d2;
-  box-shadow: 3px 3px 0 #0b0304;
-}
-
-html[data-theme="grimoire"] .project-controls button > span {
-  color: inherit;
-}
-
-html[data-theme="grimoire"] .project-controls button > span:first-child {
-  background: #d9ae5b !important;
-}
-
-html[data-theme="grimoire"] .project-controls button:focus-visible,
 html[data-theme="grimoire"] .service-arrow:focus-visible {
   outline: 2px solid #d9ae5b;
   outline-offset: 4px;
@@ -166,10 +139,6 @@ html[data-theme="grimoire"] .project-detail-hero h2 {
   color: #efe2c4;
   font-family: "Pirata One", Georgia, serif;
   font-weight: 400;
-}
-
-html[data-theme="grimoire"] .project-detail-chart .rounded-t-md {
-  background: linear-gradient(to top, rgb(179 18 46 / 0.35), #d9ae5b) !important;
 }
 
 html[data-theme="grimoire"] .project-detail-paper.theme-paper,

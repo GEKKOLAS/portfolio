@@ -193,6 +193,12 @@ export const About = () => {
           >
             Start a project ↗
           </a>
+          <a
+            href="mailto:nikolasarango@outlook.com"
+            className="mt-2 block break-all text-[13px] text-zinc-700 underline-offset-4 transition-colors hover:text-green-600 hover:underline dark:text-zinc-300 dark:hover:text-green-200"
+          >
+            nikolasarango@outlook.com
+          </a>
         </BentoBlock>
 
         <BentoBlock span="lg:col-span-3" light={lights.quote} className="border-pink-400/25 dark:border-pink-400/25">

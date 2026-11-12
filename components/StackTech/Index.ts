@@ -123,6 +123,12 @@ export const Languages = [
     width: 80,
     height: 80,
   },
+  {
+    skill_name: "Java",
+    Image: "/icons/java.svg",
+    width: 80,
+    height: 80,
+  },
 ];
 // Backend Frameworks
 export const Backend_skill = [

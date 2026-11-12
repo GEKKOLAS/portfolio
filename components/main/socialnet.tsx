@@ -4,7 +4,7 @@ export const Social = () => {
   return (
     <section className="profile-social bg-transparent dark:bg-transparent">
       <div>
-        <div className="grid grid-cols-5 items-center justify-center pt-4 text-gray-500 dark:text-gray-400 [&_svg]:h-9 [&_svg]:w-9 sm:[&_svg]:h-11 sm:[&_svg]:w-11 lg:pt-3 lg:[&_svg]:h-8 lg:[&_svg]:w-8 xl:[&_svg]:h-10 xl:[&_svg]:w-10 2xl:[&_svg]:h-12 2xl:[&_svg]:w-12">
+        <div className="grid grid-cols-6 items-center justify-center pt-4 text-gray-500 dark:text-gray-400 [&_svg]:h-9 [&_svg]:w-9 sm:[&_svg]:h-11 sm:[&_svg]:w-11 lg:pt-3 lg:[&_svg]:h-8 lg:[&_svg]:w-8 xl:[&_svg]:h-10 xl:[&_svg]:w-10 2xl:[&_svg]:h-12 2xl:[&_svg]:w-12">
           {/* linkedIn */}
           <a
             href="https://www.linkedin.com/in/gekko"
@@ -89,6 +89,18 @@ export const Social = () => {
                   fill="#fff"
                 />
               </g>
+            </svg>
+          </a>
+          {/* Email */}
+          <a
+            href="mailto:nikolasarango@outlook.com"
+            aria-label="Email nikolasarango@outlook.com"
+            title="nikolasarango@outlook.com"
+            className="flex justify-center items-center transition-transform duration-300 hover:scale-110"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect width="20" height="16" x="2" y="4" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
             </svg>
           </a>
           {/* WhatsApp */}

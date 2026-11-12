@@ -2,42 +2,43 @@
 
 import Image from "next/image";
 import React, { type CSSProperties, type ReactNode, useState } from "react";
-import { BriefcaseBusiness, Code2, Headphones, Sparkles } from "lucide-react";
+import { ChartNoAxesCombined, Code2, Megaphone, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTilt } from "@/lib/use-tilt";
 
 // `accent` is an "r g b" triplet so the cards can apply their own alpha.
+// The four skills Nicolás brings to a project, framed around the development
+// work rather than as separate services.
 const focusAreas = [
   {
-    title: "AI-driven design",
-    short: "Generative, original visuals",
-    description: "Creative direction, generative workflows and original visual concepts shaped from imagination.",
-    icon: Sparkles,
-    accent: "34 211 238",
-  },
-  {
-    title: "Modern engineering",
-    short: "Scalable full-stack products",
-    description: "Current frameworks, scalable architecture and polished full-stack product experiences.",
+    title: "Software development",
+    short: "Full-stack products",
+    description: ".NET, React, Blazor, Azure and AWS: web apps, APIs and dashboards built to grow with the business.",
     icon: Code2,
     accent: "168 85 247",
   },
   {
-    title: "Project management",
-    short: "Planning and delivery",
-    description: "A growing interest in planning, coordination and turning product goals into clear delivery paths.",
-    icon: BriefcaseBusiness,
-    accent: "236 72 153",
+    title: "Business analysis",
+    short: "Requirements & processes",
+    description: "I map how the business works, gather requirements and turn goals into a scoped, prioritised plan, documented in Microsoft 365.",
+    icon: ChartNoAxesCombined,
+    accent: "250 204 21",
   },
   {
-    title: "IT support",
-    short: "Help desk and troubleshooting",
-    description: "Interested in help desk operations, practical troubleshooting and dependable user support.",
-    icon: Headphones,
-    accent: "249 115 22",
+    title: "Design",
+    short: "UI & visual identity",
+    description: "Interfaces, brand visuals and motion in Photoshop and After Effects, designed alongside the code with AI as a creative partner.",
+    icon: Sparkles,
+    accent: "34 211 238",
+  },
+  {
+    title: "Marketing & automation",
+    short: "Leads, CRM & ads",
+    description: "n8n and Zapier automations that connect ads, CRM and follow-ups so no lead slips through.",
+    icon: Megaphone,
+    accent: "236 72 153",
   },
 ];
-
 const background = [
   { step: "01", title: "Business analysis", color: "#FACC15" },
   { step: "02", title: "Digital marketing", color: "#EC4899" },
@@ -145,15 +146,20 @@ export const About = () => {
           />
           <p className="relative text-xs uppercase tracking-[0.35em] text-fuchsia-500">About</p>
           <div className="about-intro relative pr-20 sm:pr-28">
-            <h2 className="max-w-[22ch] text-balance text-[28px] font-semibold leading-[1.12] tracking-tight text-zinc-950 dark:text-white lg:text-4xl">
-              I combine{" "}
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">engineering</span>,{" "}
-              <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">AI</span> and{" "}
-              <span className="bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent">imagination</span>{" "}
-              to create digital experiences with their own identity.
+            <h2 className="max-w-[24ch] text-balance text-[28px] font-semibold leading-[1.12] tracking-tight text-zinc-950 dark:text-white lg:text-4xl">
+              A developer who also thinks like a{" "}
+              <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">business analyst</span>, a{" "}
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">designer</span> and a{" "}
+              <span className="bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent">marketer</span>.
             </h2>
             <p className="mt-4 max-w-xl text-[15px] leading-7 text-zinc-700 dark:text-zinc-300">
-              I’m a business-minded developer with a blend of technical depth and creative product thinking.
+              Most projects don&apos;t fail on code. They fail in the gaps between the business, the design and the launch.
+              I work across all three: I map the process and the requirements, design the experience, build it with .NET,
+              React and Azure, and connect it to the CRM, ads and automations that bring in customers.
+            </p>
+            <p className="mt-3 max-w-xl text-[15px] leading-7 text-zinc-700 dark:text-zinc-300">
+              Bilingual (Spanish and English) and used to working directly with clients, from the first conversation to the
+              final result.
             </p>
           </div>
         </BentoBlock>
@@ -186,6 +192,12 @@ export const About = () => {
             className="mt-4 inline-block text-[13px] font-semibold text-green-700 transition-colors hover:text-green-600 dark:text-green-300 dark:hover:text-green-200"
           >
             Start a project ↗
+          </a>
+          <a
+            href="mailto:nikolasarango@outlook.com"
+            className="mt-2 block break-all text-[13px] text-zinc-700 underline-offset-4 transition-colors hover:text-green-600 hover:underline dark:text-zinc-300 dark:hover:text-green-200"
+          >
+            nikolasarango@outlook.com
           </a>
         </BentoBlock>
 
@@ -222,13 +234,13 @@ export const About = () => {
             ))}
           </ol>
           <p className="mt-5 text-[12.5px] text-zinc-600 dark:text-zinc-400">
-            That mix is why I connect strategy, engineering and design in a practical way.
+            That mix lets me take a project from requirements to launch without losing anything in the hand-offs.
           </p>
         </BentoBlock>
 
         <BentoBlock span="lg:col-span-6" light={lights.shaping}>
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className={`${label} text-zinc-600 dark:text-zinc-300`}>Currently shaping</p>
+            <p className={`${label} text-zinc-600 dark:text-zinc-300`}>What I bring to a project</p>
             <p className="text-xs text-zinc-500">Hover to read more</p>
           </div>
           <ul className="mt-4 grid grid-cols-2 gap-2.5 xl:grid-cols-4">

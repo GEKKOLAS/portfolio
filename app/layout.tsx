@@ -24,10 +24,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "Nicolás | Full-Stack Developer who speaks business, design & marketing";
+const description =
+  "Full-stack developer (.NET, React, Azure) who also works as a business analyst, designer and marketer: web products and automations built from the business problem up. Available for freelance.";
+
 export const metadata: Metadata = {
-  title: "Nick Portfolio",
-  description: "Created by Nick",
-  
+  title,
+  description,
+  openGraph: { title, description, type: "website" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function RootLayout({

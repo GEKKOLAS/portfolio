@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 import { Navbar } from "./navbar";
 import { Social } from "./socialnet";
-import { ReactTyped } from "react-typed";
 import { BackgroundBeams } from "../ui/background-beams";
 import { AuroraText } from "../ui/aurora-text";
 import { CosmicAura } from "../effects/cosmic-aura";
@@ -16,7 +15,7 @@ export const Profile = () => {
   const { isRebel } = usePortfolioTheme();
   const originalEffects = useOriginalEffects();
   const words =
-    "I turn ambitious ideas into scalable, intelligent web experiences built for real people and real-world impact.";
+    "I build web products and automations starting from the business problem, not just the ticket.";
   return (
     <div className="portfolio-profile relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden py-6 sm:py-10 md:py-12 lg:h-full lg:min-h-0 lg:py-4 xl:py-6 2xl:py-8">
       {originalEffects && (
@@ -58,7 +57,7 @@ export const Profile = () => {
               </div>
               <div className="w-full max-w-2xl text-center">
                 <p className="grimoire-chapter">{isRebel ? "Rebel" : "Grimoire"} <span aria-hidden="true">{isRebel ? "★" : "✦"}</span> Chapter I</p>
-                <h2 className="profile-heading scroll-m-20 font-newyork text-3xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white sm:text-4xl md:text-5xl lg:text-2xl lg:leading-tight xl:text-3xl 2xl:text-5xl">
+                <h1 className="profile-heading scroll-m-20 font-newyork text-3xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white sm:text-4xl md:text-5xl lg:text-2xl lg:leading-tight xl:text-3xl 2xl:text-5xl">
                   Hey there! I&apos;m{" "}
                   <span className="profile-name text-yellow-500">
                     {isRebel ? <>
@@ -68,27 +67,19 @@ export const Profile = () => {
                       ))}
                     </> : "Nicolás"}
                   </span>
-                  <br />a{" "}
-                  <span className="text-rose-500">
-                    Passionate {""} <br />
-                  </span>
-
+                  {/* A fixed role reads in one glance; the old typing effect was often caught half-written. */}
                   <span className="profile-role block min-h-[1.25em]">
-                    <ReactTyped
-                      strings={[
-                        '<span class="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500  bg-clip-text text-transparent">.NET Developer</span>',
-                        '<span class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">Full Stack Developer</span>',
-                        '<span class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500  bg-clip-text text-transparent">Automation Engineer</span>',
-                      ]}
-                      typeSpeed={60}
-                      backSpeed={40}
-                      loop
-                      smartBackspace
-                      showCursor
-                      contentType="html"
-                    />
+                    <span className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+                      Full-Stack Developer
+                    </span>
                   </span>
-                </h2>
+                  <span className="profile-tagline mt-1 block text-[0.5em] font-semibold leading-snug text-zinc-600 dark:text-zinc-300">
+                    who speaks{" "}
+                    <span className="text-amber-500">business</span>,{" "}
+                    <span className="text-pink-500">design</span> &amp;{" "}
+                    <span className="text-cyan-400">marketing</span>
+                  </span>
+                </h1>
                 <div className="h-3 sm:h-4 lg:h-2 xl:h-3" />
                 <div className="profile-description flex items-center justify-center w-full">
                   <AuroraText className="px-2 text-lg leading-snug sekuya-regular sm:text-xl md:text-2xl lg:text-base xl:text-lg 2xl:text-2xl">

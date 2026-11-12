@@ -4,7 +4,7 @@ export const Social = () => {
   return (
     <section className="profile-social bg-transparent dark:bg-transparent">
       <div>
-        <div className="grid grid-cols-6 items-center justify-center pt-4 text-gray-500 dark:text-gray-400 [&_svg]:h-9 [&_svg]:w-9 sm:[&_svg]:h-11 sm:[&_svg]:w-11 lg:pt-3 lg:[&_svg]:h-8 lg:[&_svg]:w-8 xl:[&_svg]:h-10 xl:[&_svg]:w-10 2xl:[&_svg]:h-12 2xl:[&_svg]:w-12">
+        <div className="grid grid-cols-5 items-center justify-center pt-4 text-gray-500 dark:text-gray-400 [&_svg]:h-9 [&_svg]:w-9 sm:[&_svg]:h-11 sm:[&_svg]:w-11 lg:pt-3 lg:[&_svg]:h-8 lg:[&_svg]:w-8 xl:[&_svg]:h-10 xl:[&_svg]:w-10 2xl:[&_svg]:h-12 2xl:[&_svg]:w-12">
           {/* linkedIn */}
           <a
             href="https://www.linkedin.com/in/gekko"
@@ -60,37 +60,6 @@ export const Social = () => {
             >
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d22828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-file-down-icon lucide-file-down"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
             </a>
-          {/* InfoJobs */}
-          <a
-            href="#"
-            className="flex justify-center items-center transition-transform duration-300 hover:scale-110 hover:text-[#167db7]"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlSpace="preserve"
-              id="Logo_reduced"
-              width="48"
-              height="48"
-              x="0"
-              y="0"
-              version="1.1"
-              viewBox="0 0 138 136.1"
-            >
-              <path
-                id="BG"
-                d="M138 113c0 12.8-10.3 23.1-23.1 23.1H23.1C10.3 136.1 0 125.7 0 113V23.1C0 10.3 10.3 0 23.1 0h91.8C127.7 0 138 10.3 138 23.1V113z"
-                style={{ fill: "#167db7" }}
-              />
-              <g id="IJ">
-                <path
-                  d="M57.9 89.3c-.1.7-.7 1.2-1.5 1.2H45.3c-.7 0-1.3-.4-1.3-1.1l.1-.2 7.1-59.3c.1-.7.2-1 1-1.1h12c.6 0 .9.4.9 1v.2l-7.2 59.3zM86.2 91.3c-1.6 12.9-9.7 15.9-19.4 15.9-5.7 0-6.5-.2-8-.4-.7-.1-1.5-.2-1.5-1.3v-.5l.6-4.8c.2-1.4.7-1.7 2-1.7 1.2-.1 2.7-.1 4.5-.2 4.3-.2 7.3-.6 8.1-6.7L80 30c.1-.7.7-1.1 1.4-1.2l11.3.2h.2c.7 0 1 .4 1 1l-7.7 61.3z"
-                  fill="#fff"
-                />
-              </g>
-            </svg>
-          </a>
           {/* Email */}
           <a
             href="mailto:nikolasarango@outlook.com"

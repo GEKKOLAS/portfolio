@@ -43,7 +43,7 @@ export const Profile = () => {
                         <Image
                           className="rounded-full w-full h-full bg-transparent object-cover border-0"
                           src="/HeroProfile3.png"
-                          alt="profile avatar"
+                          alt="Nicolás Murillo, International Business Professional and Full-Stack Developer"
                           width={500}
                           height={300}
                           style={{ objectPosition: "center 3%" }}

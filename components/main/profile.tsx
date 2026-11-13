@@ -68,8 +68,9 @@ export const Profile = () => {
                     </> : "Nicolás"}
                   </span>
                   {/* The degree comes first: it is Nicolás's highest academic qualification. */}
-                  <span className="profile-role block">
-                    <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 bg-clip-text text-transparent">
+                  {/* Pink-to-fuchsia so it doesn't blend into the yellow name above. */}
+                  <span className="profile-role profile-degree block">
+                    <span className="bg-gradient-to-r from-pink-400 via-rose-500 to-fuchsia-500 bg-clip-text text-transparent">
                       International Business Professional
                     </span>
                   </span>

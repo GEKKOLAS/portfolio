@@ -67,17 +67,23 @@ export const Profile = () => {
                       ))}
                     </> : "Nicolás"}
                   </span>
-                  {/* A fixed role reads in one glance; the old typing effect was often caught half-written. */}
-                  <span className="profile-role block min-h-[1.25em]">
+                  {/* The degree comes first: it is Nicolás's highest academic qualification. */}
+                  <span className="profile-role block">
+                    <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 bg-clip-text text-transparent">
+                      International Business Professional
+                    </span>
+                  </span>
+                  <span className="profile-role block">
                     <span className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                      Full-Stack Developer
+                      &amp; Full-Stack Developer
                     </span>
                   </span>
                   <span className="profile-tagline mt-1 block text-[0.5em] font-semibold leading-snug text-zinc-600 dark:text-zinc-300">
-                    who speaks{" "}
+                    bridging{" "}
                     <span className="text-amber-500">business</span>,{" "}
-                    <span className="text-pink-500">design</span> &amp;{" "}
-                    <span className="text-cyan-400">marketing</span>
+                    <span className="text-pink-500">design</span>,{" "}
+                    <span className="text-cyan-400">marketing</span> &amp;{" "}
+                    <span className="text-green-400">code</span>
                   </span>
                 </h1>
                 <div className="h-3 sm:h-4 lg:h-2 xl:h-3" />

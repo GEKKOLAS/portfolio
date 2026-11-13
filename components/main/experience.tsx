@@ -57,9 +57,34 @@ export const Experience = () => {
             Experience built across technology and people.
           </h2>
           <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400 sm:text-base">
-            A timeline of building software, solving problems and understanding the people behind every product.
+            A business education, then a timeline of building software, solving problems and understanding the people behind every product.
           </p>
         </div>
+
+        {/* Education sits above the work timeline; the graduation year isn't shown. */}
+        <article className="relative mb-6 overflow-hidden rounded-[1.25rem] border border-yellow-400/30 bg-yellow-400/[0.06] p-4 sm:p-5">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-yellow-700 dark:text-yellow-300">
+            Education
+          </p>
+          <h3 className="mt-2 text-base font-semibold text-zinc-950 dark:text-white sm:text-lg">
+            Professional Degree in International Business
+          </h3>
+          <p className="mt-1 text-sm font-medium text-yellow-700 dark:text-yellow-300">Universidad Santo Tomás · Colombia</p>
+          <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+            The business foundation behind my work: how companies trade, sell and grow across markets, which shapes how I
+            analyse a process before writing any code.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {["International trade", "Market analysis", "Business strategy"].map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-yellow-400/30 bg-white/70 px-2.5 py-1 text-[10px] font-medium tracking-wide text-zinc-700 dark:bg-zinc-800/70 dark:text-zinc-300"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </article>
 
         <ol className="relative space-y-4 before:absolute before:bottom-5 before:left-[0.42rem] before:top-5 before:w-px before:bg-gradient-to-b before:from-fuchsia-500 before:via-purple-400/60 before:to-transparent sm:space-y-5 sm:before:left-[10.75rem]">
           {roles.map((role) => (

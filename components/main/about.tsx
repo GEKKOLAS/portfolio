@@ -40,7 +40,7 @@ const focusAreas = [
   },
 ];
 const background = [
-  { step: "01", title: "Business analysis", color: "#FACC15" },
+  { step: "01", title: "International Business", color: "#FACC15" },
   { step: "02", title: "Digital marketing", color: "#EC4899" },
   { step: "03", title: "Software development", color: "#A855F7" },
 ];
@@ -147,12 +147,15 @@ export const About = () => {
           <p className="relative text-xs uppercase tracking-[0.35em] text-fuchsia-500">About</p>
           <div className="about-intro relative pr-20 sm:pr-28">
             <h2 className="max-w-[24ch] text-balance text-[28px] font-semibold leading-[1.12] tracking-tight text-zinc-950 dark:text-white lg:text-4xl">
-              A developer who also thinks like a{" "}
-              <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">business analyst</span>, a{" "}
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">designer</span> and a{" "}
-              <span className="bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent">marketer</span>.
+              A{" "}
+              <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">business professional</span>{" "}
+              who also{" "}
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">designs</span> and{" "}
+              <span className="bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent">builds</span>{" "}
+              the software.
             </h2>
             <p className="mt-4 max-w-xl text-[15px] leading-7 text-zinc-700 dark:text-zinc-300">
+              I&apos;m a professional in International Business from Universidad Santo Tomás and a full-stack developer.
               Most projects don&apos;t fail on code. They fail in the gaps between the business, the design and the launch.
               I work across all three: I map the process and the requirements, design the experience, build it with .NET,
               React and Azure, and connect it to the CRM, ads and automations that bring in customers.

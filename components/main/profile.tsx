@@ -15,7 +15,7 @@ export const Profile = () => {
   const { isRebel } = usePortfolioTheme();
   const originalEffects = useOriginalEffects();
   const words =
-    "I build web products and automations starting from the business problem, not just the ticket.";
+    "I build web products & automations.";
   return (
     <div className="portfolio-profile relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden py-6 sm:py-10 md:py-12 lg:h-full lg:min-h-0 lg:py-4 xl:py-6 2xl:py-8">
       {originalEffects && (

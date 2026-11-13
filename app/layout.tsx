@@ -24,9 +24,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const title = "Nicolás | Full-Stack Developer who speaks business, design & marketing";
+const title = "Nicolás | International Business Professional & Full-Stack Developer";
 const description =
-  "Full-stack developer (.NET, React, Azure) who also works as a business analyst, designer and marketer: web products and automations built from the business problem up. Available for freelance.";
+  "International Business professional and full-stack developer (.NET, React, Azure) bridging business, design, marketing and code: web products and automations built from the business problem up. Available for freelance.";
 
 export const metadata: Metadata = {
   title,

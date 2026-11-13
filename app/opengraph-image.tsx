@@ -42,7 +42,7 @@ export default async function OpenGraphImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 36, color: "#facc15", fontWeight: 700 }}>Nicolás</div>
-          <div style={{ fontSize: 46, fontWeight: 800, lineHeight: 1.1, marginTop: 8, color: "#fbbf24" }}>International Business Professional</div>
+          <div style={{ fontSize: 46, fontWeight: 800, lineHeight: 1.1, marginTop: 8, color: "#f472b6" }}>International Business Professional</div>
           <div style={{ fontSize: 46, fontWeight: 800, lineHeight: 1.1 }}>&amp; Full-Stack Developer</div>
           <div style={{ display: "flex", fontSize: 32, marginTop: 18, color: "#d4d4d8" }}>
             bridging&nbsp;<span style={{ color: "#f59e0b" }}>business</span>,&nbsp;

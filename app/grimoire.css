@@ -198,6 +198,11 @@ html[data-theme="grimoire"] .profile-role .bg-clip-text {
   -webkit-text-fill-color: currentColor;
 }
 
+/* The degree uses the theme's rose so it doesn't blend into the gold name. */
+html[data-theme="grimoire"] .profile-degree .bg-clip-text {
+  color: #e25a6a;
+}
+
 html[data-theme="grimoire"] .profile-description .sekuya-regular {
   max-width: 35ch;
   font-family: "IM Fell English", Georgia, serif;

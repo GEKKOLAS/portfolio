@@ -69,7 +69,7 @@ export const Experience = () => {
           <h3 className="mt-2 text-base font-semibold text-zinc-950 dark:text-white sm:text-lg">
             Professional Degree in International Business
           </h3>
-          <p className="mt-1 text-sm font-medium text-yellow-700 dark:text-yellow-300">Universidad Santo Tomás · Colombia</p>
+          <p className="mt-1 text-sm font-medium text-yellow-700 dark:text-yellow-300">Santo Tomás University · Colombia</p>
           <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
             The business foundation behind my work: how companies trade, sell and grow across markets, which shapes how I
             analyse a process before writing any code.

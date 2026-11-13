@@ -155,7 +155,7 @@ export const About = () => {
               the software.
             </h2>
             <p className="mt-4 max-w-xl text-[15px] leading-7 text-zinc-700 dark:text-zinc-300">
-              I&apos;m a professional in International Business from Universidad Santo Tomás and a full-stack developer.
+              I&apos;m a professional in International Business from Santo Tomás University and a full-stack developer.
               Most projects don&apos;t fail on code. They fail in the gaps between the business, the design and the launch.
               I work across all three: I map the process and the requirements, design the experience, build it with .NET,
               React and Azure, and connect it to the CRM, ads and automations that bring in customers.

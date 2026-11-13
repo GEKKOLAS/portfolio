@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 
 // Card shown when the portfolio link is shared (LinkedIn, WhatsApp, X…).
 // Generated at build time from the profile photo.
-export const alt = "Nicolás, International Business Professional and Full-Stack Developer";
+export const alt = "Nicolás Murillo, International Business Professional and Full-Stack Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -41,7 +41,7 @@ export default async function OpenGraphImage() {
           <img src={src} width={300} height={450} style={{ objectFit: "cover", marginTop: -6 }} alt="" />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 36, color: "#facc15", fontWeight: 700 }}>Nicolás</div>
+          <div style={{ fontSize: 36, color: "#facc15", fontWeight: 700 }}>Nicolás Murillo</div>
           <div style={{ fontSize: 46, fontWeight: 800, lineHeight: 1.1, marginTop: 8, color: "#f472b6" }}>International Business Professional</div>
           <div style={{ fontSize: 46, fontWeight: 800, lineHeight: 1.1 }}>&amp; Full-Stack Developer</div>
           <div style={{ display: "flex", fontSize: 32, marginTop: 18, color: "#d4d4d8" }}>

@@ -149,7 +149,8 @@ html[data-theme="rebel"] .grimoire-orbits > .pointer-events-none {
 }
 
 html[data-theme="rebel"] .skill-heading,
-html[data-theme="rebel"] .skill-heading span {
+html[data-theme="rebel"] .skill-heading span,
+html[data-theme="rebel"] .colourful-heading span {
   color: #000 !important;
   font-family: "Anton", Impact, sans-serif;
   font-weight: 400;

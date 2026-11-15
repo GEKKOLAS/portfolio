@@ -1,5 +1,6 @@
 import React from "react";
 import { Certifications } from "./certifications";
+import ColourfulText from "@/components/ui/colourful-text";
 
 const roles = [
   {
@@ -53,8 +54,8 @@ export const Experience = () => {
               Career journey
             </p>
           </div>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-white sm:text-3xl xl:text-4xl">
-            Experience built across technology and people.
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-white sm:text-3xl xl:text-4xl colourful-heading">
+            <ColourfulText text="Experience built across technology and people." />
           </h2>
           <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400 sm:text-base">
             A business education, then a timeline of building software, solving problems and understanding the people behind every product.

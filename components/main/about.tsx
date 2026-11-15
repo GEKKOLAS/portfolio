@@ -5,7 +5,6 @@ import React, { type CSSProperties, type ReactNode, useState } from "react";
 import { ChartNoAxesCombined, Code2, Megaphone, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTilt } from "@/lib/use-tilt";
-import ColourfulText from "@/components/ui/colourful-text";
 
 // `accent` is an "r g b" triplet so the cards can apply their own alpha.
 // The four skills Nicolás brings to a project, framed around the development
@@ -147,8 +146,13 @@ export const About = () => {
           />
           <p className="relative text-xs uppercase tracking-[0.35em] text-fuchsia-500">About</p>
           <div className="about-intro relative pr-20 sm:pr-28">
-            <h2 className="colourful-heading max-w-[24ch] text-balance text-[28px] font-semibold leading-[1.12] tracking-tight text-zinc-950 dark:text-white lg:text-4xl">
-              <ColourfulText text="A business professional who also designs and builds the software." />
+            <h2 className="max-w-[24ch] text-balance text-[28px] font-semibold leading-[1.12] tracking-tight text-zinc-950 dark:text-white lg:text-4xl">
+              A{" "}
+              <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">business professional</span>{" "}
+              who also{" "}
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">designs</span> and{" "}
+              <span className="bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent">builds</span>{" "}
+              the software.
             </h2>
             <p className="mt-4 max-w-xl text-[15px] leading-7 text-zinc-700 dark:text-zinc-300">
               I&apos;m a professional in International Business from Santo Tomás University and a full-stack developer.

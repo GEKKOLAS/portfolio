@@ -29,9 +29,21 @@ export default function ColourfulText({ text }: { text: string }) {
   const colorCycle = palette;
   const shadowCycle = palette.map((c) => neonShadow(c));
 
+  // Group letters by word so long titles wrap between words, never mid-word.
+  let charIndex = 0;
+  const words = text.split(/(\s+)/).map((part) => {
+    const chars = part.split("").map((char) => ({ char, index: charIndex++ }));
+    return { part, chars };
+  });
+
   return (
-    <>
-      {text.split("").map((char, index) => (
+    <span aria-label={text} role="text">
+      {words.map(({ part, chars }, wordIndex) =>
+        /^\s+$/.test(part) ? (
+          <span key={`space-${wordIndex}`} aria-hidden="true"> </span>
+        ) : (
+        <span key={`word-${wordIndex}`} aria-hidden="true" className="inline-block whitespace-nowrap">
+      {chars.map(({ char, index }) => (
         <motion.span
           key={`${char}-${index}`}
           initial={{ y: 10, opacity: 0, filter: "blur(8px)" }}
@@ -57,6 +69,9 @@ export default function ColourfulText({ text }: { text: string }) {
           {char}
         </motion.span>
       ))}
-    </>
+        </span>
+        )
+      )}
+    </span>
   );
 }

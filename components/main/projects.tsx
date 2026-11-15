@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MotionConfig, motion, type Variants } from "motion/react";
 import { type ComponentType, type KeyboardEvent, useState } from "react";
 import { Modal } from "@/components/ui/modal";
+import ColourfulText from "@/components/ui/colourful-text";
 import { useUISounds } from "@/components/ui/ui-sound-provider";
 import { useTilt } from "@/lib/use-tilt";
 import { projectScreenshots } from "@/lib/project-screenshots";
@@ -485,7 +486,7 @@ export const Projects = () => {
       <div className="mb-8 flex flex-col gap-3">
         <div>
           <p className="text-sm uppercase tracking-[0.35em] text-fuchsia-400/80">Selected work</p>
-          <h2 className="mt-2 text-3xl font-semibold text-zinc-950 dark:text-white">Projects built from product idea to working software</h2>
+          <h2 className="colourful-heading mt-2 text-3xl font-semibold text-zinc-950 dark:text-white"><ColourfulText text="Projects built from product idea to working software" /></h2>
         </div>
         <p className="max-w-[40rem] text-sm leading-7 text-zinc-600 dark:text-zinc-400">
           Full-stack products and business automations, spanning real-time experiences, e-commerce, logistics and cloud architecture.

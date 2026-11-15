@@ -3,6 +3,7 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
+import ColourfulText from "@/components/ui/colourful-text";
 
 import { useEffect, useState, useCallback } from "react";
 
@@ -69,8 +70,8 @@ export const AnimatedTestimonials = ({
       <div className="theme-paper rounded-[2rem] border border-white/15 bg-white/70 p-6 shadow-[0_30px_90px_-36px_rgba(0,0,0,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-900/70 sm:p-8">
         <div className="mb-6">
           <p className="text-xs uppercase tracking-[0.35em] text-fuchsia-500">Services</p>
-          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">
-            Capabilities shaped for digital products and execution.
+          <h2 className="colourful-heading mt-2 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+            <ColourfulText text="Capabilities shaped for digital products and execution." />
           </h2>
         </div>
 

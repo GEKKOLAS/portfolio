@@ -90,7 +90,8 @@ html[data-theme="grimoire"] .grimoire-orbits > .pointer-events-none {
 }
 
 html[data-theme="grimoire"] .skill-heading,
-html[data-theme="grimoire"] .skill-heading span {
+html[data-theme="grimoire"] .skill-heading span,
+html[data-theme="grimoire"] .colourful-heading span {
   font-family: "Pirata One", Georgia, serif;
   font-weight: 400;
   color: #efe2c4 !important;

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Excel">
+  <rect x="40" y="10" width="78" height="108" rx="8" fill="#21A366"/>
+  <path fill="#33C481" d="M79 10h31a8 8 0 0 1 8 8v28H79z"/>
+  <path fill="#107C41" d="M40 82h78v28a8 8 0 0 1-8 8H40z"/>
+  <path fill="#185C37" d="M40 46h39v36H40z"/>
+  <rect x="10" y="30" width="68" height="68" rx="8" fill="#107C41"/>
+  <path fill="#ffffff" d="M24 44h12l8 14 8-14h12L50 64l14 20H52l-8-14-8 14H24l14-20z"/>
+</svg>

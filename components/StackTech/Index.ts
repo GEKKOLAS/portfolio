@@ -129,6 +129,12 @@ export const Languages = [
     width: 80,
     height: 80,
   },
+  {
+    skill_name: ".NET",
+    Image: "/icons/dotnet.svg",
+    width: 80,
+    height: 80,
+  },
 ];
 // Backend Frameworks
 export const Backend_skill = [
@@ -313,10 +319,11 @@ export const DB_skill = [
     height: 80,
   },
 ];
-// Cloud, design and business tools. Icons live in public/icons: AWS, Photoshop and
-// After Effects come from Devicon (MIT, AWS wordmark recoloured white for the dark
-// themes); Microsoft 365 is a simple local mark, since the free icon sets dropped
-// Microsoft's logos.
+// Cloud, design, data and business tools. Icons live in public/icons: AWS, Photoshop,
+// After Effects and .NET come from Devicon (MIT, AWS wordmark recoloured white for the
+// dark themes); n8n, Zapier, Google Ads and Meta come from Simple Icons (CC0) with their
+// brand colour added; Microsoft 365, Excel and Power BI are simple local marks, since
+// the free icon sets dropped Microsoft's logos.
 export const Tools_skill = [
   {
     skill_name: "AWS",
@@ -339,6 +346,42 @@ export const Tools_skill = [
   {
     skill_name: "Microsoft 365",
     Image: "/icons/microsoft365.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Excel",
+    Image: "/icons/excel.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Power BI",
+    Image: "/icons/powerbi.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "n8n",
+    Image: "/icons/n8n.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Zapier",
+    Image: "/icons/zapier.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Google Ads",
+    Image: "/icons/googleads.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Meta Ads",
+    Image: "/icons/meta.svg",
     width: 80,
     height: 80,
   },

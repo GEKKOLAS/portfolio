@@ -1,4 +1,4 @@
-import { Frontend_skill, Backend_skill, Languages, DB_skill, Tools_skill } from "./Index";
+import { Frontend_skill, Frontend_extra_skill, Backend_skill, Languages, DB_skill, Tools_skill, Services_skill } from "./Index";
 import { OrbitingCircles } from "../magicui/orbiting-circles";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -36,7 +36,7 @@ export function OrbitingCirclesDemo() {
         transition={{ delay: 0.15, duration: 0.45 }}
       >
         <OrbitingCircles iconSize={56} radius={300} reverse speed={1}>
-          {Frontend_skill.map((skill, index) => (
+          {[...Frontend_skill, ...Frontend_extra_skill].map((skill, index) => (
             <motion.div
               key={skill.skill_name}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -58,8 +58,8 @@ export function OrbitingCirclesDemo() {
         transition={{ delay: 0.25, duration: 0.45 }}
       >
         <OrbitingCircles iconSize={40} radius={220}>
-          {/* Databases share this ring with cloud, design and business tools: it had room to spare. */}
-          {[...DB_skill, ...Tools_skill].map((skill, index) => (
+          {/* Databases share this ring with cloud, design, business and service tools: it had room to spare. */}
+          {[...DB_skill, ...Tools_skill, ...Services_skill].map((skill, index) => (
             <motion.div
               key={skill.skill_name}
               initial={{ opacity: 0, scale: 0.9 }}

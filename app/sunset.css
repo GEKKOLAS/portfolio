@@ -215,12 +215,12 @@ html[data-theme="sunset"] .profile-name {
 
 /* Gradient text is transparent, so a text-shadow would show through it: outline
    the profile lines with a drop-shadow instead to keep them legible on the sky. */
-html[data-theme="sunset"] :is(.profile-role, .profile-tagline, .profile-description),
-html[data-theme="sunset"] :is(.profile-role, .profile-tagline, .profile-description) * {
+html[data-theme="sunset"] :is(.profile-role, .profile-tagline),
+html[data-theme="sunset"] :is(.profile-role, .profile-tagline) * {
   text-shadow: none;
 }
 
-html[data-theme="sunset"] :is(.profile-role, .profile-tagline, .profile-description) {
+html[data-theme="sunset"] :is(.profile-role, .profile-tagline) {
   filter: drop-shadow(0 2px 0 #1a0b2e) drop-shadow(0 0 6px rgb(26 11 46 / 0.85));
 }
 
@@ -236,12 +236,6 @@ html[data-theme="sunset"] .profile-tagline {
   color: var(--sunset-ink);
 }
 
-html[data-theme="sunset"] .profile-description .sekuya-regular {
-  max-width: 36ch;
-  font-family: "Kanit", var(--font-geist-sans), sans-serif;
-  font-weight: 500;
-  line-height: 1.4;
-}
 
 html[data-theme="sunset"] .profile-social a {
   margin-inline: 3px;

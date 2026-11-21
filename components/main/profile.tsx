@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Navbar } from "./navbar";
 import { Social } from "./socialnet";
 import { BackgroundBeams } from "../ui/background-beams";
-import { AuroraText } from "../ui/aurora-text";
 import { CosmicAura } from "../effects/cosmic-aura";
 import { PixelFireReveal } from "../effects/pixel-fire-reveal";
 import { ThemeSwitcher } from "../ui/theme-switcher";
@@ -14,8 +13,6 @@ import { SoundToggle } from "../ui/sound-toggle";
 export const Profile = () => {
   const { isRebel, isSunset } = usePortfolioTheme();
   const originalEffects = useOriginalEffects();
-  const words =
-    "I build web products & automations.";
   return (
     <div className="portfolio-profile relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden py-6 sm:py-10 md:py-12 lg:h-full lg:min-h-0 lg:py-4 xl:py-6 2xl:py-8">
       {originalEffects && (
@@ -88,11 +85,6 @@ export const Profile = () => {
                   </span>
                 </h1>
                 <div className="h-3 sm:h-4 lg:h-2 xl:h-3" />
-                <div className="profile-description flex items-center justify-center w-full">
-                  <AuroraText className="px-2 text-lg leading-snug sekuya-regular sm:text-xl md:text-2xl lg:text-base xl:text-lg 2xl:text-2xl">
-                    {words}
-                  </AuroraText>
-                </div>
                 <Social />
               </div>
             </div>

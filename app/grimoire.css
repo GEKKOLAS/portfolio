@@ -203,24 +203,8 @@ html[data-theme="grimoire"] .profile-degree .bg-clip-text {
   color: #e25a6a;
 }
 
-html[data-theme="grimoire"] .profile-description .sekuya-regular {
-  max-width: 35ch;
-  font-family: "IM Fell English", Georgia, serif;
-  font-size: 1.1rem;
-  line-height: 1.55;
-}
 
-html[data-theme="grimoire"] .profile-description .animate-aurora-text {
-  animation: none;
-  background-image: none !important;
-  color: #cdb89a;
-  filter: none;
-  -webkit-text-fill-color: currentColor !important;
-}
 
-html[data-theme="grimoire"] .profile-description .animate-aurora-text.absolute {
-  display: none;
-}
 
 /* Paper panels retain the current layout and interactions in every section.
    Local utility tokens keep existing dark:text-* classes legible on paper. */
@@ -372,9 +356,6 @@ html[data-theme="grimoire"] .portfolio-loader .font-tangerine > span:not(:first-
     font-size: 1.7rem;
   }
 
-  html[data-theme="grimoire"] .profile-description .sekuya-regular {
-    font-size: 0.95rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

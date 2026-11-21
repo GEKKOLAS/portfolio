@@ -236,24 +236,8 @@ html[data-theme="rebel"] .profile-tagline span {
   color: #ffe14d;
 }
 
-html[data-theme="rebel"] .profile-description .sekuya-regular {
-  max-width: 35ch;
-  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
-  font-size: 1.2rem;
-  line-height: 1.4;
-}
 
-html[data-theme="rebel"] .profile-description .animate-aurora-text {
-  animation: none;
-  background-image: none !important;
-  color: #fff;
-  filter: none;
-  -webkit-text-fill-color: currentColor !important;
-}
 
-html[data-theme="rebel"] .profile-description .animate-aurora-text.absolute {
-  display: none;
-}
 
 html[data-theme="rebel"] .profile-social a {
   margin-inline: 3px;
@@ -403,7 +387,6 @@ html[data-theme="rebel"] .portfolio-loader .font-tangerine > span:not(:first-chi
 
 @media (min-width: 1024px) and (max-height: 800px) {
   html[data-theme="rebel"] .profile-heading { font-size: 1.5rem; }
-  html[data-theme="rebel"] .profile-description .sekuya-regular { font-size: 1.05rem; }
   html[data-theme="rebel"] .portfolio-profile nav { padding-block: 0.6rem; }
 }
 

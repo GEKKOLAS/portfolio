@@ -6,7 +6,8 @@ import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
 import { startThemeTransition } from "@/components/effects/theme-transition";
 import { startRebelTransition } from "@/components/effects/rebel-transition";
 import { startCosmicTransition } from "@/components/effects/cosmic-transition";
-import { portfolioThemeNames, type PortfolioTheme } from "@/lib/portfolio-themes";
+import { startSunsetTransition } from "@/components/effects/sunset-transition";
+import { isPortfolioTheme, portfolioThemeNames, type PortfolioTheme } from "@/lib/portfolio-themes";
 import { UISoundProvider, useUISounds } from "./ui-sound-provider";
 
 export type { PortfolioTheme } from "@/lib/portfolio-themes";
@@ -16,6 +17,7 @@ type PortfolioThemeContextValue = {
   mounted: boolean;
   isGrimoire: boolean;
   isRebel: boolean;
+  isSunset: boolean;
   isOriginal: boolean;
   isTransitioning: boolean;
   transitionToTheme: (theme: PortfolioTheme) => void;
@@ -31,7 +33,7 @@ function PortfolioThemeController({ children }: { children: React.ReactNode }) {
   const busy = React.useRef(false);
   const selectionVersion = React.useRef(0);
   const cancel = React.useRef<(() => void) | null>(null);
-  const theme: PortfolioTheme = mounted && (savedTheme === "grimoire" || savedTheme === "rebel") ? savedTheme : "dark";
+  const theme: PortfolioTheme = mounted && isPortfolioTheme(savedTheme) ? savedTheme : "dark";
 
   React.useEffect(() => {
     setMounted(true);
@@ -44,7 +46,7 @@ function PortfolioThemeController({ children }: { children: React.ReactNode }) {
   React.useEffect(() => {
     // next-themes may read a theme saved by an older version of the site.
     // Normalize it so the selector and the document always agree.
-    if (savedTheme && !portfolioThemeNames.some((name) => name === savedTheme) && !isTransitioning) {
+    if (savedTheme && !isPortfolioTheme(savedTheme) && !isTransitioning) {
       setTheme("dark");
     }
   }, [savedTheme, setTheme, isTransitioning]);
@@ -78,6 +80,7 @@ function PortfolioThemeController({ children }: { children: React.ReactNode }) {
       dark: startCosmicTransition,
       grimoire: startThemeTransition,
       rebel: startRebelTransition,
+      sunset: startSunsetTransition,
     }[nextTheme];
     let started = false;
     let aborted = false;
@@ -125,6 +128,7 @@ function PortfolioThemeController({ children }: { children: React.ReactNode }) {
     mounted,
     isGrimoire: theme === "grimoire",
     isRebel: theme === "rebel",
+    isSunset: theme === "sunset",
     isOriginal: theme === "dark",
     isTransitioning,
     transitionToTheme,

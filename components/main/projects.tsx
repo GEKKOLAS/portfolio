@@ -13,6 +13,7 @@ import { FleetArchitecture } from "./fleet-architecture";
 import { ProjectGallery, type ProjectScreenshot } from "./project-gallery";
 import "./grimoire-surfaces.css";
 import "./rebel-surfaces.css";
+import "./sunset-surfaces.css";
 
 type DevProject = {
   title: string;

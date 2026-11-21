@@ -1,11 +1,11 @@
 "use client";
 
-import { Crown, Sparkles, Star } from "lucide-react";
+import { Crown, Sparkles, Star, TreePalm } from "lucide-react";
 import { portfolioThemes } from "@/lib/portfolio-themes";
 import { usePortfolioTheme } from "./theme-provider";
 import "./theme-switcher.css";
 
-const icons = { dark: Sparkles, grimoire: Crown, rebel: Star };
+const icons = { dark: Sparkles, grimoire: Crown, rebel: Star, sunset: TreePalm };
 
 export function ThemeSwitcher() {
   const { theme, mounted, isTransitioning, transitionToTheme } = usePortfolioTheme();

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 import { createUISoundEngine, type UISound } from "@/lib/ui-audio";
-import { portfolioThemeNames, type PortfolioTheme } from "@/lib/portfolio-themes";
+import { isPortfolioTheme, portfolioThemeNames, type PortfolioTheme } from "@/lib/portfolio-themes";
 
 const STORAGE_KEY = "portfolio-ui-sound";
 const CONTROL_SELECTOR = 'button, a[href], [role="button"], .portfolio-project-card, .about-focus-area';
@@ -37,7 +37,7 @@ export function UISoundProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
-    theme.current = savedTheme === "grimoire" || savedTheme === "rebel" ? savedTheme : "dark";
+    theme.current = isPortfolioTheme(savedTheme) ? savedTheme : "dark";
   }, [savedTheme]);
 
   const getEngine = React.useCallback(() => {

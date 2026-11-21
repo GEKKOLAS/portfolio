@@ -158,3 +158,30 @@
     transition: none;
   }
 }
+
+[data-theme="sunset"] .sound-toggle {
+  border-color: rgb(255 46 136 / 0.6);
+  background: #1a0b2e;
+  box-shadow: 0 0 12px rgb(255 46 136 / 0.35);
+  color: #2de2e6;
+}
+
+[data-theme="sunset"] .theme-switcher {
+  border-color: rgb(255 46 136 / 0.5);
+  background: rgb(26 11 46 / 0.9);
+  box-shadow: 0 0 22px rgb(255 46 136 / 0.3);
+}
+
+[data-theme="sunset"] .theme-switcher-option {
+  color: #d4b6e0;
+}
+
+[data-theme="sunset"] .theme-switcher-option[aria-pressed="true"] {
+  border-color: transparent;
+  background: linear-gradient(90deg, #ff2e88, #ff9a3d);
+  color: #fff;
+}
+
+[data-theme="sunset"] .theme-switcher-option:focus-visible {
+  outline-color: #2de2e6;
+}

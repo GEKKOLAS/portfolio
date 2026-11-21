@@ -1,0 +1,155 @@
+/* Sunset uses night-glass panels with pink neon edges, turquoise highlights and
+   sun-gradient accents. */
+html[data-theme="sunset"] .portfolio-project-card h3 {
+  color: #fff;
+  text-shadow: 0 0 12px rgb(255 46 136 / 0.5);
+}
+
+html[data-theme="sunset"] .project-artwork {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(255 46 136 / 0.45);
+  border-radius: 16px;
+}
+
+/* A light dusk wash over screenshots ties them into the palette. */
+html[data-theme="sunset"] .project-artwork::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgb(255 46 136 / 0.22));
+  content: "";
+  pointer-events: none;
+}
+
+html[data-theme="sunset"] .project-card-chip {
+  border-color: rgb(45 226 230 / 0.45);
+  background: rgb(45 226 230 / 0.1);
+  color: #7ff3f5;
+}
+
+html[data-theme="sunset"] .project-data-metrics {
+  border: 1px solid rgb(255 46 136 / 0.35);
+  border-radius: 14px;
+  background: rgb(26 11 46 / 0.7);
+}
+
+html[data-theme="sunset"] .project-data-metrics > div > div:first-child {
+  color: #ffe36e;
+}
+
+html[data-theme="sunset"] .project-data-bar {
+  background: linear-gradient(90deg, #ff2e88, #ff9a3d) !important;
+}
+
+html[data-theme="sunset"] .project-data-bar:last-child {
+  background: #2de2e6 !important;
+}
+
+html[data-theme="sunset"] .service-artwork {
+  border: 1px solid rgb(255 46 136 / 0.5);
+  box-shadow: 0 0 40px rgb(255 46 136 / 0.35);
+}
+
+html[data-theme="sunset"] .service-description {
+  border: 1px solid rgb(45 226 230 / 0.3);
+  border-radius: 16px;
+  background: rgb(59 15 92 / 0.45);
+}
+
+html[data-theme="sunset"] .service-arrow {
+  border: 1px solid rgb(255 46 136 / 0.6);
+  background: linear-gradient(135deg, #ff2e88, #ff9a3d);
+  box-shadow: 0 0 16px rgb(255 46 136 / 0.5);
+}
+
+html[data-theme="sunset"] .service-arrow svg {
+  color: #fff;
+}
+
+html[data-theme="sunset"] .service-arrow:hover {
+  background: #2de2e6;
+  box-shadow: 0 0 18px rgb(45 226 230 / 0.6);
+}
+
+html[data-theme="sunset"] .service-arrow:hover svg {
+  color: #1a0b2e;
+}
+
+html[data-theme="sunset"] :is(.service-arrow, .project-primary-link):focus-visible {
+  outline: 2px solid #2de2e6;
+  outline-offset: 4px;
+}
+
+html[data-theme="sunset"] :is(.grimoire-manuscript, .grimoire-orbits) {
+  border: 1px solid rgb(255 46 136 / 0.45);
+  background: linear-gradient(160deg, rgb(36 16 61 / 0.9), rgb(26 11 46 / 0.86));
+  box-shadow: 0 0 0 1px rgb(45 226 230 / 0.12), 0 24px 70px -24px rgb(255 46 136 / 0.55);
+  color: #f3dcf5;
+}
+
+html[data-theme="sunset"] .grimoire-manuscript > [aria-hidden="true"]:first-child {
+  background: rgb(255 46 136 / 0.25);
+}
+
+html[data-theme="sunset"] .skill-tool {
+  border-color: rgb(255 46 136 / 0.3);
+  background: rgb(59 15 92 / 0.45);
+}
+
+html[data-theme="sunset"] .skill-tool:hover {
+  border-color: rgb(45 226 230 / 0.6);
+  box-shadow: 0 0 18px rgb(45 226 230 / 0.25);
+}
+
+html[data-theme="sunset"] .skill-tool > div:first-child {
+  border-color: rgb(255 46 136 / 0.5);
+  background: linear-gradient(135deg, #ff2e88, #ff9a3d);
+  color: #fff;
+}
+
+html[data-theme="sunset"] .grimoire-orbits circle {
+  stroke: rgb(45 226 230 / 0.35);
+}
+
+html[data-theme="sunset"] .portfolio-modal {
+  border: 1px solid rgb(255 46 136 / 0.5);
+  background: #1a0b2e;
+  color: #f3dcf5;
+  box-shadow: 0 0 60px rgb(255 46 136 / 0.35);
+  font-family: "Kanit", var(--font-geist-sans), sans-serif;
+}
+
+html[data-theme="sunset"] .portfolio-modal::backdrop {
+  background: rgb(26 11 46 / 0.82);
+}
+
+html[data-theme="sunset"] .project-detail-hero {
+  background: linear-gradient(180deg, #3b0f5c, #1a0b2e);
+}
+
+html[data-theme="sunset"] .project-detail-hero h2 {
+  color: #fff;
+  text-shadow: 0 0 6px #ff2e88, 0 0 18px #ff2e88, 3px 3px 0 #2de2e6;
+}
+
+html[data-theme="sunset"] .project-detail-paper aside {
+  border: 1px solid rgb(45 226 230 / 0.3);
+  border-radius: 16px;
+  background: rgb(59 15 92 / 0.45);
+}
+
+html[data-theme="sunset"] .project-primary-link {
+  border: 0;
+  background: linear-gradient(90deg, #ff2e88, #ff9a3d);
+  color: #fff;
+  box-shadow: 0 0 18px rgb(255 46 136 / 0.5);
+}
+
+html[data-theme="sunset"] .project-primary-link:hover {
+  background: #2de2e6;
+  color: #1a0b2e;
+}
+
+html[data-theme="sunset"] .portfolio-modal nav button:hover {
+  background: rgb(255 46 136 / 0.2);
+}

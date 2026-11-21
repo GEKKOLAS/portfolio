@@ -3,6 +3,7 @@ import { Geist, Geist_Mono,  } from "next/font/google";
 import "./globals.css";
 import "./grimoire.css";
 import "./rebel.css";
+import "./sunset.css";
 import { portfolioThemeNames } from "@/lib/portfolio-themes";
 import { ThemeProvider } from "../components/ui/theme-provider";
 import { VisitBeacon } from "../components/visit-beacon";

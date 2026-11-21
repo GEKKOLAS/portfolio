@@ -12,7 +12,7 @@ import { useOriginalEffects, usePortfolioTheme } from "../ui/theme-provider";
 import { SoundToggle } from "../ui/sound-toggle";
 
 export const Profile = () => {
-  const { isRebel } = usePortfolioTheme();
+  const { isRebel, isSunset } = usePortfolioTheme();
   const originalEffects = useOriginalEffects();
   const words =
     "I build web products & automations.";
@@ -56,7 +56,7 @@ export const Profile = () => {
                 </div>
               </div>
               <div className="w-full max-w-2xl text-center">
-                <p className="grimoire-chapter">{isRebel ? "Rebel" : "Grimoire"} <span aria-hidden="true">{isRebel ? "★" : "✦"}</span> Chapter I</p>
+                <p className="grimoire-chapter">{isRebel ? "Rebel" : isSunset ? "Sunset" : "Grimoire"} <span aria-hidden="true">{isRebel ? "★" : isSunset ? "☀" : "✦"}</span> Chapter I</p>
                 <h1 className="profile-heading scroll-m-20 font-newyork text-3xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white sm:text-4xl md:text-5xl lg:text-2xl lg:leading-tight xl:text-3xl 2xl:text-5xl">
                   Hey there! I&apos;m{" "}
                   <span className="profile-name text-yellow-500">

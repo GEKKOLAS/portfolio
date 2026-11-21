@@ -1,0 +1,332 @@
+/* Sunset: an original neon coast at dusk (purple sky, hot-pink and orange sun,
+   turquoise water and palm silhouettes) with 80s synthwave signage. */
+@font-face {
+  font-family: "Kanit";
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/kanit-latin-800-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Kanit";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/kanit-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Kanit";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/kanit-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Pacifico";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/pacifico-latin-400-normal.woff2") format("woff2");
+}
+
+html[data-theme="sunset"] {
+  color-scheme: dark;
+  --sunset-night: #1a0b2e;
+  --sunset-plum: #3b0f5c;
+  --sunset-pink: #ff2e88;
+  --sunset-coral: #ff5a5f;
+  --sunset-orange: #ff9a3d;
+  --sunset-gold: #ffe36e;
+  --sunset-teal: #2de2e6;
+  --sunset-ink: #fff1f8;
+  --sunset-text: #f3dcf5;
+  --sunset-muted: #d4b6e0;
+
+  --background: #1a0b2e;
+  --foreground: #fff1f8;
+  --card: #24103d;
+  --card-foreground: #fff1f8;
+  --popover: #24103d;
+  --popover-foreground: #fff1f8;
+  --primary: #ff2e88;
+  --primary-foreground: #fff;
+  --secondary: #3b0f5c;
+  --secondary-foreground: #fff1f8;
+  --muted: #2a1245;
+  --muted-foreground: #d4b6e0;
+  --accent: #2de2e6;
+  --accent-foreground: #1a0b2e;
+  --border: #ff2e8855;
+  --input: #ff2e8855;
+  --ring: #2de2e6;
+
+  --color-white: #fff1f8;
+  --color-zinc-100: #fff1f8;
+  --color-zinc-200: #f3dcf5;
+  --color-zinc-300: #f3dcf5;
+  --color-zinc-400: #d4b6e0;
+  --color-zinc-500: #c3a0d4;
+  --color-zinc-600: #d4b6e0;
+  --color-zinc-700: #4a2368;
+  --color-zinc-800: #2a1245;
+  --color-zinc-900: #24103d;
+  --color-zinc-950: #fff1f8;
+  --color-fuchsia-300: #ff8ac4;
+  --color-fuchsia-400: #ff5fa8;
+  --color-fuchsia-500: #ff2e88;
+  --color-fuchsia-600: #ff2e88;
+  --color-fuchsia-700: #ff8ac4;
+  --color-purple-400: #c59bff;
+  --color-purple-500: #a970ff;
+  --color-violet-300: #c59bff;
+  --color-violet-400: #c59bff;
+  --color-cyan-300: #7ff3f5;
+  --color-cyan-400: #2de2e6;
+  --color-cyan-500: #2de2e6;
+  --color-pink-400: #ff5fa8;
+  --color-pink-500: #ff2e88;
+  --color-rose-500: #ff5a5f;
+  --color-yellow-300: #ffe36e;
+  --color-yellow-400: #ffe36e;
+  --color-yellow-500: #ffd23f;
+  --color-yellow-600: #ffb347;
+  --color-yellow-700: #ffd23f;
+  --color-amber-500: #ff9a3d;
+  --color-orange-500: #ff9a3d;
+}
+
+html[data-theme="sunset"] body {
+  background:
+    /* dusk shade behind the profile column so its text stays readable */
+    linear-gradient(90deg, rgb(26 11 46 / 0.6) 0, rgb(26 11 46 / 0.45) 26%, transparent 34%),
+    /* palm silhouettes on both shores */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240'%3E%3Cg fill='%23120624'%3E%3Cpath d='M86 240c2-50 8-100 22-138l6 2c-11 38-17 86-18 136z'/%3E%3Cpath d='M112 102C90 80 58 78 30 94c30-10 58-4 78 14z'/%3E%3Cpath d='M112 102c-8-30-30-48-58-52 28 10 46 28 54 56z'/%3E%3Cpath d='M112 102c12-30 38-42 66-38-26 6-46 20-60 42z'/%3E%3Cpath d='M112 102c28-8 56 2 74 24-22-14-46-20-70-16z'/%3E%3Cpath d='M112 102c-18 4-36 18-46 40 14-18 30-28 50-32z'/%3E%3C/g%3E%3C/svg%3E") left -40px bottom -10px / min(34vw, 360px) auto no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240'%3E%3Cg fill='%23120624'%3E%3Cpath d='M114 240c-2-46-8-92-20-128l-6 2c10 36 16 80 16 126z'/%3E%3Cpath d='M90 112c22-22 54-24 82-8-30-10-58-4-78 14z'/%3E%3Cpath d='M90 112c8-30 30-48 58-52-28 10-46 28-54 56z'/%3E%3Cpath d='M90 112c-12-30-38-42-66-38 26 6 46 20 60 42z'/%3E%3Cpath d='M90 112c-28-8-56 2-74 24 22-14 46-20 70-16z'/%3E%3C/g%3E%3C/svg%3E") right -30px bottom -10px / min(26vw, 280px) auto no-repeat,
+    /* water reflections below the horizon */
+    repeating-linear-gradient(180deg, transparent 0 14px, rgb(45 226 230 / 0.10) 14px 16px) 0 72vh / 100% 28vh no-repeat,
+    linear-gradient(180deg, transparent 72vh, #0c3b5c 72vh, #071a33 100%),
+    /* the setting sun on the horizon */
+    radial-gradient(circle at 50% 72vh, #ffe36e 0 9vh, #ff9a3d 9vh 11vh, transparent 11.2vh),
+    radial-gradient(ellipse at 50% 72vh, rgb(255 46 136 / 0.55), transparent 55%),
+    linear-gradient(180deg, #1a0b2e 0%, #3b0f5c 32%, #8a1f8f 52%, #ff2e88 64%, #ff9a3d 72%);
+  background-attachment: fixed;
+  background-color: #1a0b2e;
+  color: var(--sunset-text);
+  font-family: "Kanit", var(--font-geist-sans), sans-serif;
+  font-weight: 500;
+}
+
+html[data-theme="sunset"] ::selection {
+  background: var(--sunset-pink);
+  color: #fff;
+}
+
+html[data-theme="sunset"] :is(h1, h2, h3, h4) {
+  font-family: "Kanit", var(--font-geist-sans), sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+html[data-theme="sunset"] h2 {
+  text-transform: uppercase;
+}
+
+/* The animated section titles become neon signage: white core, pink glow, teal offset. */
+html[data-theme="sunset"] .skill-heading span,
+html[data-theme="sunset"] .colourful-heading span {
+  color: #fff !important;
+  font-family: "Kanit", var(--font-geist-sans), sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  text-shadow: 0 0 6px #ff2e88, 0 0 18px #ff2e88, 3px 3px 0 #2de2e6 !important;
+  text-transform: uppercase;
+}
+
+html[data-theme="sunset"] .profile-medallion {
+  margin-bottom: 1.3rem;
+  padding: 6px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffe36e, #ff2e88 50%, #2de2e6);
+  box-shadow: 0 0 40px rgb(255 46 136 / 0.55), 0 0 90px rgb(255 154 61 / 0.25);
+}
+
+html[data-theme="sunset"] .profile-portrait img {
+  filter: saturate(1.2) contrast(1.05);
+}
+
+html[data-theme="sunset"] .profile-portrait .pixel-fire-img {
+  animation: none;
+}
+
+html[data-theme="sunset"] .profile-portrait .pixel-fire-grid {
+  display: none;
+}
+
+html[data-theme="sunset"] .grimoire-ribbon {
+  position: absolute;
+  z-index: 20;
+  bottom: -12px;
+  left: 50%;
+  display: block;
+  width: max-content;
+  padding: 3px 12px;
+  transform: translateX(-50%) rotate(-3deg);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff2e88, #ff9a3d);
+  box-shadow: 0 0 18px rgb(255 46 136 / 0.6);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+html[data-theme="sunset"] .grimoire-chapter {
+  display: block;
+  margin: 0.2rem auto 0.5rem;
+  color: var(--sunset-teal);
+  font-family: "Pacifico", cursive;
+  font-size: 1.05rem;
+  text-shadow: 0 0 10px rgb(45 226 230 / 0.7);
+}
+
+html[data-theme="sunset"] .profile-heading {
+  color: var(--sunset-ink);
+  text-shadow: 0 2px 12px rgb(26 11 46 / 0.7);
+}
+
+html[data-theme="sunset"] .profile-name {
+  display: inline-block;
+  padding: 0 0.12em 0.1em;
+  background: linear-gradient(90deg, #ffe36e, #ff9a3d 40%, #ff2e88);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: "Pacifico", cursive;
+  font-style: normal;
+  font-weight: 400;
+  filter: drop-shadow(0 0 10px rgb(255 46 136 / 0.65));
+  text-shadow: none;
+}
+
+/* Gradient text is transparent, so a text-shadow would show through it: outline
+   the profile lines with a drop-shadow instead to keep them legible on the sky. */
+html[data-theme="sunset"] :is(.profile-role, .profile-tagline, .profile-description),
+html[data-theme="sunset"] :is(.profile-role, .profile-tagline, .profile-description) * {
+  text-shadow: none;
+}
+
+html[data-theme="sunset"] :is(.profile-role, .profile-tagline, .profile-description) {
+  filter: drop-shadow(0 2px 0 #1a0b2e) drop-shadow(0 0 6px rgb(26 11 46 / 0.85));
+}
+
+html[data-theme="sunset"] .profile-degree .bg-clip-text {
+  background-image: linear-gradient(90deg, #fff7d6, #ffe36e);
+}
+
+html[data-theme="sunset"] .profile-role:not(.profile-degree) .bg-clip-text {
+  background-image: linear-gradient(90deg, #7ff3f5, #e0c3ff);
+}
+
+html[data-theme="sunset"] .profile-tagline {
+  color: var(--sunset-ink);
+}
+
+html[data-theme="sunset"] .profile-description .sekuya-regular {
+  max-width: 36ch;
+  font-family: "Kanit", var(--font-geist-sans), sans-serif;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+html[data-theme="sunset"] .profile-social a {
+  margin-inline: 3px;
+  padding: 5px;
+  border-radius: 999px;
+  background: rgb(26 11 46 / 0.7);
+  box-shadow: 0 0 0 1px rgb(255 46 136 / 0.6), 0 0 14px rgb(255 46 136 / 0.35);
+}
+
+html[data-theme="sunset"] .nav-item:hover {
+  color: var(--sunset-teal);
+  text-shadow: 0 0 10px rgb(45 226 230 / 0.7);
+}
+
+/* Night-glass panels so text stays readable over the bright sky. */
+html[data-theme="sunset"] .theme-paper {
+  border: 1px solid rgb(255 46 136 / 0.45);
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgb(36 16 61 / 0.9), rgb(26 11 46 / 0.86));
+  box-shadow: 0 0 0 1px rgb(45 226 230 / 0.12), 0 24px 70px -24px rgb(255 46 136 / 0.55);
+  color: var(--sunset-text);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+html[data-theme="sunset"] .theme-paper:hover {
+  border-color: rgb(45 226 230 / 0.6);
+  box-shadow: 0 0 0 1px rgb(45 226 230 / 0.3), 0 24px 70px -20px rgb(45 226 230 / 0.45);
+}
+
+html[data-theme="sunset"] .theme-paper :is(.project-card-orb, .project-card-glow) {
+  display: none;
+}
+
+html[data-theme="sunset"] .bento-accent-rule {
+  background: linear-gradient(90deg, #ff2e88, #ff9a3d, #2de2e6) !important;
+}
+
+html[data-theme="sunset"] .about-focus-area {
+  border: 1px solid rgb(255 46 136 / 0.35);
+  border-radius: 16px;
+  background: rgb(59 15 92 / 0.45);
+}
+
+html[data-theme="sunset"] .about-origin-step {
+  border-color: rgb(45 226 230 / 0.5) !important;
+  background: rgb(26 11 46 / 0.8);
+  color: var(--sunset-ink) !important;
+}
+
+html[data-theme="sunset"] .experience-paper article {
+  border: 1px solid rgb(255 46 136 / 0.3);
+  border-radius: 16px;
+  background: rgb(59 15 92 / 0.4);
+}
+
+html[data-theme="sunset"] .experience-paper article:hover {
+  border-color: rgb(45 226 230 / 0.55);
+  box-shadow: 0 0 22px rgb(45 226 230 / 0.2);
+}
+
+html[data-theme="sunset"] .certificate-preview-label {
+  background: var(--sunset-night);
+  color: var(--sunset-ink);
+}
+
+html[data-theme="sunset"] .portfolio-loader {
+  background: linear-gradient(180deg, #1a0b2e, #3b0f5c 55%, #ff2e88);
+}
+
+html[data-theme="sunset"] .portfolio-loader .font-tangerine {
+  color: #fff;
+  font-family: "Pacifico", cursive;
+  text-shadow: 0 0 14px #ff2e88;
+}
+
+@media (min-width: 1024px) and (max-height: 800px) {
+  html[data-theme="sunset"] .profile-heading { font-size: 1.5rem; }
+  html[data-theme="sunset"] .portfolio-profile nav { padding-block: 0.6rem; }
+}
+
+/* On phones the page scrolls with the body; keep the sky still and drop the palms. */
+@media (max-width: 1023px) {
+  html[data-theme="sunset"] body {
+    background:
+      linear-gradient(180deg, #1a0b2e 0%, #3b0f5c 40%, #8a1f8f 70%, #ff2e88 100%) fixed;
+  }
+}

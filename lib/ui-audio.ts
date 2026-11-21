@@ -58,6 +58,14 @@ const cues: Record<PortfolioTheme, Record<ActionSound, Cue>> = {
     open: { tones: [{ frequency: 392, to: 784, duration: 0.11, gain: 0.04, type: "sawtooth" }, { frequency: 1046.5, duration: 0.09, gain: 0.025, type: "square", delay: 0.06 }], noise: { frequency: 1700, duration: 0.07, gain: 0.035 } },
     close: { tones: [{ frequency: 330, to: 110, duration: 0.11, gain: 0.04, type: "sawtooth" }, { frequency: 100, duration: 0.07, gain: 0.035, type: "triangle" }] },
   },
+  // Warm detuned 80s synth stabs: a soft sawtooth pad plus a bright chord note.
+  sunset: {
+    hover: { tones: [{ frequency: 659.25, duration: 0.05, gain: 0.03, type: "triangle" }, { frequency: 662.5, duration: 0.05, gain: 0.018, type: "sawtooth" }] },
+    navigate: { tones: [{ frequency: 523.25, to: 783.99, duration: 0.09, gain: 0.04, type: "sawtooth" }, { frequency: 1046.5, duration: 0.1, gain: 0.025, type: "triangle", delay: 0.04 }] },
+    activate: { tones: [{ frequency: 440, duration: 0.09, gain: 0.045, type: "sawtooth" }, { frequency: 554.37, duration: 0.11, gain: 0.03, type: "triangle", delay: 0.03 }, { frequency: 659.25, duration: 0.13, gain: 0.025, type: "triangle", delay: 0.06 }] },
+    open: { tones: [{ frequency: 220, to: 440, duration: 0.16, gain: 0.05, type: "sawtooth" }, { frequency: 880, duration: 0.2, gain: 0.03, type: "triangle", delay: 0.07 }, { frequency: 1108.73, duration: 0.2, gain: 0.02, type: "triangle", delay: 0.11 }] },
+    close: { tones: [{ frequency: 554.37, to: 220, duration: 0.15, gain: 0.045, type: "sawtooth" }, { frequency: 110, duration: 0.12, gain: 0.04, type: "triangle" }] },
+  },
 };
 
 const crackles = (count: number, duration: number, intensity: number): Noise[] => Array.from({ length: count }, (_, index) => ({
@@ -158,6 +166,26 @@ const phases: Record<PortfolioTheme, Record<"transition" | "reveal" | "arrive", 
       noises: [...slashNoises(true), { frequency: 350, to: 3700, duration: 0.665, gain: 0.4, envelope: "swell", release: 0.12 }],
     },
     arrive: { tones: [{ frequency: 523.25, duration: 0.09, gain: 0.12, type: "square" }, { frequency: 783.99, duration: 0.13, gain: 0.09, type: "square", delay: 0.06 }, { frequency: 130.81, duration: 0.12, gain: 0.14, type: "triangle" }] },
+  },
+  // A rising synthwave chord while the sunset bands rise, then a falling sweep as they leave.
+  sunset: {
+    transition: {
+      tones: [
+        { frequency: 110, to: 220, duration: 0.8, gain: 0.2, type: "sawtooth", envelope: "swell", release: 0.1 },
+        { frequency: 220.8, duration: 0.8, gain: 0.07, type: "sawtooth", envelope: "swell", release: 0.1 },
+        ...[440, 554.37, 659.25, 880].map((frequency, index): Tone => ({ frequency, duration: 0.3, gain: 0.06, type: "triangle", delay: 0.12 + index * 0.1, envelope: "sustain", release: 0.08 })),
+      ],
+      noises: [{ frequency: 400, to: 3000, duration: 0.8, gain: 0.32, envelope: "swell", release: 0.1 }],
+    },
+    reveal: {
+      tones: [
+        { frequency: 880, to: 220, duration: 0.7, gain: 0.12, type: "sawtooth", envelope: "sustain", release: 0.14 },
+        { frequency: 659.25, duration: 0.5, gain: 0.06, type: "triangle", delay: 0.05, envelope: "sustain", release: 0.15 },
+        { frequency: 55, duration: 0.5, gain: 0.2, type: "triangle", delay: 0.1, envelope: "sustain", release: 0.2 },
+      ],
+      noises: [{ frequency: 3200, to: 500, duration: 0.7, gain: 0.38, envelope: "sustain", release: 0.16 }],
+    },
+    arrive: { tones: [{ frequency: 659.25, duration: 0.18, gain: 0.12, type: "triangle" }, { frequency: 830.61, duration: 0.2, gain: 0.08, type: "triangle", delay: 0.05 }, { frequency: 987.77, duration: 0.26, gain: 0.07, type: "triangle", delay: 0.1 }] },
   },
 };
 

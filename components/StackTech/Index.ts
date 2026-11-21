@@ -386,3 +386,117 @@ export const Tools_skill = [
     height: 80,
   },
 ];
+
+// Front-end libraries used in the projects; they share the outer ring with Frontend_skill.
+export const Frontend_extra_skill = [
+  {
+    skill_name: "shadcn/ui",
+    Image: "/icons/shadcn.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "PrimeNG",
+    Image: "/icons/primeng.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Three.js",
+    Image: "/icons/threejs.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "MapLibre",
+    Image: "/icons/maplibre.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "GrapesJS",
+    Image: "/icons/grapesjs.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "WebRTC",
+    Image: "/icons/webrtc.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Clerk",
+    Image: "/icons/clerk.svg",
+    width: 80,
+    height: 80,
+  },
+];
+
+// Back-end services, data layers, payments and AI used in the projects. Redis, RabbitMQ,
+// Stripe, MapLibre, WebRTC, PrimeNG and Clerk come from Simple Icons (CC0) with their brand
+// colour; OpenAI, Claude, Express, Prisma, Three.js and shadcn/ui sit on a tile so the
+// black marks stay visible on dark themes; SignalR, EF Core, Hangfire and GrapesJS have no
+// free icon, so they are simple local labels.
+export const Services_skill = [
+  {
+    skill_name: "Express",
+    Image: "/icons/express.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Prisma",
+    Image: "/icons/prisma.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Entity Framework",
+    Image: "/icons/efcore.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "SignalR",
+    Image: "/icons/signalr.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Hangfire",
+    Image: "/icons/hangfire.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Redis",
+    Image: "/icons/redis.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "RabbitMQ",
+    Image: "/icons/rabbitmq.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Stripe",
+    Image: "/icons/stripe.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "OpenAI",
+    Image: "/icons/openai.svg",
+    width: 80,
+    height: 80,
+  },
+  {
+    skill_name: "Claude",
+    Image: "/icons/claude.svg",
+    width: 80,
+    height: 80,
+  },
+];
